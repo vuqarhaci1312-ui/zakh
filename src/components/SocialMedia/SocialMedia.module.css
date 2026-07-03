@@ -1,0 +1,330 @@
+.socialGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.125rem;
+}
+
+@media (max-width: 991px) {
+  .socialGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 479px) {
+  .socialGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.introCenter {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.socialCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 1.375rem 1rem;
+  border-radius: var(--_border-radius---border-radius--border-1-normal);
+  background-color: var(--_color---white);
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.socialCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(3, 5, 5, 0.08);
+}
+
+.socialIconWrap {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #fff;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+.socialIconWrap[data-platform="facebook"] {
+  color: #1877f2;
+}
+
+.socialIconWrap[data-platform="x"] {
+  color: #000;
+}
+
+.socialIconWrap[data-platform="wechat"] {
+  color: #07c160;
+}
+
+.socialIconWrap[data-platform="telegram"] {
+  color: #229ed9;
+}
+
+.socialIconWrap[data-platform="youtube"] {
+  color: #ff0000;
+}
+
+.socialIconWrap[data-platform="tiktok"] {
+  color: #000;
+}
+
+.socialIconWrap[data-platform="instagram"] {
+  color: #e4405f;
+}
+
+.socialIconWrap[data-platform="linkedin"] {
+  color: #0a66c2;
+}
+
+.socialIconWrap[data-platform="snapchat"] {
+  color: #000;
+  background-color: #fffc00;
+}
+
+.socialIconWrap[data-platform="tripadvisor"] {
+  color: #00af87;
+}
+
+.socialIconWrap svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.socialLabel {
+  font-family: var(--font-family--inter-tight);
+  font-size: var(--_typography---font-size--font-1-extra-small);
+  color: var(--_color---night);
+  text-align: center;
+}
+
+.instaGrid {
+  --ig-border: #dbdbdb;
+  --ig-text: #262626;
+  --ig-secondary: #8e8e8e;
+  --ig-link: #0095f6;
+  --ig-bg: #fff;
+  --ig-ring: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
+@media (max-width: 991px) {
+  .instaGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .instaFollow {
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+  }
+
+  .instaMoreIcon {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .instaGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    max-width: 28rem;
+    margin-inline: auto;
+  }
+}
+
+.instaCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ig-border);
+  border-radius: 0.5rem;
+  background-color: var(--ig-bg);
+  overflow: hidden;
+  color: var(--ig-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.instaCard:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.instaPostHeader {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 0.875rem;
+}
+
+.instaAvatarRing {
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--ig-ring);
+  flex-shrink: 0;
+}
+
+.instaAvatar {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.instaMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.instaUsername {
+  overflow: hidden;
+  color: var(--ig-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.instaSubtitle {
+  overflow: hidden;
+  color: var(--ig-secondary);
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.instaFollow {
+  padding: 0.3125rem 0.875rem;
+  border-radius: 0.5rem;
+  background-color: var(--ig-link);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.instaMoreIcon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--ig-text);
+}
+
+.instaImageWrap {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background-color: #fafafa;
+}
+
+.instaImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.instaCard:hover .instaImage {
+  transform: scale(1.03);
+}
+
+.instaActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0.875rem 0.375rem;
+}
+
+.instaActionsLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.instaActionIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--ig-text);
+}
+
+.instaBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 0 0.875rem 0.875rem;
+}
+
+.instaLikes {
+  margin: 0;
+  color: var(--ig-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.instaCaption {
+  margin: 0;
+  color: var(--ig-text);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.instaCaption strong {
+  font-weight: 600;
+}
+
+.instaViewProfile {
+  margin: 0.125rem 0 0;
+  color: var(--ig-secondary);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.youtubeWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--_border-radius---border-radius--border-large);
+  overflow: hidden;
+  background-color: var(--_color---night);
+}
+
+.youtubeIframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.youtubeLink {
+  margin: 0;
+}

@@ -6,9 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:up": "docker compose up -d postgres",
+    "i18n:extract": "tsx scripts/extract-translation-keys.ts",
+    "i18n:generate-az": "tsx scripts/generate-az-translations.ts",
+    "i18n:seed": "cd server && npm run db:seed",
+    "server:dev": "cd server && npm run dev",
+    "server:install": "cd server && npm install",
+    "setup:cms": "npm run db:up && npm run server:install && cd server && copy .env.example .env && npm run db:generate && npm run db:migrate && npm run admin:bootstrap"
   },
   "dependencies": {
+    "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.12.98",
+    "framer-motion": "^12.42.2",
+    "gsap": "^3.15.0",
     "next": "16.2.9",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -20,7 +31,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "ffmpeg-static": "^5.3.0",
     "tailwindcss": "^4",
+    "tsx": "^4.22.5",
     "typescript": "^5"
   }
 }

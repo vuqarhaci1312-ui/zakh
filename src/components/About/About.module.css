@@ -1,0 +1,614 @@
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap");
+
+@font-face {
+  font-family: "Neutral Sans";
+  src: url("https://cdn.prod.website-files.com/686560aec3f1efe3779c1934/686560aec3f1efe3779c19f4_NeutralSans-Regular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neutral Sans";
+  src: url("https://cdn.prod.website-files.com/686560aec3f1efe3779c1934/686560aec3f1efe3779c19f3_NeutralSans-Meidum.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+.aboutPage {
+  --light-gray: #f1f3f5;
+  --black: #000;
+  --white: #fff;
+  --mid-black: #1f1f1f;
+  --font-neutral: "Neutral Sans", Arial, sans-serif;
+  --font-heading: "Cal Sans", sans-serif;
+
+  background-color: var(--light-gray);
+  color: #333;
+  font-family: var(--font-neutral);
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.section {
+  position: relative;
+}
+
+.overflowHidden {
+  overflow: hidden;
+}
+
+.container {
+  max-width: 77.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.headingTextContainer {
+  flex: 1;
+}
+
+.textBox {
+  position: relative;
+}
+
+.paragraph {
+  margin-bottom: 1.3rem;
+}
+
+.marginNone,
+.noMargin {
+  margin-bottom: 0;
+}
+
+.white {
+  color: var(--white);
+}
+
+.black {
+  color: var(--black);
+}
+
+.gray {
+  color: #9c9c9c;
+}
+
+.inline {
+  display: inline;
+}
+
+.h1Heading {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.h2Heading {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.h3Heading {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.smallParagraph {
+  font-size: 0.8rem;
+}
+
+.contentImage {
+  width: 100%;
+  height: 100%;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.plusIntro {
+  width: auto;
+  height: auto;
+  max-width: 16px;
+  max-height: 16px;
+}
+
+.gridBlock {
+  min-width: 0;
+}
+
+/* Hero */
+.aboutHero {
+  color: var(--white);
+  background-image: url("https://cdn.prod.website-files.com/686560aec3f1efe3779c1934/686c1f73c63a17299cee245d_Frame%20427322154.avif");
+  background-position: 50%;
+  background-size: cover;
+  justify-content: flex-start;
+  align-items: flex-end;
+  max-width: 100%;
+  padding-top: 28%;
+  padding-bottom: 3%;
+  display: flex;
+}
+
+.aboutHeroPlaneWrapper {
+  z-index: 5;
+  pointer-events: none;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.aboutHeroHeading {
+  z-index: 6;
+  max-width: 25rem;
+  position: relative;
+}
+
+.aboutHeroH1 {
+  max-width: 100%;
+}
+
+.aboutHeroTitle {
+  color: var(--white);
+  font-size: 2.75rem;
+}
+
+.aboutHeroSub {
+  max-width: 27rem;
+}
+
+/* Intro */
+.aboutIntro {
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+
+.aboutIntroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.aboutIntroMedia {
+  display: flex;
+  justify-content: center;
+}
+
+.aboutIntroImage {
+  width: min(100%, 28rem);
+  height: auto;
+  object-fit: contain;
+}
+
+.aboutIntroContent {
+  max-width: 42rem;
+}
+
+.aboutIntroTitle {
+  margin-bottom: 1.6rem;
+}
+
+.aboutIntroRichText {
+  max-width: 100%;
+  margin-bottom: 0;
+}
+
+.aboutIntroRichText .paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitleCenter {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* Members */
+.aboutMembersSection {
+  background: #fff;
+}
+
+.aboutMembers {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.membersTrack {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.memberCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 7rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: var(--light-gray);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.memberLogo {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 4.5rem;
+  object-fit: contain;
+}
+
+/* Charity */
+.aboutCharitySection {
+  background: var(--light-gray);
+}
+
+.aboutCharity {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.charityGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.charityVisual {
+  display: flex;
+  justify-content: center;
+}
+
+.charityImage {
+  width: min(100%, 18rem);
+  height: auto;
+  object-fit: contain;
+}
+
+.charityTitle {
+  margin-bottom: 1.25rem;
+}
+
+.charityContent .paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Certificates */
+.aboutCertificatesSection {
+  background: #fff;
+  overflow: hidden;
+}
+
+.aboutCertificates {
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+.certificatesViewport {
+  margin-top: 2.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  user-select: none;
+  touch-action: pan-x;
+}
+
+.certificatesViewport::-webkit-scrollbar {
+  display: none;
+}
+
+.certificatesViewport[data-dragging="true"] {
+  cursor: grabbing;
+}
+
+.certificatesTrack {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  padding: 0.25rem 0;
+}
+
+.certificateCard {
+  flex: 0 0 auto;
+  width: clamp(160px, 18vw, 220px);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.certificateCard:hover {
+  transform: translateY(-3px);
+}
+
+.certificateImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.certificateLightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.82);
+  cursor: zoom-out;
+}
+
+.certificateLightboxImage {
+  max-width: min(92vw, 720px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Values */
+.aboutValues {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.headingGrid {
+  display: grid;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.centered {
+  text-align: center;
+}
+
+.twoRows {
+  grid-template-rows: auto auto;
+  max-width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.headingGridTitle {
+  grid-column: 1 / -1;
+}
+
+.headingGridSubtitle {
+  grid-column: 3 / 11;
+}
+
+.homeIntro {
+  margin-bottom: 0;
+}
+
+.valueContentGrid {
+  display: grid;
+}
+
+.aboutSubPage {
+  color: var(--white);
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 7%;
+}
+
+.valueCardContainer {
+  border-radius: 7px;
+  background-position: 50%;
+  background-size: cover;
+  justify-content: flex-start;
+  align-items: flex-end;
+  height: auto;
+  padding: 110% 1.3rem 1.3rem;
+  display: flex;
+  position: relative;
+}
+
+.valueCard01,
+.valueCard02,
+.valueCard03 {
+  height: auto;
+  padding-top: 110%;
+  padding-right: 1.3rem;
+  padding-bottom: 1.3rem;
+  padding-left: 1.3rem;
+}
+
+.plusCircleIntro {
+  background-color: #fff;
+  border-radius: 45px;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  position: absolute;
+  inset: 2% 2% auto auto;
+}
+
+.valueTitle {
+  color: var(--white);
+  font-size: 1.6rem;
+}
+
+.valueContentLargeBox {
+  color: var(--white);
+  background-position: 50%;
+  background-size: cover;
+  border-radius: 7px;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-top: 1rem;
+  padding: 34% 1.5rem 1.3rem;
+  display: flex;
+  position: relative;
+}
+
+.valueCard04 {
+  height: auto;
+}
+
+.larger {
+  font-size: 2.5rem;
+}
+
+.largerBox {
+  right: 1%;
+}
+
+@media screen and (min-width: 992px) {
+  .aboutHeroHeading {
+    max-width: 35rem;
+  }
+
+  .aboutHeroTitle {
+    font-size: 4rem;
+  }
+
+  .aboutIntro {
+    padding-top: 11rem;
+    padding-bottom: 6rem;
+  }
+
+  .aboutIntroGrid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 4rem;
+  }
+
+  .aboutIntroMedia {
+    justify-content: flex-start;
+  }
+
+  .charityGrid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 4rem;
+  }
+
+  .membersTrack {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .h2Heading {
+    font-size: 3rem;
+  }
+
+  .larger {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .aboutSubPage {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .headingGridSubtitle {
+    grid-column: 2 / 12;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .aboutHero {
+    padding-top: 60%;
+  }
+
+  .aboutIntro {
+    padding-top: 6.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .aboutIntroGrid {
+    gap: 1.75rem;
+  }
+
+  .membersTrack {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutIntroRichText {
+    max-width: 100%;
+  }
+
+  .aboutSubPage {
+    grid-template-columns: 1fr;
+  }
+
+  .headingGridSubtitle {
+    grid-column: 1 / -1;
+  }
+
+  .valueCardContainer,
+  .valueCard01,
+  .valueCard02,
+  .valueCard03 {
+    padding-top: 90%;
+  }
+
+  .valueContentLargeBox {
+    padding-top: 50%;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .aboutHero {
+    padding-top: 84%;
+    padding-bottom: 5%;
+  }
+
+  .aboutHeroHeading {
+    max-width: 100%;
+  }
+
+  .aboutHeroTitle {
+    font-size: 2.3rem;
+  }
+
+  .h2Heading {
+    font-size: 2rem;
+  }
+
+  .larger {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .aboutHero {
+    padding-top: 128%;
+  }
+}

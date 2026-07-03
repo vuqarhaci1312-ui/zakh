@@ -1,0 +1,52 @@
+@import "../../styles/avenora.shared.css";
+
+.avenora-page *,
+.avenora-page {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.avenora-page .service-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--_spacing---space-1-normal);
+}
+
+.avenora-page .service-icon-wrapper {
+  flex: none;
+}
+
+.avenora-page .service-content p,
+.avenora-page .service-bottom p {
+  margin: 0;
+  opacity: 0.6;
+  font-family: var(--font-family--inter-tight);
+  color: var(--_color---black);
+  font-size: var(--_typography---font-size--font-1-extra-small);
+  line-height: var(--_typography---all-line-height--line-height-1-4-em);
+}
+
+.avenora-page .section:first-child {
+  padding-top: 7rem;
+}
+
+.avenora-page [data-services-reveal],
+.avenora-page [data-service-card],
+.avenora-page [data-experience-card] {
+  opacity: 0;
+}
+
+@media (max-width: 767px) {
+  .avenora-page .section:first-child {
+    padding-top: 3.5rem;
+  }
+
+  .avenora-page .space-8-small {
+    padding-top: 3rem;
+  }
+
+  .avenora-page .section-heading.night {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+}

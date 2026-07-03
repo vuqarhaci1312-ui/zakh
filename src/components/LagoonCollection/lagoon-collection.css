@@ -1,0 +1,173 @@
+@import "../../styles/caladan-template.shared.css";
+
+body {
+  background-color: #fff;
+  color: #2d2d2d;
+  font-family: var(--font-inter-tight), "Inter Tight", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.caladan-lagoon *,
+.caladan-lagoon {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.caladan-lagoon.home-a_rest-content {
+  background-color: var(--_🎨-color--tokens---ink--base);
+  color: var(--_🎨-color--tokens---tone--strong);
+  font-family: var(--_🔠-typography---font-family--b2);
+  font-size: var(--_🔠-typography---size--b2);
+  line-height: var(--_🔠-typography---line-height--b2);
+  font-weight: var(--_🔠-typography---font-weight--b2);
+  letter-spacing: var(--_🔠-typography---letter-spacing--b2);
+  --_🎨-color--tokens---ink--base: var(--_🎨-color--base---base--light-100);
+  --_🎨-color--tokens---tone--strong: var(--_🎨-color--base---base--dark-100);
+  --_🎨-color--tokens---tone--medium: var(--_🎨-color--base---base--dark-64);
+  --_🎨-color--tokens---tone--subtle: var(--_🎨-color--base---base--dark-48);
+  --_🎨-color--tokens---tone--faint: var(--_🎨-color--base---base--dark-16);
+  --_🎨-color--tokens---ink--light-0: var(--_🎨-color--base---base--light-0);
+  --_🎨-color--tokens---ink--gradient-purposes--gradient-0: var(--_🎨-color--base---base--light-0);
+  --_🎨-color--tokens---ink--gradient-purposes--gradient-100: var(--_🎨-color--base---base--light-100);
+  --_🎨-color--tokens---ink--gradient-purposes--gradient-64: var(--_🎨-color--base---base--light-64);
+}
+
+.caladan-lagoon .w-layout-blockcontainer.container-large {
+  max-width: var(--container--large);
+}
+
+.caladan-lagoon .slider.resorts-centered.w-slider {
+  height: auto;
+  background: transparent;
+}
+
+.caladan-lagoon .mask_resorts-v1.w-slider-mask {
+  width: 44rem;
+  max-width: 44rem;
+  height: auto;
+  overflow: visible;
+}
+
+.caladan-lagoon .lagoon-slider-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.caladan-lagoon .slide_resorts-v1.w-slide {
+  flex: 0 0 44rem;
+  width: 44rem;
+  max-width: 44rem;
+  display: block;
+}
+
+.caladan-lagoon .w-slider-arrow-left,
+.caladan-lagoon .w-slider-arrow-right {
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.caladan-lagoon .card_resort-slide {
+  text-decoration: none;
+  color: inherit;
+}
+
+.caladan-lagoon .image_resort-slide {
+  isolation: isolate;
+}
+
+.caladan-lagoon .image_resort-slide .lagoon-tour-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.caladan-lagoon .overlay_resort-card-slide {
+  display: none;
+}
+
+.caladan-lagoon [data-lagoon-headline] {
+  opacity: 0;
+}
+
+.caladan-lagoon h2.margin-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.caladan-lagoon .lagoon-title-accent {
+  background: linear-gradient(135deg, #ffb347 0%, #ff8c00 42%, #ff5f1f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+@media screen and (max-width: 991px) {
+  .caladan-lagoon .mask_resorts-v1.w-slider-mask {
+    width: 80vw;
+    max-width: 80vw;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .caladan-lagoon .slide_resorts-v1.w-slide {
+    flex: 0 0 80vw;
+    width: 80vw;
+    max-width: 80vw;
+  }
+
+  .caladan-lagoon .master_slider {
+    overflow: visible;
+  }
+
+  .caladan-lagoon .shadow_slider {
+    display: none;
+  }
+
+  .caladan-lagoon .button_slider-resorts-centered {
+    display: none;
+  }
+
+  .caladan-lagoon .mask_resorts-v1.w-slider-mask {
+    touch-action: pan-y;
+    cursor: grab;
+  }
+
+  .caladan-lagoon .mask_resorts-v1.w-slider-mask[data-dragging="true"] {
+    cursor: grabbing;
+  }
+
+  .caladan-lagoon .image_resort-slide {
+    width: 100%;
+    height: 20rem;
+  }
+
+  .caladan-lagoon .image_resort-slide .lagoon-tour-cover {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 20rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .caladan-lagoon .image_resort-slide {
+    height: 18rem;
+  }
+
+  .caladan-lagoon .image_resort-slide .lagoon-tour-cover {
+    height: 18rem;
+  }
+}

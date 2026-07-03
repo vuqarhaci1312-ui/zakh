@@ -1,0 +1,96 @@
+@import "../our-services/avenora.css";
+
+.social-media-page {
+  --social-section-gap: 5.5rem;
+  --social-section-gap-mobile: 3.5rem;
+}
+
+.social-media-page .page-wrapper > main {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-media-page .section {
+  padding-top: var(--social-section-gap);
+  padding-bottom: var(--social-section-gap);
+}
+
+.social-media-page .section:first-child {
+  padding-top: 7rem;
+}
+
+.social-media-page .section-title-wrapper,
+.social-media-page .service-title-wrapper {
+  gap: 1.25rem;
+}
+
+.social-media-page .section-heading.night.center,
+.social-media-page .service-title-wrapper .section-heading.night {
+  line-height: 1.15;
+}
+
+.social-media-page .font-1-extra-small {
+  opacity: 0.72;
+  line-height: 1.6;
+}
+
+.social-media-page .service-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+}
+
+.social-media-page .space-8-small,
+.social-media-page .space-3-medium {
+  display: none;
+}
+
+.social-media-page .space-1-normal {
+  height: 1rem;
+}
+
+.social-media-page .introCenter {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.social-media-page .youtubeLink {
+  margin: 0;
+}
+
+.social-media-page .youtubeLink a {
+  color: var(--_color---night);
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.social-media-page .youtubeLink a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 991px) {
+  .social-media-page .section {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .social-media-page .service-wrapper {
+    gap: 2.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .social-media-page .section {
+    padding-top: var(--social-section-gap-mobile);
+    padding-bottom: var(--social-section-gap-mobile);
+  }
+
+  .social-media-page .section:first-child {
+    padding-top: 3.5rem;
+  }
+
+  .social-media-page .service-wrapper {
+    gap: 2rem;
+  }
+}

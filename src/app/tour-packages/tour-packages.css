@@ -1,0 +1,15 @@
+.tour-packages-page .service-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.tour-packages-page .section-title-wrapper {
+  gap: 1rem;
+}
+
+@media (max-width: 767px) {
+  .tour-packages-page .service-wrapper {
+    gap: 3rem;
+  }
+}

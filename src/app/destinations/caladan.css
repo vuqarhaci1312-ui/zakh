@@ -1,0 +1,94 @@
+@import "../../styles/caladan-template.shared.css";
+
+.caladan-page *,
+.caladan-page {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.caladan-page .button_submit-static .button_submit.w-button {
+  cursor: pointer;
+}
+
+.caladan-page .expandable-single.is-closed .expandable-bottom {
+  overflow: hidden;
+}
+
+.caladan-page .expandable-single.is-closed .faq-line.vertical {
+  display: block;
+}
+
+.caladan-page .expandable-single.is-open .faq-line.vertical {
+  display: none;
+}
+
+.caladan-page .gallery-slider-track {
+  display: flex;
+  will-change: transform;
+}
+
+.caladan-page .lightbox_resort {
+  overflow: hidden;
+}
+
+.caladan-page .lightbox_resort img {
+  will-change: transform;
+}
+
+.caladan-page [data-detail-reveal],
+.caladan-page [data-detail-amenity],
+.caladan-page [data-detail-related-card] {
+  opacity: 0;
+}
+
+.caladan-page .gallery-slider-mask {
+  overflow: hidden;
+}
+
+.caladan-page .gallery-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+}
+
+.caladan-page .w-slider-arrow-left,
+.caladan-page .w-slider-arrow-right {
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.caladan-page .link_nav,
+.caladan-page .cta_primary,
+.caladan-page .cta_tertiary,
+.caladan-page .card_resort-v1,
+.caladan-page .lightbox_resort,
+.caladan-page .lightbox_resort-gallery {
+  text-decoration: none;
+  color: inherit;
+}
+
+.caladan-page .cta_primary {
+  border: 0;
+  background: transparent;
+}
+
+.caladan-page form .cta_primary {
+  width: 100%;
+}
+
+.caladan-page .expandable-single {
+  border: 0;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+}
+
+.caladan-page .grid_resort {
+  grid-template-columns: 1fr;
+}
+
+.caladan-page .section_hero-resort {
+  padding-top: var(--section-padding--small);
+}

@@ -1,0 +1,64 @@
+.branchGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--_spacing---space-1-normal);
+}
+
+@media (max-width: 991px) {
+  .branchGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .branchGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--_spacing---space-1-small);
+  }
+
+  .branchCard {
+    padding: var(--_spacing---space-1-normal) var(--_spacing---space-1-small);
+  }
+}
+
+.branchCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--_spacing---space-1-small);
+  padding: var(--_spacing---space-1-large) var(--_spacing---space-medium);
+  border-radius: var(--_border-radius---border-radius--border-1-normal);
+  background-color: var(--_color---white);
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.branchCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(3, 5, 5, 0.08);
+}
+
+.flagWrap {
+  width: 100%;
+  max-width: 7.5rem;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: var(--_border-radius---border-radius--border-1-small);
+  box-shadow: 0 4px 12px rgba(3, 5, 5, 0.08);
+}
+
+.flagImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.branchName {
+  margin: 0;
+  font-family: var(--font-family--inter-tight);
+  font-size: var(--_typography---font-size--font-1-extra-small);
+  font-weight: 500;
+  color: var(--_color---night);
+  text-align: center;
+}

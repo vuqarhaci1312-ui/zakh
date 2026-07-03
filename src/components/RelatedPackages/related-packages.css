@@ -1,0 +1,59 @@
+@import "../../styles/avenora.shared.css";
+
+.avenora-related-packages,
+.avenora-related-packages * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.avenora-related-packages {
+  background-color: var(--_color---proclein);
+  font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
+}
+
+.avenora-related-packages .releted-packeges-card-left p {
+  margin: 0;
+  opacity: 0.6;
+  font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
+  color: var(--_color---black);
+  font-size: var(--_typography---font-size--font-1-extra-small);
+  line-height: var(--_typography---all-line-height--line-height-1-4-em);
+}
+
+.avenora-related-packages [data-related-packages-reveal],
+.avenora-related-packages [data-related-package-card] {
+  opacity: 0;
+}
+
+.avenora-related-packages .button-arrow-pill,
+.avenora-related-packages .button-animated-color {
+  background-color: #ff8c00;
+  background-image: linear-gradient(135deg, #ffb347 0%, #ff8c00 42%, #ff5f1f 100%);
+}
+
+.avenora-related-packages .primary-button:hover .button-animated-color {
+  inset: 0%;
+}
+
+.avenora-related-packages .button-animated-color {
+  width: 2.5rem;
+  transition: inset 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.avenora-related-packages .primary-button:hover .button-text-pill .primay-button-text:first-child {
+  transform: translateY(-100%);
+}
+
+.avenora-related-packages .primary-button:hover .arrow-wrapper .button-arrow:first-child {
+  transform: translateX(100%);
+}
+
+.avenora-related-packages .button-text-pill .primay-button-text,
+.avenora-related-packages .arrow-wrapper .button-arrow {
+  transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.avenora-related-packages .primary-button:hover {
+  color: var(--_color---white);
+}

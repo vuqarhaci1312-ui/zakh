@@ -32,6 +32,23 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.local.example
+server/.deploy-secrets.txt
+server/cloudrun-env.yaml
+
+# backend — deployed separately
+/server/
+/docker-compose.yml
+
+# legacy scrape artifacts at repo root
+/*.js
+/*.html
+/*.mjs
+/*.json
+/*.css
+!package.json
+!package-lock.json
+!tsconfig.json
 
 # vercel
 .vercel
