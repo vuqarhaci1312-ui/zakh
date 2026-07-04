@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { FOLLOW_US_SECTION, SOCIAL_LINKS } from "./social-media-data";
 import { SocialIcon } from "./SocialIcons";
 import styles from "./SocialMedia.module.css";
@@ -20,23 +20,26 @@ export default function FollowUsSection() {
             <div className="badge-wrap">
               <div className="section-badge w-variant-cbbf38fe-d1d9-25df-a3f8-ed2322a2901f">
                 <div className="badge-text w-variant-cbbf38fe-d1d9-25df-a3f8-ed2322a2901f">
-                  {dt("social.FOLLOW_US_SECTION.badge", FOLLOW_US_SECTION.badge)}
+                  <Dt k="social.FOLLOW_US_SECTION.badge" fallback={FOLLOW_US_SECTION.badge} />
                 </div>
               </div>
             </div>
             <div className="space-1-normal" />
             <div className="max-width-52">
               <h2 className="section-heading night center">
-                {dt("ui.followUsHeading.before", "Stay connected with")}{" "}
+                <Dt k="ui.followUsHeading.before" fallback="Stay connected with" />{" "}
                 <span className="text-gradient-orange">
-                  {dt("ui.followUsHeading.accent", "Zakher Travel.")}
+                  <Dt k="ui.followUsHeading.accent" fallback="Zakher Travel." />
                 </span>
               </h2>
             </div>
             <div className="space-1-normal" />
             <div className={`max-width-41 ${styles.introCenter}`}>
               <p className="font-1-extra-small">
-                {dt("social.FOLLOW_US_SECTION.description", FOLLOW_US_SECTION.description)}
+                <Dt
+                  k="social.FOLLOW_US_SECTION.description"
+                  fallback={FOLLOW_US_SECTION.description}
+                />
               </p>
             </div>
           </div>
@@ -55,7 +58,7 @@ export default function FollowUsSection() {
                   <SocialIcon id={link.id} />
                 </div>
                 <span className={styles.socialLabel}>
-                  {dt(`social.SOCIAL_LINKS.${index}.label`, link.label)}
+                  <Dt k={`social.SOCIAL_LINKS.${index}.label`} fallback={link.label} />
                 </span>
               </a>
             ))}

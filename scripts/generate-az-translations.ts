@@ -260,6 +260,17 @@ async function main() {
     namespace: item.namespace,
   }));
 
+  const manualPath = path.join(root, "scripts", "manual-az-overrides.json");
+  const manual: Record<string, string> = fs.existsSync(manualPath)
+    ? JSON.parse(fs.readFileSync(manualPath, "utf8"))
+    : {};
+
+  for (const item of azItems) {
+    if (manual[item.key]) {
+      item.value = manual[item.key];
+    }
+  }
+
   const outPath = path.join(root, "server", "prisma", "seeds", "az.json");
   fs.writeFileSync(outPath, JSON.stringify(azItems, null, 2));
 
@@ -278,6 +289,7 @@ async function main() {
 
   console.log(`Generated ${azItems.length} AZ translations → ${outPath}`);
   console.log(`Combined seed: ${combined.length} items → ${combinedPath}`);
+  console.log("Run npm run i18n:sync after generating other locales (ru, ar).");
 }
 
 main().catch(console.error);

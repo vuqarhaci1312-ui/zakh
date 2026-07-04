@@ -1,10 +1,37 @@
 "use client";
 
 import { useRef } from "react";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { TRAVEL_EXPERIENCES, TRAVEL_EXPERIENCES_SECTION } from "./our-services-data";
-import TitleWithGradient from "./TitleWithGradient";
 import { useOurServicesAnimation } from "./useOurServicesAnimation";
+
+function ExperienceTitle({
+  index,
+  title,
+  titleAccent,
+}: {
+  index: number;
+  title: string;
+  titleAccent?: string;
+}) {
+  if (!titleAccent || !title.includes(titleAccent)) {
+    return <Dt k={`services.TRAVEL_EXPERIENCES.${index}.title`} fallback={title} />;
+  }
+
+  const accentIndex = title.indexOf(titleAccent);
+  const before = title.slice(0, accentIndex);
+  const after = title.slice(accentIndex + titleAccent.length);
+
+  return (
+    <>
+      {before}
+      <span className="text-gradient-orange">
+        <Dt k={`services.TRAVEL_EXPERIENCES.${index}.titleAccent`} fallback={titleAccent} />
+      </span>
+      {after}
+    </>
+  );
+}
 
 export default function TravelExperiencesSection() {
   const dt = useDt();
@@ -20,27 +47,30 @@ export default function TravelExperiencesSection() {
               <div className="badge-wrap">
                 <div className="section-badge w-variant-cbbf38fe-d1d9-25df-a3f8-ed2322a2901f">
                   <div className="badge-text w-variant-cbbf38fe-d1d9-25df-a3f8-ed2322a2901f">
-                    {dt("services.TRAVEL_EXPERIENCES_SECTION.badge", TRAVEL_EXPERIENCES_SECTION.badge)}
+                    <Dt
+                      k="services.TRAVEL_EXPERIENCES_SECTION.badge"
+                      fallback={TRAVEL_EXPERIENCES_SECTION.badge}
+                    />
                   </div>
                 </div>
               </div>
               <div className="space-1-normal" />
               <div className="max-width-41">
                 <h2 className="section-heading night">
-                  {dt("ui.experiencesHeading.before", "Discover our most requested")}{" "}
+                  <Dt k="ui.experiencesHeading.before" fallback="Discover our most requested" />{" "}
                   <span className="text-gradient-orange">
-                    {dt("ui.experiencesHeading.accent", "tour packages")}
+                    <Dt k="ui.experiencesHeading.accent" fallback="tour packages" />
                   </span>
-                  {dt("ui.experiencesHeading.after", ".")}
+                  <Dt k="ui.experiencesHeading.after" fallback="." />
                 </h2>
               </div>
             </div>
             <div className="max-width-27">
               <p className="font-1-extra-small">
-                {dt(
-                  "services.TRAVEL_EXPERIENCES_SECTION.description",
-                  TRAVEL_EXPERIENCES_SECTION.description,
-                )}
+                <Dt
+                  k="services.TRAVEL_EXPERIENCES_SECTION.description"
+                  fallback={TRAVEL_EXPERIENCES_SECTION.description}
+                />
               </p>
             </div>
           </div>
@@ -55,7 +85,10 @@ export default function TravelExperiencesSection() {
                 <div className="service-card-top">
                   <div className="card-badge">
                     <div className="badge-text bg-2">
-                      {dt(`services.TRAVEL_EXPERIENCES.${index}.badge`, experience.badge)}
+                      <Dt
+                        k={`services.TRAVEL_EXPERIENCES.${index}.badge`}
+                        fallback={experience.badge}
+                      />
                     </div>
                   </div>
                   <div className="service-image-block">
@@ -72,24 +105,18 @@ export default function TravelExperiencesSection() {
                 </div>
                 <div className="service-content-wrapper">
                   <div className="font-1-medium pearl">
-                    <TitleWithGradient
-                      title={dt(`services.TRAVEL_EXPERIENCES.${index}.title`, experience.title)}
-                      accent={
-                        experience.titleAccent
-                          ? dt(
-                              `services.TRAVEL_EXPERIENCES.${index}.titleAccent`,
-                              experience.titleAccent,
-                            )
-                          : undefined
-                      }
+                    <ExperienceTitle
+                      index={index}
+                      title={experience.title}
+                      titleAccent={experience.titleAccent}
                     />
                   </div>
                   <div className="max-width-20">
                     <p className="font-1-extra-small">
-                      {dt(
-                        `services.TRAVEL_EXPERIENCES.${index}.description`,
-                        experience.description,
-                      )}
+                      <Dt
+                        k={`services.TRAVEL_EXPERIENCES.${index}.description`}
+                        fallback={experience.description}
+                      />
                     </p>
                   </div>
                 </div>

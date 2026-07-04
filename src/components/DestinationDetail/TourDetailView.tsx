@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
+import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
-import { createTourTranslator } from "@/lib/i18n/content-translators";
+import { tourKey } from "@/lib/i18n/content-translators";
 import type { TourDetail } from "./tour-details-data";
 import { useDestinationDetailAnimation } from "./useDestinationDetailAnimation";
 
@@ -87,14 +88,10 @@ export default function TourDetailView({
 }: TourDetailViewProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const t = useTranslations();
-  const tt = useMemo(
-    () => createTourTranslator(t, countrySlug, tourIndex),
-    [t, countrySlug, tourIndex],
-  );
+  const prefix = tourKey(countrySlug, tourIndex);
   useDestinationDetailAnimation(rootRef);
 
-  const title = tt.field("title", tour.title);
-  const excerpt = tt.field("excerpt", tour.excerpt);
+  const titleForAlt = t(`${prefix}.title`, tour.title);
 
   return (
     <div ref={rootRef} className="destination-detail-root">
@@ -114,7 +111,7 @@ export default function TourDetailView({
                     <img
                       src={tour.image}
                       loading="eager"
-                      alt={title}
+                      alt={titleForAlt}
                       className="image_cover is-parallax"
                       data-detail-parallax
                     />
@@ -122,14 +119,27 @@ export default function TourDetailView({
                 </div>
 
                 <div className="wrap_text-resort" data-detail-reveal>
-                  <h1 className="heading-style-h3 text-gradient-orange">{title}</h1>
-                  <p className="margin-0 tone-medium">{excerpt}</p>
+                  <T
+                    k={`${prefix}.title`}
+                    fallback={tour.title}
+                    as="h1"
+                    className="heading-style-h3 text-gradient-orange"
+                  />
+                  <T
+                    k={`${prefix}.excerpt`}
+                    fallback={tour.excerpt}
+                    as="p"
+                    className="margin-0 tone-medium"
+                  />
                 </div>
 
                 <div className="resort_amenities" data-detail-reveal>
-                  <div className="text-size-large text_body-bold">
-                    {t("ui.tourDetails", "Tour Details")}
-                  </div>
+                  <T
+                    k="ui.tourDetails"
+                    fallback="Tour Details"
+                    as="div"
+                    className="text-size-large text_body-bold"
+                  />
                   <div className="card-resort_info-tile-v1" style={{ flexWrap: "wrap", rowGap: "0.75rem" }}>
                     {tour.meta.map((item, index) => {
                       const Icon = META_ICONS[index % META_ICONS.length];
@@ -137,12 +147,18 @@ export default function TourDetailView({
                         <div key={item.label} className="tile_room-summary" data-detail-amenity>
                           <Icon />
                           <div className="wrap_text-room-summary">
-                            <div className="text_body-bold">
-                              {tt.meta(index, "value", item.value)}
-                            </div>
-                            <div className="tone-medium">
-                              {tt.meta(index, "label", item.label)}
-                            </div>
+                            <T
+                              k={tourKey(countrySlug, tourIndex, "meta", String(index), "value")}
+                              fallback={item.value}
+                              as="div"
+                              className="text_body-bold"
+                            />
+                            <T
+                              k={tourKey(countrySlug, tourIndex, "meta", String(index), "label")}
+                              fallback={item.label}
+                              as="div"
+                              className="tone-medium"
+                            />
                           </div>
                         </div>
                       );
@@ -152,27 +168,41 @@ export default function TourDetailView({
 
                 {tour.sections.map((section, index) => (
                   <div className="resort_amenities" data-detail-reveal key={index}>
-                    {section.heading && (
-                      <div className="text-size-large text_body-bold">
-                        {tt.section(index, "heading", section.heading)}
-                      </div>
-                    )}
-                    <p className="margin-0 tone-medium" style={{ whiteSpace: "pre-line" }}>
-                      {tt.section(index, "body", section.body)}
-                    </p>
+                    {section.heading ? (
+                      <T
+                        k={tourKey(countrySlug, tourIndex, "sections", String(index), "heading")}
+                        fallback={section.heading}
+                        as="div"
+                        className="text-size-large text_body-bold"
+                      />
+                    ) : null}
+                    <T
+                      k={tourKey(countrySlug, tourIndex, "sections", String(index), "body")}
+                      fallback={section.body}
+                      as="p"
+                      className="margin-0 tone-medium"
+                      style={{ whiteSpace: "pre-line" }}
+                    />
                   </div>
                 ))}
 
                 {tour.packages && tour.packages.length > 0 && (
                   <div className="resort_amenities" data-detail-reveal>
-                    <div className="text-size-large text_body-bold">
-                      {t("ui.transportPackages", "Transport Packages")}
-                    </div>
+                    <T
+                      k="ui.transportPackages"
+                      fallback="Transport Packages"
+                      as="div"
+                      className="text-size-large text_body-bold"
+                    />
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                       {tour.packages.map((pkg, index) => (
-                        <p key={pkg} className="margin-0 tone-medium">
-                          {tt.packageLine(index, pkg)}
-                        </p>
+                        <T
+                          key={pkg}
+                          k={tourKey(countrySlug, tourIndex, "packages", String(index))}
+                          fallback={pkg}
+                          as="p"
+                          className="margin-0 tone-medium"
+                        />
                       ))}
                     </div>
                   </div>
@@ -180,15 +210,22 @@ export default function TourDetailView({
 
                 {(tour.inclusions?.length || tour.exclusions?.length) && (
                   <div className="resort_amenities" data-detail-reveal>
-                    <div className="text-size-large text_body-bold">
-                      {t("ui.inclusionsExclusions", "Inclusions & Exclusions")}
-                    </div>
+                    <T
+                      k="ui.inclusionsExclusions"
+                      fallback="Inclusions & Exclusions"
+                      as="div"
+                      className="text-size-large text_body-bold"
+                    />
                     <div className="grid_amenities" style={{ gridTemplateColumns: "1fr 1fr" }}>
                       <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                         {tour.inclusions?.map((item, index) => (
                           <div key={item} className="tile_amenity" data-detail-amenity>
                             <CheckIcon />
-                            <div>{tt.inclusion(index, item)}</div>
+                            <T
+                              k={tourKey(countrySlug, tourIndex, "inclusions", String(index))}
+                              fallback={item}
+                              as="div"
+                            />
                           </div>
                         ))}
                       </div>
@@ -196,7 +233,11 @@ export default function TourDetailView({
                         {tour.exclusions?.map((item, index) => (
                           <div key={item} className="tile_amenity tone-medium" data-detail-amenity>
                             <CrossIcon />
-                            <div>{tt.exclusion(index, item)}</div>
+                            <T
+                              k={tourKey(countrySlug, tourIndex, "exclusions", String(index))}
+                              fallback={item}
+                              as="div"
+                            />
                           </div>
                         ))}
                       </div>
@@ -205,15 +246,23 @@ export default function TourDetailView({
                 )}
 
                 <div className="resort_amenities" data-detail-reveal>
-                  <div className="text-size-large text_body-bold">
-                    {t("ui.booking", "Booking")}
-                  </div>
+                  <T
+                    k="ui.booking"
+                    fallback="Booking"
+                    as="div"
+                    className="text-size-large text_body-bold"
+                  />
                   <p className="margin-0 tone-medium">
-                    {tour.price ? `${tt.field("price", tour.price)}. ` : ""}
-                    {t(
-                      "ui.bookingContact",
-                      "For reservation please contact us: incoming@zakher.travel or +994 12 310 09 32. Our team provides offline support by call, e-mail, and WhatsApp 24/7.",
-                    )}
+                    {tour.price ? (
+                      <>
+                        <T k={`${prefix}.price`} fallback={tour.price} as="span" />.{" "}
+                      </>
+                    ) : null}
+                    <T
+                      k="ui.bookingContact"
+                      fallback="For reservation please contact us: incoming@zakher.travel or +994 12 310 09 32. Our team provides offline support by call, e-mail, and WhatsApp 24/7."
+                      as="span"
+                    />
                   </p>
                 </div>
               </div>
@@ -228,44 +277,51 @@ export default function TourDetailView({
             <div className="w-layout-blockcontainer container-large w-container">
               <div className="headline_more-resorts" data-detail-reveal>
                 <h2 className="margin-0">
-                  More <span className="tone-medium">{countryName} {t("ui.tours", "Tours")}</span>
+                  More <span className="tone-medium">{countryName} </span>
+                  <T k="ui.tours" fallback="Tours" as="span" className="tone-medium" />
                 </h2>
               </div>
               <div className="resorts">
                 <div className="grid_resorts">
                   {otherTours.map((other) => {
-                    const otherTt = createTourTranslator(t, countrySlug, other.index);
+                    const otherPrefix = tourKey(countrySlug, other.index);
                     return (
-                    <Link
-                      key={other.slug}
-                      href={`/destinations/${countrySlug}/${other.slug}`}
-                      className="card_resort-v1 w-inline-block"
-                      data-detail-related-card
-                    >
-                      <div className="image_resort-v1">
-                        <div className="overlay_resort-card-v1">
-                          <div className="master_label w-variant-84e91bde-75c3-dd4c-a083-7846b4ae6170">
-                            <div className="label-small">{countryName}</div>
+                      <Link
+                        key={other.slug}
+                        href={`/destinations/${countrySlug}/${other.slug}`}
+                        className="card_resort-v1 w-inline-block"
+                        data-detail-related-card
+                      >
+                        <div className="image_resort-v1">
+                          <div className="overlay_resort-card-v1">
+                            <div className="master_label w-variant-84e91bde-75c3-dd4c-a083-7846b4ae6170">
+                              <div className="label-small">{countryName}</div>
+                            </div>
                           </div>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={other.image}
+                            loading="lazy"
+                            alt={t(`${otherPrefix}.title`, other.title)}
+                            className="image_cover is-parallax"
+                            data-detail-parallax
+                          />
                         </div>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={other.image}
-                          loading="lazy"
-                          alt={otherTt.field("title", other.title)}
-                          className="image_cover is-parallax"
-                          data-detail-parallax
-                        />
-                      </div>
-                      <div className="wrap_content-resort-v1">
-                        <div className="text-size-large text_body-bold text-gradient-orange">
-                          {otherTt.field("title", other.title)}
+                        <div className="wrap_content-resort-v1">
+                          <T
+                            k={`${otherPrefix}.title`}
+                            fallback={other.title}
+                            as="div"
+                            className="text-size-large text_body-bold text-gradient-orange"
+                          />
+                          <T
+                            k={`${otherPrefix}.excerpt`}
+                            fallback={other.excerpt}
+                            as="p"
+                            className="margin-0 tone-medium"
+                          />
                         </div>
-                        <p className="margin-0 tone-medium">
-                          {otherTt.field("excerpt", other.excerpt)}
-                        </p>
-                      </div>
-                    </Link>
+                      </Link>
                     );
                   })}
                 </div>

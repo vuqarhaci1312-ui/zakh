@@ -1,6 +1,22 @@
 import type { TranslateFn } from "@/lib/i18n/create-translator";
 import type { TourDetail } from "@/components/DestinationDetail/tour-details-data";
 
+export function tourKey(countrySlug: string, tourIndex: number, ...parts: string[]) {
+  return [`tours.byCountry.${countrySlug}.${tourIndex}`, ...parts].join(".");
+}
+
+export function branchKey(branchIndex: number, ...parts: string[]) {
+  return [`branches.details.${branchIndex}`, ...parts].join(".");
+}
+
+export function countryKey(countryIndex: number, ...parts: string[]) {
+  return [`country.countries.${countryIndex}`, ...parts].join(".");
+}
+
+export function generalFaqKey(index: number, field: "question" | "answer") {
+  return `country.generalFaqs.${index}.${field}`;
+}
+
 export function getTourIndex(countrySlug: string, tourSlug: string, tours: TourDetail[]) {
   return tours.findIndex((tour) => tour.slug === tourSlug);
 }

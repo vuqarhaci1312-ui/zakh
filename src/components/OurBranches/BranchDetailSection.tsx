@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
+import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
-import { createBranchTranslator } from "@/lib/i18n/content-translators";
+import { branchKey } from "@/lib/i18n/content-translators";
 import type { BranchDetail } from "./branch-details-data";
 import { BRANCH_DETAILS } from "./branch-details-data";
 import styles from "./BranchDetail.module.css";
@@ -45,11 +46,12 @@ function GlobeIcon() {
 export default function BranchDetailSection({ branch }: { branch: BranchDetail }) {
   const t = useTranslations();
   const branchIndex = BRANCH_DETAILS.findIndex((item) => item.slug === branch.slug);
-  const bt = createBranchTranslator(t, branchIndex >= 0 ? branchIndex : 0);
+  const idx = branchIndex >= 0 ? branchIndex : 0;
   const sectionRef = useRef<HTMLElement>(null);
   useOurServicesAnimation(sectionRef);
 
   const mailHref = branch.contact.email ? `mailto:${branch.contact.email}` : undefined;
+  const titleForAlt = t(branchKey(idx, "title"), branch.title);
 
   return (
     <section ref={sectionRef} className={`section ${styles.detailSection}`}>
@@ -57,30 +59,46 @@ export default function BranchDetailSection({ branch }: { branch: BranchDetail }
       <div className="w-layout-blockcontainer container w-container">
         <div className="service-wrapper">
           <Link href="/our-branches" className={styles.backLink} data-services-reveal>
-            {t("ui.allBranches", "← All branches")}
+            <T k="ui.allBranches" fallback="← All branches" />
           </Link>
 
           <div className={styles.grid} data-experience-card>
             <div className={styles.content}>
               <h1 className={styles.title}>
-                <span className="text-gradient-orange">{bt.field("title", branch.title)}</span>
+                <T
+                  k={branchKey(idx, "title")}
+                  fallback={branch.title}
+                  as="span"
+                  className="text-gradient-orange"
+                />
               </h1>
 
               {branch.description.map((paragraph, index) => (
-                <p key={paragraph.slice(0, 32)} className={styles.description}>
-                  {bt.description(index, paragraph)}
-                </p>
+                <T
+                  key={paragraph.slice(0, 32)}
+                  k={branchKey(idx, "description", String(index))}
+                  fallback={paragraph}
+                  as="p"
+                  className={styles.description}
+                />
               ))}
 
               <div className={styles.contactCard}>
-                <h2 className={styles.contactTitle}>
-                  {bt.contact("locationLabel", branch.contact.locationLabel)}
-                </h2>
+                <T
+                  k={branchKey(idx, "contact", "locationLabel")}
+                  fallback={branch.contact.locationLabel}
+                  as="h2"
+                  className={styles.contactTitle}
+                />
                 <ul className={styles.contactList}>
                   {branch.contact.address ? (
                     <li className={styles.contactItem}>
                       <LocationIcon />
-                      <span>{bt.contact("address", branch.contact.address)}</span>
+                      <T
+                        k={branchKey(idx, "contact", "address")}
+                        fallback={branch.contact.address}
+                        as="span"
+                      />
                     </li>
                   ) : null}
                   {branch.contact.phones?.map((phone) => (
@@ -117,7 +135,7 @@ export default function BranchDetailSection({ branch }: { branch: BranchDetail }
 
               {mailHref ? (
                 <a href={mailHref} className={styles.cta}>
-                  {t("ui.contactUs", "Contact Us")}
+                  <T k="ui.contactUs" fallback="Contact Us" />
                 </a>
               ) : null}
             </div>
@@ -125,7 +143,7 @@ export default function BranchDetailSection({ branch }: { branch: BranchDetail }
             <div className={styles.media}>
               <Image
                 src={branch.image}
-                alt={bt.field("title", branch.title)}
+                alt={titleForAlt}
                 width={720}
                 height={540}
                 className={styles.image}

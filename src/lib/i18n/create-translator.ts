@@ -4,15 +4,25 @@ export type TranslationDictionary = Record<string, string>;
 
 export type TranslateFn = (key: string, fallback?: string) => string;
 
+/**
+ * Returns translations for a single locale only.
+ * English source fallbacks (from *-data.ts) are used only when locale === "en".
+ * This prevents AZ/RU/AR pages from showing mixed English text.
+ */
 export function createTranslator(
   dictionary: TranslationDictionary,
-  fallbackDictionary?: TranslationDictionary,
+  locale: Locale,
 ): TranslateFn {
   return (key: string, fallback?: string) => {
-    if (key in dictionary) return dictionary[key];
-    if (fallbackDictionary && key in fallbackDictionary) return fallbackDictionary[key];
-    if (fallback !== undefined) return fallback;
-    return key;
+    if (key in dictionary) {
+      return dictionary[key];
+    }
+
+    if (locale === "en") {
+      return fallback ?? key;
+    }
+
+    return "";
   };
 }
 

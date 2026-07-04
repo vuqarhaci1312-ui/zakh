@@ -12,6 +12,8 @@ import {
 } from "./contact-data";
 import styles from "./Contact.module.css";
 import { useOurServicesAnimation } from "../OurServices/useOurServicesAnimation";
+import T from "@/components/edit-mode/EditableText";
+import { useEditMode } from "@/contexts/EditModeContext";
 import { useTranslations } from "@/contexts/TranslationsContext";
 
 function MapIcon() {
@@ -48,6 +50,7 @@ function WhatsAppIcon() {
 
 export default function ContactSection() {
   const t = useTranslations();
+  const { isEditMode } = useEditMode();
   const sectionRef = useRef<HTMLElement>(null);
   const [submitted, setSubmitted] = useState(false);
   useOurServicesAnimation(sectionRef);
@@ -62,17 +65,22 @@ export default function ContactSection() {
     const subject = String(data.get("subject") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
 
+    const nameLabel = t("ui.mailtoName", "Name:");
+    const phoneLabel = t("ui.mailtoPhone", "Phone:");
+    const emailLabel = t("ui.mailtoEmail", "Email:");
+    const defaultSubject = t("ui.mailtoDefaultSubject", "Contact from zakher.travel");
+
     const body = [
-      name ? `Name: ${name}` : "",
-      phone ? `Phone: ${phone}` : "",
-      email ? `Email: ${email}` : "",
+      name ? `${nameLabel} ${name}` : "",
+      phone ? `${phoneLabel} ${phone}` : "",
+      email ? `${emailLabel} ${email}` : "",
       "",
       message,
     ]
       .filter(Boolean)
       .join("\n");
 
-    const mailto = `mailto:${CONTACT_EMAIL.value}?subject=${encodeURIComponent(subject || "Contact from zakher.travel")}&body=${encodeURIComponent(body)}`;
+    const mailto = `mailto:${CONTACT_EMAIL.value}?subject=${encodeURIComponent(subject || defaultSubject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
     setSubmitted(true);
     form.reset();
@@ -87,15 +95,19 @@ export default function ContactSection() {
             <div className="max-width-52" style={{ margin: "0 auto" }}>
               <h1 className="section-heading night center">
                 <span className="text-gradient-orange">
-                  {t("nav.links.5.label", "Contact Us")}
+                  <T k="nav.links.6.label" fallback="Contact Us" />
                 </span>
               </h1>
             </div>
             <div className="space-1-normal" />
             <div className="max-width-41" style={{ margin: "0 auto" }}>
-              <p className="font-1-extra-small" style={{ textAlign: "center" }}>
-                {t("contact.section.description", CONTACT_SECTION.description)}
-              </p>
+              <T
+                k="contact.section.description"
+                fallback={CONTACT_SECTION.description}
+                as="p"
+                className="font-1-extra-small"
+                style={{ textAlign: "center" }}
+              />
             </div>
           </div>
 
@@ -108,15 +120,21 @@ export default function ContactSection() {
                   <MapIcon />
                 </div>
                 <div className={styles.infoContent}>
-                  <p className={styles.infoLabel}>{t("ui.office", "Office")}</p>
+                  <T k="ui.office" fallback="Office" as="p" className={styles.infoLabel} />
                   {CONTACT_OFFICES.map((office, index) => (
                     <div key={office.label} style={{ marginBottom: "0.85rem" }}>
-                      <h2 className={styles.officeTitle}>
-                        {t(`contact.offices.${index}.label`, office.label)}
-                      </h2>
-                      <p className={styles.infoText}>
-                        {t(`contact.offices.${index}.address`, office.address)}
-                      </p>
+                      <T
+                        k={`contact.offices.${index}.label`}
+                        fallback={office.label}
+                        as="h2"
+                        className={styles.officeTitle}
+                      />
+                      <T
+                        k={`contact.offices.${index}.address`}
+                        fallback={office.address}
+                        as="p"
+                        className={styles.infoText}
+                      />
                     </div>
                   ))}
                 </div>
@@ -127,7 +145,7 @@ export default function ContactSection() {
                   <PhoneIcon />
                 </div>
                 <div className={styles.infoContent}>
-                  <p className={styles.infoLabel}>{t("ui.officePhone", "Office Phone")}</p>
+                  <T k="ui.officePhone" fallback="Office Phone" as="p" className={styles.infoLabel} />
                   <a href={CONTACT_OFFICE_PHONE.href} className={styles.infoLink}>
                     {CONTACT_OFFICE_PHONE.value}
                   </a>
@@ -139,7 +157,7 @@ export default function ContactSection() {
                   <PhoneIcon />
                 </div>
                 <div className={styles.infoContent}>
-                  <p className={styles.infoLabel}>{t("ui.mobile", "Mobile")}</p>
+                  <T k="ui.mobile" fallback="Mobile" as="p" className={styles.infoLabel} />
                   {CONTACT_MOBILE_PHONES.map((phone) => (
                     <a key={phone.href} href={phone.href} className={styles.infoLink}>
                       {phone.value}
@@ -153,7 +171,7 @@ export default function ContactSection() {
                   <WhatsAppIcon />
                 </div>
                 <div className={styles.infoContent}>
-                  <p className={styles.infoLabel}>{t("ui.whatsapp", "WhatsApp")}</p>
+                  <T k="ui.whatsapp" fallback="WhatsApp" as="p" className={styles.infoLabel} />
                   <a
                     href={CONTACT_WHATSAPP.href}
                     target="_blank"
@@ -170,7 +188,7 @@ export default function ContactSection() {
                   <MailIcon />
                 </div>
                 <div className={styles.infoContent}>
-                  <p className={styles.infoLabel}>{t("ui.email", "Email")}</p>
+                  <T k="ui.email" fallback="Email" as="p" className={styles.infoLabel} />
                   <a href={CONTACT_EMAIL.href} className={styles.infoLink}>
                     {CONTACT_EMAIL.value}
                   </a>
@@ -193,8 +211,11 @@ export default function ContactSection() {
                 <div className={styles.formRow}>
                   <div className={styles.field}>
                     <label className={styles.label} htmlFor="contact-name">
-                      {t("ui.yourName", "Your Name")}
+                      <T k="ui.yourName" fallback="Your Name" />
                     </label>
+                    {isEditMode ? (
+                      <T k="ui.yourName" fallback="Your Name" as="span" className="sr-only" />
+                    ) : null}
                     <input
                       id="contact-name"
                       name="name"
@@ -206,8 +227,11 @@ export default function ContactSection() {
                   </div>
                   <div className={styles.field}>
                     <label className={styles.label} htmlFor="contact-phone">
-                      {t("ui.yourPhone", "Your Phone")}
+                      <T k="ui.yourPhone" fallback="Your Phone" />
                     </label>
+                    {isEditMode ? (
+                      <T k="ui.yourPhone" fallback="Your Phone" as="span" className="sr-only" />
+                    ) : null}
                     <input
                       id="contact-phone"
                       name="phone"
@@ -220,8 +244,11 @@ export default function ContactSection() {
 
                 <div className={styles.field}>
                   <label className={styles.label} htmlFor="contact-email">
-                    {t("ui.yourEmail", "Your Email")}
+                    <T k="ui.yourEmail" fallback="Your Email" />
                   </label>
+                  {isEditMode ? (
+                    <T k="ui.yourEmail" fallback="Your Email" as="span" className="sr-only" />
+                  ) : null}
                   <input
                     id="contact-email"
                     name="email"
@@ -234,8 +261,11 @@ export default function ContactSection() {
 
                 <div className={styles.field}>
                   <label className={styles.label} htmlFor="contact-subject">
-                    {t("ui.subject", "Subject")}
+                    <T k="ui.subject" fallback="Subject" />
                   </label>
+                  {isEditMode ? (
+                    <T k="ui.subject" fallback="Subject" as="span" className="sr-only" />
+                  ) : null}
                   <input
                     id="contact-subject"
                     name="subject"
@@ -247,8 +277,16 @@ export default function ContactSection() {
 
                 <div className={styles.field}>
                   <label className={styles.label} htmlFor="contact-message">
-                    {t("ui.message", "Message")}
+                    <T k="ui.message" fallback="Message" />
                   </label>
+                  {isEditMode ? (
+                    <T
+                      k="ui.messagePlaceholder"
+                      fallback="Leave a message here"
+                      as="span"
+                      className="sr-only"
+                    />
+                  ) : null}
                   <textarea
                     id="contact-message"
                     name="message"
@@ -259,16 +297,16 @@ export default function ContactSection() {
                 </div>
 
                 <button type="submit" className={styles.submit}>
-                  {t("ui.sendMessage", "Send Message")}
+                  <T k="ui.sendMessage" fallback="Send Message" />
                 </button>
 
                 {submitted ? (
-                  <p className={styles.infoText}>
-                    {t(
-                      "ui.contactFormSuccess",
-                      "Your email client should open with your message ready to send.",
-                    )}
-                  </p>
+                  <T
+                    k="ui.contactFormSuccess"
+                    fallback="Your email client should open with your message ready to send."
+                    as="p"
+                    className={styles.infoText}
+                  />
                 ) : null}
               </form>
             </div>

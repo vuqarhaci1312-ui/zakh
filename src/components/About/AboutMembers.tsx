@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { ABOUT_MEMBERS, MEMBER_LOGOS } from "./about-data";
 import styles from "./About.module.css";
 
@@ -13,7 +13,7 @@ export default function AboutMembers() {
       <div className={`${styles.container} ${styles.aboutMembers}`}>
         <h2 className={`${styles.h2Heading} ${styles.sectionTitleCenter}`}>
           <span className="text-gradient-orange">
-            {dt("about.ABOUT_MEMBERS.title", ABOUT_MEMBERS.title)}
+            <Dt k="about.ABOUT_MEMBERS.title" fallback={ABOUT_MEMBERS.title} />
           </span>
         </h2>
 

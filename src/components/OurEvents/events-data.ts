@@ -13,6 +13,8 @@ export const OUR_EVENTS_SECTION = {
     "Zakher Travel represents our country at numerous large-scale international events across the GCC, Europe, Asia, and beyond.",
 } as const;
 
+export const EVENTS_PER_PAGE = 5;
+
 export const EVENTS: EventItem[] = [
   {
     "id": "event-01",

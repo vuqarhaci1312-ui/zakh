@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt } from "@/lib/i18n/use-data-translation";
 
 function ButtonArrow() {
   return (
@@ -26,18 +26,20 @@ type PackageExploreButtonProps = {
 };
 
 export default function PackageExploreButton({ href }: PackageExploreButtonProps) {
-  const dt = useDt();
-  const label = dt("ui.readMore", "Read More");
-
   return (
     <Link
       href={href}
+      dir="ltr"
       className="primary-button w-variant-b04b30b8-312c-20b6-324a-d08432c0f8eb w-inline-block"
     >
       <div className="button-item-main">
         <div className="button-text-pill">
-          <div className="primay-button-text">{label}</div>
-          <div className="primay-button-text">{label}</div>
+          <div className="primay-button-text">
+            <Dt k="ui.readMore" fallback="Read More" />
+          </div>
+          <div className="primay-button-text">
+            <Dt k="ui.readMore" fallback="Read More" />
+          </div>
         </div>
         <div className="button-arrow-pill">
           <div className="arrow-wrapper">

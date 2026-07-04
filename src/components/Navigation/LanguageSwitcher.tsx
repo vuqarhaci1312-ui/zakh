@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import T from "@/components/edit-mode/EditableText";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslations } from "@/contexts/TranslationsContext";
+import { Dt } from "@/lib/i18n/use-data-translation";
 import {
   getLanguageByCode,
   LANGUAGES,
@@ -28,6 +30,7 @@ export default function LanguageSwitcher({
   const rootRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
   const current = getLanguageByCode(locale);
+  const selectLanguageLabel = t("ui.selectLanguage", "Select language");
 
   useEffect(() => {
     if (!open) {
@@ -64,9 +67,11 @@ export default function LanguageSwitcher({
   if (variant === "mobile") {
     return (
       <div className={styles.menuLanguageSection}>
-        <p className={styles.menuLanguageLabel}>{t("ui.language", "Language")}</p>
-        <div className={styles.menuLanguageGrid} role="listbox" aria-label="Select language">
-          {LANGUAGES.map((language) => {
+        <p className={styles.menuLanguageLabel}>
+          <T k="ui.language" fallback="Language" />
+        </p>
+        <div className={styles.menuLanguageGrid} role="listbox" aria-label={selectLanguageLabel}>
+          {LANGUAGES.map((language, index) => {
             const active = language.code === locale;
 
             return (
@@ -79,7 +84,9 @@ export default function LanguageSwitcher({
                 onClick={() => handleSelect(language.code)}
               >
                 <span className={styles.menuLanguageCode}>{language.short}</span>
-                <span className={styles.menuLanguageName}>{language.label}</span>
+                <span className={styles.menuLanguageName}>
+                  <Dt k={`languages.list.${index}.label`} fallback={language.label} />
+                </span>
               </button>
             );
           })}
@@ -96,6 +103,7 @@ export default function LanguageSwitcher({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listboxId}
+        aria-label={selectLanguageLabel}
         onClick={() => setOpen((value) => !value)}
       >
         <GlobeIcon className={styles.languageTriggerIcon} />
@@ -110,9 +118,9 @@ export default function LanguageSwitcher({
           id={listboxId}
           className={styles.languageDropdown}
           role="listbox"
-          aria-label="Select language"
+          aria-label={selectLanguageLabel}
         >
-          {LANGUAGES.map((language) => {
+          {LANGUAGES.map((language, index) => {
             const active = language.code === locale;
 
             return (
@@ -125,7 +133,9 @@ export default function LanguageSwitcher({
                   onClick={() => handleSelect(language.code)}
                 >
                   <span className={styles.languageOptionCode}>{language.short}</span>
-                  <span className={styles.languageOptionLabel}>{language.label}</span>
+                  <span className={styles.languageOptionLabel}>
+                    <Dt k={`languages.list.${index}.label`} fallback={language.label} />
+                  </span>
                 </button>
               </li>
             );

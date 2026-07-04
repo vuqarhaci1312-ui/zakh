@@ -39,10 +39,9 @@ export function useOurServicesAnimation(
         });
       }
 
-      const experienceCards = gsap.utils.toArray<HTMLElement>(
-        "[data-experience-card]",
-        root
-      );
+      const experienceCards = gsap.utils
+        .toArray<HTMLElement>("[data-experience-card]", root)
+        .filter((element) => !element.closest("[data-brochures-grid]"));
 
       if (experienceCards.length > 0) {
         gsap.set(experienceCards, { autoAlpha: 0, y: 48, scale: 0.96 });
@@ -57,6 +56,7 @@ export function useOurServicesAnimation(
           scrollTrigger: {
             trigger:
               experienceCards[0].closest(".service-bottom-grid") ??
+              experienceCards[0].closest("[data-brochures-grid]") ??
               experienceCards[0],
             start: "top 85%",
             toggleActions: "play none none none",

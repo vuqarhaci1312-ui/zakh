@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { DestinationArrowIcon } from "./DestinationArrowIcon";
 import { DESTINATIONS, type DestinationItem } from "./destinations-data";
 import { useDestinationSlider, LOOP_COPIES } from "./useDestinationSlider";
@@ -18,7 +18,8 @@ function DestinationCard({
   index: number;
 }) {
   const dt = useDt();
-  const name = dt(`destinations.DESTINATIONS.${index}.name`, destination.name);
+  const name = dt(`lagoon.POPULAR_TOUR_ITEMS.${index}.title`, destination.name);
+  const alt = dt(`lagoon.POPULAR_TOUR_ITEMS.${index}.imageAlt`, destination.imageAlt);
 
   return (
     <div className={styles.cardWrapper} data-slider-card>
@@ -26,7 +27,7 @@ function DestinationCard({
         <div className={styles.imageWrapper}>
           <Image
             src={destination.image}
-            alt={name}
+            alt={alt}
             width={1644}
             height={1100}
             sizes="(max-width: 767px) calc(100vw - 40px), 408px"
@@ -38,16 +39,16 @@ function DestinationCard({
         <div className={styles.detail}>
           <div className={styles.info}>
             <div className={styles.smallParagraph}>
-              {dt("ui.tourPackagesEyebrow.before", "Tour")}{" "}
+              <Dt k="ui.tourPackagesEyebrow.before" fallback="Tour" />{" "}
               <span className="text-gradient-orange">
-                {dt("ui.tourPackagesEyebrow.accent", "Packages")}
+                <Dt k="ui.tourPackagesEyebrow.accent" fallback="Packages" />
               </span>
             </div>
             <div className={`${styles.heading} text-gradient-orange`}>{name}</div>
           </div>
 
           <Link
-            href={`/destinations/${destination.id}`}
+            href={destination.href}
             className={styles.linkBlock}
             aria-label={`${dt("ui.exploreDestination", "Explore")} ${name}`}
             draggable={false}
@@ -88,9 +89,9 @@ export default function ExploreDestinations() {
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <h2 id="explore-destinations-title" ref={titleRef} className={styles.title}>
-            {dt("ui.tourPackagesHeading.before", "Our Tour")}{" "}
+            <Dt k="ui.tourPackagesHeading.before" fallback="Our Tour" />{" "}
             <span className="text-gradient-orange">
-              {dt("ui.tourPackagesHeading.accent", "Packages")}
+              <Dt k="ui.tourPackagesHeading.accent" fallback="Packages" />
             </span>
           </h2>
         </div>

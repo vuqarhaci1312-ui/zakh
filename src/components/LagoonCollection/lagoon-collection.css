@@ -78,8 +78,18 @@ body {
   color: inherit;
 }
 
+.caladan-lagoon .master_slider {
+  direction: ltr;
+}
+
+.caladan-lagoon .mask_resorts-v1.w-slider-mask,
+.caladan-lagoon .lagoon-slider-track {
+  direction: ltr;
+}
+
 .caladan-lagoon .image_resort-slide {
   isolation: isolate;
+  position: relative;
 }
 
 .caladan-lagoon .image_resort-slide .lagoon-tour-cover {

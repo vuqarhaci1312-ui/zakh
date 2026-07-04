@@ -36,27 +36,28 @@ async function fetchDictionaryFromPublic(locale: Locale): Promise<TranslationDic
 }
 
 async function loadDictionary(locale: Locale): Promise<TranslationDictionary> {
+  let staticDict: TranslationDictionary = {};
   try {
-    return await fetchDictionaryFromApi(locale);
+    staticDict = await fetchDictionaryFromPublic(locale);
   } catch {
-    return fetchDictionaryFromPublic(locale);
+    /* optional static fallback */
+  }
+
+  try {
+    const apiDict = await fetchDictionaryFromApi(locale);
+    if (locale === "en" || locale === "ru" || locale === "ar") {
+      return { ...apiDict, ...staticDict };
+    }
+    return { ...staticDict, ...apiDict };
+  } catch {
+    return staticDict;
   }
 }
 
 export const getTranslations = unstable_cache(
   async (locale: Locale): Promise<TranslateFn> => {
     const primary = await loadDictionary(locale);
-    let fallback: TranslationDictionary | undefined;
-
-    if (locale !== "en") {
-      try {
-        fallback = await loadDictionary("en");
-      } catch {
-        fallback = undefined;
-      }
-    }
-
-    return createTranslator(primary, fallback);
+    return createTranslator(primary, locale);
   },
   ["site-translations"],
   { revalidate: 300, tags: ["translations"] },

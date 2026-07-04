@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { IBM_Plex_Mono } from "next/font/google";
 import { useRef } from "react";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { SliderArrowIcon } from "./LagoonCollectionIcons";
 import {
   LAGOON_COLLECTION_TITLE,
@@ -38,7 +39,12 @@ function TourSlideCard({
           <Link href={href} className="card_resort-slide w-inline-block" aria-label={alt}>
             <div className="image_resort-slide">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={image} loading="lazy" alt={alt} className="image_cover lagoon-tour-cover" />
+              <img
+                src={image}
+                loading="eager"
+                alt={alt}
+                className="image_cover lagoon-tour-cover"
+              />
             </div>
           </Link>
         </div>
@@ -49,9 +55,11 @@ function TourSlideCard({
 
 export default function LagoonCollection() {
   const dt = useDt();
+  const { locale } = useLanguage();
   const rootRef = useRef<HTMLDivElement>(null);
   const { maskRef, trackRef, goPrev, goNext } = useLagoonCollectionSlider(
     POPULAR_TOUR_ITEMS.length,
+    locale,
   );
 
   useLagoonCollectionAnimation(rootRef);
@@ -67,9 +75,12 @@ export default function LagoonCollection() {
             <div className="headline_resorts-slider">
               <div className="heading_resorts-slider" data-lagoon-headline>
                 <h2 className="margin-0">
-                  {dt("lagoon.LAGOON_COLLECTION_TITLE", LAGOON_COLLECTION_TITLE)}{" "}
+                  <Dt k="lagoon.LAGOON_COLLECTION_TITLE" fallback={LAGOON_COLLECTION_TITLE} />{" "}
                   <span className="lagoon-title-accent">
-                    {dt("lagoon.LAGOON_COLLECTION_TITLE_ACCENT", LAGOON_COLLECTION_TITLE_ACCENT)}
+                    <Dt
+                      k="lagoon.LAGOON_COLLECTION_TITLE_ACCENT"
+                      fallback={LAGOON_COLLECTION_TITLE_ACCENT}
+                    />
                   </span>
                 </h2>
               </div>

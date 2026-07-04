@@ -2,6 +2,7 @@
 
 import { gsap } from "gsap";
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { Locale } from "@/lib/i18n/language-data";
 
 const AUTOPLAY_DELAY_MS = 3000;
 const TRANSITION_DURATION = 0.5;
@@ -9,7 +10,7 @@ const MOBILE_SWIPE_MAX_WIDTH = 991;
 const SWIPE_THRESHOLD_PX = 40;
 const DRAG_START_PX = 8;
 
-export function useLagoonCollectionSlider(itemCount: number) {
+export function useLagoonCollectionSlider(itemCount: number, locale?: Locale) {
   const maskRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -117,7 +118,16 @@ export function useLagoonCollectionSlider(itemCount: number) {
     return () => {
       resizeObserver.disconnect();
     };
-  }, [getStepWidth, itemCount]);
+  }, [getStepWidth, itemCount, locale]);
+
+  useEffect(() => {
+    activeIndexRef.current = 0;
+    setActiveIndex(0);
+    const track = trackRef.current;
+    if (track) {
+      gsap.set(track, { x: 0 });
+    }
+  }, [locale]);
 
   useEffect(() => {
     resetAutoplay();

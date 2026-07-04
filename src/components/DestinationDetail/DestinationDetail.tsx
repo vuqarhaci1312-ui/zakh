@@ -2,11 +2,9 @@
 
 import Link from "next/link";
 import { useMemo, useRef } from "react";
+import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
-import {
-  createCountryTranslator,
-  createTourTranslator,
-} from "@/lib/i18n/content-translators";
+import { countryKey, generalFaqKey, tourKey } from "@/lib/i18n/content-translators";
 import { COUNTRY_TOURS } from "./country-tours-data";
 import type { DestinationDetailData } from "./destination-detail-data";
 import FaqAccordion from "./FaqAccordion";
@@ -70,21 +68,31 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
   useDestinationDetailAnimation(rootRef);
 
   const countryIndex = COUNTRY_TOURS.findIndex((country) => country.slug === data.slug);
-  const ct = createCountryTranslator(t, data.slug, countryIndex >= 0 ? countryIndex : 0);
-  const countryName = ct.field("name", COUNTRY_TOURS[countryIndex]?.name ?? data.slug);
+  const effectiveCountryIndex = countryIndex >= 0 ? countryIndex : 0;
+  const countryNameFallback = COUNTRY_TOURS[countryIndex]?.name ?? data.slug;
   const hasTours = data.tours.length > 0;
 
   const translatedFaqs = useMemo(
     () =>
       data.faqs.map((item, index) => ({
-        question: hasTours
-          ? t(`country.generalFaqs.${index}.question`, item.question)
-          : ct.faq(index, "question", item.question),
-        answer: hasTours
-          ? t(`country.generalFaqs.${index}.answer`, item.answer)
-          : ct.faq(index, "answer", item.answer),
+        question: hasTours ? (
+          <T k={generalFaqKey(index, "question")} fallback={item.question} />
+        ) : (
+          <T
+            k={countryKey(effectiveCountryIndex, "faqs", String(index), "question")}
+            fallback={item.question}
+          />
+        ),
+        answer: hasTours ? (
+          <T k={generalFaqKey(index, "answer")} fallback={item.answer} />
+        ) : (
+          <T
+            k={countryKey(effectiveCountryIndex, "faqs", String(index), "answer")}
+            fallback={item.answer}
+          />
+        ),
       })),
-    [ct, data.faqs, hasTours, t],
+    [data.faqs, effectiveCountryIndex, hasTours],
   );
 
   return (
@@ -98,7 +106,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                   <div className="inner_image-resort">
                     <div className="master_label w-variant-84e91bde-75c3-dd4c-a083-7846b4ae6170">
                       <div className="label-small">
-                        {t("ui.tourPackage", data.tag)}
+                        <T k="ui.tourPackage" fallback={data.tag} />
                       </div>
                     </div>
                     <div className="wrap_small-gallery">
@@ -131,20 +139,30 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
 
                 <div className="wrap_text-resort" data-detail-reveal>
                   <h1 className="heading-style-h3">
-                    {countryName} {t("ui.tourPackagesEyebrow.before", "Tour")}{" "}
+                    <T
+                      k={countryKey(effectiveCountryIndex, "name")}
+                      fallback={countryNameFallback}
+                    />{" "}
+                    <T k="ui.tourPackagesEyebrow.before" fallback="Tour" />{" "}
                     <span className="text-gradient-orange">
-                      {t("ui.packagesAccent", "Packages")}
+                      <T k="ui.packagesAccent" fallback="Packages" />
                     </span>
                   </h1>
-                  <p className="margin-0 tone-medium">
-                    {ct.field("description", data.description)}
-                  </p>
+                  <T
+                    k={countryKey(effectiveCountryIndex, "description")}
+                    fallback={data.description}
+                    as="p"
+                    className="margin-0 tone-medium"
+                  />
                 </div>
 
                 <div className="resort_amenities">
-                  <div className="text-size-large text_body-bold">
-                    {t("ui.amenities", "Amenities")}
-                  </div>
+                  <T
+                    k="ui.amenities"
+                    fallback="Amenities"
+                    as="div"
+                    className="text-size-large text_body-bold"
+                  />
                   <div className="amenities">
                     <div className="grid_amenities">
                       {data.amenities.map((amenity, index) => (
@@ -152,10 +170,10 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={amenity.icon} loading="lazy" alt="" className="icon_amenity" />
                           <div>
-                            {t(
-                              `caladan.CALADAN_RESORT_DETAIL.amenities.${index}.label`,
-                              amenity.label,
-                            )}
+                            <T
+                              k={`caladan.CALADAN_RESORT_DETAIL.amenities.${index}.label`}
+                              fallback={amenity.label}
+                            />
                           </div>
                         </div>
                       ))}
@@ -164,9 +182,12 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                 </div>
 
                 <div className="resort_amenities" data-detail-reveal>
-                  <div className="text-size-large text_body-bold">
-                    {t("ui.reviews", "Reviews")}
-                  </div>
+                  <T
+                    k="ui.reviews"
+                    fallback="Reviews"
+                    as="div"
+                    className="text-size-large text_body-bold"
+                  />
                   <div className="content_card-testimonials-v3">
                     <div className="testimonial-v3_top-tile">
                       <div className="rating_testimonial">
@@ -175,41 +196,56 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                         ))}
                       </div>
                       <div className="testimonial-v3_text-tile">
-                        <div className="text-size-large text_body-bold">
-                          {t(
-                            "caladan.CALADAN_RESORT_DETAIL.review.headline",
-                            data.review.headline,
-                          )}
-                        </div>
+                        <T
+                          k="caladan.CALADAN_RESORT_DETAIL.review.headline"
+                          fallback={data.review.headline}
+                          as="div"
+                          className="text-size-large text_body-bold"
+                        />
                         <p className="tone-medium margin-0">
                           &quot;
-                          {t("caladan.CALADAN_RESORT_DETAIL.review.quote", data.review.quote)}
+                          <T
+                            k="caladan.CALADAN_RESORT_DETAIL.review.quote"
+                            fallback={data.review.quote}
+                          />
                           &quot;
                         </p>
                       </div>
                     </div>
                     <div className="testimonial-v3_bottom-tile">
-                      <div className="text_body-bold">
-                        {t("caladan.CALADAN_RESORT_DETAIL.review.name", data.review.name)}
-                      </div>
-                      <div className="tone-medium">
-                        {t("caladan.CALADAN_RESORT_DETAIL.review.role", data.review.role)}
-                      </div>
+                      <T
+                        k="caladan.CALADAN_RESORT_DETAIL.review.name"
+                        fallback={data.review.name}
+                        as="div"
+                        className="text_body-bold"
+                      />
+                      <T
+                        k="caladan.CALADAN_RESORT_DETAIL.review.role"
+                        fallback={data.review.role}
+                        as="div"
+                        className="tone-medium"
+                      />
                     </div>
                   </div>
                 </div>
 
                 <div className="resort_amenities" data-detail-reveal>
-                  <div className="text-size-large text_body-bold">
-                    {t("ui.gallery", "Gallery")}
-                  </div>
+                  <T
+                    k="ui.gallery"
+                    fallback="Gallery"
+                    as="div"
+                    className="text-size-large text_body-bold"
+                  />
                   <GallerySlider images={data.gallerySlides} />
                 </div>
 
                 <div className="resort_amenities" data-detail-reveal>
-                  <div className="text-size-large text_body-bold">
-                    {data.faqsTitle ? t("ui.faqs", data.faqsTitle) : t("ui.faqs", "FAQs")}
-                  </div>
+                  <T
+                    k="ui.faqs"
+                    fallback={data.faqsTitle ?? "FAQs"}
+                    as="div"
+                    className="text-size-large text_body-bold"
+                  />
                   <FaqAccordion items={translatedFaqs} />
                 </div>
               </div>
@@ -224,65 +260,83 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
             <div className="w-layout-blockcontainer container-large w-container">
               <div className="headline_more-resorts" data-detail-reveal>
                 <h2 className="margin-0">
-                  {countryName} {t("ui.toursAccent", "Tours")}{" "}
+                  <T
+                    k={countryKey(effectiveCountryIndex, "name")}
+                    fallback={countryNameFallback}
+                  />{" "}
+                  <T k="ui.toursAccent" fallback="Tours" />{" "}
                   <span className="tone-medium">({data.tours.length})</span>
                 </h2>
               </div>
               <div className="resorts">
                 <div className="grid_resorts">
-                  {data.tours.map((tour, tourIndex) => {
-                    const tt = createTourTranslator(t, data.slug, tourIndex);
-                    return (
-                      <Link
-                        key={tour.slug}
-                        href={`/destinations/${data.slug}/${tour.slug}`}
-                        className="card_resort-v1 w-inline-block"
-                        data-detail-related-card
-                      >
-                        <div className="image_resort-v1">
-                          <div className="overlay_resort-card-v1">
-                            <div className="master_label w-variant-84e91bde-75c3-dd4c-a083-7846b4ae6170">
-                              <div className="label-small">
-                                {tt.meta(0, "value", tour.stats[0]?.value ?? t("ui.tours", "Tour"))}
-                              </div>
+                  {data.tours.map((tour, tourIndex) => (
+                    <Link
+                      key={tour.slug}
+                      href={`/destinations/${data.slug}/${tour.slug}`}
+                      className="card_resort-v1 w-inline-block"
+                      data-detail-related-card
+                    >
+                      <div className="image_resort-v1">
+                        <div className="overlay_resort-card-v1">
+                          <div className="master_label w-variant-84e91bde-75c3-dd4c-a083-7846b4ae6170">
+                            <div className="label-small">
+                              <T
+                                k={tourKey(data.slug, tourIndex, "meta", "0", "value")}
+                                fallback={tour.stats[0]?.value ?? "Tour"}
+                              />
                             </div>
                           </div>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={tour.image}
-                            loading="lazy"
-                            alt={tt.field("title", tour.title)}
-                            className="image_cover is-parallax"
-                            data-detail-parallax
-                          />
                         </div>
-                        <div className="wrap_content-resort-v1">
-                          <div className="text-size-large text_body-bold text-gradient-orange">
-                            {tt.field("title", tour.title)}
-                          </div>
-                          <p className="margin-0 tone-medium">
-                            {tt.field("excerpt", tour.excerpt)}
-                          </p>
-                          <div className="card-resort_info-tile-v1">
-                            {tour.stats.map((stat, index) => {
-                              const Icon = RELATED_ICONS[index] ?? UsersIcon;
-                              return (
-                                <div key={stat.label} className="tile_room-summary">
-                                  <Icon />
-                                  <div className="wrap_text-room-summary">
-                                    <div>{tt.meta(index, "value", stat.value)}</div>
-                                    <div className="tone-medium">
-                                      {tt.meta(index, "label", stat.label)}
-                                    </div>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={tour.image}
+                          loading="lazy"
+                          alt={t(tourKey(data.slug, tourIndex, "title"), tour.title)}
+                          className="image_cover is-parallax"
+                          data-detail-parallax
+                        />
+                      </div>
+                      <div className="wrap_content-resort-v1">
+                        <T
+                          k={tourKey(data.slug, tourIndex, "title")}
+                          fallback={tour.title}
+                          as="div"
+                          className="text-size-large text_body-bold text-gradient-orange"
+                        />
+                        <T
+                          k={tourKey(data.slug, tourIndex, "excerpt")}
+                          fallback={tour.excerpt}
+                          as="p"
+                          className="margin-0 tone-medium"
+                        />
+                        <div className="card-resort_info-tile-v1">
+                          {tour.stats.map((stat, index) => {
+                            const Icon = RELATED_ICONS[index] ?? UsersIcon;
+                            return (
+                              <div key={stat.label} className="tile_room-summary">
+                                <Icon />
+                                <div className="wrap_text-room-summary">
+                                  <div>
+                                    <T
+                                      k={tourKey(data.slug, tourIndex, "meta", String(index), "value")}
+                                      fallback={stat.value}
+                                    />
+                                  </div>
+                                  <div className="tone-medium">
+                                    <T
+                                      k={tourKey(data.slug, tourIndex, "meta", String(index), "label")}
+                                      fallback={stat.label}
+                                    />
                                   </div>
                                 </div>
-                              );
-                            })}
-                          </div>
+                              </div>
+                            );
+                          })}
                         </div>
-                      </Link>
-                    );
-                  })}
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
@@ -295,9 +349,9 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
           <div className="w-layout-blockcontainer container-large w-container">
             <div className="headline_more-resorts" data-detail-reveal>
               <h2 className="margin-0">
-                {t("ui.moreDestinations.before", "More")}{" "}
+                <T k="ui.moreDestinations.before" fallback="More" />{" "}
                 <span className="tone-medium">
-                  {t("ui.moreDestinations.accent", "Destinations")}
+                  <T k="ui.moreDestinations.accent" fallback="Destinations" />
                 </span>
               </h2>
             </div>
@@ -305,13 +359,6 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
               <div className="grid_resorts">
                 {data.related.map((resort) => {
                   const relatedIndex = COUNTRY_TOURS.findIndex((c) => c.slug === resort.slug);
-                  const relatedName =
-                    relatedIndex >= 0
-                      ? t(
-                          `country.countries.${relatedIndex}.name`,
-                          COUNTRY_TOURS[relatedIndex].name,
-                        )
-                      : resort.title;
                   return (
                     <Link
                       key={resort.slug}
@@ -323,7 +370,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                         <div className="overlay_resort-card-v1">
                           <div className="master_label w-variant-84e91bde-75c3-dd4c-a083-7846b4ae6170">
                             <div className="label-small">
-                              {t("ui.tourPackage", resort.tag)}
+                              <T k="ui.tourPackage" fallback={resort.tag} />
                             </div>
                           </div>
                         </div>
@@ -338,24 +385,47 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                       </div>
                       <div className="wrap_content-resort-v1">
                         <div className="text-size-large text_body-bold text-gradient-orange">
-                          {relatedName} {t("ui.toursAccent", "Tours")}
+                          {relatedIndex >= 0 ? (
+                            <>
+                              <T
+                                k={countryKey(relatedIndex, "name")}
+                                fallback={COUNTRY_TOURS[relatedIndex].name}
+                              />{" "}
+                              <T k="ui.toursAccent" fallback="Tours" />
+                            </>
+                          ) : (
+                            <>
+                              {resort.title}{" "}
+                              <T k="ui.toursAccent" fallback="Tours" />
+                            </>
+                          )}
                         </div>
                         <div className="card-resort_info-tile-v1">
                           {resort.stats.map((stat, index) => {
                             const Icon = RELATED_ICONS[index] ?? UsersIcon;
-                            const rct =
-                              relatedIndex >= 0
-                                ? createCountryTranslator(t, resort.slug, relatedIndex)
-                                : null;
                             return (
                               <div key={stat.label} className="tile_room-summary">
                                 <Icon />
                                 <div className="wrap_text-room-summary">
                                   <div>
-                                    {rct ? rct.stat(index, "value", stat.value) : stat.value}
+                                    {relatedIndex >= 0 ? (
+                                      <T
+                                        k={countryKey(relatedIndex, "stats", String(index), "value")}
+                                        fallback={stat.value}
+                                      />
+                                    ) : (
+                                      stat.value
+                                    )}
                                   </div>
                                   <div>
-                                    {rct ? rct.stat(index, "label", stat.label) : stat.label}
+                                    {relatedIndex >= 0 ? (
+                                      <T
+                                        k={countryKey(relatedIndex, "stats", String(index), "label")}
+                                        fallback={stat.label}
+                                      />
+                                    ) : (
+                                      stat.label
+                                    )}
                                   </div>
                                 </div>
                               </div>

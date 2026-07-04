@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import BrochuresSection from "@/components/OurServices/BrochuresSection";
 import Navigation from "@/components/Navigation/Navigation";
 import OurServiceSection from "@/components/OurServices/OurServiceSection";
-import TravelExperiencesSection from "@/components/OurServices/TravelExperiencesSection";
+// TravelExperiencesSection disabled — restore: import and add <TravelExperiencesSection /> after OurServiceSection
+// import TravelExperiencesSection from "@/components/OurServices/TravelExperiencesSection";
 
 export const metadata: Metadata = {
   title: "Our Services | Zakher Travel",
@@ -16,7 +17,6 @@ export default function OurServicesPage() {
       <Navigation />
       <main>
         <OurServiceSection />
-        <TravelExperiencesSection />
         <BrochuresSection />
       </main>
     </>

@@ -1,13 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt } from "@/lib/i18n/use-data-translation";
 import { ABOUT_CHARITY } from "./about-data";
 import styles from "./About.module.css";
 
 export default function AboutCharity() {
-  const dt = useDt();
-
   return (
     <section className={`${styles.section} ${styles.aboutCharitySection}`}>
       <div className={`${styles.container} ${styles.aboutCharity}`}>
@@ -25,14 +23,18 @@ export default function AboutCharity() {
           <div className={styles.charityContent}>
             <h2 className={`${styles.h2Heading} ${styles.charityTitle}`}>
               <span className="text-gradient-orange">
-                {dt("about.ABOUT_CHARITY.title", ABOUT_CHARITY.title)}
+                <Dt k="about.ABOUT_CHARITY.title" fallback={ABOUT_CHARITY.title} />
               </span>
             </h2>
 
             {ABOUT_CHARITY.paragraphs.map((paragraph, index) => (
-              <p key={paragraph.slice(0, 24)} className={styles.paragraph}>
-                {dt(`about.ABOUT_CHARITY.paragraphs.${index}`, paragraph)}
-              </p>
+              <Dt
+                key={paragraph.slice(0, 24)}
+                k={`about.ABOUT_CHARITY.paragraphs.${index}`}
+                fallback={paragraph}
+                as="p"
+                className={styles.paragraph}
+              />
             ))}
           </div>
         </div>

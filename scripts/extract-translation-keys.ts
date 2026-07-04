@@ -48,6 +48,14 @@ const TRANSLATABLE_KEYS = new Set([
   "role",
   "company",
   "eventTitle",
+  "locationLabel",
+  "iconAlt",
+  "countriesTitle",
+  "toursTitle",
+  "copyrightSuffix",
+  "headline",
+  "quote",
+  "count",
 ]);
 
 const SKIP_KEYS = new Set([
@@ -81,7 +89,6 @@ const SKIP_KEYS = new Set([
   "heroImage",
   "since",
   "year",
-  "count",
   "number",
   "width",
   "height",
@@ -94,13 +101,13 @@ function namespaceFromKey(key: string) {
   return key.split(".")[0] ?? "general";
 }
 
-function add(key: string, value: string, locale = "en") {
+function add(key: string, value: string, locale = "en", forceNumeric = false) {
   const trimmed = value.trim();
   if (!trimmed) return;
   if (trimmed.length < 2 && !/^[.,!?;:…]$/.test(trimmed)) return;
   if (/^https?:\/\//.test(trimmed)) return;
   if (/^\/[\w/-]+$/.test(trimmed) && !trimmed.includes(" ")) return;
-  if (/^[\d+().\s-]+$/.test(trimmed)) return;
+  if (!forceNumeric && trimmed.length > 1 && /^[\d+().\s-]+$/.test(trimmed)) return;
   if (/^[\w.-]+@[\w.-]+\.\w+$/.test(trimmed)) return;
   if (/^\/tours\//.test(trimmed)) return;
   if (/^\/events\//.test(trimmed)) return;
@@ -139,7 +146,7 @@ function walk(obj: unknown, prefix: string) {
       const nextPrefix = prefix ? `${prefix}.${key}` : key;
 
       if (typeof value === "string" && TRANSLATABLE_KEYS.has(key)) {
-        add(nextPrefix, value);
+        add(nextPrefix, value, "en", key === "count");
       } else if (typeof value === "object") {
         walk(value, nextPrefix);
       }
@@ -229,6 +236,10 @@ async function loadData() {
       loader: async () => import("../src/components/RelatedPackages/related-packages-data.ts"),
     },
     {
+      prefix: "reviews",
+      loader: async () => import("../src/components/CustomerReviews/customer-reviews-data.ts"),
+    },
+    {
       prefix: "tourPackages",
       loader: async () => import("../src/components/TourPackages/tour-packages-data.ts"),
     },
@@ -239,6 +250,10 @@ async function loadData() {
     {
       prefix: "stats",
       loader: async () => import("../src/components/WhyChooseUs/stats-data.ts"),
+    },
+    {
+      prefix: "whyChooseUs",
+      loader: async () => import("../src/components/WhyChooseUsFeatures/why-choose-us-data.ts"),
     },
     {
       prefix: "country",
@@ -256,6 +271,13 @@ async function loadData() {
     {
       prefix: "caladan",
       loader: async () => import("../src/components/DestinationDetail/caladan-resort-data.ts"),
+    },
+    {
+      prefix: "languages",
+      loader: async () => {
+        const m = await import("../src/lib/i18n/language-data.ts");
+        return { list: m.LANGUAGES };
+      },
     },
   ];
 
@@ -299,12 +321,19 @@ async function loadData() {
     "meta.home.description":
       "Professional travel agency in Azerbaijan offering Baku city tours, Azerbaijan tour packages, visa support and unforgettable travel experiences across the Caucasus.",
     "meta.about.title": "About Us — Zakher Travel",
+    "meta.about.description": "Learn about Zakher Travel — professional tour operator in Azerbaijan since 2016.",
     "meta.contact.title": "Contact Us — Zakher Travel",
+    "meta.contact.description": "Contact Zakher Travel for tour bookings, visa support and custom travel packages.",
     "meta.services.title": "Our Services — Zakher Travel",
+    "meta.services.description": "Professional travel services including tours, visa support, transfers and hotel bookings.",
     "meta.tourPackages.title": "Tour Packages — Zakher Travel",
+    "meta.tourPackages.description": "Explore tour packages across Azerbaijan, Türkiye, Georgia, UAE and more.",
     "meta.social.title": "Social Media — Zakher Travel",
+    "meta.social.description": "Follow Zakher Travel on social media for tours, destinations and travel news.",
     "meta.events.title": "Our Events — Zakher Travel",
+    "meta.events.description": "International travel exhibitions and roadshows featuring Zakher Travel.",
     "meta.branches.title": "Our Branches — Zakher Travel",
+    "meta.branches.description": "Zakher Travel branch offices worldwide — local support and reservations.",
     "hero.tagline.afterAccent": ".",
     "ui.aboutIntro.titleBefore": "Who",
     "ui.aboutIntro.titleAccent": "We Are?",
@@ -339,6 +368,18 @@ async function loadData() {
     "ui.tourPackagesHeading.accent": "Packages",
     "ui.toursAccent": "Tours",
     "ui.viewAllIn": "View all in",
+    "ui.allDestinations": "All destinations",
+    "ui.tourSingular": "tour",
+    "ui.tourPackagesPickCountry": "Pick a destination to browse tours — no endless scrolling.",
+    "ui.noToursForCountry": "Tour programs for this destination are coming soon.",
+    "ui.showMoreTours": "Show all",
+    "ui.showLess": "Show less",
+    "ui.page": "Page",
+    "ui.pageOf": "of",
+    "ui.previousPage": "Previous",
+    "ui.nextPage": "Next",
+    "ui.eventsTotal": "events",
+    "ui.eventsPagination": "Events pages",
     "ui.exploreDestination": "Explore",
     "ui.followUsHeading.before": "Stay connected with",
     "ui.followUsHeading.accent": "Zakher Travel.",
@@ -381,6 +422,31 @@ async function loadData() {
     "ui.contactMapTitle": "Zakher Travel office location",
     "ui.contactFormSuccess":
       "Your email client should open with your message ready to send.",
+    "ui.heroSection": "Hero",
+    "ui.zakherTravelHome": "Zakher Travel home",
+    "ui.footerQuickLinks": "Footer quick links",
+    "ui.socialMediaSection": "Social media",
+    "ui.selectLanguage": "Select language",
+    "ui.navigationMenu": "Navigation menu",
+    "ui.navigateTo": "Navigate to",
+    "ui.onInstagram": " on Instagram",
+    "ui.countryFlag": " flag",
+    "ui.youtubePlayer": "YouTube video player",
+    "ui.mailtoName": "Name:",
+    "ui.mailtoPhone": "Phone:",
+    "ui.mailtoEmail": "Email:",
+    "ui.mailtoDefaultSubject": "Contact from zakher.travel",
+    "ui.inclusionsExclusions": "Inclusions & Exclusions",
+    "meta.notFound.destination": "Destination Not Found",
+    "meta.notFound.tour": "Tour Not Found",
+    "meta.notFound.branch": "Branch Not Found",
+    "meta.destination.titleSuffix": "Tours",
+    "meta.destination.descriptionFallback":
+      "Explore tour packages and destinations with Zakher Travel.",
+    "stats.STAT_SECTION.title": "STATISTICS",
+    "stats.STAT_SECTION.eyebrow": "Statistics",
+    "lagoon.LAGOON_COLLECTION_TITLE": "MOST POPULAR",
+    "lagoon.LAGOON_COLLECTION_TITLE_ACCENT": "TOURS",
   };
 
   for (const [key, value] of Object.entries(uiStrings)) {

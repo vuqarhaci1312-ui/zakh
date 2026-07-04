@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { useDt } from "@/lib/i18n/use-data-translation";
-import { BRANCHES, OUR_BRANCHES_SECTION } from "./branches-data";import styles from "./OurBranches.module.css";
+import { Dt, useDt } from "@/lib/i18n/use-data-translation";
+import { BRANCHES, OUR_BRANCHES_SECTION } from "./branches-data";
+import styles from "./OurBranches.module.css";
 import { useOurServicesAnimation } from "../OurServices/useOurServicesAnimation";
 
 export default function BranchesSection() {
@@ -21,22 +22,27 @@ export default function BranchesSection() {
             <div className="badge-wrap">
               <div className="section-badge w-variant-cbbf38fe-d1d9-25df-a3f8-ed2322a2901f">
                 <div className="badge-text w-variant-cbbf38fe-d1d9-25df-a3f8-ed2322a2901f">
-                  {dt("branches.OUR_BRANCHES_SECTION.badge", OUR_BRANCHES_SECTION.badge)}                </div>
+                  <Dt k="branches.OUR_BRANCHES_SECTION.badge" fallback={OUR_BRANCHES_SECTION.badge} />
+                </div>
               </div>
             </div>
             <div className="space-1-normal" />
             <div className="max-width-52" style={{ margin: "0 auto" }}>
               <h1 className="section-heading night center">
-                {dt("ui.branchesHeading.before", "Our")}{" "}
+                <Dt k="ui.branchesHeading.before" fallback="Our" />{" "}
                 <span className="text-gradient-orange">
-                  {dt("ui.branchesHeading.accent", "Branches")}
+                  <Dt k="ui.branchesHeading.accent" fallback="Branches" />
                 </span>
               </h1>
             </div>
             <div className="space-1-normal" />
             <div className="max-width-41" style={{ margin: "0 auto" }}>
               <p className="font-1-extra-small" style={{ textAlign: "center" }}>
-                {dt("branches.OUR_BRANCHES_SECTION.description", OUR_BRANCHES_SECTION.description)}              </p>
+                <Dt
+                  k="branches.OUR_BRANCHES_SECTION.description"
+                  fallback={OUR_BRANCHES_SECTION.description}
+                />
+              </p>
             </div>
           </div>
 
@@ -53,15 +59,18 @@ export default function BranchesSection() {
                 <div className={styles.flagWrap}>
                   <Image
                     src={branch.flag}
-                    alt={`${dt(`branches.BRANCHES.${index}.name`, branch.name)} flag`}
+                    alt={`${dt(`branches.BRANCHES.${index}.name`, branch.name)}${dt("ui.countryFlag", " flag")}`}
                     width={240}
                     height={160}
                     className={styles.flagImage}
                   />
                 </div>
-                <h2 className={styles.branchName}>
-                  {dt(`branches.BRANCHES.${index}.name`, branch.name)}
-                </h2>
+                <Dt
+                  k={`branches.BRANCHES.${index}.name`}
+                  fallback={branch.name}
+                  as="h2"
+                  className={styles.branchName}
+                />
               </Link>
             ))}
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { ABOUT_HERO } from "./about-data";
 import styles from "./About.module.css";
 
@@ -24,14 +24,20 @@ export default function AboutHero() {
 
         <div className={`${styles.headingTextContainer} ${styles.aboutHeroHeading}`}>
           <div className={`${styles.textBox} ${styles.aboutHeroH1}`}>
-            <h1 className={`${styles.h1Heading} ${styles.aboutHeroTitle}`}>
-              {dt("about.ABOUT_HERO.title", ABOUT_HERO.title)}
-            </h1>
+            <Dt
+              k="about.ABOUT_HERO.title"
+              fallback={ABOUT_HERO.title}
+              as="h1"
+              className={`${styles.h1Heading} ${styles.aboutHeroTitle}`}
+            />
           </div>
           <div className={`${styles.textBox} ${styles.aboutHeroSub}`}>
-            <p className={`${styles.paragraph} ${styles.marginNone} ${styles.white}`}>
-              {dt("about.ABOUT_HERO.subtitle", ABOUT_HERO.subtitle)}
-            </p>
+            <Dt
+              k="about.ABOUT_HERO.subtitle"
+              fallback={ABOUT_HERO.subtitle}
+              as="p"
+              className={`${styles.paragraph} ${styles.marginNone} ${styles.white}`}
+            />
           </div>
         </div>
       </div>

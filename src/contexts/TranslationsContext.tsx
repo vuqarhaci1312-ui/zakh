@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getLocaleDrafts, useEditModeOptional } from "@/contexts/EditModeContext";
 import {
   createTranslator,
   type TranslateFn,
@@ -29,68 +30,72 @@ const TranslationsContext = createContext<TranslationsContextValue | null>(null)
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
 async function fetchDictionary(locale: Locale): Promise<TranslationDictionary> {
+  let staticDict: TranslationDictionary = {};
+  try {
+    const staticRes = await fetch(`/i18n/${locale}.json`, { cache: "no-store" });
+    if (staticRes.ok) {
+      staticDict = (await staticRes.json()) as TranslationDictionary;
+    }
+  } catch {
+    /* static fallback optional */
+  }
+
   try {
     const res = await fetch(`${API_URL}/api/translations?locale=${locale}`, {
       credentials: "include",
+      cache: "no-store",
     });
     if (res.ok) {
       const data = (await res.json()) as { translations: TranslationDictionary };
-      return data.translations;
+      const apiDict = data.translations;
+      // EN/RU: static file wins conflicts to prevent cross-locale bleed from stale API data.
+      // AZ and other locales: API/DB wins; static JSON fills missing keys.
+      if (locale === "en" || locale === "ru" || locale === "ar") {
+        return { ...apiDict, ...staticDict };
+      }
+      return { ...staticDict, ...apiDict };
     }
   } catch {
     /* fallback below */
   }
 
-  const res = await fetch(`/i18n/${locale}.json`);
-  if (!res.ok) throw new Error("Translations unavailable");
-  return (await res.json()) as TranslationDictionary;
+  return staticDict;
 }
 
-export function TranslationsProvider({
-  children,
-  initialLocale,
-  initialDictionary,
-}: {
-  children: ReactNode;
-  initialLocale?: Locale;
-  initialDictionary?: TranslationDictionary;
-}) {
-  const { locale: contextLocale } = useLanguage();
-  const locale = initialLocale ?? contextLocale;
-  const [dictionary, setDictionary] = useState<TranslationDictionary>(
-    initialDictionary ?? {},
-  );
-  const [fallbackDictionary, setFallbackDictionary] = useState<TranslationDictionary>({});
-  const [loading, setLoading] = useState(!initialDictionary);
+export function TranslationsProvider({ children }: { children: ReactNode }) {
+  const { locale } = useLanguage();
+  const editMode = useEditModeOptional();
+  const [dictionary, setDictionary] = useState<TranslationDictionary>({});
+  const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
       const primary = await fetchDictionary(locale);
       setDictionary(primary);
-
-      if (locale !== "en") {
-        try {
-          const en = await fetchDictionary("en");
-          setFallbackDictionary(en);
-        } catch {
-          setFallbackDictionary({});
-        }
-      }
     } finally {
       setLoading(false);
     }
   }, [locale]);
 
   useEffect(() => {
-    if (!initialDictionary || locale !== initialLocale) {
-      void load();
-    }
-  }, [load, initialDictionary, initialLocale, locale]);
+    void load();
+  }, [load]);
+
+  useEffect(() => {
+    if (!editMode) return;
+    editMode.onSaved(load);
+  }, [editMode, load]);
+
+  const effectiveDictionary = useMemo(() => {
+    if (!editMode) return dictionary;
+    const localeDrafts = getLocaleDrafts(editMode.drafts, locale);
+    return { ...dictionary, ...localeDrafts };
+  }, [dictionary, editMode, locale]);
 
   const t = useMemo(
-    () => createTranslator(dictionary, fallbackDictionary),
-    [dictionary, fallbackDictionary],
+    () => createTranslator(effectiveDictionary, locale),
+    [effectiveDictionary, locale],
   );
 
   const value = useMemo(
@@ -99,7 +104,15 @@ export function TranslationsProvider({
   );
 
   return (
-    <TranslationsContext.Provider value={value}>{children}</TranslationsContext.Provider>
+    <TranslationsContext.Provider value={value}>
+      <div
+        style={{
+          visibility: loading && Object.keys(dictionary).length === 0 ? "hidden" : "visible",
+        }}
+      >
+        {children}
+      </div>
+    </TranslationsContext.Provider>
   );
 }
 

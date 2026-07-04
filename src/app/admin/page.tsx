@@ -18,10 +18,16 @@ export default function AdminLoginPage() {
     setError("");
 
     try {
-      await loginAdmin(email, password);
-      router.replace("/admin/languages");
+      await loginAdmin(email.trim().toLowerCase(), password);
+      router.replace("/?edit=1");
+      router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Login failed");
+      const message = err instanceof Error ? err.message : "Login failed";
+      if (message.includes("Failed to fetch") || message.includes("NetworkError")) {
+        setError("API ilə əlaqə qurulmadı. NEXT_PUBLIC_API_URL düzgün qurulubmu yoxlayın.");
+      } else {
+        setError(message);
+      }
     } finally {
       setLoading(false);
     }

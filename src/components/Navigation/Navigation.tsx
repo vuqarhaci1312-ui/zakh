@@ -19,6 +19,7 @@ import {
 } from "./navigation-data";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useCeepiiNavigation } from "./useCeepiiNavigation";
+import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
 
 function isExternalHref(href: string) {
@@ -60,10 +61,8 @@ function NavLink({
   activeClassName: string;
   onClick?: () => void;
 }) {
-  const t = useTranslations();
   const active = isActiveLink(pathname, href);
   const combinedClassName = `${className} ${active ? activeClassName : ""}`;
-  const text = t(labelKey, label);
 
   if (isExternalHref(href)) {
     return (
@@ -74,14 +73,14 @@ function NavLink({
         target="_blank"
         rel="noreferrer"
       >
-        {text}
+        <T k={labelKey} fallback={label} />
       </a>
     );
   }
 
   return (
     <Link href={href} className={combinedClassName} onClick={onClick}>
-      {text}
+      <T k={labelKey} fallback={label} />
     </Link>
   );
 }
@@ -99,22 +98,20 @@ function PillLink({
   pathname: string;
   gradient?: boolean;
 }) {
-  const t = useTranslations();
   const active = isActiveLink(pathname, href);
   const className = `${styles.pillLink} ${gradient ? "text-gradient-orange" : ""} ${active ? styles.pillLinkActive : ""}`;
-  const text = t(labelKey, label);
 
   if (isExternalHref(href)) {
     return (
       <a href={href} className={className} target="_blank" rel="noreferrer">
-        {text}
+        <T k={labelKey} fallback={label} />
       </a>
     );
   }
 
   return (
     <Link href={href} className={className} aria-current={active ? "page" : undefined}>
-      {text}
+      <T k={labelKey} fallback={label} />
     </Link>
   );
 }
@@ -126,14 +123,24 @@ function DesktopHeader({
   pathname: string;
   overlayMode: boolean;
 }) {
+  const t = useTranslations();
+
   return (
     <div className={overlayMode ? styles.overlayShell : styles.stickyShell}>
       <header className={`${styles.header} ${overlayMode ? "" : styles.headerLight}`}>
         <div className={styles.headerInner}>
           <div className={styles.container}>
             <div className={styles.left}>
-              <Link href="/" className={styles.logoLink} aria-label="Zakher Travel home">
-                <img src={NAV_LOGO} alt="Zakher Travel" className={styles.logo} />
+              <Link
+                href="/"
+                className={styles.logoLink}
+                aria-label={t("ui.zakherTravelHome", "Zakher Travel home")}
+              >
+                <img
+                  src={NAV_LOGO}
+                  alt={t("ui.zakherTravelHome", "Zakher Travel home")}
+                  className={styles.logo}
+                />
               </Link>
             </div>
 
@@ -203,15 +210,17 @@ export default function Navigation() {
         aria-hidden={!mobileMenuOpen}
         role="dialog"
         aria-modal="true"
-        aria-label="Navigation menu"
+        aria-label={t("ui.navigationMenu", "Navigation menu")}
       >
         <div className={styles.menuPanelHandle} aria-hidden="true" />
         <div className={styles.menuPanelHeader}>
-          <p className={styles.menuPanelTitle}>{t("ui.menu", "Menu")}</p>
+          <p className={styles.menuPanelTitle}>
+            <T k="ui.menu" fallback="Menu" />
+          </p>
           <button
             type="button"
             className={styles.iconButton}
-            aria-label="Close menu"
+            aria-label={t("ui.closeMenu", "Close menu")}
             onClick={closeMobileMenu}
           >
             <CloseIcon />
@@ -240,7 +249,7 @@ export default function Navigation() {
         />
       </aside>
 
-      <nav className={styles.bottomBar} aria-label="Mobile navigation">
+      <nav className={styles.bottomBar} aria-label={t("ui.navigationMenu", "Navigation menu")}>
         <div className={styles.bottomBarInner}>
           {MOBILE_TABS.map((tab, tabIndex) => {
             if (tab.type === "menu") {
@@ -254,7 +263,7 @@ export default function Navigation() {
                 >
                   <MenuTabIcon className={styles.bottomTabIcon} />
                   <p className={styles.bottomTabLabel}>
-                    {t(`nav.mobileTabs.${tabIndex}.label`, tab.label)}
+                    <T k={`nav.mobileTabs.${tabIndex}.label`} fallback={tab.label} />
                   </p>
                 </button>
               );
@@ -270,16 +279,18 @@ export default function Navigation() {
                     ? ToursTabIcon
                     : ServicesTabIcon;
 
+            const tabLabel = t(`nav.mobileTabs.${tabIndex}.label`, tab.label);
+
             return (
               <Link
                 key={tab.href}
                 href={tab.href}
                 className={`${styles.bottomTab} ${active ? styles.bottomTabActive : ""}`}
-                aria-label={`Navigate to ${tab.label}`}
+                aria-label={`${t("ui.navigateTo", "Navigate to")} ${tabLabel}`}
               >
                 <Icon className={styles.bottomTabIcon} />
                 <p className={styles.bottomTabLabel}>
-                  {t(`nav.mobileTabs.${tabIndex}.label`, tab.label)}
+                  <T k={`nav.mobileTabs.${tabIndex}.label`} fallback={tab.label} />
                 </p>
               </Link>
             );

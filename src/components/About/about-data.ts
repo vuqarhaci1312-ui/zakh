@@ -22,6 +22,8 @@ export const ABOUT_INTRO_BODY = [
 
 export const ABOUT_MEMBERS = {
   title: "We Are Members Of",
+  titleBefore: "We Are",
+  titleAccent: "Members Of",
 } as const;
 
 export const MEMBER_LOGOS = [

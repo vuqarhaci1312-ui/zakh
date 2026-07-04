@@ -1,6 +1,7 @@
 /**
- * Translates en.json to professional AZ using Google Cloud Translation API.
- * Run: node scripts/translate-with-gcp.mjs
+ * Translates en.json seed to a target locale via Google Cloud Translation API.
+ * Run: node scripts/translate-with-gcp.mjs ru
+ *      node scripts/translate-with-gcp.mjs az
  * Requires: gcloud auth application-default login OR GOOGLE_APPLICATION_CREDENTIALS
  */
 import fs from "fs";
@@ -11,13 +12,24 @@ import { execSync } from "child_process";
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PROJECT = process.env.GCP_PROJECT ?? "elevenmedia-em-2026";
 const BATCH = 50;
+const targetLocale = (process.argv[2] ?? "az").toLowerCase();
+
+const MANUAL_FILES = {
+  az: "manual-az-overrides.json",
+  ru: "manual-ru-overrides.json",
+  ar: "manual-ar-overrides.json",
+};
+
+if (!MANUAL_FILES[targetLocale]) {
+  console.error(`Unsupported locale: ${targetLocale}. Use one of: ${Object.keys(MANUAL_FILES).join(", ")}`);
+  process.exit(1);
+}
 
 function getAccessToken() {
   return execSync("gcloud auth print-access-token", { encoding: "utf8" }).trim();
 }
 
 async function translateBatch(texts, token) {
-  const url = `https://translation.googleapis.com/language/translate/v2?key=`;
   const res = await fetch(
     `https://translation.googleapis.com/v3/projects/${PROJECT}/locations/global:translateText`,
     {
@@ -29,7 +41,7 @@ async function translateBatch(texts, token) {
       },
       body: JSON.stringify({
         contents: texts,
-        targetLanguageCode: "az",
+        targetLanguageCode: targetLocale,
         sourceLanguageCode: "en",
         mimeType: "text/plain",
       }),
@@ -55,8 +67,8 @@ async function main() {
   );
 
   const token = getAccessToken();
-  const azDict = {};
-  const manualPath = path.join(root, "scripts/manual-az-overrides.json");
+  const translatedDict = {};
+  const manualPath = path.join(root, "scripts", MANUAL_FILES[targetLocale]);
   const manual = fs.existsSync(manualPath)
     ? JSON.parse(fs.readFileSync(manualPath, "utf8"))
     : {};
@@ -69,7 +81,7 @@ async function main() {
     for (let j = 0; j < batch.length; j++) {
       const item = batch[j];
       if (manual[item.key]) {
-        azDict[item.key] = manual[item.key];
+        translatedDict[item.key] = manual[item.key];
       } else {
         toTranslate.push(item.value);
         indices.push(j);
@@ -79,7 +91,7 @@ async function main() {
     if (toTranslate.length) {
       const translated = await translateBatch(toTranslate, token);
       translated.forEach((text, idx) => {
-        azDict[batch[indices[idx]].key] = text;
+        translatedDict[batch[indices[idx]].key] = text;
       });
     }
 
@@ -87,18 +99,18 @@ async function main() {
     await new Promise((r) => setTimeout(r, 200));
   }
 
-  const azItems = enItems.map((item) => ({
+  const localeItems = enItems.map((item) => ({
     key: item.key,
-    locale: "az",
-    value: azDict[item.key] ?? item.value,
+    locale: targetLocale,
+    value: translatedDict[item.key] ?? item.value,
     namespace: item.namespace,
   }));
 
   for (const [key, value] of Object.entries(manual)) {
-    if (!azItems.some((item) => item.key === key)) {
-      azItems.push({
+    if (!localeItems.some((item) => item.key === key)) {
+      localeItems.push({
         key,
-        locale: "az",
+        locale: targetLocale,
         value,
         namespace: key.split(".")[0] ?? "general",
       });
@@ -106,19 +118,12 @@ async function main() {
   }
 
   const seedsDir = path.join(root, "server/prisma/seeds");
-  fs.writeFileSync(path.join(seedsDir, "az.json"), JSON.stringify(azItems, null, 2));
+  fs.writeFileSync(
+    path.join(seedsDir, `${targetLocale}.json`),
+    JSON.stringify(localeItems, null, 2),
+  );
 
-  const dict = Object.fromEntries(azItems.map((i) => [i.key, i.value]));
-  fs.mkdirSync(path.join(root, "public/i18n"), { recursive: true });
-  fs.writeFileSync(path.join(root, "public/i18n/az.json"), JSON.stringify(dict));
-
-  const enDict = Object.fromEntries(enItems.map((i) => [i.key, i.value]));
-  fs.writeFileSync(path.join(root, "public/i18n/en.json"), JSON.stringify(enDict));
-
-  const combined = [...enItems, ...azItems];
-  fs.writeFileSync(path.join(seedsDir, "translations.json"), JSON.stringify(combined, null, 2));
-
-  console.log("Done. AZ dictionary written to public/i18n/az.json");
+  console.log(`Done. ${targetLocale.toUpperCase()} seed → server/prisma/seeds/${targetLocale}.json`);
 }
 
 main().catch(console.error);

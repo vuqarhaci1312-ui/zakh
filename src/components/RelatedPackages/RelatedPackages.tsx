@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
+import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
 import PackageExploreButton from "./PackageExploreButton";
 import {
@@ -28,8 +29,10 @@ export default function RelatedPackages() {
             <div className="section-title-wrapper" data-related-packages-reveal>
               <div className="max-width-38">
                 <h2 id="related-packages-title" className="section-heading night center">
-                  {t("packages.RELATED_PACKAGES_SECTION.title", "Popular")}{" "}
-                  <span className="text-gradient-orange">{t("ui.tours", "Tours")}</span>
+                  <T k="packages.RELATED_PACKAGES_SECTION.title" fallback="Popular" />{" "}
+                  <span className="text-gradient-orange">
+                    <T k="ui.tours" fallback="Tours" />
+                  </span>
                 </h2>
               </div>
             </div>
@@ -51,11 +54,19 @@ export default function RelatedPackages() {
                           <div className="releted-packeges-card-left">
                             <div className="max-width-17">
                               <div className="packeges-card-title text-gradient-orange">
-                                {t(`packages.RELATED_PACKAGES.${index}.title`, pkg.title)}
+                                <T
+                                  k={`packages.RELATED_PACKAGES.${index}.title`}
+                                  fallback={pkg.title}
+                                />
                               </div>
                             </div>
                             <div className="space-1-exta-small hide-mobile" />
-                            <p>{t(`packages.RELATED_PACKAGES.${index}.description`, pkg.description)}</p>
+                            <p>
+                              <T
+                                k={`packages.RELATED_PACKAGES.${index}.description`}
+                                fallback={pkg.description}
+                              />
+                            </p>
                             <div className="space-1-large hide-mobile" />
                             <PackageExploreButton href={pkg.href} />
                           </div>

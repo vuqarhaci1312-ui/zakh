@@ -4,9 +4,19 @@ import { fileURLToPath } from "url";
 
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
+const cmsApiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+
 const nextConfig: NextConfig = {
   turbopack: {
     root: projectRoot,
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/cms/:path*",
+        destination: `${cmsApiUrl}/:path*`,
+      },
+    ];
   },
   images: {
     remotePatterns: [

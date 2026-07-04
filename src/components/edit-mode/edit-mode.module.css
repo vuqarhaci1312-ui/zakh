@@ -1,0 +1,452 @@
+.editToolbar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: #0f172a;
+  color: #fff;
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.35);
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  font-size: 14px;
+  max-width: calc(100vw - 32px);
+  flex-wrap: wrap;
+}
+
+body[data-edit-panel-open="true"] .editToolbar {
+  right: calc(380px + 24px);
+  left: auto;
+  transform: none;
+  max-width: min(560px, calc(100vw - 420px));
+}
+
+.editBadge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #ff8c00;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.editLocale {
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+}
+
+.editCount {
+  color: #cbd5e1;
+}
+
+.editActiveField {
+  color: #fdba74;
+  font-size: 12px;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.editSuccess {
+  color: #86efac;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.editError {
+  color: #fca5a5;
+  font-size: 12px;
+  max-width: 200px;
+}
+
+.editActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.editBtn {
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.editBtnPrimary {
+  background: #ff8c00;
+  color: #fff;
+}
+
+.editBtnPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.editBtnSecondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.editBtnGhost {
+  background: transparent;
+  color: #94a3b8;
+}
+
+.editLink {
+  color: #fdba74;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.editLink:hover {
+  text-decoration: underline;
+}
+
+.enterEditBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9998;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.2);
+}
+
+.enterEditBtn:hover {
+  background: #1e293b;
+}
+
+/* ── Editable fields on page ── */
+
+.editable {
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: box-shadow 0.15s, outline-color 0.15s;
+  outline: 2px dashed transparent;
+  outline-offset: 3px;
+}
+
+.editable:hover {
+  outline-color: rgba(255, 140, 0, 0.55);
+  box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.08);
+}
+
+.editableGradient:hover {
+  outline-color: rgba(255, 140, 0, 0.75);
+  box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.12);
+}
+
+/* Gradient text uses transparent fill — switch to solid orange in edit mode */
+:global(body[data-edit-mode="true"]) .editableGradientText,
+:global(body[data-edit-mode="true"]) :global(.text-gradient-orange) .editable,
+:global(body[data-edit-mode="true"]) :global(.text-gradient-orange).editable,
+:global(body[data-edit-mode="true"]) :global(.lagoon-title-accent) .editable,
+:global(body[data-edit-mode="true"]) :global(.lagoon-title-accent).editable {
+  background: none !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  -webkit-text-fill-color: #e85d04 !important;
+  color: #e85d04 !important;
+}
+
+/* Hero / button labels stay readable inside solid buttons in edit mode */
+:global(body[data-edit-mode="true"]) :global(.btnSolid) .editable,
+:global(body[data-edit-mode="true"]) :global(.btn-solid) .editable,
+:global(body[data-edit-mode="true"]) a[class*="btn"] .editable {
+  -webkit-text-fill-color: inherit !important;
+  color: inherit !important;
+  opacity: 1;
+}
+
+.editableGradientText.editablePreview,
+:global(body[data-edit-mode="true"]) :global(.text-gradient-orange) .editable.editablePreview {
+  opacity: 1;
+  color: #f97316 !important;
+  -webkit-text-fill-color: #f97316 !important;
+}
+
+.editableActive {
+  outline: 2px solid #ff8c00;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 140, 0, 0.15);
+}
+
+.editableDirty {
+  outline-color: #f97316;
+}
+
+.editableEmpty {
+  outline: 2px dashed #f97316;
+  outline-offset: 3px;
+  min-width: 48px;
+  min-height: 1.2em;
+  display: inline-block;
+}
+
+.editablePreview {
+  opacity: 0.72;
+}
+
+.editablePlaceholder {
+  font-style: italic;
+  opacity: 0.65;
+}
+
+/* ── Side panel editor ── */
+
+.editBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  border: 0;
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(2px);
+  cursor: default;
+}
+
+.editPanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  width: min(380px, 100vw);
+  height: 100dvh;
+  background: #fff;
+  border-left: 1px solid #e2e8f0;
+  box-shadow: -12px 0 48px rgba(15, 23, 42, 0.12);
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+}
+
+.editPanelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 20px 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.editPanelEyebrow {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+}
+
+.editPanelTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.editPanelClose {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.editPanelClose:hover {
+  background: #e2e8f0;
+}
+
+.editPanelMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 20px 0;
+}
+
+.editPanelLocale {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #0f172a;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.editPanelDirty {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff7ed;
+  color: #c2410c;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.editPanelEmpty {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.editPanelKey {
+  display: block;
+  margin: 12px 20px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-size: 11px;
+  color: #64748b;
+  word-break: break-all;
+}
+
+.editPanelSection {
+  padding: 16px 20px 0;
+}
+
+.editPanelLabel {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.editPanelReference {
+  margin: 0;
+  padding: 12px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #64748b;
+  white-space: pre-wrap;
+}
+
+.editPanelTextarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #0f172a;
+  resize: vertical;
+}
+
+.editPanelTextarea:focus {
+  outline: none;
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.15);
+}
+
+.editPanelHint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #94a3b8;
+}
+
+.editPanelFooter {
+  margin-top: auto;
+  padding: 16px 20px 20px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.editPanelShortcut {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.editPanelDone {
+  width: 100%;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.editPanelDone:hover:not(:disabled) {
+  background: #1e293b;
+}
+
+.editPanelDone:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .editToolbar {
+    left: 16px;
+    right: 16px;
+    transform: none;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body[data-edit-panel-open="true"] .editToolbar {
+    left: 16px;
+    right: 16px;
+    bottom: calc(42vh + 12px);
+    max-width: none;
+  }
+
+  .editActions {
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+
+  .editPanel {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: min(72vh, 560px);
+    border-left: 0;
+    border-top: 1px solid #e2e8f0;
+    border-radius: 16px 16px 0 0;
+  }
+}

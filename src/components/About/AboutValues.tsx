@@ -1,29 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt } from "@/lib/i18n/use-data-translation";
 import { ABOUT_VALUES, FLEET_CARD, PLUS_ICON, VALUE_CARDS } from "./about-data";
 import styles from "./About.module.css";
 
 export default function AboutValues() {
-  const dt = useDt();
-
   return (
     <section className={`${styles.section} ${styles.overflowHidden}`}>
       <div className={`${styles.container} ${styles.aboutValues}`}>
         <div className={`${styles.headingGrid} ${styles.centered} ${styles.twoRows}`}>
           <div className={`${styles.gridBlock} ${styles.headingGridTitle}`}>
             <div className={styles.textBox}>
-              <h2 className={`${styles.h2Heading} ${styles.homeIntro}`}>
-                {dt("about.ABOUT_VALUES.title", ABOUT_VALUES.title)}
-              </h2>
+              <Dt
+                k="about.ABOUT_VALUES.title"
+                fallback={ABOUT_VALUES.title}
+                as="h2"
+                className={`${styles.h2Heading} ${styles.homeIntro}`}
+              />
             </div>
           </div>
           <div className={`${styles.gridBlock} ${styles.headingGridSubtitle}`}>
             <div className={styles.textBox}>
-              <p className={styles.paragraph}>
-                {dt("about.ABOUT_VALUES.subtitle", ABOUT_VALUES.subtitle)}
-              </p>
+              <Dt
+                k="about.ABOUT_VALUES.subtitle"
+                fallback={ABOUT_VALUES.subtitle}
+                as="p"
+                className={styles.paragraph}
+              />
             </div>
           </div>
         </div>
@@ -48,13 +52,19 @@ export default function AboutValues() {
                   />
                 </div>
                 <div className={styles.textBox}>
-                  <h3 className={`${styles.h3Heading} ${styles.valueTitle}`}>
-                    {dt(`about.VALUE_CARDS.${index}.title`, card.title)}
-                  </h3>
+                  <Dt
+                    k={`about.VALUE_CARDS.${index}.title`}
+                    fallback={card.title}
+                    as="h3"
+                    className={`${styles.h3Heading} ${styles.valueTitle}`}
+                  />
                   <div className={styles.textBox}>
-                    <p className={`${styles.smallParagraph} ${styles.noMargin}`}>
-                      {dt(`about.VALUE_CARDS.${index}.description`, card.description)}
-                    </p>
+                    <Dt
+                      k={`about.VALUE_CARDS.${index}.description`}
+                      fallback={card.description}
+                      as="p"
+                      className={`${styles.smallParagraph} ${styles.noMargin}`}
+                    />
                   </div>
                 </div>
               </div>
@@ -68,15 +78,18 @@ export default function AboutValues() {
         >
           <div className={styles.textBox}>
             <h3 className={`${styles.h3Heading} ${styles.valueTitle} ${styles.larger}`}>
-              {dt("ui.aboutFleet.titleBefore", "Our Tour")}{" "}
+              <Dt k="ui.aboutFleet.titleBefore" fallback="Our Tour" />{" "}
               <span className="text-gradient-orange">
-                {dt("ui.aboutFleet.titleAccent", "Packages")}
+                <Dt k="ui.aboutFleet.titleAccent" fallback="Packages" />
               </span>
             </h3>
             <div className={styles.textBox}>
-              <p className={`${styles.smallParagraph} ${styles.noMargin}`}>
-                {dt("about.FLEET_CARD.description", FLEET_CARD.description)}
-              </p>
+              <Dt
+                k="about.FLEET_CARD.description"
+                fallback={FLEET_CARD.description}
+                as="p"
+                className={`${styles.smallParagraph} ${styles.noMargin}`}
+              />
             </div>
           </div>
           <div className={`${styles.plusCircleIntro} ${styles.largerBox}`}>

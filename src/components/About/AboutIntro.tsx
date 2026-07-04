@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { ABOUT_INTRO, ABOUT_INTRO_BODY } from "./about-data";
 import styles from "./About.module.css";
 
@@ -24,17 +24,21 @@ export default function AboutIntro() {
 
           <div className={styles.aboutIntroContent}>
             <h2 className={`${styles.h2Heading} ${styles.aboutIntroTitle}`}>
-              {dt("ui.aboutIntro.titleBefore", "Who")}{" "}
+              <Dt k="ui.aboutIntro.titleBefore" fallback="Who" />{" "}
               <span className="text-gradient-orange">
-                {dt("ui.aboutIntro.titleAccent", "We Are?")}
+                <Dt k="ui.aboutIntro.titleAccent" fallback="We Are?" />
               </span>
             </h2>
 
             <div className={`${styles.richTextBlock} ${styles.aboutIntroRichText}`}>
               {ABOUT_INTRO_BODY.map((paragraph, index) => (
-                <p key={paragraph.slice(0, 24)} className={styles.paragraph}>
-                  {dt(`about.ABOUT_INTRO_BODY.${index}`, paragraph)}
-                </p>
+                <Dt
+                  key={paragraph.slice(0, 24)}
+                  k={`about.ABOUT_INTRO_BODY.${index}`}
+                  fallback={paragraph}
+                  as="p"
+                  className={styles.paragraph}
+                />
               ))}
             </div>
           </div>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { ABOUT_CERTIFICATES, CERTIFICATE_IMAGES } from "./about-data";
 import styles from "./About.module.css";
 import {
@@ -61,7 +61,7 @@ export default function AboutCertificates() {
       <div className={`${styles.container} ${styles.aboutCertificates}`}>
         <h2 className={`${styles.h2Heading} ${styles.sectionTitleCenter}`}>
           <span className="text-gradient-orange">
-            {dt("about.ABOUT_CERTIFICATES.title", ABOUT_CERTIFICATES.title)}
+            <Dt k="about.ABOUT_CERTIFICATES.title" fallback={ABOUT_CERTIFICATES.title} />
           </span>
         </h2>
 

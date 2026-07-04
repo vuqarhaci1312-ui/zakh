@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
+import T from "@/components/edit-mode/EditableText";
+import { useTranslations } from "@/contexts/TranslationsContext";
 import {
   HERO_DESCRIPTION,
   HERO_HEADLINE,
@@ -10,7 +12,6 @@ import {
   HERO_TAGLINE,
   HERO_VIDEO,
 } from "./hero-data";
-import { useTranslations } from "@/contexts/TranslationsContext";
 import styles from "./Hero.module.css";
 
 function ArrowRightIcon() {
@@ -36,9 +37,9 @@ function HeroDisplayTitle({
   as = "h1",
   className,
 }: {
-  beforeAccent: string;
-  accent: string;
-  afterAccent: string;
+  beforeAccent: ReactNode;
+  accent: ReactNode;
+  afterAccent: ReactNode;
   as?: "h1" | "h2";
   className?: string;
 }) {
@@ -47,16 +48,16 @@ function HeroDisplayTitle({
   return (
     <Tag className={className}>
       {beforeAccent}
-      <span className="text-gradient-orange">{accent}</span>
+      {accent}
       {afterAccent}
     </Tag>
   );
 }
 
 export default function Hero() {
-  const t = useTranslations();
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
+  const t = useTranslations();
   const fadeIn = reduceMotion
     ? {
         initial: { opacity: 1, y: 0 },
@@ -93,7 +94,7 @@ export default function Hero() {
   }, [reduceMotion]);
 
   return (
-    <section className={styles.heroSection} aria-label="Hero">
+    <section className={styles.heroSection} aria-label={t("ui.heroSection", "Hero")}>
       <div
         className={styles.mediaWrap}
         style={{ backgroundImage: `url(${HERO_VIDEO.poster})` }}
@@ -118,9 +119,19 @@ export default function Hero() {
         <div className={styles.content}>
           <motion.div {...fadeIn}>
             <HeroDisplayTitle
-              beforeAccent={t("hero.headline.beforeAccent", HERO_HEADLINE.beforeAccent)}
-              accent={t("hero.headline.accent", HERO_HEADLINE.accent)}
-              afterAccent={t("hero.headline.afterAccent", HERO_HEADLINE.afterAccent)}
+              beforeAccent={
+                <T k="hero.headline.beforeAccent" fallback={HERO_HEADLINE.beforeAccent} />
+              }
+              accent={
+                <T
+                  k="hero.headline.accent"
+                  fallback={HERO_HEADLINE.accent}
+                  className="text-gradient-orange"
+                />
+              }
+              afterAccent={
+                <T k="hero.headline.afterAccent" fallback={HERO_HEADLINE.afterAccent} />
+              }
               className={styles.displayTitle}
             />
           </motion.div>
@@ -131,9 +142,14 @@ export default function Hero() {
               {...fadeIn}
               transition={{ ...fadeIn.transition, delay: 0.15 }}
             >
-              <p className={styles.description}>{t("hero.description", HERO_DESCRIPTION)}</p>
+              <T
+                k="hero.description"
+                fallback={HERO_DESCRIPTION}
+                as="p"
+                className={styles.description}
+              />
               <Link href={HERO_PRIMARY_CTA.href} className={styles.btnSolid}>
-                {t("hero.cta.label", HERO_PRIMARY_CTA.label)}
+                <T k="hero.cta.label" fallback={HERO_PRIMARY_CTA.label} />
                 <ArrowRightIcon />
               </Link>
             </motion.div>
@@ -144,9 +160,19 @@ export default function Hero() {
               transition={{ ...fadeIn.transition, delay: 0.25 }}
             >
               <HeroDisplayTitle
-                beforeAccent={t("hero.tagline.beforeAccent", HERO_TAGLINE.beforeAccent)}
-                accent={t("hero.tagline.accent", HERO_TAGLINE.accent)}
-                afterAccent={t("hero.tagline.afterAccent", HERO_TAGLINE.afterAccent)}
+                beforeAccent={
+                  <T k="hero.tagline.beforeAccent" fallback={HERO_TAGLINE.beforeAccent} />
+                }
+                accent={
+                  <T
+                    k="hero.tagline.accent"
+                    fallback={HERO_TAGLINE.accent}
+                    className="text-gradient-orange"
+                  />
+                }
+                afterAccent={
+                  <T k="hero.tagline.afterAccent" fallback={HERO_TAGLINE.afterAccent} />
+                }
                 as="h2"
                 className={`${styles.displayTitle} ${styles.displayTitleRight}`}
               />

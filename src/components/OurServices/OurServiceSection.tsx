@@ -1,11 +1,38 @@
 "use client";
 
 import { useRef } from "react";
-import { useDt } from "@/lib/i18n/use-data-translation";
+import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { OUR_SERVICES } from "./our-services-data";
 import ServiceIcon from "./ServiceIcon";
-import TitleWithGradient from "./TitleWithGradient";
 import { useOurServicesAnimation } from "./useOurServicesAnimation";
+
+function ServiceTitle({
+  index,
+  title,
+  titleAccent,
+}: {
+  index: number;
+  title: string;
+  titleAccent?: string;
+}) {
+  if (!titleAccent || !title.includes(titleAccent)) {
+    return <Dt k={`services.OUR_SERVICES.${index}.title`} fallback={title} />;
+  }
+
+  const accentIndex = title.indexOf(titleAccent);
+  const before = title.slice(0, accentIndex);
+  const after = title.slice(accentIndex + titleAccent.length);
+
+  return (
+    <>
+      {before}
+      <span className="text-gradient-orange">
+        <Dt k={`services.OUR_SERVICES.${index}.titleAccent`} fallback={titleAccent} />
+      </span>
+      {after}
+    </>
+  );
+}
 
 function ServiceCard({
   service,
@@ -25,19 +52,17 @@ function ServiceCard({
         <div className="service-number-text">{service.number}</div>
         <div className="service-content">
           <div className="font-1-medium pearl">
-            <TitleWithGradient
-              title={dt(`services.OUR_SERVICES.${index}.title`, service.title)}
-              accent={
-                service.titleAccent
-                  ? dt(`services.OUR_SERVICES.${index}.titleAccent`, service.titleAccent)
-                  : undefined
-              }
-            />
+            <ServiceTitle index={index} title={service.title} titleAccent={service.titleAccent} />
           </div>
           <div className="service-content-bottom">
             <div className="space-1-exta-small" />
             <div className="service-bottom">
-              <p>{dt(`services.OUR_SERVICES.${index}.description`, service.description)}</p>
+              <p>
+                <Dt
+                  k={`services.OUR_SERVICES.${index}.description`}
+                  fallback={service.description}
+                />
+              </p>
             </div>
             {service.number === "02" ? <div className="space-1-medium" /> : null}
           </div>
@@ -64,7 +89,6 @@ function ServiceCard({
 }
 
 export default function OurServiceSection() {
-  const dt = useDt();
   const sectionRef = useRef<HTMLElement>(null);
   useOurServicesAnimation(sectionRef);
 
@@ -76,11 +100,11 @@ export default function OurServiceSection() {
           <div className="section-title-wrapper" data-services-reveal>
             <div className="max-width-52">
               <h2 className="section-heading night center">
-                {dt("ui.servicesHeading.before", "Professional")}{" "}
+                <Dt k="ui.servicesHeading.before" fallback="Professional" />{" "}
                 <span className="text-gradient-orange">
-                  {dt("ui.servicesHeading.accent", "travel services")}
+                  <Dt k="ui.servicesHeading.accent" fallback="travel services" />
                 </span>{" "}
-                {dt("ui.servicesHeading.after", "for every kind of journey.")}
+                <Dt k="ui.servicesHeading.after" fallback="for every kind of journey." />
               </h2>
             </div>
           </div>

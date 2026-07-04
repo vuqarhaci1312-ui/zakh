@@ -1,13 +1,12 @@
 "use client";
 
 import { gsap } from "gsap";
-import { useEffect, useRef, useState } from "react";
-import type { CaladanResortDetail } from "./caladan-resort-data";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 export default function FaqAccordion({
   items,
 }: {
-  items: CaladanResortDetail["faqs"];
+  items: { question: ReactNode; answer: ReactNode }[];
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const bottomRefs = useRef<Array<HTMLDivElement | null>>([]);
@@ -57,7 +56,7 @@ export default function FaqAccordion({
 
           return (
             <button
-              key={item.question}
+              key={String(index)}
               type="button"
               className={`expandable-single ${isOpen ? "is-open" : "is-closed"}`}
               onClick={() => setOpenIndex(isOpen ? null : index)}

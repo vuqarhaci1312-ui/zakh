@@ -1,0 +1,306 @@
+.section {
+  --wcu-ink: #1d1d1d;
+  --wcu-muted: #4d585f;
+  --wcu-soft: #edf1f4;
+  --wcu-white: #fff;
+  --wcu-radius: 1.25rem;
+
+  padding: 5rem 0 5.5rem;
+  background: var(--wcu-white);
+  color: var(--wcu-muted);
+  font-family: var(--font-inter-tight), "Inter Tight", sans-serif;
+  overflow: clip;
+}
+
+.container {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 1.875rem;
+}
+
+.header {
+  max-width: 720px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1.125rem;
+  border: 1px solid #dde5ed;
+  border-radius: 999px;
+  background: var(--wcu-soft);
+  color: var(--wcu-ink);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0 0 1rem;
+  color: var(--wcu-ink);
+  font-family: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  margin: 0 auto;
+  max-width: 560px;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.carouselWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+  touch-action: pan-x;
+  direction: ltr;
+}
+
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.viewport[data-dragging="true"] {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+}
+
+.slide {
+  flex: 0 0 var(--wcu-slide-width, 100%);
+  width: var(--wcu-slide-width, 100%);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 0 0.25rem;
+  box-sizing: border-box;
+}
+
+.card {
+  height: 100%;
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  min-height: 18rem;
+  padding: 1.75rem;
+  border-radius: var(--wcu-radius);
+  background: linear-gradient(145deg, #2d2d2d 0%, #1d1d1d 100%);
+  color: rgb(255 255 255 / 82%);
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 14%);
+  color: var(--wcu-white);
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.cardTitle {
+  margin: 0;
+  color: var(--wcu-white);
+  font-family: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.cardDescription {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: rgb(255 255 255 / 78%);
+}
+
+.navButton {
+  display: none;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid #dde5ed;
+  border-radius: 999px;
+  background: var(--wcu-white);
+  color: var(--wcu-ink);
+  cursor: pointer;
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.navButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.navButton:not(:disabled):hover {
+  border-color: #ff8c00;
+  background: #fff7ed;
+}
+
+.navIcon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.navIconNext {
+  width: 1.125rem;
+  height: 1.125rem;
+  transform: rotate(180deg);
+}
+
+.dots {
+  display: none;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #dde5ed;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.dotActive {
+  background: #ff8c00;
+  transform: scale(1.15);
+}
+
+.section :global([data-wcu-reveal]),
+.section :global([data-wcu-card]) {
+  opacity: 0;
+}
+
+@media screen and (min-width: 992px) {
+  .carouselWrap {
+    gap: 0;
+  }
+
+  .viewport {
+    overflow: visible;
+    cursor: default;
+    scroll-snap-type: none;
+  }
+
+  .track {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .slide {
+    flex: none;
+    width: auto;
+    padding: 0;
+    scroll-snap-align: unset;
+  }
+
+  .cardInner {
+    min-height: 20rem;
+    padding: 1.5rem;
+  }
+
+  .cardDescription {
+    font-size: 0.8125rem;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .section {
+    padding: 4rem 0 4.5rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .carouselWrap {
+    gap: 0.5rem;
+  }
+
+  .navButton {
+    display: inline-flex;
+  }
+
+  .dots {
+    display: flex;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .cardInner {
+    min-height: 16rem;
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .navButton {
+    width: 2.375rem;
+    height: 2.375rem;
+  }
+
+  .cardInner {
+    min-height: 15rem;
+    padding: 1.25rem;
+  }
+}
+
+[dir="rtl"] .header {
+  text-align: center;
+}
+
+[dir="rtl"] .cardDescription,
+[dir="rtl"] .cardTitle {
+  text-align: start;
+}

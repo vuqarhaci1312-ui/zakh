@@ -32,6 +32,43 @@
   background-image: linear-gradient(135deg, #ffb347 0%, #ff8c00 42%, #ff5f1f 100%);
 }
 
+.avenora-related-packages .primary-button {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.avenora-related-packages .primary-button,
+.avenora-related-packages .primary-button .button-item-main {
+  direction: ltr;
+}
+
+.avenora-related-packages .button-item-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 0.625rem;
+}
+
+.avenora-related-packages .button-text-pill {
+  height: 1.25rem;
+  line-height: 1.25rem;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.avenora-related-packages .button-text-pill .primay-button-text {
+  height: 1.25rem;
+  line-height: 1.25rem;
+  white-space: nowrap;
+}
+
+.avenora-related-packages .button-arrow-pill {
+  flex-shrink: 0;
+}
+
+[dir="rtl"] .avenora-related-packages .releted-packeges-card-left {
+  align-items: flex-start;
+}
+
 .avenora-related-packages .primary-button:hover .button-animated-color {
   inset: 0%;
 }
