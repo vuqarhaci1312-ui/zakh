@@ -1,6 +1,6 @@
 export const CONTACT_SECTION = {
   description:
-    "Get in touch with Zakher Travel in Baku or Dubai for tour packages, partnerships, and travel support.",
+    "Get in touch with Zakher Travel in Baku or the UAE for tour packages, partnerships, and travel support.",
 } as const;
 
 export const CONTACT_OFFICES = [
@@ -9,7 +9,7 @@ export const CONTACT_OFFICES = [
     address: "73 Huseyn Javid Ave, 16 floor, Baku 1073",
   },
   {
-    label: "Dubai Office",
+    label: "UAE Office",
     address: "SAIF Zone, Gate 3 building Q1-09. Office 103\\A, Sharjah",
   },
 ] as const;
@@ -20,9 +20,8 @@ export const CONTACT_OFFICE_PHONE = {
 } as const;
 
 export const CONTACT_MOBILE_PHONES = [
-  { href: "tel:+994502532200", value: "+994 50 253 22 00" },
   { href: "tel:+994502532209", value: "+994 50 253 22 09" },
-  { href: "tel:+994502532208", value: "+994 50 253 22 08" },
+  { href: "tel:+971565902100", value: "+971 56 590 21 00" },
 ] as const;
 
 export const CONTACT_WHATSAPP = {

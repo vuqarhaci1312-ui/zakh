@@ -11,5 +11,10 @@
 @media (max-width: 767px) {
   .tour-packages-page .service-wrapper {
     gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .tour-packages-page .w-layout-blockcontainer.container {
+    overflow: visible;
   }
 }

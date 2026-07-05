@@ -146,6 +146,7 @@ function walk(obj: unknown, prefix: string) {
       const nextPrefix = prefix ? `${prefix}.${key}` : key;
 
       if (typeof value === "string" && TRANSLATABLE_KEYS.has(key)) {
+        if (/\.INSTAGRAM_ACCOUNTS\.\d+\.username$/.test(nextPrefix)) continue;
         add(nextPrefix, value, "en", key === "count");
       } else if (typeof value === "object") {
         walk(value, nextPrefix);
@@ -380,6 +381,16 @@ async function loadData() {
     "ui.nextPage": "Next",
     "ui.eventsTotal": "events",
     "ui.eventsPagination": "Events pages",
+    "ui.brochureSingular": "brochure",
+    "ui.brochuresTotal": "brochures",
+    "ui.noBrochuresForLanguage": "No brochures for this language.",
+    "ui.brochuresPagination": "Brochure pages",
+    "ui.browseTours": "Browse tours",
+    "ui.tourPackagesFilterHint": "Choose a destination to see tours",
+    "ui.selectDestination": "Destination",
+    "ui.backToAllDestinations": "All destinations",
+    "ui.popularDestinations": "Popular destinations",
+    "ui.toursPagination": "Tour pages",
     "ui.exploreDestination": "Explore",
     "ui.followUsHeading.before": "Stay connected with",
     "ui.followUsHeading.accent": "Zakher Travel.",
@@ -394,6 +405,8 @@ async function loadData() {
     "ui.instagramCaption":
       "Tours, destinations, and travel moments from our team.",
     "ui.instagramViewProfile": "View profile on Instagram",
+    "ui.instagramAccountsTotal": "accounts",
+    "ui.instagramPagination": "Instagram account pages",
     "ui.amenities": "Amenities",
     "ui.reviews": "Reviews",
     "ui.gallery": "Gallery",

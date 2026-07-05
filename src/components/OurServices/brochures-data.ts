@@ -13,6 +13,8 @@ export const BROCHURES_SECTION = {
     "Printable brochures for every destination we operate — available in English, Arabic, Russian, German, and Chinese.",
 } as const;
 
+export const BROCHURES_MOBILE_PAGE_SIZE = 6;
+
 export interface BrochureItem {
   title: string;
   language: string;

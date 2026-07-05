@@ -1,0 +1,271 @@
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  padding: 20px 16px;
+  border-right: 1px solid #e2e8f0;
+  background: #fff;
+  min-height: calc(100vh - 64px);
+}
+
+.sidebarBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.sidebarBrand strong {
+  display: block;
+  font-size: 15px;
+}
+
+.sidebarBrand small {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.sidebarMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ffb347, #ff5f1f);
+  color: #fff;
+  font-weight: 700;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebarLink {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebarLink:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.sidebarLinkActive {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.pageHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.pageHeader h1 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.pageHeader p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.cardGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.localeTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.localeTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.localeTabActive {
+  border-color: #ff8c00;
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.localeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+.localeDotComplete {
+  background: #22c55e;
+}
+
+.fieldStack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formField label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.formField input,
+.formField textarea,
+.formField select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.formField textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.publishBar {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 16px 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.publishHint {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.statusPublished {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.statusDraft {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #64748b;
+}
+
+.rowActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mediaUploader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mediaPreview {
+  width: 100%;
+  max-width: 240px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.repeater {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.repeaterItem {
+  padding: 16px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .sidebarNav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

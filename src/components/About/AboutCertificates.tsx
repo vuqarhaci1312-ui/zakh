@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCmsContent } from "@/lib/content/use-cms";
 import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { ABOUT_CERTIFICATES, CERTIFICATE_IMAGES } from "./about-data";
 import styles from "./About.module.css";
@@ -12,20 +13,27 @@ import {
 
 export default function AboutCertificates() {
   const dt = useDt();
+  const { data: cmsData, hasCms } = useCmsContent<{
+    section: { title: string };
+    items: Array<{ imageUrl: string; alt: string | null }>;
+  }>("/api/content/certificates");
+  const certificateImages = hasCms && cmsData?.items?.length
+    ? cmsData.items.map((item) => item.imageUrl)
+    : CERTIFICATE_IMAGES;
   const [activeImage, setActiveImage] = useState<string | null>(null);
   const { viewportRef, trackRef, suppressClickRef } = useCertificateCarousel(
-    CERTIFICATE_IMAGES.length,
+    certificateImages.length,
   );
 
   const loopedCertificates = useMemo(
     () =>
       Array.from({ length: CERTIFICATE_LOOP_COPIES }, (_, copyIndex) =>
-        CERTIFICATE_IMAGES.map((src, index) => ({
+        certificateImages.map((src, index) => ({
           src,
           key: `${src}-${copyIndex}-${index}`,
         })),
       ).flat(),
-    [],
+    [certificateImages],
   );
 
   const closeLightbox = useCallback(() => setActiveImage(null), []);

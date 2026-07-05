@@ -145,8 +145,7 @@ export const OUR_SERVICES: OurServiceItem[] = [
 
     number: "04",
 
-    title: "Meetings, Incentives, Conferences and Exhibitions (MICE)",
-    titleAccent: "MICE",
+    title: "Meetings, Incentives, Conferences and Exhibitions",
 
     description:
 
@@ -156,7 +155,7 @@ export const OUR_SERVICES: OurServiceItem[] = [
 
     imageSrcSet: `${AVENORA_CDN}/6a2122d55f2930f34b4cbda7_Lone%20Trekker%20in%20the%20Majestic%20Mountains-p-500.webp 500w, ${AVENORA_CDN}/6a2122d55f2930f34b4cbda7_Lone%20Trekker%20in%20the%20Majestic%20Mountains-p-800.webp 800w, ${AVENORA_CDN}/6a2122d55f2930f34b4cbda7_Lone%20Trekker%20in%20the%20Majestic%20Mountains-p-1080.webp 1080w, ${AVENORA_CDN}/6a2122d55f2930f34b4cbda7_Lone%20Trekker%20in%20the%20Majestic%20Mountains.webp 1200w`,
 
-    alt: "MICE and event travel services",
+    alt: "Event and conference travel services",
 
     gridLayout: true,
 

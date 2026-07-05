@@ -15,6 +15,8 @@ export function useWhyChooseUsFeaturesAnimation(
       return;
     }
 
+    let mm: gsap.MatchMedia | undefined;
+
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>("[data-wcu-reveal]", root).forEach((element) => {
         gsap.set(element, { autoAlpha: 0, y: 36 });
@@ -34,7 +36,13 @@ export function useWhyChooseUsFeaturesAnimation(
       });
 
       const cards = gsap.utils.toArray<HTMLElement>("[data-wcu-card]", root);
-      if (cards.length > 0) {
+      if (cards.length === 0) {
+        return;
+      }
+
+      mm = gsap.matchMedia();
+
+      mm.add("(min-width: 992px)", () => {
         gsap.set(cards, { autoAlpha: 0, y: 48 });
 
         gsap.to(cards, {
@@ -50,7 +58,11 @@ export function useWhyChooseUsFeaturesAnimation(
             once: true,
           },
         });
-      }
+      });
+
+      mm.add("(max-width: 991px)", () => {
+        gsap.set(cards, { autoAlpha: 1, y: 0 });
+      });
     }, root);
 
     const refresh = () => ScrollTrigger.refresh();
@@ -59,6 +71,7 @@ export function useWhyChooseUsFeaturesAnimation(
 
     return () => {
       window.removeEventListener("load", refresh);
+      mm?.revert();
       ctx.revert();
     };
   }, [rootRef]);

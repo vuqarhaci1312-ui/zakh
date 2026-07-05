@@ -48,7 +48,7 @@ const PHRASE_MAP: Record<string, string> = {
   "About Company": "Şirkət haqqında",
   "Our Brochures": "Broşürlərimiz",
   "Head Office": "Baş ofis",
-  "Dubai Office": "Dubay ofisi",
+  "UAE Office": "BƏƏ ofisi",
   "All rights reserved": "Bütün hüquqlar qorunur",
   "Popular Tours": "Populyar turlar",
   Category: "Kateqoriya",

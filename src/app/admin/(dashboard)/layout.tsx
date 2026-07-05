@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import AdminHeader from "@/components/admin/AdminHeader";
+import AdminSidebar from "@/components/admin/cms/AdminSidebar";
 import styles from "../admin.module.css";
 import { getAdminMe, logoutAdmin, clearAdminToken, type AdminUser } from "@/lib/admin/api";
 
@@ -43,7 +44,10 @@ export default function AdminDashboardLayout({ children }: { children: ReactNode
     <div className={styles.adminRoot}>
       <div className={styles.appShell}>
         <AdminHeader user={user} onLogout={() => void handleLogout()} />
-        <main className={styles.mainContent}>{children}</main>
+        <div className={styles.dashboardBody}>
+          <AdminSidebar />
+          <main className={styles.mainContent}>{children}</main>
+        </div>
       </div>
     </div>
   );

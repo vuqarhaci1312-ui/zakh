@@ -17,7 +17,7 @@
     "i18n:seed": "cd server && npm run db:seed",
     "server:dev": "cd server && npm run dev",
     "server:install": "cd server && npm install",
-    "setup:cms": "npm run db:up && npm run server:install && cd server && copy .env.example .env && npm run db:generate && npm run db:migrate && npm run admin:bootstrap"
+    "setup:cms": "npm run db:up && npm run server:install && cd server && copy .env.example .env && npm run db:generate && npm run db:migrate && npm run admin:bootstrap && npm run content:seed"
   },
   "dependencies": {
     "@splinetool/react-spline": "^4.1.0",

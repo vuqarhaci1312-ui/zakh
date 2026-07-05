@@ -213,9 +213,14 @@
   transform: scale(1.15);
 }
 
-.section :global([data-wcu-reveal]),
-.section :global([data-wcu-card]) {
+.section :global([data-wcu-reveal]) {
   opacity: 0;
+}
+
+@media screen and (min-width: 992px) {
+  .section :global([data-wcu-card]) {
+    opacity: 0;
+  }
 }
 
 @media screen and (min-width: 992px) {

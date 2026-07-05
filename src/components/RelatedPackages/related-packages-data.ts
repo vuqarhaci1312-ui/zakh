@@ -1,5 +1,6 @@
 export const RELATED_PACKAGES_SECTION = {
-  title: "Popular Tours",
+  titleBefore: "Popular",
+  titleAccent: "Tours",
 } as const;
 
 export const RELATED_PACKAGES = [

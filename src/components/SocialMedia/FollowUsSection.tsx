@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
+import { useCmsContent } from "@/lib/content/use-cms";
 import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { FOLLOW_US_SECTION, SOCIAL_LINKS } from "./social-media-data";
 import { SocialIcon } from "./SocialIcons";
@@ -9,6 +10,16 @@ import { useOurServicesAnimation } from "../OurServices/useOurServicesAnimation"
 
 export default function FollowUsSection() {
   const dt = useDt();
+  const { data: cmsData, hasCms } = useCmsContent<{
+    socialLinks: Array<{ id: string; label: string; title: string; href: string }>;
+  }>("/api/content/social");
+  const links = useMemo(
+    () =>
+      hasCms && cmsData?.socialLinks?.length
+        ? cmsData.socialLinks.map((link) => ({ id: link.id as typeof SOCIAL_LINKS[number]["id"], label: link.label, title: link.title, href: link.href }))
+        : SOCIAL_LINKS,
+    [hasCms, cmsData],
+  );
   const sectionRef = useRef<HTMLElement>(null);
   useOurServicesAnimation(sectionRef);
 
@@ -44,21 +55,21 @@ export default function FollowUsSection() {
             </div>
           </div>
           <div className={styles.socialGrid}>
-            {SOCIAL_LINKS.map((link, index) => (
+            {links.map((link, index) => (
               <a
-                key={link.id}
+                key={`${link.id}-${index}`}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialCard}
-                title={dt(`social.SOCIAL_LINKS.${index}.title`, link.title)}
+                title={hasCms ? link.title : dt(`social.SOCIAL_LINKS.${index}.title`, link.title)}
                 data-experience-card
               >
                 <div className={styles.socialIconWrap} data-platform={link.id}>
                   <SocialIcon id={link.id} />
                 </div>
                 <span className={styles.socialLabel}>
-                  <Dt k={`social.SOCIAL_LINKS.${index}.label`} fallback={link.label} />
+                  {hasCms ? link.label : <Dt k={`social.SOCIAL_LINKS.${index}.label`} fallback={link.label} />}
                 </span>
               </a>
             ))}

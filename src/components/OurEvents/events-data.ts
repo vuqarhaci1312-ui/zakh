@@ -87,9 +87,13 @@ export const EVENTS: EventItem[] = [
     "id": "event-09",
     "title": "Asia's Leading Travel Show in Mumbai, India, 2025",
     "images": [
-      "/events/mumbai-D1tK5cjo.jpg",
-      "/events/mumbai1--Kx2_V9o.jpg",
-      "/events/mumbai3-fwNUhVeS.jpg"
+      "/events/ITF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.32%20(1).jpeg",
+      "/events/ITF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.32%20(2).jpeg",
+      "/events/ITF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.32.jpeg",
+      "/events/ITF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.33%20(1).jpeg",
+      "/events/ITF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.33%20(2).jpeg",
+      "/events/ITF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.33%20(3).jpeg",
+      "/events/ITF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.33.jpeg"
     ]
   },
   {
@@ -111,63 +115,116 @@ export const EVENTS: EventItem[] = [
     "id": "event-12",
     "title": "EMITT Istanbul, Turkey, 2025",
     "images": [
-      "/events/emitt-2025-MnxZc632.png"
+      "/events/EMITT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.09%20(1).jpeg",
+      "/events/EMITT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.09%20(2).jpeg",
+      "/events/EMITT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.09.jpeg",
+      "/events/EMITT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.10%20(1).jpeg",
+      "/events/EMITT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.10.jpeg"
     ]
   },
   {
     "id": "event-13",
     "title": "Arabian Travel Market (ATM), Dubai, UAE, 2025",
     "images": [
-      "/events/ATM_2025-D6RpYMwX.jpg"
+      "/events/ATM2025/WhatsApp%20Image%202026-07-03%20at%2012.24.15%20(1).jpeg",
+      "/events/ATM2025/WhatsApp%20Image%202026-07-03%20at%2012.24.15%20(2).jpeg",
+      "/events/ATM2025/WhatsApp%20Image%202026-07-03%20at%2012.24.15.jpeg",
+      "/events/ATM2025/WhatsApp%20Image%202026-07-03%20at%2012.24.16%20(1).jpeg",
+      "/events/ATM2025/WhatsApp%20Image%202026-07-03%20at%2012.24.16%20(2).jpeg",
+      "/events/ATM2025/WhatsApp%20Image%202026-07-03%20at%2012.24.16.jpeg",
+      "/events/ATM2025/WhatsApp%20Image%202026-07-03%20at%2012.24.17%20(1).jpeg",
+      "/events/ATM2025/WhatsApp%20Image%202026-07-03%20at%2012.24.17.jpeg"
     ]
   },
   {
     "id": "event-14",
     "title": "IMEX Frankfurt, Germany, 2025",
     "images": [
-      "/events/imex-frankfurt-2025.png"
+      "/events/IMEXFRANKFURT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.18%20(1).jpeg",
+      "/events/IMEXFRANKFURT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.18%20(2).jpeg",
+      "/events/IMEXFRANKFURT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.18%20(3).jpeg",
+      "/events/IMEXFRANKFURT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.18.jpeg",
+      "/events/IMEXFRANKFURT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.19%20(1).jpeg",
+      "/events/IMEXFRANKFURT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.19%20(2).jpeg",
+      "/events/IMEXFRANKFURT2025/WhatsApp%20Image%202026-07-03%20at%2012.24.19.jpeg"
     ]
   },
   {
     "id": "event-15",
     "title": "ITB Shanghai, China, 2025",
     "images": [
-      "/events/itb-china-CtyWPCwi.jpeg"
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.20%20(1).jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.20%20(2).jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.20%20(3).jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.20%20(4).jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.20%20(5).jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.20.jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.21%20(1).jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.21%20(2).jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.21%20(3).jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.21.jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.22%20(1).jpeg",
+      "/events/ITBCHINA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.22.jpeg"
     ]
   },
   {
     "id": "event-16",
     "title": "Georgian Wine and Regions Festival, Georgia, 2025",
     "images": [
-      "/events/winefest-DPEYsuiV.jpeg"
+      "/events/GEORGIA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.22%20(1).jpeg",
+      "/events/GEORGIA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.22%20(2).jpeg",
+      "/events/GEORGIA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.22%20(3).jpeg",
+      "/events/GEORGIA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.22.jpeg",
+      "/events/GEORGIA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.23%20(1).jpeg",
+      "/events/GEORGIA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.23%20(2).jpeg",
+      "/events/GEORGIA2025/WhatsApp%20Image%202026-07-03%20at%2012.24.23.jpeg"
     ]
   },
   {
     "id": "event-17",
     "title": "Istanbul ATF (Antalya Tourism Fair), Turkey, 2025",
     "images": [
-      "/events/atf2025-rtfUUYZ5.png"
+      "/events/ATF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.33.jpeg",
+      "/events/ATF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.34%20(1).jpeg",
+      "/events/ATF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.34%20(2).jpeg",
+      "/events/ATF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.34%20(3).jpeg",
+      "/events/ATF2025/WhatsApp%20Image%202026-07-03%20at%2012.24.34.jpeg"
     ]
   },
   {
     "id": "event-18",
     "title": "IMEX America, Las Vegas, USA, 2025",
     "images": [
-      "/events/imex-lasvegas-D0AuDLxs.jpeg"
-    ]
-  },
-  {
-    "id": "event-19",
-    "title": "IMEX America, Las Vegas, USA, 2025",
-    "images": [
-      "/events/imex-lasvegas-D0AuDLxs.jpeg"
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.34%20(1).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.34%20(2).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.34%20(3).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.34.jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.35%20(1).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.35%20(2).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.35%20(3).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.35%20(4).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.35%20(5).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.35%20(6).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.35%20(7).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.35%20(8).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.35%20(9).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.35.jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.36%20(1).jpeg",
+      "/events/IMEX%20Las%20Vegas%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.36.jpeg"
     ]
   },
   {
     "id": "event-20",
     "title": "IBTM World, Barcelona, Spain.",
     "images": [
-      "/events/ibtm-spain-DRDHGQhd.jpg"
+      "/events/IBTM%20Barcelona%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.36%20(1).jpeg",
+      "/events/IBTM%20Barcelona%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.36%20(2).jpeg",
+      "/events/IBTM%20Barcelona%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.36.jpeg",
+      "/events/IBTM%20Barcelona%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.37%20(1).jpeg",
+      "/events/IBTM%20Barcelona%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.37%20(2).jpeg",
+      "/events/IBTM%20Barcelona%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.37%20(3).jpeg",
+      "/events/IBTM%20Barcelona%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.37%20(4).jpeg",
+      "/events/IBTM%20Barcelona%202025/WhatsApp%20Image%202026-07-03%20at%2012.24.37.jpeg"
     ]
   },
   {
@@ -223,7 +280,23 @@ export const EVENTS: EventItem[] = [
   {
     "id": "event-27",
     "title": "Arabian Travel Market (ATM), Dubai, UAE, 2024",
-    "images": []
+    "images": [
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.38%20(1).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.38.jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.39%20(1).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.39%20(2).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.39%20(3).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.39%20(4).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.39%20(5).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.39%20(6).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.39.jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.40%20(1).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.40%20(2).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.40%20(3).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.40%20(4).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.40%20(5).jpeg",
+      "/events/ATM2024/WhatsApp%20Image%202026-07-03%20at%2012.24.40.jpeg"
+    ]
   },
   {
     "id": "event-28",

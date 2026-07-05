@@ -34,7 +34,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     id: "facebook",
     label: "Facebook",
     title: "Join us on Facebook",
-    href: "https://www.facebook.com/p/Zakher-Travel-Azerbaijan-61552554323306/?locale=ru_RU",
+    href: "https://www.facebook.com/zakher.travel/",
   },
   {
     id: "x",
@@ -82,7 +82,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     id: "snapchat",
     label: "Snapchat",
     title: "Join us on Snapchat",
-    href: "https://www.snapchat.com/",
+    href: "https://www.snapchat.com/add/zakher.travel?share_id=xcskqGRxSJqpOlKuNBPjHA&locale=en_AZ",
   },
   {
     id: "tripadvisor",
@@ -157,7 +157,7 @@ export const INSTAGRAM_ACCOUNTS: InstagramAccount[] = [
     avatar: PROFILE,
   },
   {
-    username: "Zakher.Travel_Azerbaijan",
+    username: "Zakher.Travel",
     href: "https://www.instagram.com/zakher_travel_azerbaijan?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
     image: PROFILE,
     avatar: PROFILE,

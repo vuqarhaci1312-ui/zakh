@@ -12,10 +12,6 @@
   font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
 }
 
-.avenora-customer-reviews [data-customer-reviews-reveal] {
-  opacity: 0;
-}
-
 .avenora-customer-reviews .customer-reviews-widget {
   width: 100%;
   min-height: 18rem;

@@ -6,3 +6,5 @@ export const TOUR_PACKAGES_PAGE = {
   countriesTitle: "Destinations",
   toursTitle: "All Tours",
 } as const;
+
+export const MOBILE_TOURS_PAGE_SIZE = 4;

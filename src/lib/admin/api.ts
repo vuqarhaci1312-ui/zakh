@@ -1,7 +1,10 @@
+import { clearAdminMode } from "./admin-mode";
+
 const REMOTE_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 /** Same-origin proxy in browser avoids cross-origin cookie/CORS issues with Cloud Run. */
 const API_URL = typeof window !== "undefined" ? "/api/cms" : REMOTE_API_URL;
 const ADMIN_TOKEN_KEY = "zakher-admin-token";
+
 export type AdminUser = {
   id: string;
   email: string;
@@ -69,6 +72,7 @@ export async function logoutAdmin() {
     await adminFetch("/api/auth/logout", { method: "POST" });
   } finally {
     clearAdminToken();
+    clearAdminMode();
   }
 }
 

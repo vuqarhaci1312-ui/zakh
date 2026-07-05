@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
 import { COUNTRY_TOURS } from "../DestinationDetail/country-tours-data";
 import { getToursForCountry } from "../DestinationDetail/tour-details-data";
 import { useOurServicesAnimation } from "../OurServices/useOurServicesAnimation";
-import { TOUR_PACKAGES_PAGE } from "./tour-packages-data";
+import { MOBILE_TOURS_PAGE_SIZE, TOUR_PACKAGES_PAGE } from "./tour-packages-data";
 import styles from "./TourPackages.module.css";
 
 const INITIAL_TOUR_LIMIT = 6;
@@ -20,6 +20,29 @@ const COUNTRIES_WITH_META = COUNTRY_TOURS.map((country, countryIndex) => ({
   countryIndex,
   tours: getToursForCountry(country.slug),
 }));
+
+function getMobilePageNumbers(currentPage: number, totalPages: number) {
+  if (totalPages <= 5) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  const pages = new Set<number>([1, totalPages, currentPage]);
+  if (currentPage > 1) pages.add(currentPage - 1);
+  if (currentPage < totalPages) pages.add(currentPage + 1);
+
+  const sorted = [...pages].sort((a, b) => a - b);
+  const result: (number | "ellipsis")[] = [];
+
+  sorted.forEach((page, index) => {
+    const prev = sorted[index - 1];
+    if (prev !== undefined && page - prev > 1) {
+      result.push("ellipsis");
+    }
+    result.push(page);
+  });
+
+  return result;
+}
 
 function CountryOverviewCard({
   slug,
@@ -52,7 +75,7 @@ function CountryOverviewCard({
             alt=""
             width={480}
             height={320}
-            sizes="(max-width: 639px) 100vw, (max-width: 991px) 50vw, 25vw"
+            sizes="(max-width: 767px) 50vw, (max-width: 991px) 33vw, 25vw"
             className={styles.image}
           />
         </div>
@@ -71,6 +94,9 @@ function CountryOverviewCard({
               <T k="ui.toursAccent" fallback="Tours" />
             )}
           </span>
+          <span className={styles.overviewAction}>
+            <T k="ui.browseTours" fallback="Browse tours" /> &rarr;
+          </span>
         </div>
       </button>
       <Link href={`/destinations/${slug}`} className={styles.overviewLink}>
@@ -84,17 +110,19 @@ function TourCard({
   countrySlug,
   tourIndex,
   tour,
+  compact = false,
 }: {
   countrySlug: string;
   tourIndex: number;
   tour: ReturnType<typeof getToursForCountry>[number];
+  compact?: boolean;
 }) {
   const t = useTranslations();
 
   return (
     <Link
       href={`/destinations/${countrySlug}/${tour.slug}`}
-      className={styles.tourCard}
+      className={`${styles.tourCard}${compact ? ` ${styles.tourCardCompact}` : ""}`}
     >
       <div className={styles.tourImageWrap}>
         <Image
@@ -105,7 +133,7 @@ function TourCard({
           )}
           width={640}
           height={480}
-          sizes="(max-width: 639px) 100vw, (max-width: 991px) 50vw, 33vw"
+          sizes="(max-width: 767px) 50vw, (max-width: 991px) 50vw, 33vw"
           className={styles.image}
         />
       </div>
@@ -116,15 +144,17 @@ function TourCard({
           as="h3"
           className={styles.tourTitle}
         />
-        <p className={styles.tourExcerpt}>
-          <T
-            k={`tours.byCountry.${countrySlug}.${tourIndex}.excerpt`}
-            fallback={tour.excerpt}
-          />
-        </p>
+        {!compact ? (
+          <p className={styles.tourExcerpt}>
+            <T
+              k={`tours.byCountry.${countrySlug}.${tourIndex}.excerpt`}
+              fallback={tour.excerpt}
+            />
+          </p>
+        ) : null}
         {tour.meta.length > 0 ? (
           <div className={styles.tourMeta}>
-            {tour.meta.slice(0, 2).map((item, metaIndex) => (
+            {tour.meta.slice(0, compact ? 1 : 2).map((item, metaIndex) => (
               <span key={item.label} className={styles.stat}>
                 <strong>
                   <T
@@ -146,30 +176,64 @@ function TourCard({
 }
 
 export default function TourPackagesSection() {
+  const t = useTranslations();
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [activeView, setActiveView] = useState<ActiveView>("all");
   const [showAllTours, setShowAllTours] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileTourPage, setMobileTourPage] = useState(1);
 
   useOurServicesAnimation(sectionRef);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const syncViewport = () => setIsMobile(mediaQuery.matches);
+
+    syncViewport();
+    mediaQuery.addEventListener("change", syncViewport);
+    return () => mediaQuery.removeEventListener("change", syncViewport);
+  }, []);
 
   const activeCountry = useMemo(
     () => COUNTRIES_WITH_META.find((country) => country.slug === activeView),
     [activeView],
   );
 
+  const mobileTourTotalPages = activeCountry
+    ? Math.max(1, Math.ceil(activeCountry.tours.length / MOBILE_TOURS_PAGE_SIZE))
+    : 1;
+
   const visibleTours = useMemo(() => {
     if (!activeCountry) return [];
+
+    if (isMobile) {
+      const start = (mobileTourPage - 1) * MOBILE_TOURS_PAGE_SIZE;
+      return activeCountry.tours.slice(start, start + MOBILE_TOURS_PAGE_SIZE);
+    }
+
     if (showAllTours) return activeCountry.tours;
     return activeCountry.tours.slice(0, INITIAL_TOUR_LIMIT);
-  }, [activeCountry, showAllTours]);
+  }, [activeCountry, isMobile, mobileTourPage, showAllTours]);
+
+  const mobileTourPageNumbers = useMemo(
+    () => getMobilePageNumbers(mobileTourPage, mobileTourTotalPages),
+    [mobileTourPage, mobileTourTotalPages],
+  );
 
   const selectView = (view: ActiveView) => {
     setActiveView(view);
     setShowAllTours(false);
+    setMobileTourPage(1);
+
     requestAnimationFrame(() => {
       contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  };
+
+  const goToMobileTourPage = (page: number) => {
+    const nextPage = Math.min(Math.max(page, 1), mobileTourTotalPages);
+    setMobileTourPage(nextPage);
   };
 
   return (
@@ -177,7 +241,7 @@ export default function TourPackagesSection() {
       <div className="space-8-small" />
       <div className="w-layout-blockcontainer container w-container">
         <div className={`service-wrapper ${styles.wrapper}`}>
-          <div className="section-title-wrapper" data-services-reveal>
+          <div className={`section-title-wrapper ${styles.pageHeader}`} data-services-reveal>
             <div className="badge-wrap">
               <div className="section-badge w-variant-cbbf38fe-d1d9-25df-a3f8-ed2322a2901f">
                 <div className="badge-text w-variant-cbbf38fe-d1d9-25df-a3f8-ed2322a2901f">
@@ -199,44 +263,12 @@ export default function TourPackagesSection() {
             </div>
             <div className="space-1-normal" />
             <div className="max-width-41" style={{ margin: "0 auto" }}>
-              <p className="font-1-extra-small" style={{ textAlign: "center" }}>
+              <p className={`font-1-extra-small ${styles.pageDescription}`}>
                 <T
                   k="tourPackages.TOUR_PACKAGES_PAGE.description"
                   fallback={TOUR_PACKAGES_PAGE.description}
                 />
               </p>
-            </div>
-          </div>
-
-          <div className={styles.filterBar} data-services-reveal>
-            <div className={styles.filterScroll} role="tablist" aria-label="Destinations">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={activeView === "all"}
-                className={`${styles.filterButton}${activeView === "all" ? ` ${styles.filterButtonActive}` : ""}`}
-                onClick={() => selectView("all")}
-              >
-                <T k="ui.allDestinations" fallback="All destinations" />
-              </button>
-              {COUNTRIES_WITH_META.map((country) => (
-                <button
-                  key={country.slug}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeView === country.slug}
-                  className={`${styles.filterButton}${activeView === country.slug ? ` ${styles.filterButtonActive}` : ""}`}
-                  onClick={() => selectView(country.slug)}
-                >
-                  <T
-                    k={`country.countries.${country.countryIndex}.name`}
-                    fallback={country.name}
-                  />
-                  {country.tours.length > 0 ? (
-                    <span className={styles.filterCount}>{country.tours.length}</span>
-                  ) : null}
-                </button>
-              ))}
             </div>
           </div>
 
@@ -252,7 +284,7 @@ export default function TourPackagesSection() {
                 <p className={styles.panelHint}>
                   <T
                     k="ui.tourPackagesPickCountry"
-                    fallback="Pick a destination to browse tours — no endless scrolling."
+                    fallback="Tap a country to browse its tours."
                   />
                 </p>
                 <div className={styles.overviewGrid}>
@@ -271,6 +303,15 @@ export default function TourPackagesSection() {
               </div>
             ) : activeCountry ? (
               <div className={styles.toursSection}>
+                <button
+                  type="button"
+                  className={styles.backButton}
+                  onClick={() => selectView("all")}
+                >
+                  <span aria-hidden="true">←</span>
+                  <T k="ui.backToAllDestinations" fallback="All destinations" />
+                </button>
+
                 <div className={styles.panelHeader}>
                   <div>
                     <h2 className={styles.panelTitle}>
@@ -289,6 +330,13 @@ export default function TourPackagesSection() {
                       ) : (
                         <T k="ui.toursAccent" fallback="tours" />
                       )}
+                      {isMobile && activeCountry.tours.length > MOBILE_TOURS_PAGE_SIZE ? (
+                        <>
+                          {" · "}
+                          <T k="ui.page" fallback="Page" /> {mobileTourPage}{" "}
+                          <T k="ui.pageOf" fallback="of" /> {mobileTourTotalPages}
+                        </>
+                      ) : null}
                     </p>
                   </div>
                   <Link
@@ -333,12 +381,62 @@ export default function TourPackagesSection() {
                             countrySlug={activeCountry.slug}
                             tourIndex={tourIndex}
                             tour={tour}
+                            compact={isMobile}
                           />
                         );
                       })}
                     </div>
 
-                    {activeCountry.tours.length > INITIAL_TOUR_LIMIT ? (
+                    {isMobile && mobileTourTotalPages > 1 ? (
+                      <nav
+                        className={styles.pagination}
+                        aria-label={t("ui.toursPagination", "Tour pages")}
+                      >
+                        <button
+                          type="button"
+                          className={styles.pageButton}
+                          disabled={mobileTourPage === 1}
+                          onClick={() => goToMobileTourPage(mobileTourPage - 1)}
+                        >
+                          <T k="ui.previousPage" fallback="Previous" />
+                        </button>
+
+                        <div className={styles.pageNumbers}>
+                          {mobileTourPageNumbers.map((entry, entryIndex) =>
+                            entry === "ellipsis" ? (
+                              <span
+                                key={`ellipsis-${entryIndex}`}
+                                className={styles.pageEllipsis}
+                                aria-hidden="true"
+                              >
+                                …
+                              </span>
+                            ) : (
+                              <button
+                                key={entry}
+                                type="button"
+                                className={`${styles.pageNumber}${entry === mobileTourPage ? ` ${styles.pageNumberActive}` : ""}`}
+                                aria-current={entry === mobileTourPage ? "page" : undefined}
+                                onClick={() => goToMobileTourPage(entry)}
+                              >
+                                {entry}
+                              </button>
+                            ),
+                          )}
+                        </div>
+
+                        <button
+                          type="button"
+                          className={styles.pageButton}
+                          disabled={mobileTourPage === mobileTourTotalPages}
+                          onClick={() => goToMobileTourPage(mobileTourPage + 1)}
+                        >
+                          <T k="ui.nextPage" fallback="Next" />
+                        </button>
+                      </nav>
+                    ) : null}
+
+                    {!isMobile && activeCountry.tours.length > INITIAL_TOUR_LIMIT ? (
                       <div className={styles.showMoreWrap}>
                         <button
                           type="button"

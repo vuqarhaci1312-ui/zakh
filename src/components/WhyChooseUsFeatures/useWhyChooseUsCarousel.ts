@@ -5,20 +5,15 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export function useWhyChooseUsCarousel(itemCount: number) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const activeIndexRef = useRef(0);
   const isDraggingRef = useRef(false);
   const dragStartXRef = useRef(0);
   const scrollStartRef = useRef(0);
 
-  const getSlideWidth = useCallback(() => {
-    const viewport = viewportRef.current;
-    if (!viewport) {
-      return 0;
-    }
-    return viewport.clientWidth;
-  }, []);
+  const getSlideWidth = useCallback(() => viewportRef.current?.clientWidth ?? 0, []);
 
   const scrollToIndex = useCallback(
-    (index: number) => {
+    (index: number, behavior: ScrollBehavior = "smooth") => {
       const viewport = viewportRef.current;
       if (!viewport) {
         return;
@@ -26,19 +21,28 @@ export function useWhyChooseUsCarousel(itemCount: number) {
 
       const clamped = Math.max(0, Math.min(index, itemCount - 1));
       const slideWidth = getSlideWidth();
-      viewport.scrollTo({ left: clamped * slideWidth, behavior: "smooth" });
+      if (slideWidth <= 0) {
+        return;
+      }
+
+      viewport.scrollTo({ left: clamped * slideWidth, behavior });
+      activeIndexRef.current = clamped;
       setActiveIndex(clamped);
     },
     [getSlideWidth, itemCount],
   );
 
   const goPrev = useCallback(() => {
-    scrollToIndex(activeIndex - 1);
-  }, [activeIndex, scrollToIndex]);
+    scrollToIndex(activeIndexRef.current - 1);
+  }, [scrollToIndex]);
 
   const goNext = useCallback(() => {
-    scrollToIndex(activeIndex + 1);
-  }, [activeIndex, scrollToIndex]);
+    scrollToIndex(activeIndexRef.current + 1);
+  }, [scrollToIndex]);
+
+  useEffect(() => {
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
 
   useEffect(() => {
     const viewport = viewportRef.current;
@@ -63,7 +67,11 @@ export function useWhyChooseUsCarousel(itemCount: number) {
       }
 
       const index = Math.round(viewport.scrollLeft / slideWidth);
-      setActiveIndex(Math.max(0, Math.min(index, itemCount - 1)));
+      const clamped = Math.max(0, Math.min(index, itemCount - 1));
+      if (clamped !== activeIndexRef.current) {
+        activeIndexRef.current = clamped;
+        setActiveIndex(clamped);
+      }
     };
 
     const onPointerDown = (event: PointerEvent) => {
@@ -114,7 +122,7 @@ export function useWhyChooseUsCarousel(itemCount: number) {
 
     const resizeObserver = new ResizeObserver(() => {
       syncSlideWidth();
-      scrollToIndex(activeIndex);
+      scrollToIndex(activeIndexRef.current, "auto");
     });
     resizeObserver.observe(viewport);
 
@@ -126,7 +134,7 @@ export function useWhyChooseUsCarousel(itemCount: number) {
       viewport.removeEventListener("pointercancel", endDrag);
       resizeObserver.disconnect();
     };
-  }, [activeIndex, getSlideWidth, itemCount, scrollToIndex]);
+  }, [getSlideWidth, itemCount, scrollToIndex]);
 
   return {
     viewportRef,

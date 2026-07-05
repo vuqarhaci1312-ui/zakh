@@ -45,17 +45,14 @@ export default function CustomerReviews() {
             <div className="space-3-medium" />
 
             <div className="customer-reviews-widget" data-customer-reviews-reveal>
-              <div
-                className={`elfsight-app-${ELFSIGHT_GOOGLE_REVIEWS_APP_ID}`}
-                data-elfsight-app-lazy
-              />
+              <div className={`elfsight-app-${ELFSIGHT_GOOGLE_REVIEWS_APP_ID}`} />
             </div>
           </div>
           <div className="space-8-small" />
         </section>
       </div>
 
-      <Script src={ELFSIGHT_PLATFORM_SCRIPT} strategy="lazyOnload" />
+      <Script src={ELFSIGHT_PLATFORM_SCRIPT} strategy="afterInteractive" />
     </div>
   );
 }

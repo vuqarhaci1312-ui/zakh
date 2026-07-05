@@ -72,7 +72,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: "facebook",
         label: "Facebook",
-        href: "https://www.facebook.com/p/Zakher-Travel-Azerbaijan-61552554323306/?locale=ru_RU",
+        href: "https://www.facebook.com/zakher.travel/",
       },
       {
         id: "instagram",
@@ -82,7 +82,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: "snapchat",
         label: "Snapchat",
-        href: "https://www.snapchat.com/add/zakhertravel",
+        href: "https://www.snapchat.com/add/zakher.travel?share_id=xcskqGRxSJqpOlKuNBPjHA&locale=en_AZ",
       },
       {
         id: "youtube",

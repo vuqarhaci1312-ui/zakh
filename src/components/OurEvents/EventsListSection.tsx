@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCmsContent } from "@/lib/content/use-cms";
 import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { EVENTS, EVENTS_PER_PAGE, OUR_EVENTS_SECTION } from "./events-data";
 import styles from "./OurEvents.module.css";
@@ -38,21 +39,36 @@ function getPageNumbers(currentPage: number, totalPages: number) {
 
 export default function EventsListSection() {
   const dt = useDt();
+  const { data: cmsData, hasCms } = useCmsContent<{
+    items: Array<{ id: string; title: string; description?: string; images: string[]; video?: string }>;
+  }>("/api/content/events");
+  const eventsSource = useMemo(() => {
+    if (hasCms && cmsData?.items?.length) {
+      return cmsData.items.map((item) => ({
+        id: item.id,
+        title: item.title,
+        description: item.description,
+        images: item.images as string[],
+        video: item.video,
+      }));
+    }
+    return EVENTS;
+  }, [hasCms, cmsData]);
   const sectionRef = useRef<HTMLElement>(null);
   const listTopRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [lightbox, setLightbox] = useState<LightboxState>(null);
   useOurServicesAnimation(sectionRef);
 
-  const totalPages = Math.max(1, Math.ceil(EVENTS.length / EVENTS_PER_PAGE));
+  const totalPages = Math.max(1, Math.ceil(eventsSource.length / EVENTS_PER_PAGE));
 
   const paginatedEvents = useMemo(() => {
     const start = (currentPage - 1) * EVENTS_PER_PAGE;
-    return EVENTS.slice(start, start + EVENTS_PER_PAGE).map((event, offset) => ({
+    return eventsSource.slice(start, start + EVENTS_PER_PAGE).map((event, offset) => ({
       event,
       eventIndex: start + offset,
     }));
-  }, [currentPage]);
+  }, [currentPage, eventsSource]);
 
   const pageNumbers = useMemo(
     () => getPageNumbers(currentPage, totalPages),
@@ -161,26 +177,32 @@ export default function EventsListSection() {
               <Dt k="ui.page" fallback="Page" /> {currentPage}{" "}
               <Dt k="ui.pageOf" fallback="of" /> {totalPages}
               {" · "}
-              {EVENTS.length} <Dt k="ui.eventsTotal" fallback="events" />
+              {eventsSource.length} <Dt k="ui.eventsTotal" fallback="events" />
             </p>
 
             <div className={styles.eventsList}>
               {paginatedEvents.map(({ event, eventIndex }) => {
-                const eventTitle = dt(`events.EVENTS.${eventIndex}.title`, event.title);
+                const eventTitle = hasCms ? event.title : dt(`events.EVENTS.${eventIndex}.title`, event.title);
                 return (
                   <article key={event.id} className={styles.eventCard}>
-                    <Dt
-                      k={`events.EVENTS.${eventIndex}.title`}
-                      fallback={event.title}
-                      as="h2"
-                      className={styles.eventTitle}
-                    />
+                    {hasCms ? (
+                      <h2 className={styles.eventTitle}>{event.title}</h2>
+                    ) : (
+                      <Dt
+                        k={`events.EVENTS.${eventIndex}.title`}
+                        fallback={event.title}
+                        as="h2"
+                        className={styles.eventTitle}
+                      />
+                    )}
                     {event.description ? (
                       <p className={styles.eventDescription}>
-                        <Dt
-                          k={`events.EVENTS.${eventIndex}.description`}
-                          fallback={event.description}
-                        />
+                        {hasCms ? event.description : (
+                          <Dt
+                            k={`events.EVENTS.${eventIndex}.description`}
+                            fallback={event.description}
+                          />
+                        )}
                       </p>
                     ) : null}
 

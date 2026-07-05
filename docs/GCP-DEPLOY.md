@@ -28,8 +28,47 @@ REVALIDATE_SECRET=<from Secret Manager: zakher-revalidate-secret>
 ## Admin panel
 
 - Login: `/admin` on your frontend domain
+- **Language login** — inline site editing (`/?edit=1`)
+- **Normal login** — full CMS (`/admin/dashboard`): catalogs, tours, social media, events, certificates
 - Email: `admin@zakher.travel`
 - Password: stored in `server/.deploy-secrets.txt` locally (rotate in production)
+
+## Content CMS API
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/content/brochures?locale=az` | Published brochures |
+| `GET /api/content/certificates?locale=az` | Certificates carousel |
+| `GET /api/content/events?locale=az` | Events list |
+| `GET /api/content/social?locale=az` | Social links + Instagram + YouTube |
+| `GET /api/content/tours?locale=az` | Countries + tour cards |
+| `GET /api/content/tours/:country/:tour?locale=az` | Tour detail page |
+| `POST /api/admin/uploads` | Admin file upload (JWT required) |
+
+After deploying schema changes:
+
+```bash
+cd server
+npm run db:migrate:deploy
+npm run content:seed
+```
+
+## GCS file uploads (production)
+
+Cloud Run is stateless — uploads must go to **Google Cloud Storage**.
+
+1. Create bucket, e.g. `zakher-cms-uploads` (public read or CDN in front).
+2. Grant Cloud Run service account `Storage Object Admin` on the bucket.
+3. Set env on `zakher-cms-api`:
+
+```
+GCS_BUCKET=zakher-cms-uploads
+GCS_PUBLIC_BASE_URL=https://storage.googleapis.com/zakher-cms-uploads
+```
+
+Local dev uses `UPLOAD_DIR=../public/uploads` (served by Next.js at `/uploads/...`).
+
+## Admin panel
 
 ## Redeploy API
 

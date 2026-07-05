@@ -37,6 +37,52 @@
   line-height: 1.5;
 }
 
+.loginModeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.loginModeCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.loginModeCard strong {
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.loginModeCard span {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #64748b;
+}
+
+.loginModeCardActive {
+  border-color: #ff8c00;
+  background: #fff7ed;
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.12);
+}
+
+@media (max-width: 520px) {
+  .loginModeGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .field {
   display: flex;
   flex-direction: column;
@@ -151,12 +197,18 @@
   flex-direction: column;
 }
 
+.dashboardBody {
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+}
+
 .mainContent {
   flex: 1;
   padding: 28px 32px 48px;
   max-width: 1280px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
 }
 
 /* ── Header ── */

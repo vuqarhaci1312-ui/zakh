@@ -65,7 +65,8 @@
   "lagoon.LAGOON_COLLECTION_TITLE": "أشهر",
   "lagoon.LAGOON_COLLECTION_TITLE_ACCENT": "الجولات",
 
-  "packages.RELATED_PACKAGES_SECTION.title": "الأكثر شعبية",
+  "packages.RELATED_PACKAGES_SECTION.titleBefore": "الأكثر شعبية",
+  "packages.RELATED_PACKAGES_SECTION.titleAccent": "الجولات",
   "packages.RELATED_PACKAGES.0.title": "رحلة واحدة — 3 دول",
   "packages.RELATED_PACKAGES.0.description": "مغامرة متعددة الدول تشمل أذربيجان وجورجيا وروسيا.",
   "packages.RELATED_PACKAGES.1.title": "جولات تركيا",

@@ -139,8 +139,144 @@
   }
 }
 
+@media (max-width: 767px) {
+  .instaGridMobile {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .instaMobileCount {
+    margin: 0;
+    color: rgba(30, 30, 30, 0.58);
+    font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .instaCardCompact {
+    min-height: 0;
+  }
+
+  .instaCardCompact .instaPostHeader {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0.875rem;
+  }
+
+  .instaCardCompact .instaAvatar {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .instaCardCompact .instaMeta {
+    gap: 0;
+  }
+
+  .instaCardCompact .instaUsername {
+    overflow: visible;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+
+  .instaCardCompact:hover {
+    transform: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  }
+
+  .instaPagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .instaPageButton {
+    padding: 0.5rem 0.875rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    background: #fff;
+    color: #1d1d1d;
+    font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .instaPageButton:hover:not(:disabled) {
+    border-color: #ffb347;
+    background: #fff7ed;
+  }
+
+  .instaPageButton:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .instaPageNumbers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+  }
+
+  .instaPageNumber {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.125rem;
+    height: 2.125rem;
+    padding: 0 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    background: #fff;
+    color: #4d585f;
+    font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .instaPageNumber:hover {
+    border-color: #ffb347;
+    color: #1d1d1d;
+  }
+
+  .instaPageNumberActive {
+    border-color: transparent;
+    background: linear-gradient(135deg, #ffb347 0%, #ff8c00 42%, #ff5f1f 100%);
+    color: #fff;
+  }
+
+  .instaPageEllipsis {
+    padding: 0 0.25rem;
+    color: rgba(30, 30, 30, 0.45);
+    font-size: 0.875rem;
+    line-height: 1;
+  }
+}
+
 @media (max-width: 639px) {
-  .instaGrid {
+  .instaGrid:not(.instaGridMobile) {
     grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
     max-width: 28rem;

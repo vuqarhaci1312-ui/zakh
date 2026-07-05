@@ -71,7 +71,10 @@
   margin-left: auto;
   text-align: right;
   max-width: 100%;
-  overflow-wrap: break-word;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  text-wrap: wrap;
 }
 
 .serifAccent {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useCmsContent } from "@/lib/content/use-cms";
 import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { YOUTUBE_SECTION } from "./social-media-data";
 import styles from "./SocialMedia.module.css";
@@ -9,6 +10,11 @@ import { useOurServicesAnimation } from "../OurServices/useOurServicesAnimation"
 export default function YouTubeSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const dt = useDt();
+  const { data: cmsData, hasCms } = useCmsContent<{
+    youtubeSection: { embedUrl?: string; channelUrl?: string } | null;
+  }>("/api/content/social");
+  const embedUrl = hasCms && cmsData?.youtubeSection?.embedUrl ? cmsData.youtubeSection.embedUrl : YOUTUBE_SECTION.embedUrl;
+  const channelUrl = hasCms && cmsData?.youtubeSection?.channelUrl ? cmsData.youtubeSection.channelUrl : YOUTUBE_SECTION.channelUrl;
   useOurServicesAnimation(sectionRef);
 
   return (
@@ -46,7 +52,7 @@ export default function YouTubeSection() {
           <div className={styles.youtubeWrap} data-experience-card>
             <iframe
               className={styles.youtubeIframe}
-              src={YOUTUBE_SECTION.embedUrl}
+              src={embedUrl}
               title={dt("ui.youtubePlayer", "YouTube video player")}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
@@ -54,7 +60,7 @@ export default function YouTubeSection() {
             />
           </div>
           <p className={`font-1-extra-small ${styles.youtubeLink}`}>
-            <a href={YOUTUBE_SECTION.channelUrl} target="_blank" rel="noopener noreferrer">
+            <a href={channelUrl} target="_blank" rel="noopener noreferrer">
               <Dt k="ui.youtubeViewAll" fallback="View all videos on YouTube" /> &rarr;
             </a>
           </p>

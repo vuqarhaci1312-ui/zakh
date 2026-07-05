@@ -7,6 +7,7 @@ import { useTranslations } from "@/contexts/TranslationsContext";
 import PackageExploreButton from "./PackageExploreButton";
 import {
   RELATED_PACKAGES,
+  RELATED_PACKAGES_SECTION,
 } from "./related-packages-data";
 import { useRelatedPackagesAnimation } from "./useRelatedPackagesAnimation";
 import "./related-packages.css";
@@ -29,9 +30,15 @@ export default function RelatedPackages() {
             <div className="section-title-wrapper" data-related-packages-reveal>
               <div className="max-width-38">
                 <h2 id="related-packages-title" className="section-heading night center">
-                  <T k="packages.RELATED_PACKAGES_SECTION.title" fallback="Popular" />{" "}
+                  <T
+                    k="packages.RELATED_PACKAGES_SECTION.titleBefore"
+                    fallback={RELATED_PACKAGES_SECTION.titleBefore}
+                  />{" "}
                   <span className="text-gradient-orange">
-                    <T k="ui.tours" fallback="Tours" />
+                    <T
+                      k="packages.RELATED_PACKAGES_SECTION.titleAccent"
+                      fallback={RELATED_PACKAGES_SECTION.titleAccent}
+                    />
                   </span>
                 </h2>
               </div>

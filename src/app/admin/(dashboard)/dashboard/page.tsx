@@ -1,73 +1,51 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ADMIN_LANGUAGE_SECTIONS, ADMIN_PAGE_GROUPS } from "@/lib/admin/page-sections";
-import styles from "../../admin.module.css";
+import adminStyles from "@/app/admin/admin.module.css";
+import cmsStyles from "@/components/admin/cms/cms.module.css";
+import AdminPageHeader from "@/components/admin/cms/AdminPageHeader";
+import { contentAdminApi } from "@/lib/admin/content-api";
 
 export default function AdminDashboardPage() {
-  const pageCount = ADMIN_LANGUAGE_SECTIONS.filter((s) => s.group === "pages").length;
+  const [stats, setStats] = useState<Record<string, number> | null>(null);
+
+  useEffect(() => {
+    contentAdminApi.stats().then(setStats).catch(() => setStats(null));
+  }, []);
+
+  const cards = [
+    { href: "/admin/catalogs", label: "Kataloqlar", count: stats?.brochures },
+    { href: "/admin/tours", label: "Tur paketləri", count: stats?.tours },
+    { href: "/admin/social-media", label: "Sosial media", count: (stats?.socialLinks ?? 0) + (stats?.instagram ?? 0) },
+    { href: "/admin/events", label: "Tədbirlər", count: stats?.events },
+    { href: "/admin/certificates", label: "Sertifikatlar", count: stats?.certificates },
+    { href: "/admin/languages", label: "Dillər", count: "4 dil" },
+  ];
 
   return (
     <div>
-      <div className={styles.dashboardHero}>
-        <h1>Dashboard</h1>
-        <p>
-          Welcome to Zakher Travel content management. Manage translations by page, review content
-          sections and keep all four languages in sync.
-        </p>
-      </div>
+      <AdminPageHeader
+        title="Dashboard"
+        description="Zakher Travel məzmun idarəetmə paneli. Sol menyudan modul seçin."
+      />
 
-      <div className={styles.statsGrid}>
-        <div className={styles.statCard}>
-          <strong>{ADMIN_LANGUAGE_SECTIONS.length}</strong>
-          <span>Content sections</span>
-        </div>
-        <div className={styles.statCard}>
-          <strong>4</strong>
-          <span>Languages (AZ, EN, RU, AR)</span>
-        </div>
-        <div className={styles.statCard}>
-          <strong>{pageCount}</strong>
-          <span>Site pages</span>
-        </div>
-        <div className={styles.statCard}>
-          <strong>{ADMIN_PAGE_GROUPS.length}</strong>
-          <span>Content groups</span>
-        </div>
-      </div>
-
-      <h2
-        style={{
-          margin: "0 0 16px",
-          fontSize: 18,
-          fontWeight: 700,
-        }}
-      >
-        Quick access
-      </h2>
-      <div className={styles.sectionGrid}>
-        {ADMIN_LANGUAGE_SECTIONS.slice(0, 6).map((section) => (
-          <Link
-            key={section.id}
-            href={`/admin/languages/${section.id}`}
-            className={styles.sectionCard}
-          >
-            <div className={styles.sectionCardTop}>
-              <span className={styles.sectionCardIcon}>{section.labelAz.charAt(0)}</span>
-            </div>
-            <h3>{section.labelAz}</h3>
-            <p>{section.descriptionAz}</p>
-            <div className={styles.sectionCardFooter}>
-              <span>{section.label}</span>
-              <span>Edit →</span>
-            </div>
+      <div className={adminStyles.statsGrid}>
+        {cards.map((card) => (
+          <Link key={card.href} href={card.href} className={adminStyles.statCard}>
+            <strong>{card.count ?? "—"}</strong>
+            <span>{card.label}</span>
           </Link>
         ))}
       </div>
 
-      <p style={{ marginTop: 24 }}>
-        <Link href="/admin/languages" style={{ color: "#ff8c00", fontWeight: 600, textDecoration: "none" }}>
-          View all page sections →
-        </Link>
-      </p>
+      <div className={`${cmsStyles.card} ${cmsStyles.cardGrid}`}>
+        <h2 style={{ margin: 0 }}>Tez başlanğıc</h2>
+        <p style={{ margin: 0, color: "#64748b" }}>
+          Hər modulda 4 dil tab-ı var (AZ, EN, RU, AR). Publish etmək üçün bütün dillər doldurulmalıdır.
+          Draft save ilə yarımçıq saxlaya bilərsiniz.
+        </p>
+      </div>
     </div>
   );
 }
