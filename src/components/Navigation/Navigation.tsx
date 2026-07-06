@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useId, useRef, useState } from "react";
 import {
   AboutTabIcon,
   CloseIcon,
@@ -15,6 +16,7 @@ import {
   NAV_LINKS,
   NAV_LOGO,
   NAV_PILL_LINKS,
+  type NavChildLink,
 } from "./navigation-data";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useCeepiiNavigation } from "./useCeepiiNavigation";
@@ -41,6 +43,18 @@ function isActiveLink(pathname: string, href: string) {
   }
 
   return pathname === pathOnly || pathname.startsWith(`${pathOnly}/`);
+}
+
+function isDropdownActive(
+  pathname: string,
+  href: string,
+  children?: readonly NavChildLink[],
+) {
+  if (isActiveLink(pathname, href)) {
+    return true;
+  }
+
+  return children?.some((child) => isActiveLink(pathname, child.href)) ?? false;
 }
 
 function NavLink({
@@ -115,6 +129,103 @@ function PillLink({
   );
 }
 
+function PillDropdown({
+  href,
+  label,
+  labelKey,
+  subLinks,
+  pathname,
+  gradient,
+}: {
+  href: string;
+  label: string;
+  labelKey: string;
+  subLinks: readonly NavChildLink[];
+  pathname: string;
+  gradient?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const menuId = useId();
+  const active = isDropdownActive(pathname, href, subLinks);
+  const className = `${styles.pillLink} ${styles.pillDropdownTrigger} ${gradient ? "text-gradient-orange" : ""} ${active ? styles.pillLinkActive : ""}`;
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    function handlePointerDown(event: MouseEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [open]);
+
+  return (
+    <div
+      ref={rootRef}
+      className={styles.pillDropdown}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <Link
+        href={href}
+        className={className}
+        aria-current={active ? "page" : undefined}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls={menuId}
+        onClick={() => setOpen(false)}
+      >
+        <T k={labelKey} fallback={label} />
+        <span className={styles.pillDropdownChevron} aria-hidden="true">
+          ▾
+        </span>
+      </Link>
+
+      {open ? (
+        <div className={styles.pillDropdownMenuWrap}>
+          <ul id={menuId} className={styles.pillDropdownMenu} role="menu">
+            {subLinks.map((child, childIndex) => {
+            const childActive = isActiveLink(pathname, child.href);
+            const childLabelKey = `${labelKey.replace(/\.label$/, "")}.children.${childIndex}.label`;
+
+            return (
+              <li key={child.href} role="none">
+                <Link
+                  href={child.href}
+                  className={`${styles.pillDropdownItem} ${childActive ? styles.pillDropdownItemActive : ""}`}
+                  role="menuitem"
+                  aria-current={childActive ? "page" : undefined}
+                  onClick={() => setOpen(false)}
+                >
+                  <T k={childLabelKey} fallback={child.label} />
+                </Link>
+              </li>
+            );
+          })}
+          </ul>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function DesktopHeader({
   pathname,
   overlayMode,
@@ -156,13 +267,24 @@ function DesktopHeader({
                           aria-hidden="true"
                         />
                       ) : null}
-                      <PillLink
-                        href={link.href}
-                        label={link.label}
-                        labelKey={`nav.pillLinks.${index}.label`}
-                        pathname={pathname}
-                        gradient={!overlayMode}
-                      />
+                      {link.children ? (
+                        <PillDropdown
+                          href={link.href}
+                          label={link.label}
+                          labelKey={`nav.pillLinks.${index}.label`}
+                          subLinks={link.children}
+                          pathname={pathname}
+                          gradient={!overlayMode}
+                        />
+                      ) : (
+                        <PillLink
+                          href={link.href}
+                          label={link.label}
+                          labelKey={`nav.pillLinks.${index}.label`}
+                          pathname={pathname}
+                          gradient={!overlayMode}
+                        />
+                      )}
                     </span>
                   ))}
                 </div>
@@ -233,6 +355,23 @@ export default function Navigation() {
                 activeClassName={styles.menuLinkActive}
                 onClick={closeMobileMenu}
               />
+              {link.children ? (
+                <ul className={styles.menuSubList}>
+                  {link.children.map((child, childIndex) => (
+                    <li key={child.href}>
+                      <NavLink
+                        href={child.href}
+                        label={child.label}
+                        labelKey={`nav.links.${index}.children.${childIndex}.label`}
+                        pathname={pathname}
+                        className={styles.menuSubLink}
+                        activeClassName={styles.menuLinkActive}
+                        onClick={closeMobileMenu}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </li>
           ))}
         </ul>

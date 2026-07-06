@@ -266,7 +266,7 @@ async function main() {
     : {};
 
   for (const item of azItems) {
-    if (manual[item.key]) {
+    if (Object.prototype.hasOwnProperty.call(manual, item.key)) {
       item.value = manual[item.key];
     }
   }

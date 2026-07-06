@@ -171,12 +171,21 @@ export default function Footer() {
                         rel="noreferrer noopener"
                         aria-label={t(`footer.columns.${columnIndex}.social.${socialIndex}.label`, item.label)}
                       >
-                        <SocialIcon id={item.id} className={styles.socialIcon} />
-                        <T
-                          k={`footer.columns.${columnIndex}.social.${socialIndex}.label`}
-                          fallback={item.label}
-                          as="span"
-                        />
+                        {item.id === "x" ? (
+                          <>
+                            <SocialIcon id={item.id} className={styles.socialIcon} />
+                            <span className={styles.socialLabel}>X</span>
+                          </>
+                        ) : (
+                          <>
+                            <SocialIcon id={item.id} className={styles.socialIcon} />
+                            <T
+                              k={`footer.columns.${columnIndex}.social.${socialIndex}.label`}
+                              fallback={item.label}
+                              as="span"
+                            />
+                          </>
+                        )}
                       </a>
                     </li>
                   ))}

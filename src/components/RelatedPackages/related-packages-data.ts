@@ -31,4 +31,31 @@ export const RELATED_PACKAGES = [
     image: "/tours/uae.webp",
     alt: "United Arab Emirates tour package",
   },
+  {
+    id: "azerbaijan-tour",
+    title: "Azerbaijan Tour",
+    description:
+      "Discover Azerbaijan with curated itineraries, local experts, and premium travel experiences.",
+    href: "/destinations/azerbaijan",
+    image: "/tours/azerbaijan.webp",
+    alt: "Azerbaijan tour package",
+  },
+  {
+    id: "ukraine-tour",
+    title: "Ukraine Tour",
+    description:
+      "Explore Ukraine's rich history, vibrant cities, and cultural heritage with expertly planned tours.",
+    href: "/destinations/ukraine",
+    image: "/tours/ukraine.webp",
+    alt: "Ukraine tour package",
+  },
+  {
+    id: "kazakhstan-uzbekistan-tour",
+    title: "1 Trip — 2 Countries (Kazakhstan & Uzbekistan)",
+    description:
+      "Kazakhstan and Uzbekistan — one seamless journey across two Central Asian gems.",
+    href: "/tour-packages",
+    image: "/tours/kazakhstan.webp",
+    alt: "Kazakhstan and Uzbekistan tour package",
+  },
 ] as const;

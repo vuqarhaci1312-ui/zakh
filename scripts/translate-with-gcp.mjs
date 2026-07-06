@@ -80,7 +80,7 @@ async function main() {
 
     for (let j = 0; j < batch.length; j++) {
       const item = batch[j];
-      if (manual[item.key]) {
+      if (Object.prototype.hasOwnProperty.call(manual, item.key)) {
         translatedDict[item.key] = manual[item.key];
       } else {
         toTranslate.push(item.value);

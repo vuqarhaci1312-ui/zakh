@@ -1,20 +1,17 @@
 export const CDN = "https://cdn.prod.website-files.com/69302ef953d83110f866c37b";
 
+/** Public GCS bucket with Cloud CDN backend (elevenmedia-em-2026). */
+export const HERO_CDN_BASE = "https://storage.googleapis.com/zakher-static-cdn";
+
 export const HERO_VIDEO = {
-  src: "/hero/hero-bg.mp4",
-  poster: "/hero/hero-poster.webp",
+  src: `${HERO_CDN_BASE}/hero/explore-azerbaijan-hero.mp4`,
+  poster: "",
 } as const;
 
 export const HERO_HEADLINE = {
   beforeAccent: "Your ",
   accent: "online and offline",
-  afterAccent: "",
-} as const;
-
-export const HERO_TAGLINE = {
-  beforeAccent: "supplier in the world ",
-  accent: "since 2016",
-  afterAccent: "",
+  afterAccent: " supplier in the world since 2016",
 } as const;
 
 export const HERO_DESCRIPTION =

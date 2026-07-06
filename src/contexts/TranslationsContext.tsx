@@ -28,7 +28,17 @@ type TranslationsContextValue = {
 const TranslationsContext = createContext<TranslationsContextValue | null>(null);
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
-const STATIC_CONTENT_PREFIXES = ["stats.STAT_CARDS.", "branches.", "hero.", "contact.", "brochures.BROCHURES.", "about.WHO_WE_ARE."];
+const STATIC_CONTENT_PREFIXES = [
+  "stats.STAT_CARDS.",
+  "branches.",
+  "hero.",
+  "contact.",
+  "brochures.BROCHURES.",
+  "about.WHO_WE_ARE.",
+  "packages.RELATED_PACKAGES.",
+  "packages.RELATED_PACKAGES_SECTION.",
+  "reviews.CUSTOMER_REVIEWS_SECTION.",
+];
 
 function applyStaticContentOverrides(
   merged: TranslationDictionary,

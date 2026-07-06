@@ -14,8 +14,9 @@ export function createTranslator(
   locale: Locale,
 ): TranslateFn {
   return (key: string, fallback?: string) => {
-    if (key in dictionary) {
-      return dictionary[key];
+    const value = dictionary[key];
+    if (typeof value === "string" && value.trim()) {
+      return value;
     }
 
     if (locale === "en") {

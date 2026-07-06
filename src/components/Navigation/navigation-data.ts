@@ -3,16 +3,32 @@ export const SKYWALK_CDN =
 
 export const NAV_LOGO = "/hero/ztravel.png";
 
-export const NAV_PILL_LINKS = [
+export type NavChildLink = {
+  href: string;
+  label: string;
+};
+
+export type NavPillLink = {
+  href: string;
+  label: string;
+  children?: readonly NavChildLink[];
+};
+
+export const NAV_PILL_LINKS: readonly NavPillLink[] = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
-  { href: "/our-services", label: "Our Services" },
+  {
+    href: "/about",
+    label: "About Us",
+    children: [
+      { href: "/our-services", label: "Our Services" },
+      { href: "/our-events", label: "Our Events" },
+      { href: "/our-branches", label: "Our Branches" },
+    ],
+  },
   { href: "/tour-packages", label: "Tour Packages" },
   { href: "/social-media", label: "Social Media" },
-  { href: "/our-events", label: "Our Events" },
-  { href: "/our-branches", label: "Our Branches" },
   { href: "/contact-us", label: "Contact Us" },
-] as const;
+];
 
 export const NAV_LINKS = NAV_PILL_LINKS;
 

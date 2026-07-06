@@ -262,6 +262,12 @@
   color: #ff8c00;
 }
 
+.socialLabel {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #52525b;
+}
+
 .bottomRow {
   margin-top: 40px;
   padding-top: 24px;

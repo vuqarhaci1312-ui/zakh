@@ -24,6 +24,7 @@ const TRANSLATABLE_KEYS = new Set([
   "beforeAccent",
   "accent",
   "afterAccent",
+  "titleBefore",
   "text",
   "badge",
   "titleAccent",
@@ -176,7 +177,6 @@ async function loadData() {
         const m = await import("../src/components/Hero/hero-data.ts");
         return {
           headline: m.HERO_HEADLINE,
-          tagline: m.HERO_TAGLINE,
           description: m.HERO_DESCRIPTION,
           cta: m.HERO_PRIMARY_CTA,
         };
@@ -335,7 +335,6 @@ async function loadData() {
     "meta.events.description": "International travel exhibitions and roadshows featuring Zakher Travel.",
     "meta.branches.title": "Our Branches — Zakher Travel",
     "meta.branches.description": "Zakher Travel branch offices worldwide — local support and reservations.",
-    "hero.tagline.afterAccent": ".",
     "ui.aboutIntro.titleBefore": "Who",
     "ui.aboutIntro.titleAccent": "We Are?",
     "ui.aboutIntro.imageAlt": "Zakher Travel team",

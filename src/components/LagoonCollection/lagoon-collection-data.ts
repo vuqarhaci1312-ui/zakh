@@ -113,6 +113,17 @@ export const POPULAR_TOUR_ITEMS: PopularTourItem[] = [
     image: "/tours/ukraine.webp",
     imageAlt: "Ukraine tour package",
   },
+  {
+    id: "kazakhstan-uzbekistan-tour",
+    href: "/tour-packages",
+    tag: "Tour Package",
+    title: "1 Trip - 2 Countries",
+    duration: "10",
+    cities: "2",
+    guests: "12",
+    image: "/tours/kazakhstan.webp",
+    imageAlt: "Kazakhstan and Uzbekistan tour package",
+  },
 ];
 
 /** @deprecated Use POPULAR_TOUR_ITEMS */
