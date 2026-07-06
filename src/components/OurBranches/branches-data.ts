@@ -8,7 +8,7 @@ export type BranchItem = {
 export const OUR_BRANCHES_SECTION = {
   badge: "Our Branches",
   description:
-    "Zakher Travel serves travelers from offices and partner destinations across the Caucasus, Central Asia, Europe, and the Middle East.",
+    "Explore Zakher Travel offices and partner destinations across the Caucasus, Central Asia, Europe, and the Middle East.",
 } as const;
 
 export const BRANCHES: BranchItem[] = [

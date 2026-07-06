@@ -92,61 +92,6 @@ export function useUxoralMissionAnimation(
           });
         });
       }
-
-      gsap.utils.toArray<HTMLElement>("[data-ux-counter-item]", root).forEach((item) => {
-        const wraps = gsap.utils.toArray<HTMLElement>("[data-ux-counter-wrap]", item);
-        if (wraps.length === 0) return;
-
-        const buildTimeline = () => {
-          const stepValues = wraps.map(
-            (wrap) => wrap.querySelector<HTMLElement>(".counterValue")?.offsetHeight ?? 0,
-          );
-          if (stepValues.some((step) => step === 0)) {
-            return null;
-          }
-
-          const counterTimeline = gsap.timeline({
-            scrollTrigger: {
-              trigger: item,
-              start: "top 90%",
-              toggleActions: "play none none none",
-              once: true,
-            },
-          });
-
-          wraps.forEach((wrap, index) => {
-            const values = wrap.querySelectorAll<HTMLElement>(".counterValue");
-            const step = stepValues[index] ?? values[0]?.offsetHeight ?? 0;
-            if (!step) return;
-
-            const startY = -(values.length - 1) * step;
-            gsap.set(wrap, { y: startY });
-
-            counterTimeline.to(
-              wrap,
-              {
-                y: 0,
-                duration: 2.2,
-                ease: wrap.classList.contains("three") ? "power3.out" : "power2.out",
-              },
-              index * 0.08,
-            );
-          });
-
-          return counterTimeline;
-        };
-
-        let attempts = 0;
-        const startCounterAnimation = () => {
-          if (buildTimeline()) return;
-          attempts += 1;
-          if (attempts < 24) {
-            requestAnimationFrame(startCounterAnimation);
-          }
-        };
-
-        startCounterAnimation();
-      });
     }, root);
 
     scheduleScrollRefresh();

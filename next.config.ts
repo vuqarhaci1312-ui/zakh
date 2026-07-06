@@ -65,6 +65,11 @@ const nextConfig: NextConfig = {
         hostname: "images.pexels.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "zakher.travel",
+        pathname: "/wp-content/uploads/**",
+      },
     ],
   },
 };

@@ -6,24 +6,8 @@ import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
 import "@/styles/uxoral-mission.css";
 import UxoralCounter from "./UxoralCounter";
-import {
-  buildUxoralCounterColumns,
-  STAT_CARDS,
-  STAT_MISSION,
-  UXORAL_CENTER_IMAGE,
-} from "./stats-data";
+import { STAT_CARDS, UXORAL_CENTER_IMAGE } from "./stats-data";
 import { useUxoralMissionAnimation } from "./useUxoralMissionAnimation";
-
-function QuoteIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 32 32" fill="none" className="invertedComma" aria-hidden="true">
-      <path
-        d="M14.5 9V20C14.4983 21.5908 13.8657 23.116 12.7408 24.2408C11.616 25.3657 10.0908 25.9983 8.5 26C8.23478 26 7.98043 25.8946 7.79289 25.7071C7.60536 25.5196 7.5 25.2652 7.5 25C7.5 24.7348 7.60536 24.4804 7.79289 24.2929C7.98043 24.1054 8.23478 24 8.5 24C9.56087 24 10.5783 23.5786 11.3284 22.8284C12.0786 22.0783 12.5 21.0609 12.5 20V19H5C4.46957 19 3.96086 18.7893 3.58579 18.4142C3.21071 18.0391 3 17.5304 3 17V9C3 8.46957 3.21071 7.96086 3.58579 7.58579C3.96086 7.21071 4.46957 7 5 7H12.5C13.0304 7 13.5391 7.21071 13.9142 7.58579C14.2893 7.96086 14.5 8.46957 14.5 9ZM27 7H19.5C18.9696 7 18.4609 7.21071 18.0858 7.58579C17.7107 7.96086 17.5 8.46957 17.5 9V17C17.5 17.5304 17.7107 18.0391 18.0858 18.4142C18.4609 18.7893 18.9696 19 19.5 19H27V20C27 21.0609 26.5786 22.0783 25.8284 22.8284C25.0783 23.5786 24.0609 24 23 24C22.7348 24 22.4804 24.1054 22.2929 24.2929C22.1054 24.4804 22 24.7348 22 25C22 25.2652 22.1054 25.5196 22.2929 25.7071C22.4804 25.8946 22.7348 26 23 26C24.5908 25.9983 26.116 25.3657 27.2408 24.2408C28.3657 23.116 28.9983 21.5908 29 20V9C29 8.46957 28.7893 7.96086 28.4142 7.58579C28.0391 7.21071 27.5304 7 27 7Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
 
 function TrophyIcon() {
   return (
@@ -42,12 +26,11 @@ export default function WhyChooseUs() {
 
   useUxoralMissionAnimation(sectionRef);
 
-  const card1Columns = buildUxoralCounterColumns(t("stats.STAT_CARDS.0.count", STAT_CARDS[0].count));
-  const card2Columns = buildUxoralCounterColumns(
-    t("stats.STAT_CARDS.1.count", STAT_CARDS[1].count),
-    { light: true },
-  );
-  const card3Columns = buildUxoralCounterColumns(t("stats.STAT_CARDS.3.count", STAT_CARDS[3].count));
+  const partnersCount = t("stats.STAT_CARDS.0.count", STAT_CARDS[0].count);
+  const destinationsCount = t("stats.STAT_CARDS.1.count", STAT_CARDS[1].count);
+  const hotelsCount = t("stats.STAT_CARDS.2.count", STAT_CARDS[2].count);
+  const touristsCount = t("stats.STAT_CARDS.3.count", STAT_CARDS[3].count);
+  const staffCount = t("stats.STAT_CARDS.4.count", STAT_CARDS[4].count);
 
   return (
     <section ref={sectionRef} className="uxoralMission section">
@@ -55,28 +38,16 @@ export default function WhyChooseUs() {
         <div className="missionGrid" data-ux-mission-grid>
           <div className="missionContainCard" data-ux-card="left">
             <div className="missionTopCard missionTopCardText">
-              <T
-                k="stats.STAT_MISSION.card1Top"
-                fallback={STAT_MISSION.card1Top}
-                as="p"
-                className="fontSizeXsm fontSizeXsmPureBlack missionTopText"
+              <UxoralCounter
+                value={partnersCount}
+                label={<T k="stats.STAT_CARDS.0.title" fallback={STAT_CARDS[0].title} />}
               />
             </div>
 
             <div className="containBottomCard">
-              <div className="bottomTopContant">
-                <QuoteIcon />
-                <T
-                  k="stats.STAT_CARDS.0.description"
-                  fallback={STAT_CARDS[0].description}
-                  as="div"
-                  className="fontSizeBase"
-                />
-              </div>
-
               <UxoralCounter
-                columns={card1Columns}
-                label={<T k="stats.STAT_CARDS.0.title" fallback={STAT_CARDS[0].title} />}
+                value={hotelsCount}
+                label={<T k="stats.STAT_CARDS.2.title" fallback={STAT_CARDS[2].title} />}
               />
             </div>
           </div>
@@ -90,22 +61,14 @@ export default function WhyChooseUs() {
                 height={760}
                 className="robotImage"
               />
-              <div className="robotImageCaption">
-                <T
-                  k="stats.STAT_MISSION.card2ImageCaption"
-                  fallback={STAT_MISSION.card2ImageCaption}
-                  as="p"
-                  className="robotImageCaptionText"
-                />
-              </div>
             </div>
 
             <div className="counterMain">
               <div className="counterWrapperMain">
                 <UxoralCounter
-                  columns={card2Columns}
+                  value={destinationsCount}
                   light
-                  labelClassName="fontSizeXsm fontSizeXsmWhite"
+                  labelClassName="fontSizeXsm fontSizeXsmWhite missionStatLabel"
                   label={<T k="stats.STAT_CARDS.1.title" fallback={STAT_CARDS[1].title} />}
                 />
               </div>
@@ -117,27 +80,16 @@ export default function WhyChooseUs() {
 
           <div className="missionContainCard" data-ux-card="right">
             <div className="containBottomCard">
-              <div className="bottomTopContant">
-                <T
-                  k="stats.STAT_MISSION.card3Highlight"
-                  fallback={STAT_MISSION.card3Highlight}
-                  as="p"
-                  className="fontSizeBase"
-                />
-              </div>
-
               <UxoralCounter
-                columns={card3Columns}
+                value={touristsCount}
                 label={<T k="stats.STAT_CARDS.3.title" fallback={STAT_CARDS[3].title} />}
               />
             </div>
 
             <div className="missionTopCard missionTopCardText">
-              <T
-                k="stats.STAT_MISSION.card3Footer"
-                fallback={STAT_MISSION.card3Footer}
-                as="p"
-                className="fontSizeXsm fontSizeXsmPureBlack missionTopText"
+              <UxoralCounter
+                value={staffCount}
+                label={<T k="stats.STAT_CARDS.4.title" fallback={STAT_CARDS[4].title} />}
               />
             </div>
           </div>

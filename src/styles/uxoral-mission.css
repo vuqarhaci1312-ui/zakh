@@ -11,8 +11,8 @@
   --ux-display-2: clamp(2.5rem, 5vw, 3.75rem);
   --ux-counter-height: 3.6rem;
   --ux-counter-height-v2: 2.5rem;
-  --ux-counter-size: clamp(2rem, 4vw, 3.25rem);
-  --ux-counter-size-v2: clamp(1.75rem, 3vw, 2.25rem);
+  --ux-counter-size: clamp(3rem, 8vw, 5.5rem);
+  --ux-counter-size-v2: clamp(2.75rem, 7vw, 5rem);
 
   padding: clamp(3rem, 7vw, 7.5rem) 0 clamp(3rem, 6vw, 5rem);
   background: var(--ux-white);
@@ -92,6 +92,7 @@
 .uxoralMission .missionTopCardText {
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: 5.5rem;
 }
 
@@ -134,7 +135,8 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   gap: clamp(1.5rem, 4vw, 3rem);
   padding: 1.5rem 1.25rem;
   border: 1px solid var(--ux-light-border);
@@ -157,6 +159,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+.uxoralMission .missionStatCounter {
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+}
+
+.uxoralMission .missionStatLabel {
+  width: 100%;
+  text-align: center;
 }
 
 .uxoralMission .robotImageWrapper {
@@ -199,10 +212,15 @@
   border: 1px solid var(--ux-light-border);
   border-radius: 1rem;
   background: var(--ux-vermilion);
+  overflow: hidden;
 }
 
 .uxoralMission .counterWrapperMain {
-  display: block;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .uxoralMission .cardIconWrap {
@@ -247,65 +265,64 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
+  width: 100%;
+  max-width: 100%;
 }
 
 .uxoralMission .counterText {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.uxoralMission .counterCol {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex: none;
-  width: 1ch;
-  height: 1.2em;
-  overflow: hidden;
-  font-size: var(--ux-counter-size);
-}
-
-.uxoralMission .counterColV2 {
-  height: 1.2em;
-  font-size: var(--ux-counter-size-v2);
-  width: 1ch;
-}
-
-.uxoralMission .counterWrap {
-  display: flex;
-  flex-direction: column;
-  flex: none;
-  will-change: transform;
-}
-
-.uxoralMission .counterValue {
-  display: flex;
-  align-items: center;
   justify-content: center;
   width: 100%;
-  height: 1.2em;
+  max-width: 100%;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--ux-counter-size);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--ux-deep-black);
-  font-size: inherit;
-  line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: -0.04em;
+  --ux-counter-size: clamp(3rem, 8vw, 5.5rem);
 }
 
-.uxoralMission .counterValueColorNormal {
-  color: var(--ux-spanish-gray);
+.uxoralMission .counterTextLight {
+  font-size: var(--ux-counter-size-v2);
+  color: var(--ux-white);
+  --ux-counter-size-v2: clamp(2.75rem, 7vw, 5rem);
 }
 
-.uxoralMission .counterValueBrandColor {
+.uxoralMission .counterText[data-digit-count="5"] {
+  --ux-counter-size: clamp(2.5rem, 6.5vw, 4.5rem);
+}
+
+.uxoralMission .counterTextLight[data-digit-count="5"] {
+  --ux-counter-size-v2: clamp(2.25rem, 6vw, 4rem);
+}
+
+.uxoralMission .counterText[data-digit-count="6"] {
+  --ux-counter-size: clamp(2.15rem, 5.5vw, 3.85rem);
+}
+
+.uxoralMission .counterTextLight[data-digit-count="6"] {
+  --ux-counter-size-v2: clamp(2rem, 5vw, 3.5rem);
+}
+
+.uxoralMission .counterStaticDigit {
+  display: inline-block;
+  flex: none;
+}
+
+.uxoralMission .counterStaticDigitBrand {
   color: var(--ux-vermilion);
 }
 
-.uxoralMission .counterValueIsWhite {
+.uxoralMission .counterStaticDigitMuted {
+  color: var(--ux-spanish-gray);
+}
+
+.uxoralMission .counterStaticDigitWhite {
   color: var(--ux-white);
-  font-size: inherit;
 }
 
 @media screen and (max-width: 991px) {
@@ -346,23 +363,36 @@
   .uxoralMission .satisficationPercentise {
     gap: 0.5rem;
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .uxoralMission .counterItem {
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .uxoralMission .counterText {
-    --ux-counter-size: clamp(1.5rem, 7vw, 2rem);
-    --ux-counter-size-v2: clamp(1.375rem, 6.5vw, 1.75rem);
-    transform-origin: left center;
+    --ux-counter-size: clamp(2.75rem, 12vw, 4.25rem);
   }
 
-  .uxoralMission .counterCol,
-  .uxoralMission .counterColV2 {
-    width: 0.95ch;
+  .uxoralMission .counterTextLight {
+    --ux-counter-size-v2: clamp(2.5rem, 11vw, 3.85rem);
+  }
+
+  .uxoralMission .counterText[data-digit-count="5"] {
+    --ux-counter-size: clamp(2.35rem, 10vw, 3.65rem);
+  }
+
+  .uxoralMission .counterTextLight[data-digit-count="5"] {
+    --ux-counter-size-v2: clamp(2.15rem, 9vw, 3.35rem);
+  }
+
+  .uxoralMission .counterText[data-digit-count="6"] {
+    --ux-counter-size: clamp(2rem, 9vw, 3.25rem);
+  }
+
+  .uxoralMission .counterTextLight[data-digit-count="6"] {
+    --ux-counter-size-v2: clamp(1.85rem, 8vw, 3rem);
   }
 
   .uxoralMission .robotImageWrapper,
@@ -388,13 +418,18 @@
   }
 
   .uxoralMission .counterText {
-    --ux-counter-size: 1.45rem;
-    --ux-counter-size-v2: 1.3rem;
+    --ux-counter-size: clamp(2.5rem, 14vw, 3.5rem);
+    --ux-counter-size-v2: clamp(2.25rem, 13vw, 3.25rem);
   }
 
-  .uxoralMission .counterCol,
-  .uxoralMission .counterColV2 {
-    width: 0.9ch;
+  .uxoralMission .counterText[data-digit-count="5"] {
+    --ux-counter-size: clamp(2.15rem, 12vw, 3rem);
+    --ux-counter-size-v2: clamp(2rem, 11vw, 2.85rem);
+  }
+
+  .uxoralMission .counterText[data-digit-count="6"] {
+    --ux-counter-size: clamp(1.85rem, 10vw, 2.65rem);
+    --ux-counter-size-v2: clamp(1.75rem, 9.5vw, 2.5rem);
   }
 }
 

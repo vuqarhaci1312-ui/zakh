@@ -10,6 +10,7 @@ export const NAV_PILL_LINKS = [
   { href: "/tour-packages", label: "Tour Packages" },
   { href: "/social-media", label: "Social Media" },
   { href: "/our-events", label: "Our Events" },
+  { href: "/our-branches", label: "Our Branches" },
   { href: "/contact-us", label: "Contact Us" },
 ] as const;
 

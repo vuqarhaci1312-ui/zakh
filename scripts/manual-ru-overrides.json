@@ -1,10 +1,11 @@
 {
-  "hero.headline.accent": "Собирайте",
-  "hero.headline.afterAccent": " моменты",
-  "hero.tagline.beforeAccent": "Не ",
-  "hero.tagline.accent": "вещи",
-  "hero.tagline.afterAccent": ".",
-  "hero.description": "Непревзойдённый опыт для уникальных путешествий. Мы доставим вас в места, о которых вы всегда мечтали.",
+  "hero.headline.beforeAccent": "Ваш ",
+  "hero.headline.accent": "онлайн и офлайн",
+  "hero.headline.afterAccent": "",
+  "hero.tagline.beforeAccent": "поставщик в мире ",
+  "hero.tagline.accent": "с 2016 года",
+  "hero.tagline.afterAccent": "",
+  "hero.description": "Команда Zakher Travel Group of Companies взяла на себя обязательство жить и работать с честностью и искренностью. Мы отвечаем за своё слово и соблюдаем данные обещания.",
   "hero.cta.label": "Узнать больше",
 
   "nav.pillLinks.0.label": "Главная",
@@ -155,6 +156,7 @@
   "ui.allBranches": "← Все филиалы",
 
   "contact.section.description": "Свяжитесь с нами по вопросам, бронированию или индивидуальным турпакетам. Наша команда готова помочь вам 24/7.",
+  "contact.offices.1.label": "Офис в ОАЭ",
 
   "meta.home.title": "Zakher Travel — профессиональное турагентство в Азербайджане",
   "meta.home.description": "Экскурсии по Баку, турпакеты по Азербайджану, визовая поддержка и незабываемые путешествия по Кавказу.",

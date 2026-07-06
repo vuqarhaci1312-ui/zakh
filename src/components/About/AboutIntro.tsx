@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { Dt, useDt } from "@/lib/i18n/use-data-translation";
+import PackageExploreButton from "@/components/RelatedPackages/PackageExploreButton";
+import "@/components/RelatedPackages/related-packages.css";
 import { ABOUT_INTRO, ABOUT_INTRO_BODY } from "./about-data";
 import styles from "./About.module.css";
 
@@ -40,6 +42,12 @@ export default function AboutIntro() {
                   className={styles.paragraph}
                 />
               ))}
+            </div>
+
+            <div className={styles.aboutIntroActions}>
+              <div className="avenora-related-packages">
+                <PackageExploreButton href="/who-we-are" />
+              </div>
             </div>
           </div>
         </div>

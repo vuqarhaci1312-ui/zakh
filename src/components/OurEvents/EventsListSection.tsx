@@ -137,7 +137,6 @@ export default function EventsListSection() {
   return (
     <>
       <section ref={sectionRef} className="section">
-        <div className="space-8-small" />
         <div className="w-layout-blockcontainer container w-container">
           <div className="service-wrapper">
             <div className="section-title-wrapper" data-services-reveal>

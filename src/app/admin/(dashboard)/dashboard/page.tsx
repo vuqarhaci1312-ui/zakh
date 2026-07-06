@@ -17,6 +17,7 @@ export default function AdminDashboardPage() {
   const cards = [
     { href: "/admin/catalogs", label: "Kataloqlar", count: stats?.brochures },
     { href: "/admin/tours", label: "Tur paketləri", count: stats?.tours },
+    { href: "/admin/reservations", label: "Rezervasiyalar", count: stats?.reservations },
     { href: "/admin/social-media", label: "Sosial media", count: (stats?.socialLinks ?? 0) + (stats?.instagram ?? 0) },
     { href: "/admin/events", label: "Tədbirlər", count: stats?.events },
     { href: "/admin/certificates", label: "Sertifikatlar", count: stats?.certificates },

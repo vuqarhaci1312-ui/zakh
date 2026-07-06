@@ -31,12 +31,6 @@ export const BROCHURES: BrochureItem[] = [
   },
   {
     title: "Azerbaijan catalog",
-    language: "EN",
-    image: "/brochures/shusha.webp",
-    file: `${PDF_BASE}/inside_press_eng%20(1).pdf`,
-  },
-  {
-    title: "Azerbaijan catalog",
     language: "RU",
     image: "/brochures/flame-tower.webp",
     file: `${PDF_BASE}/inside_press_rus.pdf`,

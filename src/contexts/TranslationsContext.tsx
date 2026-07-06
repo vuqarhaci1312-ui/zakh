@@ -28,6 +28,22 @@ type TranslationsContextValue = {
 const TranslationsContext = createContext<TranslationsContextValue | null>(null);
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const STATIC_CONTENT_PREFIXES = ["stats.STAT_CARDS.", "branches.", "hero.", "contact.", "brochures.BROCHURES.", "about.WHO_WE_ARE."];
+
+function applyStaticContentOverrides(
+  merged: TranslationDictionary,
+  staticDict: TranslationDictionary,
+): TranslationDictionary {
+  const result = { ...merged };
+
+  for (const key of Object.keys(staticDict)) {
+    if (STATIC_CONTENT_PREFIXES.some((prefix) => key.startsWith(prefix))) {
+      result[key] = staticDict[key];
+    }
+  }
+
+  return result;
+}
 
 async function fetchDictionary(locale: Locale): Promise<TranslationDictionary> {
   let staticDict: TranslationDictionary = {};
@@ -51,9 +67,9 @@ async function fetchDictionary(locale: Locale): Promise<TranslationDictionary> {
       // EN/RU: static file wins conflicts to prevent cross-locale bleed from stale API data.
       // AZ and other locales: API/DB wins; static JSON fills missing keys.
       if (locale === "en" || locale === "ru" || locale === "ar") {
-        return { ...apiDict, ...staticDict };
+        return applyStaticContentOverrides({ ...apiDict, ...staticDict }, staticDict);
       }
-      return { ...staticDict, ...apiDict };
+      return applyStaticContentOverrides({ ...staticDict, ...apiDict }, staticDict);
     }
   } catch {
     /* fallback below */

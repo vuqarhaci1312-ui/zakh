@@ -41,9 +41,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { href: "/about", label: "About Us" },
       { href: "/our-branches", label: "Our Branches" },
       {
-        href: "https://test.zakher.travel/who-we-are",
+        href: "/who-we-are",
         label: "About Company",
-        external: true,
       },
       { href: "/social-media", label: "Social Media" },
       { href: "/contact-us", label: "Contact Us" },

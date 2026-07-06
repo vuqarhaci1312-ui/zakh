@@ -5,7 +5,7 @@ import ContactSection from "@/components/Contact/ContactSection";
 export const metadata: Metadata = {
   title: "Contact Us | Zakher Travel",
   description:
-    "Contact Zakher Travel head office in Baku or Dubai office for tour packages, bookings, and travel support.",
+    "Contact Zakher Travel head office in Baku or UAE office for tour packages, bookings, and travel support.",
 };
 
 export default function ContactPage() {

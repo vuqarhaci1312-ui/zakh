@@ -10,12 +10,12 @@ import { useOurServicesAnimation } from "../OurServices/useOurServicesAnimation"
 
 export default function BranchesSection() {
   const dt = useDt();
+  const headingBefore = dt("ui.branchesHeading.before", "Our");
   const sectionRef = useRef<HTMLElement>(null);
   useOurServicesAnimation(sectionRef);
 
   return (
     <section ref={sectionRef} className="section">
-      <div className="space-8-small" />
       <div className="w-layout-blockcontainer container w-container">
         <div className="service-wrapper">
           <div className="section-title-wrapper" data-services-reveal>
@@ -29,9 +29,14 @@ export default function BranchesSection() {
             <div className="space-1-normal" />
             <div className="max-width-52" style={{ margin: "0 auto" }}>
               <h1 className="section-heading night center">
-                <Dt k="ui.branchesHeading.before" fallback="Our" />{" "}
+                {headingBefore ? (
+                  <>
+                    <Dt k="ui.branchesHeading.before" fallback="Our" as="span" />
+                    {" "}
+                  </>
+                ) : null}
                 <span className="text-gradient-orange">
-                  <Dt k="ui.branchesHeading.accent" fallback="Branches" />
+                  <Dt k="ui.branchesHeading.accent" fallback="Branches" as="span" />
                 </span>
               </h1>
             </div>

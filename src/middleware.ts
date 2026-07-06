@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PUBLIC_ADMIN_PATHS = ["/admin/dashboard", "/admin/catalogs", "/admin/tours", "/admin/social-media", "/admin/events", "/admin/certificates", "/admin/languages"];
+const PUBLIC_ADMIN_PATHS = ["/admin/dashboard", "/admin/catalogs", "/admin/tours", "/admin/reservations", "/admin/social-media", "/admin/events", "/admin/certificates", "/admin/languages"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

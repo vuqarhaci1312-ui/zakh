@@ -1,10 +1,11 @@
 {
-  "hero.headline.accent": "اجمع",
-  "hero.headline.afterAccent": " اللحظات",
-  "hero.tagline.beforeAccent": "لا ",
-  "hero.tagline.accent": "الأشياء",
-  "hero.tagline.afterAccent": ".",
-  "hero.description": "خبرة لا مثيل لها في رحلات فريدة. نأخذك إلى الوجهات التي حلمت بها دائماً.",
+  "hero.headline.beforeAccent": "مورّدك ",
+  "hero.headline.accent": "عبر الإنترنت وخارجه",
+  "hero.headline.afterAccent": "",
+  "hero.tagline.beforeAccent": "حول العالم ",
+  "hero.tagline.accent": "منذ عام 2016",
+  "hero.tagline.afterAccent": "",
+  "hero.description": "التزم فريق مجموعة شركات زاخر للسفر بالعيش والعمل بأمانة وإخلاص. نقف وراء كلمتنا ونُكرّم التزاماتنا.",
   "hero.cta.label": "اكتشف المزيد",
 
   "nav.pillLinks.0.label": "الرئيسية",
@@ -155,6 +156,7 @@
   "ui.allBranches": "← جميع الفروع",
 
   "contact.section.description": "تواصل معنا للاستفسارات والحجوزات أو باقات الجولات المخصصة. فريقنا جاهز لمساعدتك على مدار الساعة.",
+  "contact.offices.1.label": "مكتب الإمارات",
 
   "meta.home.title": "Zakher Travel — وكالة سفر محترفة في أذربيجان",
   "meta.home.description": "جولات باكو، باقات أذربيجان، دعم التأشيرات وتجارب سفر لا تُنسى في القوقاز.",

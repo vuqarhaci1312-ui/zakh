@@ -7,6 +7,9 @@
   position: relative;
   display: flex;
   width: 100%;
+  min-height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
 }
 
 .mediaWrap {
@@ -41,6 +44,7 @@
   flex: 1;
   width: 100%;
   max-width: var(--hero-container);
+  min-height: 0;
   margin: 0 auto;
   padding: 0 var(--hero-gutter);
 }
@@ -50,17 +54,19 @@
   flex: 1;
   flex-direction: column;
   width: 100%;
-  padding: 3rem 0;
+  min-height: 0;
+  padding: 8rem 0 1.5rem;
+  gap: 1.25rem;
   color: var(--hero-text);
   font-family: var(--font-inter-tight), "Inter Tight", sans-serif;
 }
 
 .displayTitle {
-  max-width: 24rem;
+  max-width: min(36rem, 100%);
   margin: 0;
   font-family: var(--font-inter-tight), "Inter Tight", sans-serif;
-  font-size: 3.75rem;
-  line-height: 1;
+  font-size: clamp(2.25rem, 9.5vw, 3.5rem);
+  line-height: 1.08;
   font-weight: 500;
   letter-spacing: -0.01em;
   font-feature-settings: "ss02" on;
@@ -86,10 +92,11 @@
 .bottomRow {
   display: flex;
   flex-direction: column-reverse;
-  gap: 3.5rem;
+  gap: 1.5rem;
   align-items: flex-start;
   justify-content: space-between;
   margin-top: auto;
+  width: 100%;
 }
 
 .bottomLeft {
@@ -99,8 +106,8 @@
 .description {
   max-width: 20rem;
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.9375rem;
+  line-height: 1.45;
   font-weight: 400;
   color: var(--hero-text);
 }
@@ -110,14 +117,14 @@
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  margin-top: 1.5rem;
-  padding: 0.5625rem 0.9375rem;
+  margin-top: 1rem;
+  padding: 0.5rem 0.875rem;
   border: 1px solid rgba(10, 10, 10, 0.1);
   border-radius: 9999px;
   background: #fff;
   color: var(--hero-neutral-950);
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 450;
   line-height: 1.5;
   text-decoration: none;
@@ -129,16 +136,19 @@
 }
 
 .btnIcon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.125rem;
+  height: 1.125rem;
   flex: none;
 }
 
 .bottomRight {
   display: flex;
   flex-direction: column-reverse;
-  gap: 0.625rem;
+  gap: 0.5rem;
   width: 100%;
+  margin-left: auto;
+  align-items: flex-end;
+  text-align: right;
 }
 
 .content h1,
@@ -151,83 +161,95 @@
     --hero-gutter: 24px;
   }
 
+  .content {
+    padding-top: 9rem;
+    padding-bottom: 2rem;
+    gap: 1.5rem;
+  }
+
   .displayTitle {
-    font-size: 4.5rem;
+    font-size: clamp(2.625rem, 7.5vw, 4rem);
+    max-width: min(42rem, 100%);
+  }
+
+  .displayTitleRight {
+    font-size: clamp(1.625rem, 4.5vw, 2.75rem);
+  }
+
+  .description {
+    font-size: 1rem;
   }
 
   .btnSolid {
-    padding-inline: 1.1875rem;
-  }
-
-  .btnIcon {
-    width: 1rem;
-    height: 1rem;
+    padding-inline: 1.125rem;
+    font-size: 1rem;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .heroSection {
-    min-height: 100dvh;
-  }
-
   .overlay {
     background: rgba(0, 0, 0, 0.3);
   }
 
   .content {
-    gap: 3.5rem;
-    padding-top: 9rem;
-    padding-bottom: 3.5rem;
+    position: relative;
+    gap: 1.75rem;
+    padding-top: 10rem;
+    padding-bottom: 2.25rem;
   }
 
   .displayTitle {
-    font-size: 6rem;
+    font-size: clamp(3.125rem, 4.4vw, 4.75rem);
+    max-width: min(48rem, 72%);
+  }
+
+  .displayTitleRight {
+    font-size: clamp(1.875rem, 2.6vw, 3rem);
+    line-height: 1.1;
+    max-width: min(32rem, 52%);
   }
 
   .bottomRow {
     flex-direction: row;
     align-items: flex-end;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   .bottomLeft {
     width: auto;
+    max-width: min(42%, 22rem);
   }
 
   .bottomRight {
+    position: absolute;
+    right: 0;
+    bottom: 2.25rem;
     flex-direction: column;
     gap: 0;
     width: auto;
-    max-width: min(50%, 28rem);
+    max-width: min(52%, 28rem);
     min-width: 0;
+    margin-left: 0;
+    align-items: flex-end;
     text-align: right;
-  }
-
-  .displayTitleRight {
-    font-size: clamp(2.5rem, 4.5vw, 5.5rem);
-    line-height: 1.05;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .displayTitle {
-    font-size: 8rem;
-    line-height: 0.85;
-  }
-
-  .description {
-    font-size: 1.125rem;
-  }
-}
-
-@media screen and (min-width: 1536px) {
   .content {
-    padding-top: 10rem;
-    padding-bottom: 4rem;
+    padding-top: 10.5rem;
+    padding-bottom: 2.5rem;
   }
 
   .displayTitle {
-    font-size: 9rem;
-    line-height: 0.85;
+    font-size: clamp(3.375rem, 3.6vw, 5rem);
+  }
+
+  .displayTitleRight {
+    font-size: clamp(2rem, 2.4vw, 3.25rem);
+  }
+
+  .bottomRight {
+    bottom: 2.5rem;
   }
 }

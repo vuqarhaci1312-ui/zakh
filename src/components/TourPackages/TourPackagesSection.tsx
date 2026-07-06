@@ -8,6 +8,9 @@ import { useTranslations } from "@/contexts/TranslationsContext";
 import { COUNTRY_TOURS } from "../DestinationDetail/country-tours-data";
 import { getToursForCountry } from "../DestinationDetail/tour-details-data";
 import { useOurServicesAnimation } from "../OurServices/useOurServicesAnimation";
+import TourReservationModal, {
+  type TourReservationTarget,
+} from "./TourReservationModal";
 import { MOBILE_TOURS_PAGE_SIZE, TOUR_PACKAGES_PAGE } from "./tour-packages-data";
 import styles from "./TourPackages.module.css";
 
@@ -108,70 +111,87 @@ function CountryOverviewCard({
 
 function TourCard({
   countrySlug,
+  countryName,
   tourIndex,
   tour,
   compact = false,
+  onReserve,
 }: {
   countrySlug: string;
+  countryName: string;
   tourIndex: number;
   tour: ReturnType<typeof getToursForCountry>[number];
   compact?: boolean;
+  onReserve: (target: TourReservationTarget) => void;
 }) {
   const t = useTranslations();
+  const tourTitle = t(`tours.byCountry.${countrySlug}.${tourIndex}.title`, tour.title);
 
   return (
-    <Link
-      href={`/destinations/${countrySlug}/${tour.slug}`}
-      className={`${styles.tourCard}${compact ? ` ${styles.tourCardCompact}` : ""}`}
-    >
-      <div className={styles.tourImageWrap}>
-        <Image
-          src={tour.image}
-          alt={t(
-            `tours.byCountry.${countrySlug}.${tourIndex}.title`,
-            tour.title,
-          )}
-          width={640}
-          height={480}
-          sizes="(max-width: 767px) 50vw, (max-width: 991px) 50vw, 33vw"
-          className={styles.image}
-        />
-      </div>
-      <div className={styles.tourBody}>
-        <T
-          k={`tours.byCountry.${countrySlug}.${tourIndex}.title`}
-          fallback={tour.title}
-          as="h3"
-          className={styles.tourTitle}
-        />
-        {!compact ? (
-          <p className={styles.tourExcerpt}>
-            <T
-              k={`tours.byCountry.${countrySlug}.${tourIndex}.excerpt`}
-              fallback={tour.excerpt}
-            />
-          </p>
-        ) : null}
-        {tour.meta.length > 0 ? (
-          <div className={styles.tourMeta}>
-            {tour.meta.slice(0, compact ? 1 : 2).map((item, metaIndex) => (
-              <span key={item.label} className={styles.stat}>
-                <strong>
+    <article className={`${styles.tourCard}${compact ? ` ${styles.tourCardCompact}` : ""}`}>
+      <Link href={`/destinations/${countrySlug}/${tour.slug}`} className={styles.tourCardLink}>
+        <div className={styles.tourImageWrap}>
+          <Image
+            src={tour.image}
+            alt={tourTitle}
+            width={640}
+            height={480}
+            sizes="(max-width: 767px) 50vw, (max-width: 991px) 50vw, 33vw"
+            className={styles.image}
+          />
+        </div>
+        <div className={styles.tourBody}>
+          <T
+            k={`tours.byCountry.${countrySlug}.${tourIndex}.title`}
+            fallback={tour.title}
+            as="h3"
+            className={styles.tourTitle}
+          />
+          {!compact ? (
+            <p className={styles.tourExcerpt}>
+              <T
+                k={`tours.byCountry.${countrySlug}.${tourIndex}.excerpt`}
+                fallback={tour.excerpt}
+              />
+            </p>
+          ) : null}
+          {tour.meta.length > 0 ? (
+            <div className={styles.tourMeta}>
+              {tour.meta.slice(0, compact ? 1 : 2).map((item, metaIndex) => (
+                <span key={item.label} className={styles.stat}>
+                  <strong>
+                    <T
+                      k={`tours.byCountry.${countrySlug}.${tourIndex}.meta.${metaIndex}.value`}
+                      fallback={item.value}
+                    />
+                  </strong>{" "}
                   <T
-                    k={`tours.byCountry.${countrySlug}.${tourIndex}.meta.${metaIndex}.value`}
-                    fallback={item.value}
+                    k={`tours.byCountry.${countrySlug}.${tourIndex}.meta.${metaIndex}.label`}
+                    fallback={item.label}
                   />
-                </strong>{" "}
-                <T
-                  k={`tours.byCountry.${countrySlug}.${tourIndex}.meta.${metaIndex}.label`}
-                  fallback={item.label}
-                />
-              </span>
-            ))}
-          </div>
-        ) : null}
+                </span>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </Link>
+      <div className={styles.tourCardActions}>
+        <button
+          type="button"
+          className={styles.reserveButton}
+          onClick={() =>
+            onReserve({
+              countrySlug,
+              tourSlug: tour.slug,
+              tourTitle,
+              countryName,
+            })
+          }
+        >
+          <T k="reservation.button" fallback="Reservation" />
+        </button>
       </div>
-    </Link>
+    </article>
   );
 }
 
@@ -183,6 +203,7 @@ export default function TourPackagesSection() {
   const [showAllTours, setShowAllTours] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileTourPage, setMobileTourPage] = useState(1);
+  const [reservationTarget, setReservationTarget] = useState<TourReservationTarget | null>(null);
 
   useOurServicesAnimation(sectionRef);
 
@@ -238,7 +259,6 @@ export default function TourPackagesSection() {
 
   return (
     <section ref={sectionRef} className={`section ${styles.page}`}>
-      <div className="space-8-small" />
       <div className="w-layout-blockcontainer container w-container">
         <div className={`service-wrapper ${styles.wrapper}`}>
           <div className={`section-title-wrapper ${styles.pageHeader}`} data-services-reveal>
@@ -379,9 +399,14 @@ export default function TourPackagesSection() {
                           <TourCard
                             key={tour.slug}
                             countrySlug={activeCountry.slug}
+                            countryName={t(
+                              `country.countries.${activeCountry.countryIndex}.name`,
+                              activeCountry.name,
+                            )}
                             tourIndex={tourIndex}
                             tour={tour}
                             compact={isMobile}
+                            onReserve={setReservationTarget}
                           />
                         );
                       })}
@@ -464,6 +489,10 @@ export default function TourPackagesSection() {
         </div>
       </div>
       <div className="space-8-small" />
+      <TourReservationModal
+        target={reservationTarget}
+        onClose={() => setReservationTarget(null)}
+      />
     </section>
   );
 }

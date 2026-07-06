@@ -5,7 +5,6 @@ import {
   AboutTabIcon,
   CloseIcon,
   HomeTabIcon,
-  HouseIcon,
   MenuTabIcon,
   ServicesTabIcon,
   ToursTabIcon,
@@ -149,11 +148,6 @@ function DesktopHeader({
                 className={`${styles.centerPill} ${overlayMode ? "" : styles.centerPillLight}`}
               >
                 <div className={styles.pillSegments}>
-                  <div
-                    className={`${styles.pillIcon} ${overlayMode ? "" : styles.pillIconOrange}`}
-                  >
-                    <HouseIcon />
-                  </div>
                   {NAV_PILL_LINKS.map((link, index) => (
                     <span key={link.href} style={{ display: "contents" }}>
                       {index > 0 ? (

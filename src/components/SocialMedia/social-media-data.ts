@@ -103,6 +103,24 @@ const PROFILE = "/social-media/profile.webp";
 
 export const INSTAGRAM_ACCOUNTS: InstagramAccount[] = [
   {
+    username: "zakher_travel_azerbaijan",
+    href: "https://www.instagram.com/zakher_travel_azerbaijan?igsh=MXBrbjd2enM0aDZ6ag==",
+    image: PROFILE,
+    avatar: PROFILE,
+  },
+  {
+    username: "Zakher.Travel",
+    href: "https://www.instagram.com/zakher.travel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+    image: PROFILE,
+    avatar: PROFILE,
+  },
+  {
+    username: "Zakher_Travel_Turkiye",
+    href: "https://www.instagram.com/zakher.travel.turkiye?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+    image: "/social-media/turkiye.webp",
+    avatar: "/social-media/turkiye.webp",
+  },
+  {
     username: "Zakher_Travel_UAE",
     href: "https://www.instagram.com/zakher_travel_uae?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
     image: PROFILE,
@@ -139,28 +157,10 @@ export const INSTAGRAM_ACCOUNTS: InstagramAccount[] = [
     avatar: "/social-media/russia.webp",
   },
   {
-    username: "Zakher_Travel_Turkiye",
-    href: "https://www.instagram.com/zakher.travel.turkiye?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-    image: "/social-media/turkiye.webp",
-    avatar: "/social-media/turkiye.webp",
-  },
-  {
     username: "Zakher_Travel_Uzbekistan",
     href: "https://www.instagram.com/zakher.travel.uzbekistan?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
     image: "/social-media/uzbekistan.webp",
     avatar: "/social-media/uzbekistan.webp",
-  },
-  {
-    username: "Zakher.Travel",
-    href: "https://www.instagram.com/zakher.travel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-    image: PROFILE,
-    avatar: PROFILE,
-  },
-  {
-    username: "Zakher.Travel",
-    href: "https://www.instagram.com/zakher_travel_azerbaijan?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-    image: PROFILE,
-    avatar: PROFILE,
   },
   {
     username: "Zakher.Travel_Georgia",

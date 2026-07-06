@@ -132,8 +132,8 @@ export default function InstagramSection() {
   const { data: cmsData, hasCms } = useCmsContent<{
     instagramAccounts: Array<{ username: string; href: string; image: string; avatar: string }>;
   }>("/api/content/social");
-  const accountsSource = useMemo(
-    () =>
+  const accountsSource = useMemo(() => {
+    const accounts =
       hasCms && cmsData?.instagramAccounts?.length
         ? cmsData.instagramAccounts.map((account) => ({
             username: account.username,
@@ -141,9 +141,30 @@ export default function InstagramSection() {
             image: account.image,
             avatar: account.avatar,
           }))
-        : INSTAGRAM_ACCOUNTS,
-    [hasCms, cmsData],
-  );
+        : INSTAGRAM_ACCOUNTS;
+
+    const azerbaijanHref = "https://www.instagram.com/zakher_travel_azerbaijan";
+
+    const sortRank = (href: string) => {
+      const path = href.split("?")[0].toLowerCase();
+      if (path.endsWith("/zakher_travel_azerbaijan")) return 0;
+      if (path.endsWith("/zakher.travel")) return 1;
+      if (path.endsWith("/zakher.travel.turkiye")) return 2;
+      return 3;
+    };
+
+    return [...accounts]
+      .map((account) =>
+        account.href.startsWith(azerbaijanHref)
+          ? {
+              ...account,
+              username: "zakher_travel_azerbaijan",
+              href: `${azerbaijanHref}?igsh=MXBrbjd2enM0aDZ6ag==`,
+            }
+          : account,
+      )
+      .sort((a, b) => sortRank(a.href) - sortRank(b.href));
+  }, [hasCms, cmsData]);
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);

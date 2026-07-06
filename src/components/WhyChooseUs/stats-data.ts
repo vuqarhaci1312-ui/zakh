@@ -1,7 +1,11 @@
-import type { UxoralCounterColumn } from "./UxoralCounter";
-
 const CDN_BASE =
   "https://cdn.prod.website-files.com/69b2a2adca3cdacc51788e5b";
+
+export type UxoralCounterColumn = {
+  target: string;
+  variant: "three" | "four";
+  valueClass?: "normal" | "brand" | "white";
+};
 
 export type StatCardVariant = "_01" | "_02" | "_03" | "_04" | "_05";
 

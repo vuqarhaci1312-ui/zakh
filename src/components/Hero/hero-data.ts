@@ -6,19 +6,19 @@ export const HERO_VIDEO = {
 } as const;
 
 export const HERO_HEADLINE = {
-  beforeAccent: "",
-  accent: "Collect",
-  afterAccent: " Moments",
+  beforeAccent: "Your ",
+  accent: "online and offline",
+  afterAccent: "",
 } as const;
 
 export const HERO_TAGLINE = {
-  beforeAccent: "Not ",
-  accent: "Things",
-  afterAccent: ".",
+  beforeAccent: "supplier in the world ",
+  accent: "since 2016",
+  afterAccent: "",
 } as const;
 
 export const HERO_DESCRIPTION =
-  "Unrivaled expertise for unique travel experiences. We take you to the destinations you have always dreamed of.";
+  "The Zakher Travel Group of Companies team has committed to living and working with honesty and sincerity. We stand behind our word and honor our commitments.";
 
 export const HERO_PRIMARY_CTA = {
   label: "Discover more",

@@ -101,6 +101,36 @@ export const contentAdminApi = {
     publishTour: (id: string) => contentFetch(`/api/content/admin/tours/${id}/publish`, { method: "POST" }),
     getTour: (id: string) => contentFetch(`/api/content/admin/tours/detail/${id}`),
   },
+
+  reservations: {
+    list: () => contentFetch<{ items: ReservationRecord[] }>("/api/reservations/admin"),
+    updateStatus: (id: string, status: ReservationStatus) =>
+      contentFetch<ReservationRecord>(`/api/reservations/admin/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ status }),
+      }),
+    remove: (id: string) => contentFetch(`/api/reservations/admin/${id}`, { method: "DELETE" }),
+  },
+};
+
+export type ReservationStatus = "new" | "contacted" | "confirmed" | "cancelled";
+
+export type ReservationRecord = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  phone: string | null;
+  email: string | null;
+  subject: string;
+  dateFrom: string;
+  dateTo: string;
+  tourTitle: string;
+  countrySlug: string;
+  tourSlug: string;
+  locale: string;
+  status: ReservationStatus;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type { LocalizedText, Locale };

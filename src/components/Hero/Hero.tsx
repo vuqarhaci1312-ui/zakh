@@ -58,6 +58,12 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
   const t = useTranslations();
+  const taglineBefore = t("hero.tagline.beforeAccent", HERO_TAGLINE.beforeAccent);
+  const taglineAccent = t("hero.tagline.accent", HERO_TAGLINE.accent);
+  const taglineAfter = t("hero.tagline.afterAccent", HERO_TAGLINE.afterAccent);
+  const hasTagline = [taglineBefore, taglineAccent, taglineAfter].some(
+    (part) => part.trim().length > 0,
+  );
   const fadeIn = reduceMotion
     ? {
         initial: { opacity: 1, y: 0 },
@@ -154,29 +160,31 @@ export default function Hero() {
               </Link>
             </motion.div>
 
-            <motion.div
-              className={styles.bottomRight}
-              {...fadeIn}
-              transition={{ ...fadeIn.transition, delay: 0.25 }}
-            >
-              <HeroDisplayTitle
-                beforeAccent={
-                  <T k="hero.tagline.beforeAccent" fallback={HERO_TAGLINE.beforeAccent} />
-                }
-                accent={
-                  <T
-                    k="hero.tagline.accent"
-                    fallback={HERO_TAGLINE.accent}
-                    className="text-gradient-orange"
-                  />
-                }
-                afterAccent={
-                  <T k="hero.tagline.afterAccent" fallback={HERO_TAGLINE.afterAccent} />
-                }
-                as="h2"
-                className={`${styles.displayTitle} ${styles.displayTitleRight}`}
-              />
-            </motion.div>
+            {hasTagline ? (
+              <motion.div
+                className={styles.bottomRight}
+                {...fadeIn}
+                transition={{ ...fadeIn.transition, delay: 0.25 }}
+              >
+                <HeroDisplayTitle
+                  beforeAccent={
+                    <T k="hero.tagline.beforeAccent" fallback={HERO_TAGLINE.beforeAccent} />
+                  }
+                  accent={
+                    <T
+                      k="hero.tagline.accent"
+                      fallback={HERO_TAGLINE.accent}
+                      className="text-gradient-orange"
+                    />
+                  }
+                  afterAccent={
+                    <T k="hero.tagline.afterAccent" fallback={HERO_TAGLINE.afterAccent} />
+                  }
+                  as="h2"
+                  className={`${styles.displayTitle} ${styles.displayTitleRight}`}
+                />
+              </motion.div>
+            ) : null}
           </div>
         </div>
       </div>

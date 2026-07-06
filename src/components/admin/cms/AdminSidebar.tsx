@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { href: "/admin/dashboard", label: "Dashboard" },
   { href: "/admin/catalogs", label: "Kataloqlar" },
   { href: "/admin/tours", label: "Tur paketləri" },
+  { href: "/admin/reservations", label: "Rezervasiyalar" },
   { href: "/admin/social-media", label: "Sosial media" },
   { href: "/admin/events", label: "Tədbirlər" },
   { href: "/admin/certificates", label: "Sertifikatlar" },

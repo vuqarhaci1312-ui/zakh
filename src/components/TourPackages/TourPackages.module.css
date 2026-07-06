@@ -179,7 +179,6 @@
   border-radius: 0.75rem;
   background: #fff;
   overflow: hidden;
-  text-decoration: none;
   opacity: 1;
   visibility: visible;
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
@@ -187,6 +186,44 @@
     transform 0.22s ease,
     box-shadow 0.22s ease,
     border-color 0.22s ease;
+}
+
+.tourCardLink {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tourCardActions {
+  padding: 0 1.125rem 1.125rem;
+}
+
+.reserveButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.625rem 1rem;
+  border: 1px solid rgba(255, 140, 0, 0.35);
+  border-radius: 9999px;
+  background: #fff;
+  color: #1d1d1d;
+  font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.reserveButton:hover {
+  background: linear-gradient(135deg, #ffb347, #ff8c00);
+  border-color: transparent;
+  color: #fff;
 }
 
 .tourCard:hover {

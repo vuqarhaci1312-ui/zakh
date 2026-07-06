@@ -94,15 +94,23 @@ export default function BrochuresSection() {
   }, []);
 
   const sourceBrochures = useMemo<BrochureItem[]>(() => {
-    if (hasCms && cmsData?.items?.length) {
-      return cmsData.items.map((item) => ({
-        title: item.title,
-        language: item.languageTag,
-        image: item.imageUrl,
-        file: item.fileUrl,
-      }));
-    }
-    return [...BROCHURES];
+    const raw =
+      hasCms && cmsData?.items?.length
+        ? cmsData.items.map((item) => ({
+            title: item.title,
+            language: item.languageTag,
+            image: item.imageUrl,
+            file: item.fileUrl,
+          }))
+        : [...BROCHURES];
+
+    const seen = new Set<string>();
+    return raw.filter((item) => {
+      const key = item.file.replace(/%20\(1\)/g, "").toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
   }, [hasCms, cmsData]);
 
   const filteredBrochures = useMemo(
@@ -231,14 +239,7 @@ export default function BrochuresSection() {
                     {hasCms ? brochure.title : <Dt k={`brochures.BROCHURES.${index}.title`} fallback={brochure.title} />}
                   </p>
                   <p className={styles.meta}>
-                    <span className={styles.lang}>
-                      {hasCms ? brochure.language : (
-                        <Dt
-                          k={`brochures.BROCHURES.${index}.language`}
-                          fallback={brochure.language}
-                        />
-                      )}
-                    </span>
+                    <span className={styles.lang}>{brochure.language}</span>
                     PDF
                   </p>
                 </div>

@@ -216,6 +216,123 @@
   margin-bottom: 0;
 }
 
+.aboutIntroActions {
+  margin-top: 1.75rem;
+}
+
+/* Who We Are detail */
+.whoWeAreDetail {
+  padding-top: 8rem;
+  padding-bottom: 5rem;
+}
+
+.whoWeAreBackLink {
+  display: inline-flex;
+  margin-bottom: 2rem;
+  color: var(--mid-black);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.whoWeAreBackLink:hover {
+  color: #000;
+}
+
+.whoWeAreDetailGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.whoWeAreDetailMedia {
+  display: flex;
+  justify-content: center;
+}
+
+.whoWeAreDetailContent {
+  max-width: 46rem;
+}
+
+.whoWeAreExhibitions {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  max-width: 52rem;
+}
+
+.whoWeAreExhibitionsTitle {
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+.whoWeAreExhibitionsList {
+  margin: 1.25rem 0 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.whoWeAreExhibitionsItem {
+  line-height: 1.45;
+}
+
+.whoWeAreAssets {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+
+.whoWeAreQualityPolicy {
+  max-width: 28rem;
+}
+
+.whoWeAreQualityImage {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+.whoWeAreDownload {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  max-width: 36rem;
+}
+
+.whoWeAreDownloadLabel {
+  margin: 0;
+  font-weight: 500;
+}
+
+.whoWeAreDownloadButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.125rem;
+  border-radius: 9999px;
+  background: #111;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.whoWeAreDownloadButton:hover {
+  background: #333;
+}
+
 .sectionTitleCenter {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -507,6 +624,16 @@
 
   .aboutIntroMedia {
     justify-content: flex-start;
+  }
+
+  .whoWeAreDetailGrid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 4rem;
+  }
+
+  .whoWeAreAssets {
+    grid-template-columns: minmax(0, 28rem) minmax(0, 1fr);
+    align-items: center;
   }
 
   .charityGrid {
