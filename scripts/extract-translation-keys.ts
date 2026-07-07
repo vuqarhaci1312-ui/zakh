@@ -71,6 +71,9 @@ const TRANSLATABLE_KEYS = new Set([
   "contactRequired",
   "dateRange",
   "submitFailed",
+  "intro",
+  "profileLabel",
+  "downloadLabel",
 ]);
 
 const SKIP_KEYS = new Set([
@@ -217,7 +220,19 @@ async function loadData() {
     },
     {
       prefix: "about",
-      loader: async () => import("../src/components/About/about-data.ts"),
+      loader: async () => {
+        const about = await import("../src/components/About/about-data.ts");
+        const whoWeAre = await import("../src/components/About/who-we-are-data.ts");
+        return {
+          ...about,
+          WHO_WE_ARE_BODY: whoWeAre.WHO_WE_ARE_BODY,
+          WHO_WE_ARE_EXHIBITIONS: whoWeAre.WHO_WE_ARE_EXHIBITIONS,
+          WHO_WE_ARE: {
+            profileLabel: whoWeAre.WHO_WE_ARE_ASSETS.companyProfileLabel,
+            downloadLabel: whoWeAre.WHO_WE_ARE_ASSETS.downloadLabel,
+          },
+        };
+      },
     },
     {
       prefix: "services",
