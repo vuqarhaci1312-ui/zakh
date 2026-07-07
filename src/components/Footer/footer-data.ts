@@ -96,7 +96,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: "wechat",
         label: "WeChat",
-        href: "https://www.wechat.com/",
+        href: "/social-media/wechat-qr.png",
       },
       {
         id: "x",

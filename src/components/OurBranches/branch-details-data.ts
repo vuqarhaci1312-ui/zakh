@@ -25,7 +25,7 @@ export const BRANCH_DETAILS: BranchDetail[] = [
     contact: {
       locationLabel: "Baku, Azerbaijan",
       address: "73 Huseyn Javid Ave, Baku 1073",
-      phones: ["+994 12 310 09 32"],
+      phones: ["+994 12 310 09 32", "+994 50 253 22 09"],
       email: "incoming@zakher.travel",
       website: "zakher.travel",
     },

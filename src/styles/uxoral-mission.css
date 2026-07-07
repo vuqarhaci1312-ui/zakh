@@ -305,6 +305,14 @@
   --ux-counter-size-v2: clamp(2.75rem, 7vw, 5rem);
 }
 
+.uxoralMission .counterText[data-digit-count="4"] {
+  --ux-counter-size: clamp(2.35rem, 6vw, 4.25rem);
+}
+
+.uxoralMission .counterTextLight[data-digit-count="4"] {
+  --ux-counter-size-v2: clamp(2.1rem, 5.5vw, 3.85rem);
+}
+
 .uxoralMission .counterText[data-digit-count="5"] {
   --ux-counter-size: clamp(2.5rem, 6.5vw, 4.5rem);
 }
@@ -392,6 +400,14 @@
     --ux-counter-size-v2: clamp(2.5rem, 11vw, 3.85rem);
   }
 
+  .uxoralMission .counterText[data-digit-count="4"] {
+    --ux-counter-size: clamp(2.5rem, 11vw, 3.85rem);
+  }
+
+  .uxoralMission .counterTextLight[data-digit-count="4"] {
+    --ux-counter-size-v2: clamp(2.25rem, 10vw, 3.5rem);
+  }
+
   .uxoralMission .counterText[data-digit-count="5"] {
     --ux-counter-size: clamp(2.35rem, 10vw, 3.65rem);
   }
@@ -462,4 +478,21 @@
 [dir="rtl"] .uxoralMission .headingStyleH2,
 [dir="rtl"] .uxoralMission .fontSizeBase {
   text-align: right;
+}
+
+[dir="rtl"] .uxoralMission .missionStatLabel {
+  text-align: center;
+}
+
+[dir="rtl"] .uxoralMission .counterText {
+  direction: ltr;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+[dir="rtl"] .uxoralMission .counterItem,
+[dir="rtl"] .uxoralMission .missionStatCounter {
+  min-width: 0;
 }

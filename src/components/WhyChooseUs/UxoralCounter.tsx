@@ -3,9 +3,22 @@
 import { useEffect, useRef, useState } from "react";
 
 function parseStatValue(value: string) {
-  const match = value.match(/^(\d+)(.*)$/);
-  if (!match) return { target: 0, suffix: value };
-  return { target: Number(match[1]), suffix: match[2] ?? "" };
+  const trimmed = value.trim();
+  const leadingMatch = trimmed.match(/^(\d+)(.*)$/);
+  if (leadingMatch) {
+    return { target: Number(leadingMatch[1]), suffix: leadingMatch[2] ?? "" };
+  }
+
+  const embeddedMatch = trimmed.match(/(\d[\d,]*\+?)/);
+  if (embeddedMatch) {
+    const normalized = embeddedMatch[1].replace(/,/g, "");
+    const parts = normalized.match(/^(\d+)(\+?)$/);
+    if (parts) {
+      return { target: Number(parts[1]), suffix: parts[2] ?? "" };
+    }
+  }
+
+  return { target: 0, suffix: trimmed };
 }
 
 function easeOutCubic(t: number) {
@@ -107,6 +120,7 @@ export default function UxoralCounter({
         <div
           className={`counterText${light ? " counterTextLight" : ""}`}
           data-digit-count={digitCount}
+          dir="ltr"
           aria-label={`${target}${suffix}`}
         >
           <span className={digitClass}>{displayValue}</span>

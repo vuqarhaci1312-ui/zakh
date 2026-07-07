@@ -46,7 +46,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     id: "wechat",
     label: "WeChat",
     title: "Join us on WeChat",
-    href: "https://www.wechat.com/",
+    href: "/social-media/wechat-qr.png",
   },
   {
     id: "telegram",

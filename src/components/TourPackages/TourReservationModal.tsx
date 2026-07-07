@@ -123,9 +123,13 @@ export default function TourReservationModal({ target, onClose }: TourReservatio
         <div className={styles.sheetHandle} aria-hidden="true" />
         <div className={styles.sheetHeader}>
           <div>
-            <h2 id="tour-reservation-title" className={styles.sheetTitle}>
-              <T k="reservation.title" fallback="Tour reservation" />
-            </h2>
+            <T
+              k="reservation.title"
+              fallback="Tour reservation"
+              as="h2"
+              id="tour-reservation-title"
+              className={styles.sheetTitle}
+            />
             <p className={styles.sheetSubtitle}>
               {target.tourTitle} · {target.countryName}
             </p>

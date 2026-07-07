@@ -48,10 +48,12 @@
 .sheetTitle {
   margin: 0;
   color: #1d1d1d;
-  font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
+  font-family: var(--font-inter-tight), "Inter Tight", sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-wrap: balance;
 }
 
 .sheetSubtitle {
