@@ -68,7 +68,10 @@
   --line-height-md: 110%;
   --weight-normal: 400;
   --weight-medium: 500;
+  --visible-cards: 3;
   --card-width: clamp(280px, 32vw, 408px);
+  --carousel-gutter: 24px;
+  --slider-shell-gutter: 48px;
 
   padding-top: var(--space-xxxxl);
   padding-bottom: var(--space-xxxxl);
@@ -116,6 +119,10 @@
   will-change: transform, opacity;
 }
 
+.sliderShell {
+  padding-inline: var(--slider-shell-gutter);
+}
+
 .sliderViewport {
   width: 100%;
   overflow-x: auto;
@@ -125,8 +132,13 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x proximity;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0;
+  padding-inline: var(--carousel-gutter);
+  box-sizing: border-box;
+  container-type: inline-size;
   will-change: transform, opacity;
+  user-select: none;
 }
 
 .sliderViewport::-webkit-scrollbar {
@@ -144,13 +156,12 @@
   align-items: stretch;
   width: max-content;
   gap: var(--space-lg);
-  padding-left: max(20px, calc((100vw - 1320px) / 2 + 20px));
-  padding-right: max(20px, calc((100vw - 1320px) / 2 + 20px));
 }
 
 .cardWrapper {
-  flex: 0 0 var(--card-width);
-  width: var(--card-width);
+  flex: 0 0 var(--slider-card-width, var(--card-width));
+  width: var(--slider-card-width, var(--card-width));
+  max-width: var(--slider-card-width, var(--card-width));
   scroll-snap-align: start;
 }
 
@@ -245,18 +256,15 @@
     --h2-letter-spacing: -1px;
     --h4-size: 36px;
     --h4-letter-spacing: -1px;
-    --card-width: clamp(260px, 44vw, 360px);
-  }
-
-  .sliderTrack {
-    padding-left: 20px;
-    padding-right: 20px;
+    --visible-cards: 1;
+    --card-width: 100cqw;
   }
 }
 
 @media screen and (max-width: 767px) {
   .section {
     --carousel-gutter: 20px;
+    --slider-shell-gutter: 40px;
     --space-xxxxl: 50px;
     --space-xxxl: 45px;
     --space-xxl: 30px;
@@ -265,27 +273,21 @@
     --h2-letter-spacing: -0.5px;
     --h4-size: 32px;
     --h4-letter-spacing: -0.5px;
-    --card-width: calc(100vw - (2 * var(--carousel-gutter)));
+    --visible-cards: 1;
+    --card-width: 100cqw;
   }
 
   .container {
-    padding-left: var(--carousel-gutter);
-    padding-right: var(--carousel-gutter);
-  }
-
-  .sliderViewport {
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--carousel-gutter);
+    padding-left: var(--slider-shell-gutter);
+    padding-right: var(--slider-shell-gutter);
   }
 
   .sliderTrack {
-    padding-left: var(--carousel-gutter);
-    padding-right: var(--carousel-gutter);
     gap: var(--carousel-gutter);
   }
 
   .cardWrapper {
-    scroll-snap-align: center;
+    scroll-snap-align: start;
   }
 
   .linkBlock {
@@ -296,7 +298,8 @@
 
 @media screen and (max-width: 479px) {
   .section {
-    --carousel-gutter: 20px;
+    --carousel-gutter: 16px;
+    --slider-shell-gutter: 32px;
     --space-xxxxl: 40px;
     --space-xxxl: 35px;
     --space-xxl: 25px;
@@ -306,11 +309,18 @@
     --h2-letter-spacing: 0;
     --h4-size: 30px;
     --h4-letter-spacing: 0;
-    --card-width: calc(100vw - (2 * var(--carousel-gutter)));
+    --visible-cards: 1;
+    --card-width: 100cqw;
   }
 }
 
 @media screen and (min-width: 992px) {
+  .section {
+    --card-width: calc(
+      (100cqw - ((var(--visible-cards) - 1) * var(--space-lg))) / var(--visible-cards)
+    );
+  }
+
   .largeParagraph,
   .title,
   .sliderViewport {

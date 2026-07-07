@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef, useState } from "react";
+import { Fragment, useEffect, useId, useRef, useState } from "react";
 import {
   AboutTabIcon,
   CloseIcon,
@@ -260,32 +260,34 @@ function DesktopHeader({
               >
                 <div className={styles.pillSegments}>
                   {NAV_PILL_LINKS.map((link, index) => (
-                    <span key={link.href} style={{ display: "contents" }}>
+                    <Fragment key={link.href}>
                       {index > 0 ? (
                         <span
                           className={`${styles.pillDivider} ${overlayMode ? "" : styles.pillDividerLight}`}
                           aria-hidden="true"
                         />
                       ) : null}
-                      {link.children ? (
-                        <PillDropdown
-                          href={link.href}
-                          label={link.label}
-                          labelKey={`nav.pillLinks.${index}.label`}
-                          subLinks={link.children}
-                          pathname={pathname}
-                          gradient={!overlayMode}
-                        />
-                      ) : (
-                        <PillLink
-                          href={link.href}
-                          label={link.label}
-                          labelKey={`nav.pillLinks.${index}.label`}
-                          pathname={pathname}
-                          gradient={!overlayMode}
-                        />
-                      )}
-                    </span>
+                      <div className={styles.pillSegment}>
+                        {link.children ? (
+                          <PillDropdown
+                            href={link.href}
+                            label={link.label}
+                            labelKey={`nav.pillLinks.${index}.label`}
+                            subLinks={link.children}
+                            pathname={pathname}
+                            gradient={!overlayMode}
+                          />
+                        ) : (
+                          <PillLink
+                            href={link.href}
+                            label={link.label}
+                            labelKey={`nav.pillLinks.${index}.label`}
+                            pathname={pathname}
+                            gradient={!overlayMode}
+                          />
+                        )}
+                      </div>
+                    </Fragment>
                   ))}
                 </div>
               </div>

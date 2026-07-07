@@ -25,7 +25,7 @@ export default function RelatedPackages() {
           className="section"
           aria-labelledby="related-packages-title"
         >
-          <div className="space-8-small" />
+          <div className="space-4-medium" />
           <div className="w-layout-blockcontainer container w-container">
             <div className="section-title-wrapper" data-related-packages-reveal>
               <div className="max-width-38">

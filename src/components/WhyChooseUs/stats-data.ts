@@ -91,8 +91,6 @@ export const STAT_CARDS: StatCardData[] = [
   },
 ];
 
-export const UXORAL_CENTER_IMAGE = "/hero/hero-poster.webp";
-
 function splitDigits(value: string) {
   const match = value.match(/^(\d+)(.*)$/);
   if (!match) {

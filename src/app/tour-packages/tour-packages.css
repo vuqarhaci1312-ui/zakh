@@ -4,6 +4,10 @@
   gap: 2rem;
 }
 
+.tour-packages-page .page-wrapper {
+  overflow: visible;
+}
+
 .tour-packages-page .section-title-wrapper {
   gap: 1rem;
 }

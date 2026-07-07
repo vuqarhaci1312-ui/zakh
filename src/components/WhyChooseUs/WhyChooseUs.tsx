@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
 import "@/styles/uxoral-mission.css";
 import UxoralCounter from "./UxoralCounter";
-import { STAT_CARDS, UXORAL_CENTER_IMAGE } from "./stats-data";
+import { STAT_CARDS } from "./stats-data";
 import { useUxoralMissionAnimation } from "./useUxoralMissionAnimation";
 
 function TrophyIcon() {
@@ -40,6 +39,8 @@ export default function WhyChooseUs() {
             <div className="missionTopCard missionTopCardText">
               <UxoralCounter
                 value={partnersCount}
+                light
+                labelClassName="fontSizeXsm fontSizeXsmWhite missionStatLabel"
                 label={<T k="stats.STAT_CARDS.0.title" fallback={STAT_CARDS[0].title} />}
               />
             </div>
@@ -47,6 +48,8 @@ export default function WhyChooseUs() {
             <div className="containBottomCard">
               <UxoralCounter
                 value={hotelsCount}
+                light
+                labelClassName="fontSizeXsm fontSizeXsmWhite missionStatLabel"
                 label={<T k="stats.STAT_CARDS.2.title" fallback={STAT_CARDS[2].title} />}
               />
             </div>
@@ -54,13 +57,9 @@ export default function WhyChooseUs() {
 
           <div className="missionContainCard" data-ux-card="center">
             <div className="robotImageWrapper">
-              <Image
-                src={UXORAL_CENTER_IMAGE}
-                alt={t("stats.STAT_CARDS.1.title", STAT_CARDS[1].title)}
-                width={640}
-                height={760}
-                className="robotImage"
-              />
+              <span className="missionStatisticsTitle">
+                <T k="stats.STAT_SECTION.eyebrow" fallback="Statistika" />
+              </span>
             </div>
 
             <div className="counterMain">
@@ -82,6 +81,8 @@ export default function WhyChooseUs() {
             <div className="containBottomCard">
               <UxoralCounter
                 value={touristsCount}
+                light
+                labelClassName="fontSizeXsm fontSizeXsmWhite missionStatLabel"
                 label={<T k="stats.STAT_CARDS.3.title" fallback={STAT_CARDS[3].title} />}
               />
             </div>
@@ -89,6 +90,8 @@ export default function WhyChooseUs() {
             <div className="missionTopCard missionTopCardText">
               <UxoralCounter
                 value={staffCount}
+                light
+                labelClassName="fontSizeXsm fontSizeXsmWhite missionStatLabel"
                 label={<T k="stats.STAT_CARDS.4.title" fallback={STAT_CARDS[4].title} />}
               />
             </div>

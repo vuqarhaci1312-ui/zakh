@@ -57,6 +57,20 @@ const TRANSLATABLE_KEYS = new Set([
   "headline",
   "quote",
   "count",
+  "button",
+  "success",
+  "firstName",
+  "lastName",
+  "phone",
+  "email",
+  "contactHint",
+  "subject",
+  "dateFrom",
+  "dateTo",
+  "submit",
+  "contactRequired",
+  "dateRange",
+  "submitFailed",
 ]);
 
 const SKIP_KEYS = new Set([
@@ -243,6 +257,13 @@ async function loadData() {
     {
       prefix: "tourPackages",
       loader: async () => import("../src/components/TourPackages/tour-packages-data.ts"),
+    },
+    {
+      prefix: "reservation",
+      loader: async () => {
+        const m = await import("../src/components/TourPackages/reservation-data.ts");
+        return m.RESERVATION_COPY;
+      },
     },
     {
       prefix: "destinations",

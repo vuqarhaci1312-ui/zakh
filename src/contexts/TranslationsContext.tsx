@@ -38,6 +38,8 @@ const STATIC_CONTENT_PREFIXES = [
   "packages.RELATED_PACKAGES.",
   "packages.RELATED_PACKAGES_SECTION.",
   "reviews.CUSTOMER_REVIEWS_SECTION.",
+  "nav.",
+  "reservation.",
 ];
 
 function applyStaticContentOverrides(

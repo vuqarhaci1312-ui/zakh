@@ -121,7 +121,7 @@ export const POPULAR_TOUR_ITEMS: PopularTourItem[] = [
     duration: "10",
     cities: "2",
     guests: "12",
-    image: "/tours/kazakhstan.webp",
+    image: "/tours/1trip2count.png",
     imageAlt: "Kazakhstan and Uzbekistan tour package",
   },
 ];

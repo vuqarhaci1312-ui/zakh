@@ -99,6 +99,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  width: 100%;
   padding: 0;
   border: 0;
   background: transparent;
@@ -136,7 +137,7 @@
 }
 
 .overviewAction {
-  display: none;
+  display: block;
   margin-top: 0.375rem;
   color: #ff8c00;
   font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
@@ -201,23 +202,37 @@
 }
 
 .reserveButton {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   width: 100%;
+  min-height: 2.75rem;
   padding: 0.625rem 1rem;
-  border: 1px solid rgba(255, 140, 0, 0.35);
+  border: 1px solid rgba(255, 140, 0, 0.35) !important;
   border-radius: 9999px;
-  background: #fff;
-  color: #1d1d1d;
+  background: #fff !important;
+  color: #1d1d1d !important;
   font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
+  line-height: 1.2;
+  text-transform: none;
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease;
+}
+
+.reserveButtonLabel {
+  display: inline-block;
+  color: inherit;
+  font: inherit;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .reserveButton:hover {

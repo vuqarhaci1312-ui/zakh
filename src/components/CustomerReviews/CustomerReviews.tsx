@@ -23,7 +23,7 @@ export default function CustomerReviews() {
           className="section"
           aria-labelledby="customer-reviews-title"
         >
-          <div className="space-8-small" />
+          <div className="space-4-medium" />
           <div className="w-layout-blockcontainer container w-container">
             <div className="section-title-wrapper" data-customer-reviews-reveal>
               <div className="max-width-38">

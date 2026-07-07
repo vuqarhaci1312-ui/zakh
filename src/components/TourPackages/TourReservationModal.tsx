@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations, useTranslationsState } from "@/contexts/TranslationsContext";
 import { submitTourReservation } from "@/lib/reservations-api";
@@ -31,6 +32,11 @@ export default function TourReservationModal({ target, onClose }: TourReservatio
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!target) return;
@@ -61,7 +67,7 @@ export default function TourReservationModal({ target, onClose }: TourReservatio
     };
   }, [target, onClose]);
 
-  if (!target) return null;
+  if (!target || !mounted) return null;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -105,7 +111,7 @@ export default function TourReservationModal({ target, onClose }: TourReservatio
     }
   };
 
-  return (
+  return createPortal(
     <div
       className={styles.overlay}
       role="presentation"
@@ -245,6 +251,7 @@ export default function TourReservationModal({ target, onClose }: TourReservatio
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

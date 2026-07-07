@@ -95,7 +95,7 @@ export default function ContactSection() {
             <div className="max-width-52" style={{ margin: "0 auto" }}>
               <h1 className="section-heading night center">
                 <span className="text-gradient-orange">
-                  <T k="nav.links.6.label" fallback="Contact Us" />
+                  <T k="nav.links.4.label" fallback="Contact Us" />
                 </span>
               </h1>
             </div>

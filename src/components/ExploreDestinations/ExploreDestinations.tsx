@@ -30,7 +30,7 @@ function DestinationCard({
             alt={alt}
             width={1644}
             height={1100}
-            sizes="(max-width: 767px) calc(100vw - 40px), 408px"
+            sizes="(max-width: 767px) calc(100vw - 80px), calc((100vw - 80px - 48px) / 3)"
             className={styles.image}
             draggable={false}
           />
@@ -97,19 +97,21 @@ export default function ExploreDestinations() {
         </div>
       </div>
 
-      <div
-        ref={viewportRef}
-        className={styles.sliderViewport}
-        aria-label={dt("ui.destinationCarousel", "Destination carousel")}
-      >
-        <div ref={trackRef} className={styles.sliderTrack}>
-          {loopedDestinations.map((destination) => (
-            <DestinationCard
-              key={destination.key}
-              destination={destination}
-              index={destination.index}
-            />
-          ))}
+      <div className={styles.sliderShell}>
+        <div
+          ref={viewportRef}
+          className={styles.sliderViewport}
+          aria-label={dt("ui.destinationCarousel", "Destination carousel")}
+        >
+          <div ref={trackRef} className={styles.sliderTrack}>
+            {loopedDestinations.map((destination) => (
+              <DestinationCard
+                key={destination.key}
+                destination={destination}
+                index={destination.index}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

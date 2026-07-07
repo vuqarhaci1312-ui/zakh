@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
 import { COUNTRY_TOURS } from "../DestinationDetail/country-tours-data";
@@ -12,6 +13,7 @@ import TourReservationModal, {
   type TourReservationTarget,
 } from "./TourReservationModal";
 import { MOBILE_TOURS_PAGE_SIZE, TOUR_PACKAGES_PAGE } from "./tour-packages-data";
+import { RESERVATION_COPY } from "./reservation-data";
 import styles from "./TourPackages.module.css";
 
 const INITIAL_TOUR_LIMIT = 6;
@@ -102,9 +104,6 @@ function CountryOverviewCard({
           </span>
         </div>
       </button>
-      <Link href={`/destinations/${slug}`} className={styles.overviewLink}>
-        <T k="ui.exploreDestination" fallback="Explore" /> &rarr;
-      </Link>
     </article>
   );
 }
@@ -188,15 +187,19 @@ function TourCard({
             })
           }
         >
-          <T k="reservation.button" fallback="Reservation" />
+          <span className={styles.reserveButtonLabel}>
+            {t("reservation.button", RESERVATION_COPY.button) || RESERVATION_COPY.button}
+          </span>
         </button>
       </div>
     </article>
   );
 }
 
-export default function TourPackagesSection() {
+export function TourPackagesSectionContent() {
   const t = useTranslations();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [activeView, setActiveView] = useState<ActiveView>("all");
@@ -206,6 +209,16 @@ export default function TourPackagesSection() {
   const [reservationTarget, setReservationTarget] = useState<TourReservationTarget | null>(null);
 
   useOurServicesAnimation(sectionRef);
+
+  useEffect(() => {
+    const country = searchParams.get("country");
+    if (country && COUNTRIES_WITH_META.some((item) => item.slug === country)) {
+      setActiveView(country);
+      return;
+    }
+
+    setActiveView("all");
+  }, [searchParams]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)");
@@ -246,6 +259,16 @@ export default function TourPackagesSection() {
     setActiveView(view);
     setShowAllTours(false);
     setMobileTourPage(1);
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (view === "all") {
+      params.delete("country");
+    } else {
+      params.set("country", view);
+    }
+
+    const query = params.toString();
+    router.replace(query ? `/tour-packages?${query}` : "/tour-packages", { scroll: false });
 
     requestAnimationFrame(() => {
       contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -359,17 +382,6 @@ export default function TourPackagesSection() {
                       ) : null}
                     </p>
                   </div>
-                  <Link
-                    href={`/destinations/${activeCountry.slug}`}
-                    className={styles.groupLink}
-                  >
-                    <T k="ui.viewAllIn" fallback="View all in" />{" "}
-                    <T
-                      k={`country.countries.${activeCountry.countryIndex}.name`}
-                      fallback={activeCountry.name}
-                    />{" "}
-                    &rarr;
-                  </Link>
                 </div>
 
                 {activeCountry.tours.length === 0 ? (
@@ -494,5 +506,13 @@ export default function TourPackagesSection() {
         onClose={() => setReservationTarget(null)}
       />
     </section>
+  );
+}
+
+export default function TourPackagesSection() {
+  return (
+    <Suspense fallback={null}>
+      <TourPackagesSectionContent />
+    </Suspense>
   );
 }

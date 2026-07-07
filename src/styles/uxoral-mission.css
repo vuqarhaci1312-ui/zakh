@@ -1,5 +1,6 @@
 .uxoralMission {
   --ux-vermilion: #ff531f;
+  --ux-stat-card-bg: var(--ux-vermilion);
   --ux-black: #000;
   --ux-deep-black: #000;
   --ux-dim-gray: #666;
@@ -94,6 +95,8 @@
   align-items: center;
   justify-content: center;
   min-height: 5.5rem;
+  background: var(--ux-stat-card-bg);
+  border-color: var(--ux-light-border);
 }
 
 .uxoralMission .missionTopText {
@@ -141,6 +144,7 @@
   padding: 1.5rem 1.25rem;
   border: 1px solid var(--ux-light-border);
   border-radius: 1rem;
+  background: var(--ux-stat-card-bg);
 }
 
 .uxoralMission .bottomTopContant {
@@ -174,6 +178,9 @@
 
 .uxoralMission .robotImageWrapper {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 1;
   min-height: 16rem;
   border: 1px solid var(--ux-light-border);
@@ -196,11 +203,17 @@
   line-height: 1.5;
 }
 
-.uxoralMission .robotImage {
-  width: 100%;
-  height: 100%;
-  min-height: 16rem;
-  object-fit: cover;
+.uxoralMission .missionStatisticsTitle {
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  background: linear-gradient(135deg, #ff531f 0%, #ff7a2e 45%, #ffb347 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .uxoralMission .counterMain {
@@ -211,7 +224,7 @@
   padding: 1.5rem 1.25rem;
   border: 1px solid var(--ux-light-border);
   border-radius: 1rem;
-  background: var(--ux-vermilion);
+  background: var(--ux-stat-card-bg);
   overflow: hidden;
 }
 
@@ -395,9 +408,12 @@
     --ux-counter-size-v2: clamp(1.85rem, 8vw, 3rem);
   }
 
-  .uxoralMission .robotImageWrapper,
-  .uxoralMission .robotImage {
+  .uxoralMission .robotImageWrapper {
     min-height: 12rem;
+  }
+
+  .uxoralMission .missionStatisticsTitle {
+    font-size: clamp(2.25rem, 10vw, 3.5rem);
   }
 
   .uxoralMission .counterMain {

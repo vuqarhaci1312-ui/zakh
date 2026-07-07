@@ -211,6 +211,11 @@
 }
 
 .pillLink {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 4px;
   color: inherit;
   text-decoration: none;
   cursor: pointer;
@@ -220,8 +225,15 @@
   opacity: 0.85;
 }
 
+.pillSegment {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .pillDropdown {
   position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
 }

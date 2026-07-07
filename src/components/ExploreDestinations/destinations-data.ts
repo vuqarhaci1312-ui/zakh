@@ -16,8 +16,10 @@ export interface DestinationItem {
   scrollDelay: number;
 }
 
-export const DESTINATIONS: DestinationItem[] = POPULAR_TOUR_ITEMS.map((item, index) => ({
-  id: item.href.replace(/^\/destinations\//, ""),
+export const DESTINATIONS: DestinationItem[] = POPULAR_TOUR_ITEMS.filter(
+  (item) => item.id !== "kazakhstan-uzbekistan-tour",
+).map((item, index) => ({
+  id: item.id,
   name: item.title,
   href: item.href,
   imageAlt: item.imageAlt,

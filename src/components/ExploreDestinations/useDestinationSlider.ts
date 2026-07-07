@@ -3,6 +3,11 @@
 import { useEffect, useRef } from "react";
 
 const LOOP_COPIES = 3;
+const DESKTOP_QUERY = "(min-width: 992px)";
+
+function getVisibleCards() {
+  return window.matchMedia(DESKTOP_QUERY).matches ? 3 : 1;
+}
 
 export function useDestinationSlider(itemCount: number) {
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -10,6 +15,7 @@ export function useDestinationSlider(itemCount: number) {
   const isDraggingRef = useRef(false);
   const dragStartXRef = useRef(0);
   const scrollStartRef = useRef(0);
+  const hasInitializedRef = useRef(false);
 
   useEffect(() => {
     const viewport = viewportRef.current;
@@ -22,11 +28,63 @@ export function useDestinationSlider(itemCount: number) {
     let setWidth = 0;
     let rafId = 0;
 
-    const measure = () => {
-      setWidth = track.scrollWidth / LOOP_COPIES;
-      if (setWidth > 0) {
-        viewport.scrollLeft = setWidth;
+    const getGap = () =>
+      parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "0");
+
+    const getCardStep = () => {
+      const card = track.querySelector<HTMLElement>("[data-slider-card]");
+      if (!card) {
+        return 0;
       }
+
+      return card.offsetWidth + getGap();
+    };
+
+    const applyCardLayout = () => {
+      const visibleCards = getVisibleCards();
+      const gap = getGap();
+      const innerWidth = viewport.clientWidth;
+      const cardWidth = Math.floor((innerWidth - (visibleCards - 1) * gap) / visibleCards);
+
+      viewport.style.setProperty("--slider-card-width", `${Math.max(cardWidth, 0)}px`);
+    };
+
+    const measure = () => {
+      applyCardLayout();
+
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const step = getCardStep();
+        setWidth = step * itemCount;
+
+        if (setWidth <= 0) {
+          return;
+        }
+
+        if (!hasInitializedRef.current) {
+          viewport.scrollLeft = setWidth;
+          hasInitializedRef.current = true;
+          return;
+        }
+
+        if (isDraggingRef.current) {
+          return;
+        }
+
+        const copyIndex = Math.max(1, Math.round(viewport.scrollLeft / setWidth));
+        const offset = viewport.scrollLeft % setWidth;
+        viewport.scrollLeft = copyIndex * setWidth + offset;
+      });
+    };
+
+    const snapToNearest = () => {
+      const step = getCardStep();
+      if (step <= 0) {
+        return;
+      }
+
+      const target = Math.round(viewport.scrollLeft / step) * step;
+      viewport.scrollTo({ left: target, behavior: "smooth" });
     };
 
     const normalizeScroll = () => {
@@ -89,12 +147,17 @@ export function useDestinationSlider(itemCount: number) {
       }
 
       normalizeScroll();
+      snapToNearest();
     };
 
     measure();
 
     const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(viewport);
     resizeObserver.observe(track);
+
+    const desktopMedia = window.matchMedia(DESKTOP_QUERY);
+    desktopMedia.addEventListener("change", measure);
 
     viewport.addEventListener("scroll", onScroll, { passive: true });
     viewport.addEventListener("pointerdown", onPointerDown);
@@ -106,12 +169,14 @@ export function useDestinationSlider(itemCount: number) {
     return () => {
       cancelAnimationFrame(rafId);
       resizeObserver.disconnect();
+      desktopMedia.removeEventListener("change", measure);
       viewport.removeEventListener("scroll", onScroll);
       viewport.removeEventListener("pointerdown", onPointerDown);
       viewport.removeEventListener("pointermove", onPointerMove);
       viewport.removeEventListener("pointerup", endDrag);
       viewport.removeEventListener("pointercancel", endDrag);
       viewport.removeEventListener("pointerleave", endDrag);
+      viewport.style.removeProperty("--slider-card-width");
     };
   }, [itemCount]);
 
