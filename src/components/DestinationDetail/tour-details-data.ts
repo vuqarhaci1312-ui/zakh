@@ -13,6 +13,7 @@ export type TourDetail = {
   /** Short line shown on the tour card in the country page. */
   excerpt: string;
   image: string;
+  gallery?: string[];
   meta: TourMetaItem[];
   /** Economy / VIP transport package notes. */
   packages?: string[];

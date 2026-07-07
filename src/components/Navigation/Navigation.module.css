@@ -332,7 +332,47 @@
   flex: 1 1 50%;
   align-items: center;
   justify-content: flex-end;
-  gap: 4px;
+  gap: 8px;
+}
+
+.b2bLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.b2bLinkOverlay:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.b2bLinkLight {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.92);
+  color: #09090b;
+  box-shadow: var(--nav-card-shadow);
+}
+
+.b2bLinkLight:hover {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.menuActions {
+  margin-top: 1rem;
 }
 
 .iconButton {

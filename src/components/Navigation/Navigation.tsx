@@ -226,6 +226,33 @@ function PillDropdown({
   );
 }
 
+const B2B_URL = "https://b2b.zakher.travel/";
+
+function B2bLink({
+  overlayMode,
+  className,
+  onClick,
+}: {
+  overlayMode?: boolean;
+  className?: string;
+  onClick?: () => void;
+}) {
+  const t = useTranslations();
+
+  return (
+    <a
+      href={B2B_URL}
+      className={`${styles.b2bLink} ${overlayMode ? styles.b2bLinkOverlay : styles.b2bLinkLight} ${className ?? ""}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={onClick}
+      aria-label={t("nav.b2b", "B2B")}
+    >
+      B2B
+    </a>
+  );
+}
+
 function DesktopHeader({
   pathname,
   overlayMode,
@@ -294,6 +321,7 @@ function DesktopHeader({
             </div>
 
             <div className={styles.right}>
+              <B2bLink overlayMode={overlayMode} />
               <LanguageSwitcher variant="desktop" overlayMode={overlayMode} />
             </div>
           </div>
@@ -377,6 +405,10 @@ export default function Navigation() {
             </li>
           ))}
         </ul>
+
+        <div className={styles.menuActions}>
+          <B2bLink onClick={closeMobileMenu} />
+        </div>
 
         <LanguageSwitcher
           variant="mobile"

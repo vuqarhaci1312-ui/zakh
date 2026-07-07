@@ -60,6 +60,7 @@ export default async function TourPage({ params }: PageProps) {
       <TourDetailView
         countrySlug={slug}
         countryName={country.name}
+        countryHeroImage={country.heroImage}
         tour={detail}
         tourIndex={tourIndex}
         otherTours={otherTours}

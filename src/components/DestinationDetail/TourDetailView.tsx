@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
 import { tourKey } from "@/lib/i18n/content-translators";
+import { getTourGalleryImages } from "./get-tour-gallery";
 import type { TourDetail } from "./tour-details-data";
+import TourGallery from "./TourGallery";
 import { useDestinationDetailAnimation } from "./useDestinationDetailAnimation";
 
 function ClockIcon() {
@@ -68,6 +70,7 @@ function CrossIcon() {
 export type TourDetailViewProps = {
   countrySlug: string;
   countryName: string;
+  countryHeroImage: string;
   tour: TourDetail;
   tourIndex: number;
   otherTours: {
@@ -82,6 +85,7 @@ export type TourDetailViewProps = {
 export default function TourDetailView({
   countrySlug,
   countryName,
+  countryHeroImage,
   tour,
   tourIndex,
   otherTours,
@@ -92,6 +96,17 @@ export default function TourDetailView({
   useDestinationDetailAnimation(rootRef);
 
   const titleForAlt = t(`${prefix}.title`, tour.title);
+  const galleryImages = useMemo(
+    () =>
+      getTourGalleryImages(tour.image, {
+        gallery: [
+          ...(tour.gallery ?? []),
+          ...otherTours.slice(0, 4).map((item) => item.image),
+        ],
+        countryHero: countryHeroImage,
+      }),
+    [countryHeroImage, otherTours, tour.gallery, tour.image],
+  );
 
   return (
     <div ref={rootRef} className="destination-detail-root">
@@ -100,23 +115,7 @@ export default function TourDetailView({
           <div className="w-layout-blockcontainer container-large w-container">
             <div className="w-layout-grid grid_resort">
               <div className="content_resort">
-                <div className="wrap_image-resort" data-detail-reveal>
-                  <div className="inner_image-resort">
-                    <div className="master_label w-variant-84e91bde-75c3-dd4c-a083-7846b4ae6170">
-                      <div className="label-small">{countryName}</div>
-                    </div>
-                  </div>
-                  <div className="image_resort">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={tour.image}
-                      loading="eager"
-                      alt={titleForAlt}
-                      className="image_cover is-parallax"
-                      data-detail-parallax
-                    />
-                  </div>
-                </div>
+                <TourGallery images={galleryImages} label={countryName} alt={titleForAlt} />
 
                 <div className="wrap_text-resort" data-detail-reveal>
                   <T

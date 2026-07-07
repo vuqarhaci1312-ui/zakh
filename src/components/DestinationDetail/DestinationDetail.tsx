@@ -8,7 +8,8 @@ import { countryKey, generalFaqKey, tourKey } from "@/lib/i18n/content-translato
 import { COUNTRY_TOURS } from "./country-tours-data";
 import type { DestinationDetailData } from "./destination-detail-data";
 import FaqAccordion from "./FaqAccordion";
-import GallerySlider from "./GallerySlider";
+import { uniqueImages } from "./get-tour-gallery";
+import TourGallery from "./TourGallery";
 import { useDestinationDetailAnimation } from "./useDestinationDetailAnimation";
 
 function StarIcon() {
@@ -95,6 +96,11 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
     [data.faqs, effectiveCountryIndex, hasTours],
   );
 
+  const galleryImages = useMemo(
+    () => uniqueImages([data.heroImage, ...data.gallerySlides, ...data.galleryThumbs]),
+    [data.gallerySlides, data.galleryThumbs, data.heroImage],
+  );
+
   return (
     <div ref={rootRef} className="destination-detail-root">
       <section className="section_hero-resort">
@@ -102,40 +108,11 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
           <div className="w-layout-blockcontainer container-large w-container">
             <div className="w-layout-grid grid_resort">
               <div className="content_resort">
-                <div className="wrap_image-resort" data-detail-reveal>
-                  <div className="inner_image-resort">
-                    <div className="master_label w-variant-84e91bde-75c3-dd4c-a083-7846b4ae6170">
-                      <div className="label-small">
-                        <T k="ui.tourPackage" fallback={data.tag} />
-                      </div>
-                    </div>
-                    <div className="wrap_small-gallery">
-                      <div className="wrap_lightbox-resort">
-                        {data.galleryThumbs.map((thumb) => (
-                          <a
-                            key={thumb}
-                            href={thumb}
-                            className="lightbox_resort w-inline-block"
-                            data-detail-thumb
-                          >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={thumb} loading="lazy" alt="" className="image_cover" />
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="image_resort">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={data.heroImage}
-                      loading="lazy"
-                      alt=""
-                      className="image_cover is-parallax"
-                      data-detail-parallax
-                    />
-                  </div>
-                </div>
+                <TourGallery
+                  images={galleryImages}
+                  label={t("ui.tourPackage", data.tag)}
+                  alt={t(countryKey(effectiveCountryIndex, "name"), countryNameFallback)}
+                />
 
                 <div className="wrap_text-resort" data-detail-reveal>
                   <h1 className="heading-style-h3">
@@ -227,16 +204,6 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                       />
                     </div>
                   </div>
-                </div>
-
-                <div className="resort_amenities" data-detail-reveal>
-                  <T
-                    k="ui.gallery"
-                    fallback="Gallery"
-                    as="div"
-                    className="text-size-large text_body-bold"
-                  />
-                  <GallerySlider images={data.gallerySlides} />
                 </div>
 
                 <div className="resort_amenities" data-detail-reveal>

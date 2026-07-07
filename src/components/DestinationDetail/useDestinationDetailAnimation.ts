@@ -91,6 +91,10 @@ export function useDestinationDetailAnimation(
       }
 
       gsap.utils.toArray<HTMLElement>(PARALLAX_SELECTOR, root).forEach((image) => {
+        if (image.closest(".destination-detail-root")) {
+          return;
+        }
+
         const container =
           image.closest(".wrap_image-resort") ??
           image.closest(".lightbox_resort-gallery") ??
