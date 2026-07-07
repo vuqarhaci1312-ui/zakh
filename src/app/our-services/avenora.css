@@ -7,6 +7,15 @@
   text-rendering: optimizeLegibility;
 }
 
+.avenora-page {
+  position: relative;
+  z-index: 2;
+}
+
+.avenora-page .page-wrapper {
+  overflow: visible;
+}
+
 .avenora-page .service-main {
   display: flex;
   flex-direction: column;
@@ -15,6 +24,25 @@
 
 .avenora-page .service-icon-wrapper {
   flex: none;
+}
+
+.avenora-page .service-image-wrapper {
+  max-width: 25.0625rem;
+  overflow: hidden;
+}
+
+.avenora-page .font-1-medium.pearl .text-gradient-orange {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.avenora-page .service-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 12.8125rem;
+  object-fit: cover;
+  object-position: center;
 }
 
 .avenora-page .service-content p,
@@ -40,6 +68,15 @@
 @media (max-width: 767px) {
   .avenora-page .section:first-child {
     padding-top: 3.5rem;
+  }
+
+  .avenora-page .service-image-wrapper {
+    max-width: 100%;
+  }
+
+  .avenora-page .service-image {
+    width: 100%;
+    max-width: 100%;
   }
 
   .avenora-page .space-8-small {

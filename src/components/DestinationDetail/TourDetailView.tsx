@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useMemo, useRef } from "react";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
-import { tourKey } from "@/lib/i18n/content-translators";
+import { countryKey, tourKey } from "@/lib/i18n/content-translators";
+import { COUNTRY_TOURS } from "./country-tours-data";
 import { getTourGalleryImages } from "./get-tour-gallery";
 import type { TourDetail } from "./tour-details-data";
 import TourGallery from "./TourGallery";
@@ -73,6 +74,7 @@ export type TourDetailViewProps = {
   countryHeroImage: string;
   tour: TourDetail;
   tourIndex: number;
+  backFrom?: string;
   otherTours: {
     slug: string;
     title: string;
@@ -88,11 +90,18 @@ export default function TourDetailView({
   countryHeroImage,
   tour,
   tourIndex,
+  backFrom,
   otherTours,
 }: TourDetailViewProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const t = useTranslations();
   const prefix = tourKey(countrySlug, tourIndex);
+  const countryIndex = COUNTRY_TOURS.findIndex((country) => country.slug === countrySlug);
+  const backQuery = backFrom ? `?from=${backFrom}` : "?from=tour-packages";
+  const backHref =
+    backFrom === "destination"
+      ? `/destinations/${countrySlug}#country-tours`
+      : `/tour-packages?country=${countrySlug}`;
   useDestinationDetailAnimation(rootRef);
 
   const titleForAlt = t(`${prefix}.title`, tour.title);
@@ -109,12 +118,30 @@ export default function TourDetailView({
   );
 
   return (
-    <div ref={rootRef} className="destination-detail-root">
+    <div ref={rootRef} className="destination-detail-root tour-detail-view">
       <section className="section_hero-resort">
         <div className="padding-global">
           <div className="w-layout-blockcontainer container-large w-container">
             <div className="w-layout-grid grid_resort">
               <div className="content_resort">
+                <Link href={backHref} className="tour-detail-back">
+                  <span aria-hidden="true">←</span>
+                  {countryIndex >= 0 ? (
+                    <>
+                      <T
+                        k={countryKey(countryIndex, "name")}
+                        fallback={countryName}
+                      />{" "}
+                      <T k="ui.toursAccent" fallback="Tours" />
+                    </>
+                  ) : (
+                    <>
+                      {countryName}{" "}
+                      <T k="ui.toursAccent" fallback="Tours" />
+                    </>
+                  )}
+                </Link>
+
                 <TourGallery images={galleryImages} label={countryName} alt={titleForAlt} />
 
                 <div className="wrap_text-resort" data-detail-reveal>
@@ -287,7 +314,7 @@ export default function TourDetailView({
                     return (
                       <Link
                         key={other.slug}
-                        href={`/destinations/${countrySlug}/${other.slug}`}
+                        href={`/destinations/${countrySlug}/${other.slug}${backQuery}`}
                         className="card_resort-v1 w-inline-block"
                         data-detail-related-card
                       >

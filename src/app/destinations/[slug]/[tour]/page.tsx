@@ -10,6 +10,7 @@ import TourDetailView from "@/components/DestinationDetail/TourDetailView";
 
 type PageProps = {
   params: Promise<{ slug: string; tour: string }>;
+  searchParams: Promise<{ from?: string }>;
 };
 
 export function generateStaticParams() {
@@ -32,8 +33,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function TourPage({ params }: PageProps) {
+export default async function TourPage({ params, searchParams }: PageProps) {
   const { slug, tour } = await params;
+  const { from } = await searchParams;
   const country = getCountryTour(slug);
   const detail = getTourDetail(slug, tour);
 
@@ -64,6 +66,7 @@ export default async function TourPage({ params }: PageProps) {
         tour={detail}
         tourIndex={tourIndex}
         otherTours={otherTours}
+        backFrom={from}
       />
     </main>
   );

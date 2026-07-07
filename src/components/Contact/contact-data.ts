@@ -1,16 +1,16 @@
 export const CONTACT_SECTION = {
   description:
-    "Get in touch with Zakher Travel in Baku or the UAE for tour packages, partnerships, and travel support.",
+    "Contact us for questions, reservations, or tailor-made tour offers. Our team is ready to assist you 24/7.",
 } as const;
 
 export const CONTACT_OFFICES = [
   {
     label: "Head Office",
-    address: "73 Huseyn Javid Ave, 16 floor, Baku 1073",
+    address: "73 Huseyn Javid Ave, 16 floor, Baku 1073, Azerbaijan",
   },
   {
     label: "UAE Office",
-    address: "SAIF Zone, Gate 3 building Q1-09. Office 103\\A, Sharjah",
+    address: "SAIF Zone, Gate 3 building Q1-09. Office 103\\A, Sharjah, UAE",
   },
 ] as const;
 

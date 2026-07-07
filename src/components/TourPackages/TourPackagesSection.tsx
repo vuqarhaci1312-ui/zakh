@@ -128,7 +128,10 @@ function TourCard({
 
   return (
     <article className={`${styles.tourCard}${compact ? ` ${styles.tourCardCompact}` : ""}`}>
-      <Link href={`/destinations/${countrySlug}/${tour.slug}`} className={styles.tourCardLink}>
+      <Link
+        href={`/destinations/${countrySlug}/${tour.slug}?from=tour-packages`}
+        className={styles.tourCardLink}
+      >
         <div className={styles.tourImageWrap}>
           <Image
             src={tour.image}

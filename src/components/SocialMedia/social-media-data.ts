@@ -52,7 +52,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     id: "telegram",
     label: "Telegram",
     title: "Join us on Telegram",
-    href: "https://t.me/",
+    href: "/social-media/telegram-qr.png",
   },
   {
     id: "youtube",
@@ -70,7 +70,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     id: "instagram",
     label: "Instagram",
     title: "Join us on Instagram",
-    href: "https://www.instagram.com/zakhertravel.az?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
+    href: "https://www.instagram.com/zakher.travel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
   },
   {
     id: "linkedin",

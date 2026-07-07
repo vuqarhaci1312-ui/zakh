@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Fragment, useEffect, useId, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   AboutTabIcon,
   CloseIcon,
@@ -145,10 +146,46 @@ function PillDropdown({
   gradient?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const [menuPosition, setMenuPosition] = useState<{ top: number; left: number } | null>(null);
+  const [mounted, setMounted] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const closeTimerRef = useRef<number | null>(null);
   const menuId = useId();
   const active = isDropdownActive(pathname, href, subLinks);
   const className = `${styles.pillLink} ${styles.pillDropdownTrigger} ${gradient ? "text-gradient-orange" : ""} ${active ? styles.pillLinkActive : ""}`;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const updateMenuPosition = useCallback(() => {
+    const root = rootRef.current;
+    if (!root) {
+      return;
+    }
+
+    const rect = root.getBoundingClientRect();
+    setMenuPosition({
+      top: rect.bottom + 10,
+      left: rect.left + rect.width / 2,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    updateMenuPosition();
+    window.addEventListener("scroll", updateMenuPosition, true);
+    window.addEventListener("resize", updateMenuPosition);
+
+    return () => {
+      window.removeEventListener("scroll", updateMenuPosition, true);
+      window.removeEventListener("resize", updateMenuPosition);
+    };
+  }, [open, updateMenuPosition]);
 
   useEffect(() => {
     if (!open) {
@@ -156,9 +193,11 @@ function PillDropdown({
     }
 
     function handlePointerDown(event: MouseEvent) {
-      if (!rootRef.current?.contains(event.target as Node)) {
-        setOpen(false);
+      const target = event.target as Node;
+      if (rootRef.current?.contains(target) || menuRef.current?.contains(target)) {
+        return;
       }
+      setOpen(false);
     }
 
     function handleEscape(event: KeyboardEvent) {
@@ -176,12 +215,72 @@ function PillDropdown({
     };
   }, [open]);
 
+  const openMenu = useCallback(() => {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    updateMenuPosition();
+    setOpen(true);
+  }, [updateMenuPosition]);
+
+  const scheduleClose = useCallback(() => {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+    }
+    closeTimerRef.current = window.setTimeout(() => setOpen(false), 120);
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (closeTimerRef.current) {
+        window.clearTimeout(closeTimerRef.current);
+      }
+    },
+    [],
+  );
+
+  const menu =
+    open && mounted && menuPosition
+      ? createPortal(
+          <div
+            ref={menuRef}
+            className={styles.pillDropdownMenuWrapPortal}
+            style={{ top: menuPosition.top, left: menuPosition.left }}
+            onMouseEnter={openMenu}
+            onMouseLeave={scheduleClose}
+          >
+            <ul id={menuId} className={styles.pillDropdownMenu} role="menu">
+              {subLinks.map((child, childIndex) => {
+                const childActive = isActiveLink(pathname, child.href);
+                const childLabelKey = `${labelKey.replace(/\.label$/, "")}.children.${childIndex}.label`;
+
+                return (
+                  <li key={child.href} role="none">
+                    <Link
+                      href={child.href}
+                      className={`${styles.pillDropdownItem} ${childActive ? styles.pillDropdownItemActive : ""}`}
+                      role="menuitem"
+                      aria-current={childActive ? "page" : undefined}
+                      onClick={() => setOpen(false)}
+                    >
+                      <T k={childLabelKey} fallback={child.label} />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>,
+          document.body,
+        )
+      : null;
+
   return (
     <div
       ref={rootRef}
-      className={styles.pillDropdown}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      className={`${styles.pillDropdown} ${open ? styles.pillDropdownOpen : ""}`}
+      onMouseEnter={openMenu}
+      onMouseLeave={scheduleClose}
     >
       <Link
         href={href}
@@ -198,30 +297,7 @@ function PillDropdown({
         </span>
       </Link>
 
-      {open ? (
-        <div className={styles.pillDropdownMenuWrap}>
-          <ul id={menuId} className={styles.pillDropdownMenu} role="menu">
-            {subLinks.map((child, childIndex) => {
-            const childActive = isActiveLink(pathname, child.href);
-            const childLabelKey = `${labelKey.replace(/\.label$/, "")}.children.${childIndex}.label`;
-
-            return (
-              <li key={child.href} role="none">
-                <Link
-                  href={child.href}
-                  className={`${styles.pillDropdownItem} ${childActive ? styles.pillDropdownItemActive : ""}`}
-                  role="menuitem"
-                  aria-current={childActive ? "page" : undefined}
-                  onClick={() => setOpen(false)}
-                >
-                  <T k={childLabelKey} fallback={child.label} />
-                </Link>
-              </li>
-            );
-          })}
-          </ul>
-        </div>
-      ) : null}
+      {menu}
     </div>
   );
 }

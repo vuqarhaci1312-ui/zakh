@@ -1,5 +1,5 @@
 .detailSection {
-  padding-top: var(--_spacing---space-2-medium);
+  padding-top: 7rem;
 }
 
 .backLink {
@@ -22,10 +22,14 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--_spacing---space-2-medium);
-  align-items: center;
+  align-items: start;
 }
 
 @media (max-width: 991px) {
+  .detailSection {
+    padding-top: 3.5rem;
+  }
+
   .grid {
     grid-template-columns: 1fr;
   }
@@ -103,6 +107,28 @@
 
 .contactLink:hover {
   color: var(--_color---night);
+}
+
+.mapWrap {
+  margin-top: 0.85rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(3, 5, 5, 0.08);
+  background: #f4f5f6;
+  height: 11rem;
+}
+
+.mapLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mapIframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .cta {

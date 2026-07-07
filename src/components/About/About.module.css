@@ -220,6 +220,18 @@
   margin-top: 1.75rem;
 }
 
+.aboutDmcPartner {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+.aboutDmcPartnerImage {
+  width: min(100%, 32rem);
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.75rem;
+}
+
 /* Who We Are detail */
 .whoWeAreDetail {
   padding-top: 8rem;

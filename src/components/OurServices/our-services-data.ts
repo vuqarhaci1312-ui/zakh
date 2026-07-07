@@ -95,9 +95,7 @@ export const OUR_SERVICES: OurServiceItem[] = [
 
       "Honeymoon packages; private and shuttle transfers, tours; VIP welcoming; group packages; guide; air tickets; hotels booking; visas; travel insurance; off road tours; hunting tours; helicopter tours; golf tour package.",
 
-    image: `${AVENORA_CDN}/6a1a98e70e4017306fc13af5_image%2015%20(1).webp`,
-
-    imageSrcSet: `${AVENORA_CDN}/6a1a98e70e4017306fc13af5_image%2015%20(1)-p-500.webp 500w, ${AVENORA_CDN}/6a1a98e70e4017306fc13af5_image%2015%20(1)-p-800.webp 800w, ${AVENORA_CDN}/6a1a98e70e4017306fc13af5_image%2015%20(1)-p-1080.webp 1080w, ${AVENORA_CDN}/6a1a98e70e4017306fc13af5_image%2015%20(1).webp 1604w`,
+    image: "/services/tourist-services.png",
 
     alt: "Tourist travel services",
 
@@ -114,7 +112,7 @@ export const OUR_SERVICES: OurServiceItem[] = [
 
       "We provide assistance in a range of real estate services in Azerbaijan, starting from selling and renting private and commercial real estate, and providing legal advice with help of lawyers accredited by embassies.",
 
-    image: `${AVENORA_CDN}/6a1c3d6981c60eedf1b87071_image%20156.webp`,
+    image: "/services/real-estate-services.png",
 
     alt: "Real estate services in Azerbaijan",
 
@@ -133,7 +131,7 @@ export const OUR_SERVICES: OurServiceItem[] = [
 
       "We offer therapeutic, cosmetic and natural services, as we offer complete treatment trip programs that include transportation, accommodation, arranging appointments and reservations with the best doctors and clinics.",
 
-    image: `${AVENORA_CDN}/6a1c3d67e8d9bae930c25080_image%20157.webp`,
+    image: "/services/medical-services.png",
 
     alt: "Medical travel services",
 
@@ -151,9 +149,7 @@ export const OUR_SERVICES: OurServiceItem[] = [
 
       "Services for organizing various private, public, and official events.",
 
-    image: `${AVENORA_CDN}/6a2122d55f2930f34b4cbda7_Lone%20Trekker%20in%20the%20Majestic%20Mountains.webp`,
-
-    imageSrcSet: `${AVENORA_CDN}/6a2122d55f2930f34b4cbda7_Lone%20Trekker%20in%20the%20Majestic%20Mountains-p-500.webp 500w, ${AVENORA_CDN}/6a2122d55f2930f34b4cbda7_Lone%20Trekker%20in%20the%20Majestic%20Mountains-p-800.webp 800w, ${AVENORA_CDN}/6a2122d55f2930f34b4cbda7_Lone%20Trekker%20in%20the%20Majestic%20Mountains-p-1080.webp 1080w, ${AVENORA_CDN}/6a2122d55f2930f34b4cbda7_Lone%20Trekker%20in%20the%20Majestic%20Mountains.webp 1200w`,
+    image: "/services/mice-services.png",
 
     alt: "Event and conference travel services",
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter_Tight, Playfair_Display } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
 import Providers from "@/components/Providers";
+import WhatsAppFloatButton from "@/components/WhatsAppFloat/WhatsAppFloatButton";
 import "./globals.css";
 
 const interTight = Inter_Tight({
@@ -43,6 +44,7 @@ export default function RootLayout({
         <Providers>
           {children}
           <Footer />
+          <WhatsAppFloatButton />
         </Providers>
       </body>
     </html>

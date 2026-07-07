@@ -4,6 +4,7 @@ export type BranchContact = {
   phones?: string[];
   email?: string;
   website?: string;
+  mapLink?: string;
 };
 
 export type BranchDetail = {
@@ -189,6 +190,22 @@ export const BRANCH_DETAILS: BranchDetail[] = [
       website: "zakher.travel",
     },
     image: "/branches/details/ukraine.jpg",
+  },
+  {
+    slug: "saudi-arabia",
+    title: "Saudi Arabia",
+    description: [
+      "Saudi Arabia, a land of deep heritage and rapid transformation, stands at the heart of the Arabian Peninsula. From Riyadh’s modern business districts to Jeddah’s Red Sea coastline and the Kingdom’s historic sites, the country offers a compelling blend of tradition, hospitality, and innovation.",
+      "Through our Saudi Arabia branch, Zakher Travel supports international partners with destination management, MICE programs, group travel, and luxury itineraries across the Kingdom — backed by local expertise and reliable on-the-ground coordination.",
+    ],
+    contact: {
+      locationLabel: "Riyadh, Saudi Arabia",
+      address: "Riyadh, Saudi Arabia",
+      email: "ksa@zakher.travel",
+      website: "zakher.travel",
+      mapLink: "https://maps.app.goo.gl/BGmg7r576opqB5aT6?g_st=ic",
+    },
+    image: "/branches/details/saudi-arabia.png",
   },
 ];
 

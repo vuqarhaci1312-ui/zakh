@@ -7,9 +7,6 @@ import WeMembersOf from "@/components/WeMembersOf/WeMembersOf";
 const WhyChooseUsFeatures = dynamic(
   () => import("@/components/WhyChooseUsFeatures/WhyChooseUsFeatures"),
 );
-const ExploreDestinations = dynamic(
-  () => import("@/components/ExploreDestinations/ExploreDestinations"),
-);
 const RelatedPackages = dynamic(() => import("@/components/RelatedPackages/RelatedPackages"));
 const CustomerReviews = dynamic(() => import("@/components/CustomerReviews/CustomerReviews"));
 // Globe section disabled for now — restore: import CheckFlightsGlobe and add <CheckFlightsGlobe /> below CustomerReviews
@@ -23,7 +20,6 @@ export default function Home() {
       <WhyChooseUsFeatures />
       <WhyChooseUs />
       <WeMembersOf />
-      <ExploreDestinations />
       <RelatedPackages />
       <CustomerReviews />
     </main>

@@ -40,16 +40,13 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { href: "/about", label: "About Us" },
       { href: "/our-branches", label: "Our Branches" },
+      { href: "/our-events", label: "Our Events" },
       { href: "/contact-us", label: "Contact Us" },
     ],
   },
   {
-    title: "Our Menu",
+    title: "Services",
     links: [
-      {
-        href: "/our-events",
-        label: "Our Events",
-      },
       { href: "/tour-packages", label: "Tour Packages" },
       { href: "/our-services", label: "Services" },
       { href: "/our-services", label: "Our Brochures" },
@@ -71,7 +68,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: "instagram",
         label: "Instagram",
-        href: "https://www.instagram.com/zakhertravel.az?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
+        href: "https://www.instagram.com/zakher.travel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
       },
       {
         id: "snapchat",
@@ -91,7 +88,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: "telegram",
         label: "Telegram",
-        href: "https://t.me/",
+        href: "/social-media/telegram-qr.png",
       },
       {
         id: "wechat",

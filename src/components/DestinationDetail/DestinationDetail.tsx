@@ -222,7 +222,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
       </section>
 
       {data.tours.length > 0 && (
-        <section className="section_more-resorts">
+        <section className="section_more-resorts" id="country-tours">
           <div className="padding-global">
             <div className="w-layout-blockcontainer container-large w-container">
               <div className="headline_more-resorts" data-detail-reveal>
@@ -240,7 +240,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                   {data.tours.map((tour, tourIndex) => (
                     <Link
                       key={tour.slug}
-                      href={`/destinations/${data.slug}/${tour.slug}`}
+                      href={`/destinations/${data.slug}/${tour.slug}?from=destination`}
                       className="card_resort-v1 w-inline-block"
                       data-detail-related-card
                     >

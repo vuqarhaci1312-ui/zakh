@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Dt } from "@/lib/i18n/use-data-translation";
+import CompanyProfileSlider from "./CompanyProfileSlider";
 import {
   WHO_WE_ARE_ASSETS,
   WHO_WE_ARE_BODY,
-  WHO_WE_ARE_EXHIBITIONS,
   WHO_WE_ARE_HERO,
 } from "./who-we-are-data";
 import styles from "./About.module.css";
@@ -53,60 +53,7 @@ export default function WhoWeAreDetailSection() {
           </div>
         </div>
 
-        <div className={styles.whoWeAreExhibitions}>
-          <h2 className={`${styles.h3Heading} ${styles.whoWeAreExhibitionsTitle}`}>
-            <Dt
-              k="about.WHO_WE_ARE_EXHIBITIONS.title"
-              fallback={WHO_WE_ARE_EXHIBITIONS.title}
-            />
-          </h2>
-          <p className={styles.paragraph}>
-            <Dt
-              k="about.WHO_WE_ARE_EXHIBITIONS.intro"
-              fallback={WHO_WE_ARE_EXHIBITIONS.intro}
-            />
-          </p>
-          <ul className={styles.whoWeAreExhibitionsList}>
-            {WHO_WE_ARE_EXHIBITIONS.items.map((item, index) => (
-              <li key={item.slice(0, 24)} className={styles.whoWeAreExhibitionsItem}>
-                <Dt
-                  k={`about.WHO_WE_ARE_EXHIBITIONS.items.${index}`}
-                  fallback={item}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className={styles.whoWeAreAssets}>
-          <div className={styles.whoWeAreQualityPolicy}>
-            <Image
-              src={WHO_WE_ARE_ASSETS.qualityPolicyImage}
-              alt=""
-              width={791}
-              height={1024}
-              className={styles.whoWeAreQualityImage}
-            />
-          </div>
-
-          <div className={styles.whoWeAreDownload}>
-            <p className={`${styles.paragraph} ${styles.whoWeAreDownloadLabel}`}>
-              <Dt
-                k="about.WHO_WE_ARE.profileLabel"
-                fallback={WHO_WE_ARE_ASSETS.companyProfileLabel}
-              />
-            </p>
-            <a
-              href={WHO_WE_ARE_ASSETS.companyProfilePdf}
-              className={styles.whoWeAreDownloadButton}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-            >
-              <Dt k="about.WHO_WE_ARE.downloadLabel" fallback={WHO_WE_ARE_ASSETS.downloadLabel} />
-            </a>
-          </div>
-        </div>
+        <CompanyProfileSlider />
       </div>
     </section>
   );

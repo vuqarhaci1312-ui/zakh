@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import AboutHero from "@/components/About/AboutHero";
 import AboutIntro from "@/components/About/AboutIntro";
+import AboutDmcPartner from "@/components/About/AboutDmcPartner";
 import AboutMembers from "@/components/About/AboutMembers";
 import AboutCharity from "@/components/About/AboutCharity";
 import AboutCertificates from "@/components/About/AboutCertificates";
@@ -20,6 +21,7 @@ export default function AboutPage() {
       <main className={styles.aboutPage}>
         <AboutHero />
         <AboutIntro />
+        <AboutDmcPartner />
         <AboutMembers />
         <AboutCharity />
         <AboutCertificates />

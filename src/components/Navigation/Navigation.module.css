@@ -10,7 +10,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 50;
+  z-index: 100;
   display: none;
   width: 100%;
   pointer-events: none;
@@ -40,7 +40,7 @@
 .stickyShell {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
   display: none;
   width: 100%;
   background: rgba(255, 255, 255, 0.78);
@@ -178,6 +178,7 @@
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  overflow: visible;
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
@@ -238,6 +239,10 @@
   align-items: center;
 }
 
+.pillDropdownOpen {
+  z-index: 120;
+}
+
 .pillDropdownTrigger {
   display: inline-flex;
   align-items: center;
@@ -253,8 +258,15 @@
   position: absolute;
   top: 100%;
   left: 50%;
-  z-index: 40;
+  z-index: 130;
   padding-top: 10px;
+  transform: translateX(-50%);
+}
+
+.pillDropdownMenuWrapPortal {
+  position: fixed;
+  z-index: 300;
+  padding-top: 8px;
   transform: translateX(-50%);
 }
 
@@ -262,7 +274,7 @@
   position: relative;
   top: auto;
   left: auto;
-  z-index: 40;
+  z-index: 130;
   min-width: 200px;
   margin: 0;
   padding: 6px;
@@ -618,7 +630,7 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  z-index: 30;
+  z-index: 130;
   min-width: 180px;
   margin: 0;
   padding: 6px;

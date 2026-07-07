@@ -226,7 +226,6 @@ async function loadData() {
         return {
           ...about,
           WHO_WE_ARE_BODY: whoWeAre.WHO_WE_ARE_BODY,
-          WHO_WE_ARE_EXHIBITIONS: whoWeAre.WHO_WE_ARE_EXHIBITIONS,
           WHO_WE_ARE: {
             profileLabel: whoWeAre.WHO_WE_ARE_ASSETS.companyProfileLabel,
             downloadLabel: whoWeAre.WHO_WE_ARE_ASSETS.downloadLabel,
@@ -374,6 +373,7 @@ async function loadData() {
     "ui.aboutIntro.titleBefore": "Who",
     "ui.aboutIntro.titleAccent": "We Are?",
     "ui.aboutIntro.imageAlt": "Zakher Travel team",
+    "ui.aboutDmcPartner.imageAlt": "Destination Management Company (DMC)",
     "ui.aboutHero.planeAlt": "White plane.",
     "ui.aboutFleet.titleBefore": "Our Tour",
     "ui.aboutFleet.titleAccent": "Packages",
@@ -392,6 +392,7 @@ async function loadData() {
     "ui.branchesHeading.before": "Our",
     "ui.branchesHeading.accent": "Branches",
     "ui.allBranches": "← All branches",
+    "ui.backToAbout": "← About Us",
     "ui.contactUs": "Contact Us",
     "ui.eventsHeading.before": "International travel exhibitions and",
     "ui.eventsHeading.accent": "roadshows",

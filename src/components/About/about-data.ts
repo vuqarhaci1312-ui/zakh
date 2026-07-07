@@ -13,6 +13,15 @@ export const ABOUT_INTRO = {
   image: "/about/about-who-we-are.png",
 } as const;
 
+export const DMC_PARTNER = {
+  image: "/about/dmc-partner.png",
+  title: "Why Choose Zakher as Your DMC Partner?",
+  paragraphs: [
+    "With extensive local expertise and a trusted network of partners across Azerbaijan, Türkiye, Kazakhstan, Kyrgyzstan, Uzbekistan, Georgia, Poland, Czech Republic, Russia, and the UAE, Zakher Travel delivers seamless destination management services tailored to the needs of international travel agencies, tour operators, corporate clients, and event organizers.",
+    "From MICE and incentive travel to luxury experiences, group tours, and corporate events, we provide end-to-end planning, reliable logistics, carefully selected suppliers, and on-the-ground operational support. Our regional presence enables us to create authentic, high-quality travel experiences while ensuring every journey is managed with professionalism, efficiency, and attention to detail.",
+  ],
+} as const;
+
 export const ABOUT_INTRO_BODY = [
   "Zakher Travel Group of Companies was established in 2016 and soon managed to make an outstanding achievement in the travel industry. Over the years, we have welcomed thousands of visitors from the GCC region and beyond, crafting exceptional travel experiences across a diverse range of destinations — including Azerbaijan, Türkiye, Poland, Georgia, Kazakhstan, Kyrgyzstan, Uzbekistan, Russia, the Czech Republic, Ukraine, and the UAE.",
   "Since our founding, we have expanded our presence by opening branches across several countries and building strong partnerships with more than 2,000 travel companies worldwide. Our team of over 50 experienced professionals specializes in designing tailor-made holidays and delivering high-quality travel services to meet the unique needs of every client.",

@@ -7,6 +7,15 @@
   text-rendering: optimizeLegibility;
 }
 
+.caladan-page {
+  position: relative;
+  z-index: 2;
+}
+
+.caladan-page .page-wrapper {
+  overflow: visible;
+}
+
 .caladan-page .button_submit-static .button_submit.w-button {
   cursor: pointer;
 }
@@ -101,4 +110,38 @@
 
 .caladan-page .destination-detail-root .image_resort-v1 img.image_cover.is-parallax {
   height: 100%;
+}
+
+.caladan-page .tour-detail-view .grid_resort {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+
+.caladan-page .tour-detail-view .content_resort {
+  width: 100%;
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+.caladan-page .tour-detail-view .section_more-resorts .headline_more-resorts,
+.caladan-page .tour-detail-view .section_more-resorts .resorts {
+  width: 100%;
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+.caladan-page .tour-detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+  color: var(--_🎨-color--tokens---tone--medium, rgba(255, 255, 255, 0.64));
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.caladan-page .tour-detail-back:hover {
+  color: var(--_🎨-color--tokens---tone--strong, #fff);
 }

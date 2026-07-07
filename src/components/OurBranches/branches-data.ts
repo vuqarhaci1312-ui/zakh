@@ -78,4 +78,10 @@ export const BRANCHES: BranchItem[] = [
     flag: "/branches/ukraine.jpg",
     slug: "ukraine",
   },
+  {
+    id: "saudi-arabia",
+    name: "Saudi Arabia",
+    flag: "/branches/saudi-arabia.png",
+    slug: "saudi-arabia",
+  },
 ];

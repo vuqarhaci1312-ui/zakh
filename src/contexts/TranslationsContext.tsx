@@ -35,6 +35,7 @@ const STATIC_CONTENT_PREFIXES = [
   "contact.",
   "brochures.BROCHURES.",
   "about.WHO_WE_ARE.",
+  "about.DMC_PARTNER.",
   "packages.RELATED_PACKAGES.",
   "packages.RELATED_PACKAGES_SECTION.",
   "reviews.CUSTOMER_REVIEWS_SECTION.",

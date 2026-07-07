@@ -14,20 +14,24 @@ function ExperienceTitle({
   title: string;
   titleAccent?: string;
 }) {
-  if (!titleAccent || !title.includes(titleAccent)) {
-    return <Dt k={`services.TRAVEL_EXPERIENCES.${index}.title`} fallback={title} />;
+  const dt = useDt();
+  const translatedTitle = dt(`services.TRAVEL_EXPERIENCES.${index}.title`, title);
+  const translatedAccent = titleAccent
+    ? dt(`services.TRAVEL_EXPERIENCES.${index}.titleAccent`, titleAccent)
+    : undefined;
+
+  if (!translatedAccent || !translatedTitle.includes(translatedAccent)) {
+    return <>{translatedTitle}</>;
   }
 
-  const accentIndex = title.indexOf(titleAccent);
-  const before = title.slice(0, accentIndex);
-  const after = title.slice(accentIndex + titleAccent.length);
+  const accentIndex = translatedTitle.indexOf(translatedAccent);
+  const before = translatedTitle.slice(0, accentIndex);
+  const after = translatedTitle.slice(accentIndex + translatedAccent.length);
 
   return (
     <>
       {before}
-      <span className="text-gradient-orange">
-        <Dt k={`services.TRAVEL_EXPERIENCES.${index}.titleAccent`} fallback={titleAccent} />
-      </span>
+      <span className="text-gradient-orange">{translatedAccent}</span>
       {after}
     </>
   );

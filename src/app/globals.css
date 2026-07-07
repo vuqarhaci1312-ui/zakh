@@ -18,6 +18,11 @@ body {
   overflow-x: clip;
 }
 
+main {
+  position: relative;
+  z-index: 2;
+}
+
 a {
   color: inherit;
 }

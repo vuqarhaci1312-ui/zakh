@@ -15,20 +15,40 @@ function ServiceTitle({
   title: string;
   titleAccent?: string;
 }) {
-  if (!titleAccent || !title.includes(titleAccent)) {
-    return <Dt k={`services.OUR_SERVICES.${index}.title`} fallback={title} />;
+  const dt = useDt();
+  const translatedTitle = dt(`services.OUR_SERVICES.${index}.title`, title);
+  const titleBefore = dt(`services.OUR_SERVICES.${index}.titleBefore`, "");
+  const translatedAccent = titleAccent
+    ? dt(`services.OUR_SERVICES.${index}.titleAccent`, titleAccent)
+    : undefined;
+
+  if (titleBefore) {
+    const accentText = translatedTitle.startsWith(titleBefore)
+      ? translatedTitle.slice(titleBefore.length)
+      : translatedAccent ?? "";
+
+    return (
+      <>
+        {titleBefore}
+        {accentText ? (
+          <span className="text-gradient-orange">{accentText}</span>
+        ) : null}
+      </>
+    );
   }
 
-  const accentIndex = title.indexOf(titleAccent);
-  const before = title.slice(0, accentIndex);
-  const after = title.slice(accentIndex + titleAccent.length);
+  if (!translatedAccent || !translatedTitle.includes(translatedAccent)) {
+    return <>{translatedTitle}</>;
+  }
+
+  const accentIndex = translatedTitle.indexOf(translatedAccent);
+  const before = translatedTitle.slice(0, accentIndex);
+  const after = translatedTitle.slice(accentIndex + translatedAccent.length);
 
   return (
     <>
       {before}
-      <span className="text-gradient-orange">
-        <Dt k={`services.OUR_SERVICES.${index}.titleAccent`} fallback={titleAccent} />
-      </span>
+      <span className="text-gradient-orange">{translatedAccent}</span>
       {after}
     </>
   );

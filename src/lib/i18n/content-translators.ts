@@ -9,6 +9,11 @@ export function branchKey(branchIndex: number, ...parts: string[]) {
   return [`branches.details.${branchIndex}`, ...parts].join(".");
 }
 
+export function translateField(t: TranslateFn, key: string, fallback: string) {
+  const value = t(key, fallback);
+  return value.trim() ? value : fallback;
+}
+
 export function countryKey(countryIndex: number, ...parts: string[]) {
   return [`country.countries.${countryIndex}`, ...parts].join(".");
 }

@@ -5,9 +5,11 @@ import Link from "next/link";
 import { useRef } from "react";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
-import { branchKey } from "@/lib/i18n/content-translators";
+import { branchKey, translateField } from "@/lib/i18n/content-translators";
 import type { BranchDetail } from "./branch-details-data";
 import { BRANCH_DETAILS } from "./branch-details-data";
+import { getBranchMapQuery } from "./branch-map";
+import BranchMap from "./BranchMap";
 import styles from "./BranchDetail.module.css";
 import { useOurServicesAnimation } from "../OurServices/useOurServicesAnimation";
 
@@ -51,11 +53,10 @@ export default function BranchDetailSection({ branch }: { branch: BranchDetail }
   useOurServicesAnimation(sectionRef);
 
   const mailHref = branch.contact.email ? `mailto:${branch.contact.email}` : undefined;
-  const titleForAlt = t(branchKey(idx, "title"), branch.title);
+  const titleForAlt = translateField(t, branchKey(idx, "title"), branch.title);
 
   return (
     <section ref={sectionRef} className={`section ${styles.detailSection}`}>
-      <div className="space-8-small" />
       <div className="w-layout-blockcontainer container w-container">
         <div className="service-wrapper">
           <Link href="/our-branches" className={styles.backLink} data-services-reveal>
@@ -65,40 +66,34 @@ export default function BranchDetailSection({ branch }: { branch: BranchDetail }
           <div className={styles.grid} data-experience-card>
             <div className={styles.content}>
               <h1 className={styles.title}>
-                <T
-                  k={branchKey(idx, "title")}
-                  fallback={branch.title}
-                  as="span"
-                  className="text-gradient-orange"
-                />
+                <span className="text-gradient-orange">{titleForAlt}</span>
               </h1>
 
               {branch.description.map((paragraph, index) => (
-                <T
-                  key={paragraph.slice(0, 32)}
-                  k={branchKey(idx, "description", String(index))}
-                  fallback={paragraph}
-                  as="p"
-                  className={styles.description}
-                />
+                <p key={paragraph.slice(0, 32)} className={styles.description}>
+                  {translateField(t, branchKey(idx, "description", String(index)), paragraph)}
+                </p>
               ))}
 
               <div className={styles.contactCard}>
-                <T
-                  k={branchKey(idx, "contact", "locationLabel")}
-                  fallback={branch.contact.locationLabel}
-                  as="h2"
-                  className={styles.contactTitle}
-                />
+                <h2 className={styles.contactTitle}>
+                  {translateField(
+                    t,
+                    branchKey(idx, "contact", "locationLabel"),
+                    branch.contact.locationLabel,
+                  )}
+                </h2>
                 <ul className={styles.contactList}>
                   {branch.contact.address ? (
                     <li className={styles.contactItem}>
                       <LocationIcon />
-                      <T
-                        k={branchKey(idx, "contact", "address")}
-                        fallback={branch.contact.address}
-                        as="span"
-                      />
+                      <span>
+                        {translateField(
+                          t,
+                          branchKey(idx, "contact", "address"),
+                          branch.contact.address,
+                        )}
+                      </span>
                     </li>
                   ) : null}
                   {branch.contact.phones?.map((phone) => (
@@ -131,6 +126,12 @@ export default function BranchDetailSection({ branch }: { branch: BranchDetail }
                     </li>
                   ) : null}
                 </ul>
+
+                <BranchMap
+                  query={getBranchMapQuery(branch.contact)}
+                  title={titleForAlt}
+                  mapLink={branch.contact.mapLink}
+                />
               </div>
 
               {mailHref ? (

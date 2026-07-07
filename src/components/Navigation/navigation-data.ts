@@ -20,9 +20,10 @@ export const NAV_PILL_LINKS: readonly NavPillLink[] = [
     href: "/about",
     label: "About Us",
     children: [
+      { href: "/about", label: "About Us" },
       { href: "/our-services", label: "Our Services" },
-      { href: "/our-events", label: "Our Events" },
       { href: "/our-branches", label: "Our Branches" },
+      { href: "/our-events", label: "Our Events" },
     ],
   },
   { href: "/tour-packages", label: "Tour Packages" },
