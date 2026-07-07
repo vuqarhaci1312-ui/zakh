@@ -129,15 +129,17 @@
   overflow-y: hidden;
   cursor: grab;
   touch-action: pan-x;
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
+  scroll-behavior: auto;
   scroll-padding-inline: 0;
   padding-inline: var(--carousel-gutter);
   box-sizing: border-box;
   container-type: inline-size;
-  will-change: transform, opacity;
+  will-change: auto;
   user-select: none;
 }
 
@@ -163,6 +165,7 @@
   width: var(--slider-card-width, var(--card-width));
   max-width: var(--slider-card-width, var(--card-width));
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .card {

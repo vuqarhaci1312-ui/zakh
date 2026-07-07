@@ -9,6 +9,10 @@ function getVisibleCards() {
   return window.matchMedia(DESKTOP_QUERY).matches ? 3 : 1;
 }
 
+function isMousePointer(event: PointerEvent) {
+  return event.pointerType === "mouse";
+}
+
 export function useDestinationSlider(itemCount: number) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -27,6 +31,7 @@ export function useDestinationSlider(itemCount: number) {
 
     let setWidth = 0;
     let rafId = 0;
+    let scrollEndTimer = 0;
 
     const getGap = () =>
       parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "0");
@@ -77,14 +82,21 @@ export function useDestinationSlider(itemCount: number) {
       });
     };
 
-    const snapToNearest = () => {
+    const snapToNearest = (smooth = false) => {
       const step = getCardStep();
       if (step <= 0) {
         return;
       }
 
       const target = Math.round(viewport.scrollLeft / step) * step;
-      viewport.scrollTo({ left: target, behavior: "smooth" });
+      const useSmooth = smooth && window.matchMedia(DESKTOP_QUERY).matches;
+
+      if (useSmooth) {
+        viewport.scrollTo({ left: target, behavior: "smooth" });
+        return;
+      }
+
+      viewport.scrollLeft = target;
     };
 
     const normalizeScroll = () => {
@@ -99,17 +111,39 @@ export function useDestinationSlider(itemCount: number) {
       }
     };
 
+    const settleScroll = (smooth = false) => {
+      normalizeScroll();
+      snapToNearest(smooth);
+    };
+
+    const scheduleSettle = (smooth = false) => {
+      window.clearTimeout(scrollEndTimer);
+      scrollEndTimer = window.setTimeout(() => {
+        if (!isDraggingRef.current) {
+          settleScroll(smooth);
+        }
+      }, 120);
+    };
+
     const onScroll = () => {
+      if (isDraggingRef.current || "onscrollend" in window) {
+        return;
+      }
+
+      scheduleSettle(false);
+    };
+
+    const onScrollEnd = () => {
       if (isDraggingRef.current) {
         return;
       }
 
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(normalizeScroll);
+      window.clearTimeout(scrollEndTimer);
+      settleScroll(false);
     };
 
     const onPointerDown = (event: PointerEvent) => {
-      if (event.pointerType === "mouse" && event.button !== 0) {
+      if (!isMousePointer(event) || event.button !== 0) {
         return;
       }
 
@@ -118,6 +152,7 @@ export function useDestinationSlider(itemCount: number) {
         return;
       }
 
+      window.clearTimeout(scrollEndTimer);
       isDraggingRef.current = true;
       dragStartXRef.current = event.clientX;
       scrollStartRef.current = viewport.scrollLeft;
@@ -126,7 +161,7 @@ export function useDestinationSlider(itemCount: number) {
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      if (!isDraggingRef.current) {
+      if (!isDraggingRef.current || !isMousePointer(event)) {
         return;
       }
 
@@ -146,8 +181,7 @@ export function useDestinationSlider(itemCount: number) {
         viewport.releasePointerCapture(event.pointerId);
       }
 
-      normalizeScroll();
-      snapToNearest();
+      settleScroll(true);
     };
 
     measure();
@@ -160,6 +194,7 @@ export function useDestinationSlider(itemCount: number) {
     desktopMedia.addEventListener("change", measure);
 
     viewport.addEventListener("scroll", onScroll, { passive: true });
+    viewport.addEventListener("scrollend", onScrollEnd, { passive: true });
     viewport.addEventListener("pointerdown", onPointerDown);
     viewport.addEventListener("pointermove", onPointerMove);
     viewport.addEventListener("pointerup", endDrag);
@@ -168,9 +203,11 @@ export function useDestinationSlider(itemCount: number) {
 
     return () => {
       cancelAnimationFrame(rafId);
+      window.clearTimeout(scrollEndTimer);
       resizeObserver.disconnect();
       desktopMedia.removeEventListener("change", measure);
       viewport.removeEventListener("scroll", onScroll);
+      viewport.removeEventListener("scrollend", onScrollEnd);
       viewport.removeEventListener("pointerdown", onPointerDown);
       viewport.removeEventListener("pointermove", onPointerMove);
       viewport.removeEventListener("pointerup", endDrag);

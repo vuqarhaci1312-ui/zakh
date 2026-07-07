@@ -2,6 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+function isMousePointer(event: PointerEvent) {
+  return event.pointerType === "mouse";
+}
+
 export function useWhyChooseUsCarousel(itemCount: number) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -75,7 +79,7 @@ export function useWhyChooseUsCarousel(itemCount: number) {
     };
 
     const onPointerDown = (event: PointerEvent) => {
-      if (event.pointerType === "mouse" && event.button !== 0) {
+      if (!isMousePointer(event) || event.button !== 0) {
         return;
       }
 
@@ -87,7 +91,7 @@ export function useWhyChooseUsCarousel(itemCount: number) {
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      if (!isDraggingRef.current) {
+      if (!isDraggingRef.current || !isMousePointer(event)) {
         return;
       }
 
