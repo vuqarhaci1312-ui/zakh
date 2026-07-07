@@ -88,8 +88,8 @@ export const BRANCH_DETAILS: BranchDetail[] = [
       "Rich traditions and colorful history make every visit unforgettable. Travelers enjoy its history, art, and ancient culture.",
     ],
     contact: {
-      locationLabel: "Uzbekistan",
-      address: "Uzbekistan",
+      locationLabel: "Tashkent, Uzbekistan",
+      address: "Ташкент, проспект Амира Темура, 25",
       phones: ["+998971119386"],
       email: "uzbekistan@zakher.travel",
       website: "zakher.travel",
@@ -136,8 +136,8 @@ export const BRANCH_DETAILS: BranchDetail[] = [
       "This balance between nature and urban heritage contributes to its cultural refinement and architectural harmony.",
     ],
     contact: {
-      locationLabel: "Czech Republic",
-      address: "Czech Republic",
+      locationLabel: "Prague, Czech Republic",
+      address: "Rybná 716/24, Staré Město, 110 00 Praha 1",
       phones: ["+48666362201"],
       email: "incoming@zakher.travel",
       website: "zakher.travel",

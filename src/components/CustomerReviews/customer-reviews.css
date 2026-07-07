@@ -12,6 +12,24 @@
   font-family: var(--font-family--inter-tight), "Inter Tight", sans-serif;
 }
 
+.avenora-customer-reviews .section-title-wrapper {
+  overflow: visible;
+}
+
+.avenora-customer-reviews .section-title-wrapper .max-width-38 {
+  max-width: 100%;
+}
+
+.avenora-customer-reviews #customer-reviews-title {
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 479px) {
+  .avenora-customer-reviews #customer-reviews-title {
+    white-space: normal;
+  }
+}
+
 .avenora-customer-reviews .customer-reviews-widget {
   width: 100%;
   min-height: 18rem;
