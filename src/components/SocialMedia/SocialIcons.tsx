@@ -64,11 +64,39 @@ export function LinkedInIcon({ className }: IconProps) {
   );
 }
 
-export function SnapchatIcon({ className }: IconProps) {
+export function SnapchatIcon({
+  className,
+  monochrome,
+  orangeLogo,
+}: IconProps & { monochrome?: boolean; orangeLogo?: boolean }) {
+  if (orangeLogo) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src="/social/snapchat-orange.png"
+        alt=""
+        aria-hidden="true"
+        className={className}
+      />
+    );
+  }
+
+  if (monochrome) {
+    return (
+      <svg className={className} viewBox="0 0 512 512" fill="currentColor" aria-hidden="true">
+        <path d="M496.926,466.6L377.937,325.174c-54.2-59.326-54.164-152.754,0-212.079c22.552-24.612,34.963-57.042,34.963-91.695C412.9,8.622,404.243,0,393.4,0H118.6c-10.843,0-19.5,8.622-19.5,19.4c0,34.653,12.411,67.083,34.963,91.695c54.164,59.325,54.164,152.754,0,212.079L15.074,466.6c-4.686,5.106-5.328,12.723-1.566,18.612c3.762,5.889,10.455,8.964,17.181,8.032l119.009-17.461c54.2,9.345,109.909,9.305,164.102,0l119.009,17.461c6.726,0.932,13.419-2.143,17.181-8.032C502.254,479.323,501.612,471.706,496.926,466.6z" />
+      </svg>
+    );
+  }
+
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.299 4.847l-.003.06c-.012.18-.022.345-.03.51.075.045.203.045.293.045.359-.008.767-.008 1.203-.008.414 0 .838.008 1.227.045.359.037.928.165 1.227.811.195.414.195.975.075 1.43-.165.675-.563 1.192-.989 1.56-.563.503-1.203.938-1.911 1.305-.563.308-1.192.563-1.86.75-.293.09-.608.165-.938.225-.075.195-.195.563-.293.938-.293 1.08-.608 2.175-.989 3.24-.293.825-.638 1.635-1.035 2.415-.293.563-.638 1.08-1.035 1.53-.563.638-1.305 1.08-2.175 1.305-.563 0-1.08-.075-1.56-.225-.563-.165-1.08-.413-1.56-.75-.45-.308-.825-.675-1.155-1.08-.293-.345-.563-.75-.825-1.155-.293-.45-.563-.938-.825-1.455-.263-.563-.488-1.155-.675-1.785-.188-.638-.338-1.305-.45-1.995-.075-.488-.12-.975-.135-1.455 0-.075-.015-.15-.015-.225-.33-.06-.645-.135-.938-.225-.668-.188-1.297-.443-1.86-.75-.708-.368-1.348-.803-1.911-1.305-.426-.368-.825-.885-.989-1.56-.12-.455-.12-1.016.075-1.43.3-.646.868-.774 1.227-.811.389-.037.813-.045 1.227-.045.436 0 .844 0 1.203.008.09 0 .218 0 .293-.045-.008-.165-.018-.33-.03-.51l-.003-.06c-.104-1.628-.23-3.654.299-4.847C7.853 1.069 11.216.793 12.206.793z" />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/social/snapchat.png"
+      alt=""
+      aria-hidden="true"
+      className={className}
+    />
   );
 }
 
@@ -95,7 +123,21 @@ const ICON_MAP = {
 
 export type SocialPlatformId = keyof typeof ICON_MAP;
 
-export function SocialIcon({ id, className }: { id: SocialPlatformId; className?: string }) {
+export function SocialIcon({
+  id,
+  className,
+  monochrome,
+  orangeLogo,
+}: {
+  id: SocialPlatformId;
+  className?: string;
+  monochrome?: boolean;
+  orangeLogo?: boolean;
+}) {
+  if (id === "snapchat") {
+    return <SnapchatIcon className={className} monochrome={monochrome} orangeLogo={orangeLogo} />;
+  }
+
   const Icon = ICON_MAP[id];
   return <Icon className={className} />;
 }

@@ -15,6 +15,7 @@ import { useOurServicesAnimation } from "./useOurServicesAnimation";
 const LANGUAGE_FILTERS = ["All", "EN", "AR", "RU", "DE", "Chinese", "EN/AR"] as const;
 
 type LanguageFilter = (typeof LANGUAGE_FILTERS)[number];
+type BrochureWithIndex = BrochureItem & { sourceIndex: number };
 
 function DownloadIcon() {
   return (
@@ -93,16 +94,17 @@ export default function BrochuresSection() {
     return () => mediaQuery.removeEventListener("change", syncViewport);
   }, []);
 
-  const sourceBrochures = useMemo<BrochureItem[]>(() => {
-    const raw =
+  const sourceBrochures = useMemo<BrochureWithIndex[]>(() => {
+    const raw: BrochureWithIndex[] =
       hasCms && cmsData?.items?.length
-        ? cmsData.items.map((item) => ({
+        ? cmsData.items.map((item, sourceIndex) => ({
             title: item.title,
             language: item.languageTag,
             image: item.imageUrl,
             file: item.fileUrl,
+            sourceIndex,
           }))
-        : [...BROCHURES];
+        : BROCHURES.map((item, sourceIndex) => ({ ...item, sourceIndex }));
 
     const seen = new Set<string>();
     return raw.filter((item) => {
@@ -114,10 +116,7 @@ export default function BrochuresSection() {
   }, [hasCms, cmsData]);
 
   const filteredBrochures = useMemo(
-    () =>
-      sourceBrochures.map((brochure, index) => ({ brochure, index })).filter(({ brochure }) =>
-        matchesLanguageFilter(brochure, activeFilter),
-      ),
+    () => sourceBrochures.filter((brochure) => matchesLanguageFilter(brochure, activeFilter)),
     [activeFilter, sourceBrochures],
   );
 
@@ -216,14 +215,14 @@ export default function BrochuresSection() {
               <Dt k="ui.noBrochuresForLanguage" fallback="No brochures for this language." />
             </p>
           ) : (
-            visibleBrochures.map(({ brochure, index }) => (
+            visibleBrochures.map((brochure) => (
               <a
-                key={`${brochure.file}-${index}`}
+                key={`${brochure.file}-${brochure.sourceIndex}`}
                 href={brochure.file}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.card}
-                aria-label={`${dt(`brochures.BROCHURES.${index}.title`, brochure.title)} (${dt(`brochures.BROCHURES.${index}.language`, brochure.language)})`}
+                aria-label={`${dt(`brochures.BROCHURES.${brochure.sourceIndex}.title`, brochure.title)} (${dt(`brochures.BROCHURES.${brochure.sourceIndex}.language`, brochure.language)})`}
               >
                 <div className={styles.thumbWrap}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -236,7 +235,14 @@ export default function BrochuresSection() {
                 </div>
                 <div className={styles.body}>
                   <p className={styles.cardTitle}>
-                    {hasCms ? brochure.title : <Dt k={`brochures.BROCHURES.${index}.title`} fallback={brochure.title} />}
+                    {hasCms ? (
+                      brochure.title
+                    ) : (
+                      <Dt
+                        k={`brochures.BROCHURES.${brochure.sourceIndex}.title`}
+                        fallback={brochure.title}
+                      />
+                    )}
                   </p>
                   <p className={styles.meta}>
                     <span className={styles.lang}>{brochure.language}</span>

@@ -115,6 +115,7 @@
   .mobileSocialIcon {
     width: 18px;
     height: 18px;
+    object-fit: contain;
   }
 
   .bottomRow {
@@ -262,6 +263,7 @@
   height: 18px;
   flex: none;
   color: #ff8c00;
+  object-fit: contain;
 }
 
 .socialLabel {

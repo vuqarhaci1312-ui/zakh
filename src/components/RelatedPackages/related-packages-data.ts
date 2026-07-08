@@ -41,21 +41,21 @@ export const RELATED_PACKAGES = [
     alt: "Azerbaijan tour package",
   },
   {
-    id: "ukraine-tour",
-    title: "Ukraine Tour",
+    id: "russia-tour",
+    title: "Russia Tour",
     description:
-      "Explore Ukraine's rich history, vibrant cities, and cultural heritage with expertly planned tours.",
-    href: "/destinations/ukraine",
-    image: "/related-packages/ukraine.png",
-    alt: "Ukraine tour package",
+      "Explore Russia's rich history, iconic cities, and cultural heritage with expertly planned tours.",
+    href: "/destinations/russia",
+    image: "/related-packages/russia.png",
+    alt: "Russia tour package",
   },
   {
-    id: "kazakhstan-uzbekistan-tour",
-    title: "1 Trip — 2 Countries (Kazakhstan & Uzbekistan)",
+    id: "kazakhstan-kyrgyzstan-tour",
+    title: "1 Trip — 2 Countries (Kazakhstan & Kyrgyzstan)",
     description:
-      "Kazakhstan and Uzbekistan — one seamless journey across two Central Asian gems.",
+      "Kazakhstan and Kyrgyzstan — one seamless journey across two Central Asian gems.",
     href: "/tour-packages",
     image: "/tours/1trip2count.png",
-    alt: "Kazakhstan and Uzbekistan tour package",
+    alt: "Kazakhstan and Kyrgyzstan tour package",
   },
 ] as const;

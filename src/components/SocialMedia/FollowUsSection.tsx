@@ -69,7 +69,13 @@ export default function FollowUsSection() {
                   <SocialIcon id={link.id} />
                 </div>
                 <span className={styles.socialLabel}>
-                  {hasCms ? link.label : <Dt k={`social.SOCIAL_LINKS.${index}.label`} fallback={link.label} />}
+                  {link.id === "x" ? (
+                    "X"
+                  ) : hasCms ? (
+                    link.label
+                  ) : (
+                    <Dt k={`social.SOCIAL_LINKS.${index}.label`} fallback={link.label} />
+                  )}
                 </span>
               </a>
             ))}

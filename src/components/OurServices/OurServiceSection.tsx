@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { OUR_SERVICES } from "./our-services-data";
-import ServiceIcon from "./ServiceIcon";
 import { useOurServicesAnimation } from "./useOurServicesAnimation";
 
 function ServiceTitle({
@@ -43,12 +42,20 @@ function ServiceTitle({
 
   const accentIndex = translatedTitle.indexOf(translatedAccent);
   const before = translatedTitle.slice(0, accentIndex);
-  const after = translatedTitle.slice(accentIndex + translatedAccent.length);
+  let accentEnd = accentIndex + translatedAccent.length;
+  if (
+    accentEnd < translatedTitle.length &&
+    translatedTitle.indexOf(" ", accentIndex) === -1
+  ) {
+    accentEnd = translatedTitle.length;
+  }
+  const accentText = translatedTitle.slice(accentIndex, accentEnd);
+  const after = translatedTitle.slice(accentEnd);
 
   return (
     <>
       {before}
-      <span className="text-gradient-orange">{translatedAccent}</span>
+      <span className="text-gradient-orange">{accentText}</span>
       {after}
     </>
   );
@@ -99,9 +106,6 @@ function ServiceCard({
             alt={dt(`services.OUR_SERVICES.${index}.alt`, service.alt)}
             className="service-image"
           />
-        </div>
-        <div className="service-icon-wrapper">
-          <ServiceIcon />
         </div>
       </div>
     </div>

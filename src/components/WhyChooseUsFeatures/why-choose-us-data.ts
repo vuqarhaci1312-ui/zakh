@@ -17,7 +17,7 @@ export const WHY_CHOOSE_US_CARDS: WhyChooseUsCard[] = [
     id: "management",
     title: "Management — 10 Tourist Destinations",
     description:
-      "Offering and managing 10 tourist destinations. Offline support (by call, by e-mail, by WhatsApp) 24/7.",
+      "We professionally manage and operate more than 10 carefully selected tourist destinations through our trusted B2B partner network. By collaborating with reliable local suppliers, hotels, transport providers, and guides, we ensure seamless travel experiences, competitive rates, and high-quality service. Our dedicated team provides 24/7 offline support via phone, e-mail, and WhatsApp, ensuring fast assistance before, during, and after every journey.",
   },
   {
     id: "b2b-platform",

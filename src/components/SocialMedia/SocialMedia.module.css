@@ -83,15 +83,16 @@
 }
 
 .socialIconWrap[data-platform="snapchat"] {
-  color: #000;
-  background-color: #fffc00;
+  background-color: transparent;
+  padding: 0;
 }
 
 .socialIconWrap[data-platform="tripadvisor"] {
   color: #00af87;
 }
 
-.socialIconWrap svg {
+.socialIconWrap svg,
+.socialIconWrap img {
   width: 1.25rem;
   height: 1.25rem;
 }
