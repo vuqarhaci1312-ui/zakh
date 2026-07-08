@@ -16,6 +16,7 @@ import {
   type TranslateFn,
   type TranslationDictionary,
 } from "@/lib/i18n/create-translator";
+import { fetchStaticDictionary } from "@/lib/i18n/load-static-dictionary.client";
 import type { Locale } from "@/lib/i18n/language-data";
 
 type TranslationsContextValue = {
@@ -27,64 +28,38 @@ type TranslationsContextValue = {
 
 const TranslationsContext = createContext<TranslationsContextValue | null>(null);
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
-const STATIC_CONTENT_PREFIXES = [
-  "stats.STAT_CARDS.",
-  "branches.",
-  "hero.",
-  "contact.",
-  "brochures.BROCHURES.",
-  "about.WHO_WE_ARE.",
-  "about.DMC_PARTNER.",
-  "packages.RELATED_PACKAGES.",
-  "packages.RELATED_PACKAGES_SECTION.",
-  "reviews.CUSTOMER_REVIEWS_SECTION.",
-  "nav.",
-  "reservation.",
-];
+const CMS_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
-function applyStaticContentOverrides(
-  merged: TranslationDictionary,
-  staticDict: TranslationDictionary,
-): TranslationDictionary {
-  const result = { ...merged };
+async function fetchApiDictionary(locale: Locale): Promise<TranslationDictionary> {
+  const res = await fetch(`${CMS_API_URL}/api/translations?locale=${locale}`, {
+    credentials: "include",
+    cache: "no-store",
+  });
 
-  for (const key of Object.keys(staticDict)) {
-    if (STATIC_CONTENT_PREFIXES.some((prefix) => key.startsWith(prefix))) {
-      result[key] = staticDict[key];
-    }
+  if (!res.ok) {
+    throw new Error(`Translation API error: ${res.status}`);
   }
 
-  return result;
+  const data = (await res.json()) as { translations: TranslationDictionary };
+  return data.translations;
 }
 
-async function fetchDictionary(locale: Locale): Promise<TranslationDictionary> {
-  let staticDict: TranslationDictionary = {};
-  try {
-    const staticRes = await fetch(`/i18n/${locale}.json`, { cache: "no-store" });
-    if (staticRes.ok) {
-      staticDict = (await staticRes.json()) as TranslationDictionary;
-    }
-  } catch {
-    /* static fallback optional */
+async function fetchDictionary(
+  locale: Locale,
+  includeApi: boolean,
+): Promise<TranslationDictionary> {
+  const staticDict = await fetchStaticDictionary(locale);
+
+  if (!includeApi) {
+    return staticDict;
   }
 
   try {
-    const res = await fetch(`${API_URL}/api/translations?locale=${locale}`, {
-      credentials: "include",
-      cache: "no-store",
-    });
-    if (res.ok) {
-      const data = (await res.json()) as { translations: TranslationDictionary };
-      const apiDict = data.translations;
-      // Static JSON wins conflicts to prevent stale API/DB data from overriding deployed translations.
-      return applyStaticContentOverrides({ ...apiDict, ...staticDict }, staticDict);
-    }
+    const apiDict = await fetchApiDictionary(locale);
+    return { ...apiDict, ...staticDict };
   } catch {
-    /* fallback below */
+    return staticDict;
   }
-
-  return staticDict;
 }
 
 export function TranslationsProvider({ children }: { children: ReactNode }) {
@@ -96,12 +71,12 @@ export function TranslationsProvider({ children }: { children: ReactNode }) {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const primary = await fetchDictionary(locale);
+      const primary = await fetchDictionary(locale, Boolean(editMode?.isEditMode));
       setDictionary(primary);
     } finally {
       setLoading(false);
     }
-  }, [locale]);
+  }, [locale, editMode?.isEditMode]);
 
   useEffect(() => {
     void load();
