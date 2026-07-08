@@ -2,6 +2,7 @@ import { unstable_cache } from "next/cache";
 import type { Locale } from "./language-data";
 import { createTranslator, type TranslateFn, type TranslationDictionary } from "./create-translator";
 import { loadStaticDictionaryFromDisk } from "./load-static-dictionary.server";
+import { mergeTranslationDictionaries } from "./merge-dictionaries";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
@@ -20,10 +21,11 @@ async function fetchDictionaryFromApi(locale: Locale): Promise<TranslationDictio
 
 async function loadDictionary(locale: Locale): Promise<TranslationDictionary> {
   const staticDict = loadStaticDictionaryFromDisk(locale);
+  const enDict = locale === "en" ? {} : loadStaticDictionaryFromDisk("en");
 
   try {
     const apiDict = await fetchDictionaryFromApi(locale);
-    return { ...apiDict, ...staticDict };
+    return mergeTranslationDictionaries(locale, apiDict, staticDict, enDict);
   } catch {
     return staticDict;
   }

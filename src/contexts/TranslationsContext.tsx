@@ -17,6 +17,7 @@ import {
   type TranslationDictionary,
 } from "@/lib/i18n/create-translator";
 import { fetchStaticDictionary } from "@/lib/i18n/load-static-dictionary.client";
+import { mergeTranslationDictionaries } from "@/lib/i18n/merge-dictionaries";
 import type { Locale } from "@/lib/i18n/language-data";
 
 type TranslationsContextValue = {
@@ -28,10 +29,8 @@ type TranslationsContextValue = {
 
 const TranslationsContext = createContext<TranslationsContextValue | null>(null);
 
-const CMS_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
-
 async function fetchApiDictionary(locale: Locale): Promise<TranslationDictionary> {
-  const res = await fetch(`${CMS_API_URL}/api/translations?locale=${locale}`, {
+  const res = await fetch(`/api/cms/api/translations?locale=${locale}`, {
     credentials: "include",
     cache: "no-store",
   });
@@ -44,19 +43,15 @@ async function fetchApiDictionary(locale: Locale): Promise<TranslationDictionary
   return data.translations;
 }
 
-async function fetchDictionary(
-  locale: Locale,
-  includeApi: boolean,
-): Promise<TranslationDictionary> {
-  const staticDict = await fetchStaticDictionary(locale);
-
-  if (!includeApi) {
-    return staticDict;
-  }
+async function fetchDictionary(locale: Locale): Promise<TranslationDictionary> {
+  const [staticDict, enDict] = await Promise.all([
+    fetchStaticDictionary(locale),
+    locale === "en" ? Promise.resolve({} as TranslationDictionary) : fetchStaticDictionary("en"),
+  ]);
 
   try {
     const apiDict = await fetchApiDictionary(locale);
-    return { ...apiDict, ...staticDict };
+    return mergeTranslationDictionaries(locale, apiDict, staticDict, enDict);
   } catch {
     return staticDict;
   }
@@ -71,12 +66,12 @@ export function TranslationsProvider({ children }: { children: ReactNode }) {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const primary = await fetchDictionary(locale, Boolean(editMode?.isEditMode));
+      const primary = await fetchDictionary(locale);
       setDictionary(primary);
     } finally {
       setLoading(false);
     }
-  }, [locale, editMode?.isEditMode]);
+  }, [locale]);
 
   useEffect(() => {
     void load();
