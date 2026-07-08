@@ -1,10 +1,8 @@
 /**
- * Brochure catalog carried over from the live Zakher Travel site
- * (test.zakher.travel/ourservices, "Our Brochures" section).
- * PDFs are served from the live site to avoid bundling ~150 MB of files.
+ * Brochure catalog PDFs served from /public/pdf on this site.
  */
 
-const PDF_BASE = "https://test.zakher.travel/pdf";
+const PDF_BASE = "/pdf";
 
 export const BROCHURES_SECTION = {
   badge: "Our Brochures",
