@@ -45,10 +45,7 @@ async function loadDictionary(locale: Locale): Promise<TranslationDictionary> {
 
   try {
     const apiDict = await fetchDictionaryFromApi(locale);
-    if (locale === "en" || locale === "ru" || locale === "ar") {
-      return { ...apiDict, ...staticDict };
-    }
-    return { ...staticDict, ...apiDict };
+    return { ...apiDict, ...staticDict };
   } catch {
     return staticDict;
   }

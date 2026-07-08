@@ -77,12 +77,8 @@ async function fetchDictionary(locale: Locale): Promise<TranslationDictionary> {
     if (res.ok) {
       const data = (await res.json()) as { translations: TranslationDictionary };
       const apiDict = data.translations;
-      // EN/RU: static file wins conflicts to prevent cross-locale bleed from stale API data.
-      // AZ and other locales: API/DB wins; static JSON fills missing keys.
-      if (locale === "en" || locale === "ru" || locale === "ar") {
-        return applyStaticContentOverrides({ ...apiDict, ...staticDict }, staticDict);
-      }
-      return applyStaticContentOverrides({ ...staticDict, ...apiDict }, staticDict);
+      // Static JSON wins conflicts to prevent stale API/DB data from overriding deployed translations.
+      return applyStaticContentOverrides({ ...apiDict, ...staticDict }, staticDict);
     }
   } catch {
     /* fallback below */
