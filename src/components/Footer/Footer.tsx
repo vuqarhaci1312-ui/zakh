@@ -180,7 +180,6 @@ export default function Footer() {
                             <SocialIcon
                               id={item.id}
                               className={styles.socialIcon}
-                              orangeLogo={item.id === "snapchat"}
                             />
                             <span className={styles.socialLabel}>X</span>
                           </>
