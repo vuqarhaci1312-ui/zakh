@@ -150,7 +150,7 @@ export const COUNTRY_TOURS: CountryTourData[] = [
   {
     slug: "georgia",
     name: "Georgia",
-    heroImage: "/tours/georgia.webp",
+    heroImage: "/tours/georgia.png",
     description:
       "Georgia, with a history spanning over 8,000 years, offers landscapes ranging from the peaks of the Caucasus Mountains to fertile valleys and subtropical coasts. Ancient traditions live alongside modern life, creating a warm and resilient society. Georgia\u2019s identity is deeply tied to its land, language, and historical continuity.",
     faqsTitle: "Tour Programs",
@@ -222,7 +222,7 @@ export const COUNTRY_TOURS: CountryTourData[] = [
   {
     slug: "kazakhstan",
     name: "Kazakhstan",
-    heroImage: "/tours/kazakhstan.webp",
+    heroImage: "/tours/kazakhstan.png",
     description:
       "Kazakhstan, the heart of the Great Steppes, stretches across vast plains, deserts, serene lakes, and towering mountains. Here, nomadic heritage blends with modern urban life, creating a dynamic and multicultural society. Travelers are fascinated by its breathtaking nature, nomadic exoticism, and a striking modern contrast.",
     faqsTitle: "Tour Program \u2014 Almaty, 7 Days",
@@ -230,17 +230,17 @@ export const COUNTRY_TOURS: CountryTourData[] = [
       {
         question: "Day 1\u20132 \u2014 Almaty city & Big Almaty Lake",
         answer:
-          "Day 1: transfer from Almaty International Airport, Almaty city tour, Arbat Street, President Park, and a national dinner at Alasha restaurant.\nDay 2: Ile-Alatau National Park, Alma-Arasan village, the Big Almatinka\u2013Prokhodnaya river and spring, Zailiyskiy Alatau Mountain, Big Almaty Lake, lunch at Alpen Rose Resort, and a birds show.",
+          "Day 1: transfer from Almaty International Airport, Almaty city tour, Arbat Street, President Park, Kok-Tobe entertainment park (cable car and fast coaster), and a national dinner at Alasha restaurant.\nDay 2: Ile-Alatau National Park, Alma-Arasan village, the Big Almatinka\u2013Prokhodnaya river and spring, Zailiyskiy Alatau Mountain, Big Almaty Lake, lunch at Alpen Rose Resort, and a birds show.",
       },
       {
         question: "Day 3\u20134 \u2014 Shymbulak, Medeu & Issyk Lake",
         answer:
-          "Day 3: Shymbulak ski complex by gondola, the Medeu high-altitude ice rink, and Dostyk Mall.\nDay 4: Issyk Lake with boat tours, lunch at Stetson Rancho horse center, the river, and Turgen (Ayuly) waterfalls.",
+          "Day 3: Shymbulak ski complex by gondola, the Medeu high-altitude ice rink, and Dostyk Mall.\nDay 4: Issyk Lake with boat tours, lunch at Stetson Rancho horse center, and the river.",
       },
       {
-        question: "Day 5\u20136 \u2014 Kok-Tobe & shopping",
+        question: "Day 5\u20136 \u2014 Kolsai Lake, Charyn Canyon & shopping",
         answer:
-          "Day 5: Kok-Tobe entertainment park (cable car and fast coaster), Central Park, the Dolphinarium, and the zoo.\nDay 6: shopping tour \u2014 Mega Mall, Esentai Mall, Barakholka, a local chocolate boutique, and the Green Bazaar.",
+          "Day 5: Kolsai Lake and Charyn Canyon tour.\nDay 6: shopping tour \u2014 Mega Mall, Esentai Mall, Barakholka, a local chocolate boutique, and the Green Bazaar.",
       },
       {
         question: "Day 7 \u2014 Departure",

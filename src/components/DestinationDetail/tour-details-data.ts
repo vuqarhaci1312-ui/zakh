@@ -51,7 +51,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "golf-azerbaijan",
       title: "Zakher Travel \u2014 First Golf Agency in Azerbaijan",
       excerpt: "Golf holidays at The National Azerbaijan Golf Club and Dreamland Golf Club, with special packages from 500 USD.",
-      image: "/tours/azerbaijan/golf-azerbaijan.webp",
+      image: "/tours/azerbaijan/tourphoto/dreamland1.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/dreamland2.jpeg",
+        "/tours/azerbaijan/tourphoto/dreamland3.jpeg",
+        "/tours/azerbaijan/tourphoto/dreamland4.jpeg",
+        "/tours/azerbaijan/tourphoto/dreamland5.jpeg",
+      ],
       meta: [
         { label: "Category", value: "Golf packages" },
         { label: "Since", value: "2018" },
@@ -89,7 +95,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "north-gates-tour",
       title: "\u201cThe North Gates\u201d Tour \u2014 Gusar + Shahdag + Laza",
       excerpt: "Full-day trip to the north of Azerbaijan: Beshbarmag Mountain, Shahdag resort, and the waterfalls of Laza.",
-      image: "/tours/azerbaijan/north-gates-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/qusar1.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/qusar2.jpeg",
+        "/tours/azerbaijan/tourphoto/qusar3.jpeg",
+        "/tours/azerbaijan/tourphoto/qusar4.jpeg",
+        "/tours/azerbaijan/tourphoto/qusar5.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "1 day (10\u201312 hrs)" },
         { label: "Route", value: "\u2248220 km one way" },
@@ -118,7 +130,10 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "absheron-tour",
       title: "Absheron Tour",
       excerpt: "Ateshgah fire temple, the burning mountain Yanardag, and the Gala open-air museum in 3 hours.",
-      image: "/tours/azerbaijan/absheron-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/absheron.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/absheron2.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "3 hours" },
         { label: "Category", value: "Private tour" },
@@ -143,7 +158,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "baku-night-tour",
       title: "Baku Night Tour",
       excerpt: "Panoramic Baku by night: Highland Park, Flame Towers, the boulevard, and Fountain Square.",
-      image: "/tours/azerbaijan/baku-night-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/baku-night1.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/baku-night3.jpeg",
+        "/tours/azerbaijan/tourphoto/baku-night6.jpeg",
+        "/tours/azerbaijan/tourphoto/baku-nigth.jpeg",
+        "/tours/azerbaijan/tourphoto/baku-nigth4.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "2 hours" },
         { label: "Category", value: "Private tour" },
@@ -168,7 +189,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "jeep-safari-1",
       title: "Extreme Jeep Safari 1",
       excerpt: "Off-road 4\u00d74 adventure to the Kyanizadag volcano and the Gobustan petroglyphs.",
-      image: "/tours/azerbaijan/jeep-safari-1.webp",
+      image: "/tours/azerbaijan/tourphoto/safari1.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/safari2.jpeg",
+        "/tours/azerbaijan/tourphoto/safari3.jpeg",
+        "/tours/azerbaijan/tourphoto/safari5.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "5\u20136 hours" },
         { label: "Route", value: "\u224865 km one way" },
@@ -194,7 +220,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "jeep-safari-2",
       title: "Extreme Jeep Safari 2",
       excerpt: "The long 9-hour off-road route across the Dolangaz and Kyanizadag volcanoes.",
-      image: "/tours/azerbaijan/jeep-safari-2.webp",
+      image: "/tours/azerbaijan/tourphoto/safari2.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/safari3.jpeg",
+        "/tours/azerbaijan/tourphoto/safari5.jpeg",
+        "/tours/azerbaijan/tourphoto/safari1.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "9 hours" },
         { label: "Route", value: "\u224870 km one way" },
@@ -221,7 +252,11 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "sheki-tour",
       title: "Tour to Sheki \u2014 Ancient Khanate",
       excerpt: "The Khan's Palace built without nails, the Kish Albanian temple, and mountain caravanserais.",
-      image: "/tours/azerbaijan/sheki-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/sheki1.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/sheki2.jpeg",
+        "/tours/azerbaijan/tourphoto/sheki3.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "1 day (12\u201313 hrs)" },
         { label: "Route", value: "\u2248320 km one way" },
@@ -254,7 +289,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "gobustan-jeep-safari",
       title: "Jeep Safari in the Gobustan Reserve",
       excerpt: "4\u00d74 route through the Dashgil volcano and the prehistoric rock art of Gobustan.",
-      image: "/tours/azerbaijan/gobustan-jeep-safari.webp",
+      image: "/tours/azerbaijan/tourphoto/qobustansafari1.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/qobustansafari3.jpeg",
+        "/tours/azerbaijan/tourphoto/qobustansafari4.jpeg",
+        "/tours/azerbaijan/tourphoto/qobustansafari6.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "5\u20136 hours" },
         { label: "Route", value: "\u224865 km one way" },
@@ -280,7 +320,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "gobustan-jeep-safari-extreme",
       title: "Jeep Safari on the Gobustan Reserve + Extreme",
       excerpt: "The extended 9-hour extreme version with the ascent to the Kyanizadag volcano.",
-      image: "/tours/azerbaijan/gobustan-jeep-safari-extreme.webp",
+      image: "/tours/azerbaijan/tourphoto/qobustansafari3.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/qobustansafari4.jpeg",
+        "/tours/azerbaijan/tourphoto/qobustansafari6.jpeg",
+        "/tours/azerbaijan/tourphoto/qobustansafari1.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "9 hours" },
         { label: "Route", value: "\u224870 km one way" },
@@ -307,7 +352,11 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "gobustan-mud-volcano-tour",
       title: "Museum Gobustan and Mud Volcanoes Tour",
       excerpt: "UNESCO-listed rock art and the bubbling mud volcanoes in a comfortable 5-hour trip.",
-      image: "/tours/azerbaijan/gobustan-mud-volcano-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/qobustanvulkan-tour.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/qobustanvulkan2.jpeg",
+        "/tours/azerbaijan/tourphoto/qobustanvulkan3.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "5 hours" },
         { label: "Route", value: "\u224865 km one way" },
@@ -333,7 +382,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "old-city-excursion",
       title: "Old City Excursion (Walking Tour)",
       excerpt: "Maiden Tower, Shirvanshah's Palace, and medieval caravanserais of Icheri Sheher on foot.",
-      image: "/tours/azerbaijan/old-city-excursion.webp",
+      image: "/tours/azerbaijan/tourphoto/oldcity.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/oldcity1.jpeg",
+        "/tours/azerbaijan/tourphoto/oldcity2.jpeg",
+        "/tours/azerbaijan/tourphoto/oldcity3.jpeg",
+        "/tours/azerbaijan/tourphoto/oldcity4.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "2.5 hours" },
         { label: "Category", value: "Private walking tour" },
@@ -357,7 +412,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "azerbaijani-cuisine-tour",
       title: "Tastes and Flavors of Azerbaijani Cuisine",
       excerpt: "A gastronomic journey: tandir breakfast, the eastern bazaar, sturgeon kebab, and shah-plov.",
-      image: "/tours/azerbaijan/azerbaijani-cuisine-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/foodtour.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/food-tour2.jpeg",
+        "/tours/azerbaijan/tourphoto/foodtour3.jpeg",
+        "/tours/azerbaijan/tourphoto/foodtour5.jpeg",
+        "/tours/azerbaijan/tourphoto/foodtour6.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "5 hours" },
         { label: "Category", value: "Private tour" },
@@ -382,7 +443,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "gabala-tour",
       title: "Tour to Gabala \u2014 the Capital of Caucasian Albania",
       excerpt: "Ancient Kabalaka, the Tufandag ropeway, Nohur Lake, and the Seven Beauties waterfall.",
-      image: "/tours/azerbaijan/gabala-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/gabala.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/gabalatour2.jpeg",
+        "/tours/azerbaijan/tourphoto/gabala3.jpeg",
+        "/tours/azerbaijan/tourphoto/gabala7.jpeg",
+        "/tours/azerbaijan/tourphoto/gabala8.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "1 day (10\u201311 hrs)" },
         { label: "Route", value: "\u2248220 km one way" },
@@ -412,7 +479,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "khinalig-tour",
       title: "Tour to Khinalig \u2014 2,200 Meters Above Sea Level",
       excerpt: "The 5,000-year-old mountain village of Noah's descendants, via Guba and the Caucasus gorges.",
-      image: "/tours/azerbaijan/khinalig-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/xinaliq.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/xinaliq1.jpeg",
+        "/tours/azerbaijan/tourphoto/xinaliq2.jpeg",
+        "/tours/azerbaijan/tourphoto/xinaliq3.jpeg",
+        "/tours/azerbaijan/tourphoto/xinaliq4.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "1 day (10\u201312 hrs)" },
         { label: "Route", value: "\u2248220 km one way" },
@@ -442,7 +515,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "quba-tour",
       title: "Tour to the North \u2014 Forests and Mountains of Quba",
       excerpt: "Apple orchards, the Red Town, mountain waterfalls, and the Shahdag complex in one day.",
-      image: "/tours/azerbaijan/quba-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/quba.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/quba1.jpeg",
+        "/tours/azerbaijan/tourphoto/quba3.jpeg",
+        "/tours/azerbaijan/tourphoto/quba4.jpeg",
+        "/tours/azerbaijan/tourphoto/quba5.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "1 day (10\u201312 hrs)" },
         { label: "Route", value: "\u2248220 km one way" },
@@ -472,7 +551,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "lahij-tour",
       title: "Tour to the Village of Artisans \u2014 Lahij",
       excerpt: "Medieval coppersmiths' town with cobbled streets, via the ancient capital Shemakha.",
-      image: "/tours/azerbaijan/lahij-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/lahic.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/lahic1.jpeg",
+        "/tours/azerbaijan/tourphoto/lahic3.jpeg",
+        "/tours/azerbaijan/tourphoto/lahic5.jpeg",
+        "/tours/azerbaijan/tourphoto/lahic6.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "1 day (9\u201310 hrs)" },
         { label: "Route", value: "\u2248180 km one way" },
@@ -501,7 +586,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "istanbul-tour",
       title: "Istanbul Tour",
       excerpt: "Hagia Sophia, Topkapi Palace, the Blue Mosque, and a Bosphorus cruise.",
-      image: "/tours/turkiye/istanbul-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/istanbul2.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/istanbul3.jpeg",
+        "/tours/azerbaijan/tourphoto/istanbul4.jpeg",
+        "/tours/azerbaijan/tourphoto/istanbul5.jpeg",
+        "/tours/azerbaijan/tourphoto/istanbulesas.jpeg",
+      ],
       meta: [
         { label: "City", value: "Istanbul" },
         { label: "Category", value: "City tour" },
@@ -518,7 +609,11 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "istanbul-shopping-tour",
       title: "Istanbul Shopping Tour",
       excerpt: "From the Grand Bazaar to Istinye Park: the full shopping map of Istanbul.",
-      image: "/tours/turkiye/istanbul-shopping-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/istanbul-shopping.avif",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/istanbulshopping2.jpeg",
+        "/tours/azerbaijan/tourphoto/istanbulesas.jpeg",
+      ],
       meta: [
         { label: "City", value: "Istanbul" },
         { label: "Category", value: "Shopping tour" },
@@ -535,7 +630,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "sapanca-tour",
       title: "Sapanca Tour",
       excerpt: "Sapanca Lake, the Kartepe snow hill, and waterfalls near Istanbul.",
-      image: "/tours/turkiye/sapanca-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/sapanca.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/sapanca2.jpeg",
+        "/tours/azerbaijan/tourphoto/sapanca3.jpeg",
+        "/tours/azerbaijan/tourphoto/sapanca4.jpeg",
+        "/tours/azerbaijan/tourphoto/sapanca5.jpeg",
+      ],
       meta: [
         { label: "Region", value: "Sapanca / Kartepe" },
         { label: "Category", value: "Nature tour" },
@@ -552,7 +653,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "bursa-tour",
       title: "Bursa Tour",
       excerpt: "Uludag cable car, the Grand Mosque, silk market, and a 600-year-old Turkish bath.",
-      image: "/tours/turkiye/bursa-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/bursa.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/bursa2.jpeg",
+        "/tours/azerbaijan/tourphoto/bursa3.jpeg",
+        "/tours/azerbaijan/tourphoto/bursa4.jpeg",
+        "/tours/azerbaijan/tourphoto/bursa5.jpeg",
+      ],
       meta: [
         { label: "City", value: "Bursa" },
         { label: "Category", value: "City tour" },
@@ -569,7 +676,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "trabzon-rize-tour",
       title: "Trabzon & Rize Tour",
       excerpt: "Uzungol lake, tea factories, the Sumela Monastery, and the Elevit plateau.",
-      image: "/tours/turkiye/trabzon-rize-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/trabzon.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/trabzon2.jpeg",
+        "/tours/azerbaijan/tourphoto/trabzon3.jpeg",
+        "/tours/azerbaijan/tourphoto/trabzon4.jpeg",
+      ],
       meta: [
         { label: "Region", value: "Trabzon / Rize" },
         { label: "Category", value: "Nature tour" },
@@ -590,7 +702,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "antalya-tour",
       title: "Antalya Tour",
       excerpt: "The Land of Legends, Duden waterfall, Pamukkale, diving, and rafting.",
-      image: "/tours/turkiye/antalya-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/antalya.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/antalya2.jpeg",
+        "/tours/azerbaijan/tourphoto/antalya3.jpeg",
+        "/tours/azerbaijan/tourphoto/antalya4.jpeg",
+      ],
       meta: [
         { label: "City", value: "Antalya" },
         { label: "Category", value: "Resort tour" },
@@ -610,7 +727,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "tbilisi-tour",
       title: "Tbilisi Tour",
       excerpt: "Old city, Narikala fortress by cable car, sulfur baths, and the Chronicles of Georgia.",
-      image: "/tours/georgia/tbilisi-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/tbilisi.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/tbilisi1.jpeg",
+        "/tours/azerbaijan/tourphoto/tbilisi2.jpeg",
+        "/tours/azerbaijan/tourphoto/tbilisi3.jpeg",
+      ],
       meta: [
         { label: "City", value: "Tbilisi" },
         { label: "Recommended", value: "1 night / 2 days" },
@@ -627,7 +749,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "batumi-tour",
       title: "Batumi Tour",
       excerpt: "The Black Sea boulevard, Ali & Nino, Piazza Square, and the botanical garden.",
-      image: "/tours/georgia/batumi-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/batumi.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/batumi1.jpeg",
+        "/tours/azerbaijan/tourphoto/batumi2.jpeg",
+        "/tours/azerbaijan/tourphoto/batumi3.jpeg",
+        "/tours/azerbaijan/tourphoto/batumi4.jpeg",
+      ],
       meta: [
         { label: "City", value: "Batumi" },
         { label: "Recommended", value: "3 nights / 4 days" },
@@ -644,7 +772,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "gudauri-kazbegi-tour",
       title: "Gudauri & Kazbegi Tour",
       excerpt: "The Caucasus high road: Ananuri fortress, Gudauri, and Gergeti Trinity Church by 4\u00d74.",
-      image: "/tours/georgia/gudauri-kazbegi-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/kazbegi.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/kazbegi1.jpeg",
+        "/tours/azerbaijan/tourphoto/kazbegi2.jpeg",
+        "/tours/azerbaijan/tourphoto/kazbegi3.jpeg",
+        "/tours/azerbaijan/tourphoto/kazbegi4.jpeg",
+      ],
       meta: [
         { label: "Region", value: "Gudauri / Kazbegi" },
         { label: "Recommended", value: "1 night / 2 days" },
@@ -661,7 +795,11 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "borjomi-bakuriani-tour",
       title: "Borjomi & Bakuriani Tour",
       excerpt: "Mineral springs, the Uplistsikhe cave town, Rabati Castle, and the Bakuriani ski resort.",
-      image: "/tours/georgia/borjomi-bakuriani-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/bakuriani.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/bakuriani1.jpeg",
+        "/tours/azerbaijan/tourphoto/bakuriani3.jpeg",
+      ],
       meta: [
         { label: "Region", value: "Borjomi / Bakuriani" },
         { label: "Category", value: "Nature & history" },
@@ -678,7 +816,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "kakheti-tour",
       title: "Kakheti Tour",
       excerpt: "Sighnaghi — the city of Love — Bodbe monastery, and the wineries of Kakheti.",
-      image: "/tours/georgia/kakheti-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/kaxeti.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/kaxeti1.jpeg",
+        "/tours/azerbaijan/tourphoto/kaxeti2.jpeg",
+        "/tours/azerbaijan/tourphoto/kaxeti4.jpeg",
+      ],
       meta: [
         { label: "Region", value: "Kakheti" },
         { label: "Category", value: "Wine & culture" },
@@ -695,7 +838,11 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "dashbashi-tour",
       title: "Dashbashi Tour",
       excerpt: "Tsalka canyon, the Dashbashi waterfall, and the glass Diamond Bridge.",
-      image: "/tours/georgia/dashbashi-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/dashbashi.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/dashbashi1.jpeg",
+        "/tours/azerbaijan/tourphoto/dashbasi3.jpeg",
+      ],
       meta: [
         { label: "Region", value: "Tsalka / Dashbashi" },
         { label: "Category", value: "Nature tour" },
@@ -712,7 +859,11 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "kutaisi-tour",
       title: "Kutaisi Tour",
       excerpt: "Prometheus Cave, the Sataplia reserve, and Martvili Canyon.",
-      image: "/tours/georgia/kutaisi-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/kutaisi.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/kutaisi1.jpeg",
+        "/tours/azerbaijan/tourphoto/kutaisi2.jpeg",
+      ],
       meta: [
         { label: "City", value: "Kutaisi" },
         { label: "Category", value: "Nature & city tour" },
@@ -733,8 +884,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
     {
       slug: "almaty-tour",
       title: "Kazakhstan \u2014 Almaty Tour",
-      excerpt: "7-day program: Big Almaty Lake, Shymbulak, Medeu, Kok-Tobe, and Issyk Lake.",
-      image: "/tours/kazakhstan/almaty-tour.webp",
+      excerpt: "7-day program: Big Almaty Lake, Shymbulak, Medeu, Kolsai Lake, Charyn Canyon, and Issyk Lake.",
+      image: "/tours/azerbaijan/tourphoto/qazaxstan.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/qazaxstan1.jpeg",
+        "/tours/azerbaijan/tourphoto/qazaxstan2.jpeg",
+        "/tours/azerbaijan/tourphoto/qazaxstan3.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "7 days" },
         { label: "City", value: "Almaty" },
@@ -743,7 +899,7 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       sections: [
         {
           heading: "Day 1 \u2014 Arrival & city tour",
-          body: "Transfer from Almaty International Airport to the hotel and rest. Almaty city tour: Arbat Street (downtown), President Park, and a national night with dinner at the Alasha restaurant.",
+          body: "Transfer from Almaty International Airport to the hotel and rest. Almaty city tour: Arbat Street (downtown), President Park, Kok-Tobe entertainment park (cable car and fast coaster), and a national night with dinner at the Alasha restaurant.",
         },
         {
           heading: "Day 2 \u2014 Big Almaty Lake",
@@ -755,11 +911,11 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
         },
         {
           heading: "Day 4 \u2014 Issyk Lake",
-          body: "Issyk Lake and boat tours, lunch at Stetson Rancho Resort (horse center), the river, and the Turgen (Ayuly) waterfalls.",
+          body: "Issyk Lake and boat tours, lunch at Stetson Rancho Resort (horse center), and the river.",
         },
         {
-          heading: "Day 5 \u2014 Kok-Tobe",
-          body: "Kok-Tobe entertainment park (cable car and fast coaster), Central Park, the Dolphinarium, and the Zoo Park.",
+          heading: "Day 5 \u2014 Kolsai Lake & Charyn Canyon",
+          body: "Kolsai Lake and Charyn Canyon tour.",
         },
         {
           heading: "Day 6 \u2014 Shopping",
@@ -778,7 +934,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "tashkent-tour",
       title: "Tashkent Tour",
       excerpt: "Chorsu Bazaar, the Khast-Imam Ensemble, Chimgan Mountains, and Charvak Lake.",
-      image: "/tours/uzbekistan/tashkent-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/dashkend.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/dashekend1.jpeg",
+        "/tours/azerbaijan/tourphoto/dashekend2.jpeg",
+        "/tours/azerbaijan/tourphoto/dashkend3.jpeg",
+      ],
       meta: [
         { label: "City", value: "Tashkent" },
         { label: "Category", value: "City tour" },
@@ -795,7 +956,11 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "samarkand-tour",
       title: "Samarkand Tour",
       excerpt: "Registan Square, Shah-i-Zinda, Bibi-Khanym, and the Gur-Emir Mausoleum.",
-      image: "/tours/uzbekistan/samarkand-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/semerqend.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/semerqend1.jpeg",
+        "/tours/azerbaijan/tourphoto/semerqend2.jpeg",
+      ],
       meta: [
         { label: "City", value: "Samarkand" },
         { label: "Category", value: "Silk Road heritage" },
@@ -812,7 +977,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "amirsoy-tour",
       title: "Amirsoy Tour",
       excerpt: "Chimgan mountains, cable car, mountain lakes, horse riding, and skiing.",
-      image: "/tours/uzbekistan/amirsoy-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/amirsoy.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/amirsoy1.jpeg",
+        "/tours/azerbaijan/tourphoto/amirsoy2.jpeg",
+        "/tours/azerbaijan/tourphoto/amirsoy3.jpeg",
+      ],
       meta: [
         { label: "Region", value: "Chimgan / Amirsoy" },
         { label: "Category", value: "Mountain resort" },
@@ -829,7 +999,11 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "bukhara-tour",
       title: "Bukhara Tour",
       excerpt: "The Ark citadel, Poi Kalyan, Lyabi-Hauz, and the trading domes of old Bukhara.",
-      image: "/tours/uzbekistan/bukhara-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/buxara.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/buxara1.jpeg",
+        "/tours/azerbaijan/tourphoto/buxara2.jpeg",
+      ],
       meta: [
         { label: "City", value: "Bukhara" },
         { label: "Category", value: "Silk Road heritage" },
@@ -846,7 +1020,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "khiva-tour",
       title: "Khiva Tour",
       excerpt: "Itchan Kala walls, Kalta Minor, and the palaces of the ancient khanate.",
-      image: "/tours/uzbekistan/khiva-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/xiva.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/xiva1.jpeg",
+        "/tours/azerbaijan/tourphoto/xiva2.jpeg",
+        "/tours/azerbaijan/tourphoto/xiva3.jpeg",
+        "/tours/azerbaijan/tourphoto/xiva4.jpeg",
+      ],
       meta: [
         { label: "City", value: "Khiva" },
         { label: "Category", value: "Silk Road heritage" },
@@ -866,7 +1046,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "bishkek-tour",
       title: "Kyrgyzstan \u2014 Bishkek Tour",
       excerpt: "6-day program: Burana Tower, Ala-Archa park, Chunkurchak valley, and hot springs.",
-      image: "/tours/kyrgyzstan/bishkek-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/bishkek.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/bishkek1.jpeg",
+        "/tours/azerbaijan/tourphoto/bishkek3.jpeg",
+        "/tours/azerbaijan/tourphoto/bishkek4.jpeg",
+        "/tours/azerbaijan/tourphoto/bishkek6.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "6 days / 7 nights" },
         { label: "City", value: "Bishkek" },
@@ -906,7 +1092,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "moscow-tour",
       title: "Moscow Tours",
       excerpt: "The Red Square, Kremlin, city cable car, river cruises, and exclusive extras.",
-      image: "/tours/russia/moscow-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/moskva.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/moskva1.jpeg",
+        "/tours/azerbaijan/tourphoto/moskva3.jpeg",
+        "/tours/azerbaijan/tourphoto/moskva4.jpeg",
+      ],
       meta: [
         { label: "City", value: "Moscow" },
         { label: "Category", value: "City programs" },
@@ -943,7 +1134,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "st-petersburg-tour",
       title: "St. Petersburg Tour",
       excerpt: "The Hermitage, Peterhof, the bridge-raising night, and rooftop walks.",
-      image: "/tours/russia/st-petersburg-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/sankpeterburg.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/sankpeterburg1.jpeg",
+        "/tours/azerbaijan/tourphoto/sankpeterburg3.jpeg",
+        "/tours/azerbaijan/tourphoto/sankpeterburg4.jpeg",
+        "/tours/azerbaijan/tourphoto/sankpeterburg6.jpeg",
+      ],
       meta: [
         { label: "City", value: "St. Petersburg" },
         { label: "Category", value: "City programs" },
@@ -968,7 +1165,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "sochi-tour",
       title: "Sochi Tours",
       excerpt: "Rosa Khutor, Krasnaya Polyana, Sky Park, the Olympic Park, and the sea.",
-      image: "/tours/russia/sochi-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/sochi.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/sochi1.jpeg",
+        "/tours/azerbaijan/tourphoto/sochi3.jpeg",
+        "/tours/azerbaijan/tourphoto/sochi4.jpeg",
+      ],
       meta: [
         { label: "City", value: "Sochi" },
         { label: "Category", value: "Resort programs" },
@@ -1006,7 +1208,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "krakow-city-tour",
       title: "Krakow City Tour",
       excerpt: "Old town walk, Wawel Hill, Kazimierz, and sightseeing by electric golf car.",
-      image: "/tours/poland/krakow-city-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/krakow.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/krakow1.jpeg",
+        "/tours/azerbaijan/tourphoto/krakow2.jpeg",
+        "/tours/azerbaijan/tourphoto/krakow3.jpeg",
+        "/tours/azerbaijan/tourphoto/krakow4.jpeg",
+      ],
       meta: [
         { label: "City", value: "Krakow" },
         { label: "Category", value: "City tour" },
@@ -1027,7 +1235,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "zakopane-tour",
       title: "Zakopane Tour",
       excerpt: "Gubalowka funicular, the Great Krokiew ski jump, and Koscieliska Valley.",
-      image: "/tours/poland/zakopane-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/zakopane.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/zakopane1.jpeg",
+        "/tours/azerbaijan/tourphoto/zakopane2.jpeg",
+        "/tours/azerbaijan/tourphoto/zakopane4.jpeg",
+        "/tours/azerbaijan/tourphoto/zakopane6.jpeg",
+      ],
       meta: [
         { label: "Town", value: "Zakopane" },
         { label: "Category", value: "Mountain tour" },
@@ -1044,7 +1258,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "wieliczka-salt-mine-tour",
       title: "Wieliczka & Bochnia Salt Mines",
       excerpt: "UNESCO underground world: salt chapels, brine lakes, and 135 m descents.",
-      image: "/tours/poland/wieliczka-salt-mine-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/Wieliczka.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/Wieliczka1.jpeg",
+        "/tours/azerbaijan/tourphoto/Wieliczka2.jpeg",
+        "/tours/azerbaijan/tourphoto/Wieliczka4.jpeg",
+      ],
       meta: [
         { label: "Sites", value: "Wieliczka / Bochnia" },
         { label: "Tour length", value: "\u22482 hours underground" },
@@ -1065,7 +1284,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "auschwitz-tour",
       title: "Auschwitz-Birkenau Memorial and Museum",
       excerpt: "A guided memorial visit to both parts of the former camp complex.",
-      image: "/tours/poland/auschwitz-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/auschwitz-birkenau.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/auschwitz-birkenau1.jpeg",
+        "/tours/azerbaijan/tourphoto/auschwitz-birkenau2.jpeg",
+        "/tours/azerbaijan/tourphoto/auschwitz-birkenau5.jpeg",
+      ],
       meta: [
         { label: "Site", value: "Auschwitz-Birkenau" },
         { label: "Category", value: "Memorial tour" },
@@ -1082,7 +1306,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "jewish-quarter-tour",
       title: "Jewish Quarter Walk (Kazimierz)",
       excerpt: "4-hour Jewish history and heritage tour of Krakow, including Schindler's Factory.",
-      image: "/tours/poland/jewish-quarter-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/Kazimierz.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/Kazimierz1.jpeg",
+        "/tours/azerbaijan/tourphoto/Kazimierz2.jpeg",
+        "/tours/azerbaijan/tourphoto/Kazimierz4.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "4 hours" },
         { label: "District", value: "Kazimierz" },
@@ -1099,7 +1328,12 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "krakow-shopping-tour",
       title: "Krakow Shopping Tour",
       excerpt: "Art galleries, amber artisans, local designers, and Polish pottery traditions.",
-      image: "/tours/poland/krakow-shopping-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/krakow-shoping.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/krakow-shoping1.jpeg",
+        "/tours/azerbaijan/tourphoto/krakow-shoping4.jpeg",
+        "/tours/azerbaijan/tourphoto/krakow-shoping5.jpeg",
+      ],
       meta: [
         { label: "City", value: "Krakow" },
         { label: "Category", value: "Shopping tour" },
@@ -1119,7 +1353,13 @@ export const TOURS_BY_COUNTRY: Record<string, TourDetail[]> = {
       slug: "kyiv-tour",
       title: "Kyiv City Tour",
       excerpt: "8-day program: Pechersk Lavra, the Carpathians, Bukovel, and Lviv.",
-      image: "/tours/ukraine/kyiv-tour.webp",
+      image: "/tours/azerbaijan/tourphoto/kiyev.jpeg",
+      gallery: [
+        "/tours/azerbaijan/tourphoto/kiyev1.jpeg",
+        "/tours/azerbaijan/tourphoto/kiyev3.jpeg",
+        "/tours/azerbaijan/tourphoto/kiyev5.jpeg",
+        "/tours/azerbaijan/tourphoto/kiyev7.jpeg",
+      ],
       meta: [
         { label: "Duration", value: "8 days" },
         { label: "Cities", value: "Kyiv, Carpathians, Lviv" },

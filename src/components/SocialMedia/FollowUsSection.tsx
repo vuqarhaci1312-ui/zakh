@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useRef } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useCmsContent } from "@/lib/content/use-cms";
 import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { FOLLOW_US_SECTION, SOCIAL_LINKS } from "./social-media-data";
@@ -10,6 +11,8 @@ import { useOurServicesAnimation } from "../OurServices/useOurServicesAnimation"
 
 export default function FollowUsSection() {
   const dt = useDt();
+  const { locale } = useLanguage();
+  const translateSocialName = locale === "ar";
   const { data: cmsData, hasCms } = useCmsContent<{
     socialLinks: Array<{ id: string; label: string; title: string; href: string }>;
   }>("/api/content/social");
@@ -62,7 +65,13 @@ export default function FollowUsSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialCard}
-                title={hasCms ? link.title : dt(`social.SOCIAL_LINKS.${index}.title`, link.title)}
+                title={
+                  hasCms
+                    ? link.title
+                    : translateSocialName
+                      ? dt(`social.SOCIAL_LINKS.${index}.title`, link.title)
+                      : link.title
+                }
                 data-experience-card
               >
                 <div className={styles.socialIconWrap} data-platform={link.id}>
@@ -73,8 +82,10 @@ export default function FollowUsSection() {
                     "X"
                   ) : hasCms ? (
                     link.label
-                  ) : (
+                  ) : translateSocialName ? (
                     <Dt k={`social.SOCIAL_LINKS.${index}.label`} fallback={link.label} />
+                  ) : (
+                    link.label
                   )}
                 </span>
               </a>

@@ -448,6 +448,7 @@ async function loadData() {
     "ui.gallery": "Gallery",
     "ui.moreDestinations.before": "More",
     "ui.moreDestinations.accent": "Destinations",
+    "ui.moreTours.accent": "Tours",
     "ui.tourPackage": "Tour Package",
     "ui.previousSlide": "Previous slide",
     "ui.nextSlide": "Next slide",

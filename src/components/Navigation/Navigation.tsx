@@ -332,14 +332,21 @@ function B2bLink({
 function DesktopHeader({
   pathname,
   overlayMode,
+  fixedMode,
 }: {
   pathname: string;
   overlayMode: boolean;
+  fixedMode: boolean;
 }) {
   const t = useTranslations();
+  const shellClassName = overlayMode
+    ? styles.overlayShell
+    : fixedMode
+      ? styles.fixedShell
+      : styles.stickyShell;
 
   return (
-    <div className={overlayMode ? styles.overlayShell : styles.stickyShell}>
+    <div className={shellClassName}>
       <header className={`${styles.header} ${overlayMode ? "" : styles.headerLight}`}>
         <div className={styles.headerInner}>
           <div className={styles.container}>
@@ -412,6 +419,7 @@ export default function Navigation() {
     pathname,
     mobileMenuOpen,
     overlayMode,
+    fixedMode,
     toggleMobileMenu,
     closeMobileMenu,
   } = useCeepiiNavigation();
@@ -425,7 +433,7 @@ export default function Navigation() {
         aria-hidden="true"
       />
 
-      <DesktopHeader pathname={pathname} overlayMode={overlayMode} />
+      <DesktopHeader pathname={pathname} overlayMode={overlayMode} fixedMode={fixedMode} />
 
       <aside
         className={`${styles.menuPanel} ${mobileMenuOpen ? styles.menuPanelOpen : ""}`}

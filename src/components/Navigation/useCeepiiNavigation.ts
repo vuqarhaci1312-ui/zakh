@@ -6,8 +6,26 @@ import { useEffect, useState } from "react";
 export function useCeepiiNavigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const overlayMode = pathname === "/";
+  const isHome = pathname === "/";
+  const overlayMode = isHome && !isScrolled;
+  const fixedMode = isHome && isScrolled;
+
+  useEffect(() => {
+    if (!isHome) {
+      setIsScrolled(false);
+      return;
+    }
+
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 48);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -46,6 +64,7 @@ export function useCeepiiNavigation() {
     pathname,
     mobileMenuOpen,
     overlayMode,
+    fixedMode,
     toggleMobileMenu,
     closeMobileMenu,
   };

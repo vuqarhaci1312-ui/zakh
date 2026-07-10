@@ -54,6 +54,24 @@
   pointer-events: auto;
 }
 
+.fixedShell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: none;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  animation: navFadeIn 0.3s ease both;
+}
+
+.fixedShell > header {
+  pointer-events: auto;
+}
+
 .headerLight {
   color: #09090b;
 }
@@ -743,7 +761,8 @@
 
 @media (min-width: 1024px) {
   .overlayShell,
-  .stickyShell {
+  .stickyShell,
+  .fixedShell {
     display: block;
   }
 
@@ -754,7 +773,8 @@
 
 @media (max-width: 1023px) {
   .overlayShell,
-  .stickyShell {
+  .stickyShell,
+  .fixedShell {
     display: none;
   }
 

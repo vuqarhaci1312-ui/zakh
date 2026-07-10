@@ -108,14 +108,16 @@ export default function TourDetailView({
   const galleryImages = useMemo(
     () =>
       getTourGalleryImages(tour.image, {
-        gallery: [
-          ...(tour.gallery ?? []),
-          ...otherTours.slice(0, 4).map((item) => item.image),
-        ],
+        gallery: tour.gallery ?? [],
         countryHero: countryHeroImage,
       }),
-    [countryHeroImage, otherTours, tour.gallery, tour.image],
+    [countryHeroImage, tour.gallery, tour.image],
   );
+
+  const translatedCountryName =
+    countryIndex >= 0
+      ? t(countryKey(countryIndex, "name"), countryName)
+      : countryName;
 
   return (
     <div ref={rootRef} className="destination-detail-root tour-detail-view">
@@ -142,7 +144,7 @@ export default function TourDetailView({
                   )}
                 </Link>
 
-                <TourGallery images={galleryImages} label={countryName} alt={titleForAlt} />
+                <TourGallery images={galleryImages} label={translatedCountryName} alt={titleForAlt} />
 
                 <div className="wrap_text-resort" data-detail-reveal>
                   <T
@@ -303,8 +305,18 @@ export default function TourDetailView({
             <div className="w-layout-blockcontainer container-large w-container">
               <div className="headline_more-resorts" data-detail-reveal>
                 <h2 className="margin-0">
-                  More <span className="tone-medium">{countryName} </span>
-                  <T k="ui.tours" fallback="Tours" as="span" className="tone-medium" />
+                  <T k="ui.moreDestinations.before" fallback="More" />{" "}
+                  <span className="tone-medium">
+                    {countryIndex >= 0 ? (
+                      <T
+                        k={countryKey(countryIndex, "name")}
+                        fallback={countryName}
+                      />
+                    ) : (
+                      countryName
+                    )}{" "}
+                    <T k="ui.moreTours.accent" fallback="Tours" />
+                  </span>
                 </h2>
               </div>
               <div className="resorts">
@@ -321,7 +333,7 @@ export default function TourDetailView({
                         <div className="image_resort-v1">
                           <div className="overlay_resort-card-v1">
                             <div className="master_label w-variant-84e91bde-75c3-dd4c-a083-7846b4ae6170">
-                              <div className="label-small">{countryName}</div>
+                              <div className="label-small">{translatedCountryName}</div>
                             </div>
                           </div>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
