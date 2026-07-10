@@ -35,6 +35,10 @@ export function clearAdminToken() {
   localStorage.removeItem(ADMIN_TOKEN_KEY);
 }
 
+export function hasAdminToken() {
+  return Boolean(getStoredToken());
+}
+
 async function adminFetch(path: string, init?: RequestInit) {
   const token = getStoredToken();
   const res = await fetch(`${API_URL}${path}`, {

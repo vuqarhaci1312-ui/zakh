@@ -64,6 +64,8 @@
   }
 
   .mobileContactLink {
+    display: inline-block;
+    padding: 8px 4px;
     font-size: 14px;
     font-weight: 500;
     color: #18181b;

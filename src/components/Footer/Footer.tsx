@@ -105,7 +105,7 @@ export default function Footer() {
                   className={styles.mobileSocialButton}
                   target="_blank"
                   rel="noreferrer noopener"
-                  aria-label={t(`footer.columns.3.social.${index}.label`, item.label)}
+                  aria-label={t(`footer.columns.3.social.${index}.label`, item.label) || item.label}
                 >
                   <SocialIcon
                     id={item.id}
@@ -173,7 +173,7 @@ export default function Footer() {
                         className={styles.socialLink}
                         target="_blank"
                         rel="noreferrer noopener"
-                        aria-label={t(`footer.columns.${columnIndex}.social.${socialIndex}.label`, item.label)}
+                        aria-label={t(`footer.columns.${columnIndex}.social.${socialIndex}.label`, item.label) || item.label}
                       >
                         {item.id === "x" ? (
                           <>

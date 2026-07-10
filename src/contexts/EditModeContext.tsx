@@ -16,6 +16,7 @@ import {
   bulkSaveTranslations,
   clearAdminToken,
   getAdminMe,
+  hasAdminToken,
   type AdminUser,
 } from "@/lib/admin/api";
 import type { Locale } from "@/lib/i18n/language-data";
@@ -73,6 +74,12 @@ export function EditModeProvider({ children }: { children: ReactNode }) {
   const saveSuccessTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    if (!hasAdminToken()) {
+      setUser(null);
+      setIsAdmin(false);
+      return;
+    }
+
     getAdminMe()
       .then((data) => {
         setUser(data.user);

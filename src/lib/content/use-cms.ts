@@ -2,11 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { hasAdminToken } from "@/lib/admin/api";
 import type { Locale } from "./localized";
 
 const API_BASE = typeof window !== "undefined" ? "/api/cms" : process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
 async function fetchCms<T>(path: string, locale: Locale): Promise<T | null> {
+  // CMS backend is only reachable for logged-in editors; skipping the request
+  // for visitors avoids 404 console errors on every page.
+  if (typeof window !== "undefined" && !hasAdminToken()) return null;
   try {
     const res = await fetch(`${API_BASE}${path}?locale=${locale}`, { cache: "no-store" });
     if (!res.ok) return null;

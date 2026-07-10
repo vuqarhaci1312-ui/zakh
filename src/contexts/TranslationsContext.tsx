@@ -18,6 +18,7 @@ import {
 } from "@/lib/i18n/create-translator";
 import { fetchStaticDictionary } from "@/lib/i18n/load-static-dictionary.client";
 import { mergeTranslationDictionaries } from "@/lib/i18n/merge-dictionaries";
+import { hasAdminToken } from "@/lib/admin/api";
 import type { Locale } from "@/lib/i18n/language-data";
 
 type TranslationsContextValue = {
@@ -48,6 +49,12 @@ async function fetchDictionary(locale: Locale): Promise<TranslationDictionary> {
     fetchStaticDictionary(locale),
     locale === "en" ? Promise.resolve({} as TranslationDictionary) : fetchStaticDictionary("en"),
   ]);
+
+  // CMS dictionary is only needed for logged-in editors; skipping it for
+  // visitors avoids a failing no-store request on every page load.
+  if (!hasAdminToken()) {
+    return staticDict;
+  }
 
   try {
     const apiDict = await fetchApiDictionary(locale);
