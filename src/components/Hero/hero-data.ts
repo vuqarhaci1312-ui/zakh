@@ -5,7 +5,7 @@ export const HERO_CDN_BASE = "https://storage.googleapis.com/zakher-static-cdn";
 
 export const HERO_VIDEO = {
   src: `${HERO_CDN_BASE}/hero/explore-azerbaijan-hero.mp4`,
-  poster: "",
+  poster: "/hero/hero-poster.webp",
 } as const;
 
 export const HERO_HEADLINE = {

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, type ReactNode } from "react";
 import T from "@/components/edit-mode/EditableText";
@@ -136,6 +136,7 @@ export default function Hero() {
                 <T k="hero.headline.afterAccent" fallback={HERO_HEADLINE.afterAccent} />
               }
               className={styles.displayTitle}
+              data-speakable="hero-title"
             />
           </motion.div>
 
@@ -151,10 +152,10 @@ export default function Hero() {
                 as="p"
                 className={styles.description}
               />
-              <Link href={HERO_PRIMARY_CTA.href} className={styles.btnSolid}>
+              <LocaleLink href={HERO_PRIMARY_CTA.href} className={styles.btnSolid}>
                 <T k="hero.cta.label" fallback={HERO_PRIMARY_CTA.label} />
                 <ArrowRightIcon />
-              </Link>
+              </LocaleLink>
             </motion.div>
           </div>
         </div>

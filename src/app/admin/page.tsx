@@ -19,7 +19,7 @@ export default function AdminLoginPage() {
     getAdminMe()
       .then(() => {
         const mode = getAdminMode() ?? "normal";
-        router.replace(mode === "language" ? "/?edit=1" : "/admin/dashboard");
+        router.replace(mode === "language" ? "/az/?edit=1" : "/admin/dashboard");
       })
       .catch(() => setCheckingSession(false));
   }, [router]);
@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
     try {
       await loginAdmin(email.trim().toLowerCase(), password);
       setAdminMode(loginMode);
-      router.replace(loginMode === "language" ? "/?edit=1" : "/admin/dashboard");
+      router.replace(loginMode === "language" ? "/az/?edit=1" : "/admin/dashboard");
       router.refresh();
     } catch (err) {
       const message = err instanceof Error ? err.message : "Login failed";

@@ -338,6 +338,9 @@ async function loadData() {
     "ui.readMore": "Read more",
     "ui.faqs": "FAQs",
     "ui.booking": "Booking",
+    "ui.tourFaq.includedQuestion": "What is included in the {title}?",
+    "ui.tourFaq.durationQuestion": "How long does this tour take?",
+    "ui.tourFaq.packageQuestion": "What is included in the package?",
     "ui.bookingContact":
       "For reservation please contact us: incoming@zakher.travel or +994 12 310 09 32. Our team provides offline support by call, e-mail, and WhatsApp 24/7.",
     "ui.tourDetails": "Tour Details",

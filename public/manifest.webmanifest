@@ -1,0 +1,22 @@
+{
+  "name": "Zakher Travel",
+  "short_name": "Zakher",
+  "description": "Professional travel agency in Azerbaijan — tour packages, destination management, and travel services since 2016.",
+  "start_url": "/az",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff8c00",
+  "lang": "az",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

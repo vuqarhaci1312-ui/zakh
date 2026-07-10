@@ -710,7 +710,7 @@
   "social.FOLLOW_US_SECTION.description": "Yeni turlar, təkliflər və səyahət xəbərləri üçün sosial şəbəkələrimizdən bizi izləyin.",
   "social.FOLLOW_US_SECTION.title": "Stay connected with Zakher Səyahət.",
   "social.INSTAGRAM_SECTION.badge": "Instagram",
-  "social.INSTAGRAM_SECTION.description": "Regional accounts sharing destination highlights, tour toplayın, and travel tips from our teams around the world.",
+  "social.INSTAGRAM_SECTION.description": "Dünyanın müxtəlif bölgələrindəki komandalarımızın istiqamət vurğularını, tur anlarını və səyahət məsləhətlərini paylaşan regional hesablar.",
   "social.INSTAGRAM_SECTION.title": "Zakher Səyahət on Instagram",
   "social.SOCIAL_LINKS.0.label": "Facebook",
   "social.SOCIAL_LINKS.0.title": "Bizə Facebook-da qoşulun",
@@ -1620,6 +1620,9 @@
   "ui.tourPackagesHeading.accent": "Paketlərimiz",
   "ui.tourPackagesHeading.before": "Tur",
   "ui.tourPackagesPickCountry": "Turlara baxmaq üçün istiqamət seçin — sonsuz scroll yoxdur.",
+  "ui.tourFaq.durationQuestion": "Bu tur nə qədər davam edir?",
+  "ui.tourFaq.includedQuestion": "{title} turuna nə daxildir?",
+  "ui.tourFaq.packageQuestion": "Paketə nə daxildir?",
   "ui.tourSingular": "tur",
   "ui.tours": "Turlar",
   "ui.toursAccent": "Turlar",
@@ -1648,5 +1651,11 @@
   "whyChooseUs.WHY_CHOOSE_US_SECTION.eyebrow": "Üstünlüklərimiz",
   "whyChooseUs.WHY_CHOOSE_US_SECTION.subtitle": "Problemsiz səyahət üçün lazım olan hər şey — istiqamət idarəetməsindən dünya səviyyəli dəstəyə qədər.",
   "whyChooseUs.WHY_CHOOSE_US_SECTION.title": "Niyə",
-  "whyChooseUs.WHY_CHOOSE_US_SECTION.titleAccent": "biz?"
+  "whyChooseUs.WHY_CHOOSE_US_SECTION.titleAccent": "biz?",
+  "meta.whoWeAre.title": "Biz kimik | Zakher Travel",
+  "meta.whoWeAre.description": "Zakher Travel Şirkətlər Qrupu haqqında — 2016-cı ildən tariximiz, beynəlxalq sərgilər, keyfiyyət siyasəti və şirkət profili.",
+  "meta.privacy.title": "Məxfilik Siyasəti | Zakher Travel",
+  "meta.privacy.description": "Zakher Travel şəxsi məlumatlarınızı necə toplayır, istifadə edir və qoruyur.",
+  "meta.terms.title": "İstifadə Şərtləri | Zakher Travel",
+  "meta.terms.description": "Zakher Travel vebsaytı və səyahət xidmətlərinin istifadəsini tənzimləyən şərtlər."
 }

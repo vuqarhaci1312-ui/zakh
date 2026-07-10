@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import T from "@/components/edit-mode/EditableText";
 import {
   CUSTOMER_REVIEWS_SECTION,
@@ -13,7 +13,26 @@ import { useCustomerReviewsAnimation } from "./useCustomerReviewsAnimation";
 
 export default function CustomerReviews() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [shouldLoadScript, setShouldLoadScript] = useState(false);
   useCustomerReviewsAnimation(sectionRef);
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node || shouldLoadScript) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShouldLoadScript(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [shouldLoadScript]);
 
   return (
     <div className="avenora-customer-reviews avenora-page">
@@ -52,7 +71,9 @@ export default function CustomerReviews() {
         </section>
       </div>
 
-      <Script src={ELFSIGHT_PLATFORM_SCRIPT} strategy="afterInteractive" />
+      {shouldLoadScript ? (
+        <Script src={ELFSIGHT_PLATFORM_SCRIPT} strategy="lazyOnload" />
+      ) : null}
     </div>
   );
 }

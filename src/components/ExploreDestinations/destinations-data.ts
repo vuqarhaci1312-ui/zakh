@@ -3,7 +3,7 @@ import { POPULAR_TOUR_ITEMS } from "../LagoonCollection/lagoon-collection-data";
 export const DESTINATION_SECTION = {
   eyebrow: "Destinations",
   title: "Our Tour Packages",
-  linkHref: "https://test.zakher.travel/tour-packages",
+  linkHref: "/tour-packages",
 } as const;
 
 export interface DestinationItem {

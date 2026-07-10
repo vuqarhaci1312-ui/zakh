@@ -1,15 +1,17 @@
 "use client";
 
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { useMemo, useRef } from "react";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
-import { countryKey, tourKey } from "@/lib/i18n/content-translators";
+import { countryKey, resolveTourFaqs, tourKey } from "@/lib/i18n/content-translators";
 import { COUNTRY_TOURS } from "./country-tours-data";
 import { getTourGalleryImages } from "./get-tour-gallery";
-import type { TourDetail } from "./tour-details-data";
+import type { BuiltTourFaq, TourDetail } from "./tour-details-data";
 import TourGallery from "./TourGallery";
+import FaqAccordion from "./FaqAccordion";
 import { useDestinationDetailAnimation } from "./useDestinationDetailAnimation";
+import { KeyFactsBlock, SummaryBlock } from "@/components/seo/AnswerBlocks";
 
 function ClockIcon() {
   return (
@@ -75,6 +77,7 @@ export type TourDetailViewProps = {
   tour: TourDetail;
   tourIndex: number;
   backFrom?: string;
+  faqs?: BuiltTourFaq[];
   otherTours: {
     slug: string;
     title: string;
@@ -91,6 +94,7 @@ export default function TourDetailView({
   tour,
   tourIndex,
   backFrom,
+  faqs = [],
   otherTours,
 }: TourDetailViewProps) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -105,6 +109,11 @@ export default function TourDetailView({
   useDestinationDetailAnimation(rootRef);
 
   const titleForAlt = t(`${prefix}.title`, tour.title);
+  const translatedFaqs = useMemo(
+    () => resolveTourFaqs(t, countrySlug, tourIndex, tour, faqs),
+    [countrySlug, faqs, t, tour, tourIndex],
+  );
+
   const galleryImages = useMemo(
     () =>
       getTourGalleryImages(tour.image, {
@@ -126,7 +135,7 @@ export default function TourDetailView({
           <div className="w-layout-blockcontainer container-large w-container">
             <div className="w-layout-grid grid_resort">
               <div className="content_resort">
-                <Link href={backHref} className="tour-detail-back">
+                <LocaleLink href={backHref} className="tour-detail-back">
                   <span aria-hidden="true">←</span>
                   {countryIndex >= 0 ? (
                     <>
@@ -142,11 +151,11 @@ export default function TourDetailView({
                       <T k="ui.toursAccent" fallback="Tours" />
                     </>
                   )}
-                </Link>
+                </LocaleLink>
 
                 <TourGallery images={galleryImages} label={translatedCountryName} alt={titleForAlt} />
 
-                <div className="wrap_text-resort" data-detail-reveal>
+                <div className="wrap_text-resort" data-detail-reveal data-seo-summary>
                   <T
                     k={`${prefix}.title`}
                     fallback={tour.title}
@@ -160,6 +169,32 @@ export default function TourDetailView({
                     className="margin-0 tone-medium"
                   />
                 </div>
+
+                <KeyFactsBlock
+                  title={<T k="ui.keyFacts" fallback="Key facts" />}
+                  facts={tour.meta.map((item, index) => ({
+                    label: t(
+                      tourKey(countrySlug, tourIndex, "meta", String(index), "label"),
+                      item.label,
+                    ),
+                    value: t(
+                      tourKey(countrySlug, tourIndex, "meta", String(index), "value"),
+                      item.value,
+                    ),
+                  }))}
+                />
+
+                {tour.sections[0] ? (
+                  <SummaryBlock title={<T k="ui.overview" fallback="Overview" />}>
+                    <T
+                      k={tourKey(countrySlug, tourIndex, "sections", "0", "body")}
+                      fallback={tour.sections[0].body}
+                      as="p"
+                      className="margin-0"
+                      style={{ whiteSpace: "pre-line" }}
+                    />
+                  </SummaryBlock>
+                ) : null}
 
                 <div className="resort_amenities" data-detail-reveal>
                   <T
@@ -293,6 +328,23 @@ export default function TourDetailView({
                     />
                   </p>
                 </div>
+
+                {translatedFaqs.length > 0 ? (
+                  <section
+                    className="resort_amenities"
+                    data-detail-reveal
+                    aria-labelledby="tour-faq-heading"
+                  >
+                    <T
+                      k="ui.faqs"
+                      fallback="FAQs"
+                      as="h2"
+                      id="tour-faq-heading"
+                      className="text-size-large text_body-bold"
+                    />
+                    <FaqAccordion items={translatedFaqs} />
+                  </section>
+                ) : null}
               </div>
             </div>
           </div>
@@ -324,7 +376,7 @@ export default function TourDetailView({
                   {otherTours.map((other) => {
                     const otherPrefix = tourKey(countrySlug, other.index);
                     return (
-                      <Link
+                      <LocaleLink
                         key={other.slug}
                         href={`/destinations/${countrySlug}/${other.slug}${backQuery}`}
                         className="card_resort-v1 w-inline-block"
@@ -359,7 +411,7 @@ export default function TourDetailView({
                             className="margin-0 tone-medium"
                           />
                         </div>
-                      </Link>
+                      </LocaleLink>
                     );
                   })}
                 </div>

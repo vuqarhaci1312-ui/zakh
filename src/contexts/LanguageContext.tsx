@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import {
   DEFAULT_LOCALE,
   LOCALE_STORAGE_KEY,
@@ -16,6 +17,7 @@ import {
   type Locale,
   isRtlLocale,
 } from "@/lib/i18n/language-data";
+import { getLocaleFromPathname, swapLocalePath } from "@/lib/i18n/locale-path";
 
 type LanguageContextValue = {
   locale: Locale;
@@ -38,21 +40,37 @@ function persistLocale(locale: Locale) {
   document.cookie = `${LOCALE_STORAGE_KEY}=${locale};path=/;max-age=31536000;SameSite=Lax`;
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE);
+export function LanguageProvider({
+  children,
+  initialLocale = DEFAULT_LOCALE,
+}: {
+  children: ReactNode;
+  initialLocale?: Locale;
+}) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const pathLocale = getLocaleFromPathname(pathname);
+  const [locale, setLocaleState] = useState<Locale>(pathLocale ?? initialLocale);
 
   useEffect(() => {
-    const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
-    const initial = isValidLocale(stored) ? stored : DEFAULT_LOCALE;
-    setLocaleState(initial);
-    applyLocale(initial);
-  }, []);
-
-  const setLocale = useCallback((next: Locale) => {
+    const next = pathLocale ?? initialLocale;
     setLocaleState(next);
-    persistLocale(next);
     applyLocale(next);
-  }, []);
+    persistLocale(next);
+  }, [pathLocale, initialLocale]);
+
+  const setLocale = useCallback(
+    (next: Locale) => {
+      setLocaleState(next);
+      persistLocale(next);
+      applyLocale(next);
+      const target = swapLocalePath(pathname, next);
+      if (target !== pathname) {
+        router.push(target);
+      }
+    },
+    [pathname, router],
+  );
 
   const value = useMemo(() => ({ locale, setLocale }), [locale, setLocale]);
 

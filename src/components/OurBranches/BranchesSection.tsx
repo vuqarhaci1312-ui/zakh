@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { useRef } from "react";
 import { Dt, useDt } from "@/lib/i18n/use-data-translation";
 import { translateField } from "@/lib/i18n/content-translators";
@@ -58,7 +58,7 @@ export default function BranchesSection() {
 
           <div className={styles.branchGrid}>
             {BRANCHES.map((branch, index) => (
-              <Link
+              <LocaleLink
                 key={branch.id}
                 href={`/our-branches/${branch.slug}`}
                 className={styles.branchCard}
@@ -76,7 +76,7 @@ export default function BranchesSection() {
                 <h2 className={styles.branchName}>
                   {translateField(t, `branches.BRANCHES.${index}.name`, branch.name)}
                 </h2>
-              </Link>
+              </LocaleLink>
             ))}
           </div>
         </div>

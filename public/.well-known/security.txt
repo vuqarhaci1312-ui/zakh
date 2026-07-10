@@ -1,0 +1,6 @@
+Contact: mailto:info@zakher.travel
+Contact: mailto:incoming@zakher.travel
+Expires: 2027-07-10T00:00:00.000Z
+Preferred-Languages: en, az, ru, ar
+Canonical: https://zakher.travel/.well-known/security.txt
+Policy: https://zakher.travel/az/privacy-policy

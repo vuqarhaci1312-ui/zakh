@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { localePath } from "@/lib/i18n/locale-path";
 import { COUNTRY_TOURS } from "../DestinationDetail/country-tours-data";
 import { getToursForCountry } from "../DestinationDetail/tour-details-data";
 import { useOurServicesAnimation } from "../OurServices/useOurServicesAnimation";
@@ -77,7 +79,7 @@ function CountryOverviewCard({
         <div className={styles.overviewImageWrap}>
           <Image
             src={heroImage}
-            alt=""
+            alt={t(`country.countries.${countryIndex}.name`, name)}
             width={480}
             height={320}
             sizes="(max-width: 767px) 50vw, (max-width: 991px) 33vw, 25vw"
@@ -128,7 +130,7 @@ function TourCard({
 
   return (
     <article className={`${styles.tourCard}${compact ? ` ${styles.tourCardCompact}` : ""}`}>
-      <Link
+      <LocaleLink
         href={`/destinations/${countrySlug}/${tour.slug}?from=tour-packages`}
         className={styles.tourCardLink}
       >
@@ -176,7 +178,7 @@ function TourCard({
             </div>
           ) : null}
         </div>
-      </Link>
+      </LocaleLink>
       <div className={styles.tourCardActions}>
         <button
           type="button"
@@ -201,6 +203,7 @@ function TourCard({
 
 export function TourPackagesSectionContent() {
   const t = useTranslations();
+  const { locale } = useLanguage();
   const router = useRouter();
   const searchParams = useSearchParams();
   const sectionRef = useRef<HTMLElement>(null);
@@ -271,7 +274,8 @@ export function TourPackagesSectionContent() {
     }
 
     const query = params.toString();
-    router.replace(query ? `/tour-packages?${query}` : "/tour-packages", { scroll: false });
+    const base = localePath(locale, "/tour-packages");
+    router.replace(query ? `${base}?${query}` : base, { scroll: false });
 
     requestAnimationFrame(() => {
       contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -395,12 +399,12 @@ export function TourPackagesSectionContent() {
                         fallback="Tour programs for this destination are coming soon."
                       />
                     </p>
-                    <Link
+                    <LocaleLink
                       href={`/destinations/${activeCountry.slug}`}
                       className={styles.emptyLink}
                     >
                       <T k="ui.exploreDestination" fallback="Explore destination" /> &rarr;
-                    </Link>
+                    </LocaleLink>
                   </div>
                 ) : (
                   <>

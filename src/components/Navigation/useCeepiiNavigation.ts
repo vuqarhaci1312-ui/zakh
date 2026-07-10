@@ -8,7 +8,8 @@ export function useCeepiiNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const isHome = pathname === "/";
+  const barePath = pathname.replace(/^\/(az|en|ru|ar)(?=\/|$)/, "") || "/";
+  const isHome = barePath === "/";
   const overlayMode = isHome && !isScrolled;
   const fixedMode = isHome && isScrolled;
 

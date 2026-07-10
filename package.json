@@ -14,6 +14,8 @@
     "i18n:generate-ar": "node scripts/translate-with-gcp.mjs ar",
     "i18n:sync": "tsx scripts/sync-i18n-seeds.ts",
     "i18n:validate": "tsx scripts/validate-i18n-coverage.ts",
+    "seo:validate": "tsx scripts/seo-validate.ts",
+    "seo:lighthouse": "lhci autorun",
     "i18n:seed": "cd server && npm run db:seed",
     "server:dev": "cd server && npm run dev",
     "server:install": "cd server && npm install",

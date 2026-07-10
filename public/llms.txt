@@ -1,0 +1,45 @@
+# Zakher Travel
+
+> Professional travel agency and destination management company based in Baku, Azerbaijan, offering tour packages, visa support, and travel services across the Caucasus, Central Asia, Europe, and the Middle East since 2016.
+
+Zakher Travel Group of Companies provides online and offline travel services including private and group tours, hotel booking, transfers, guide services, VIP welcoming, MICE, medical travel support, and multi-country packages.
+
+## Main
+
+- [Home](https://zakher.travel/az): Company overview and featured destinations
+- [Tour Packages](https://zakher.travel/az/tour-packages): Browse all country tour packages
+- [Our Services](https://zakher.travel/az/our-services): Tourist, real estate, medical, and MICE services
+- [Our Branches](https://zakher.travel/az/our-branches): International office locations
+- [Contact](https://zakher.travel/az/contact-us): Contact Zakher Travel
+- [About](https://zakher.travel/az/about): Company profile and history
+- [Who We Are](https://zakher.travel/az/who-we-are): Mission and values
+
+## Destinations
+
+- [Azerbaijan Tours](https://zakher.travel/az/destinations/azerbaijan): Baku city tours, Absheron, Gabala, Shahdag, and golf packages
+- [Türkiye Packages](https://zakher.travel/az/destinations/turkiye): Türkiye tour programs
+- [Georgia Tours](https://zakher.travel/az/destinations/georgia): Georgia tour packages
+- [UAE Travel](https://zakher.travel/az/destinations/uae): United Arab Emirates travel services
+- [Kazakhstan Tours](https://zakher.travel/az/destinations/kazakhstan): Kazakhstan tour packages
+- [Uzbekistan Packages](https://zakher.travel/az/destinations/uzbekistan): Uzbekistan Silk Road tours
+- [Kyrgyzstan Tours](https://zakher.travel/az/destinations/kyrgyzstan): Kyrgyzstan tour packages
+- [Russia Tours](https://zakher.travel/az/destinations/russia): Russia tour packages
+- [Czech Republic](https://zakher.travel/az/destinations/czech-republic): Czech Republic travel
+- [Poland Tours](https://zakher.travel/az/destinations/poland): Poland tour packages
+- [Ukraine Tours](https://zakher.travel/az/destinations/ukraine): Ukraine tour packages
+
+## Languages
+
+- [Azerbaijani](https://zakher.travel/az): Default locale
+- [English](https://zakher.travel/en): English locale
+- [Russian](https://zakher.travel/ru): Russian locale
+- [Arabic](https://zakher.travel/ar): Arabic locale
+
+## Optional
+
+- [Our Events](https://zakher.travel/az/our-events): International travel exhibitions and roadshows
+- [Social Media](https://zakher.travel/az/social-media): Official social profiles
+- [Privacy Policy](https://zakher.travel/az/privacy-policy): Privacy policy
+- [Terms of Use](https://zakher.travel/az/terms): Terms of use
+- [Sitemap](https://zakher.travel/sitemap.xml): XML sitemap for all indexable URLs
+- [Robots](https://zakher.travel/robots.txt): Crawler rules

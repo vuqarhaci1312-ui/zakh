@@ -9,7 +9,7 @@ export default function FaqAccordion({
   items: { question: ReactNode; answer: ReactNode }[];
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const bottomRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const bottomRefs = useRef<Array<HTMLElement | null>>([]);
 
   useEffect(() => {
     items.forEach((_, index) => {
@@ -62,10 +62,8 @@ export default function FaqAccordion({
               onClick={() => setOpenIndex(isOpen ? null : index)}
             >
               <div className="expandable-top">
-                <div className="name_faq">
-                  <div className="text_body-bold">{item.question}</div>
-                </div>
-                <div className="faq_animation-box">
+                <div className="text_body-bold">{item.question}</div>
+                <div className="faq_animation-box" aria-hidden="true">
                   <div className="faq-line" />
                   <div className="faq-line vertical" />
                 </div>
@@ -74,7 +72,7 @@ export default function FaqAccordion({
                 ref={(element) => {
                   bottomRefs.current[index] = element;
                 }}
-                className="expandable-bottom"
+                className="expandable-bottom faq-answer"
                 style={{
                   display: index === 0 ? "flex" : "none",
                   overflow: "hidden",

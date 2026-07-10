@@ -21,7 +21,67 @@ export type TourDetail = {
   exclusions?: string[];
   sections: TourSection[];
   price?: string;
+  faqs?: { question: string; answer: string }[];
 };
+
+export type TourFaqKind = "overview" | "duration" | "packageInclusions" | "booking" | "custom";
+
+export type BuiltTourFaq = {
+  kind: TourFaqKind;
+  question: string;
+  answer: string;
+  metaIndex?: number;
+  customIndex?: number;
+};
+
+export function buildTourFaqs(tour: TourDetail): BuiltTourFaq[] {
+  if (tour.faqs?.length) {
+    return tour.faqs.map((faq, index) => ({
+      kind: "custom" as const,
+      question: faq.question,
+      answer: faq.answer,
+      customIndex: index,
+    }));
+  }
+
+  const faqs: BuiltTourFaq[] = [
+    {
+      kind: "overview",
+      question: `What is included in the ${tour.title}?`,
+      answer: tour.excerpt,
+    },
+  ];
+
+  const durationIndex = tour.meta.findIndex((item) =>
+    /duration|time|hours|days/i.test(item.label),
+  );
+  if (durationIndex >= 0) {
+    const duration = tour.meta[durationIndex];
+    faqs.push({
+      kind: "duration",
+      metaIndex: durationIndex,
+      question: "How long does this tour take?",
+      answer: `${duration.value} (${duration.label}).`,
+    });
+  }
+
+  if (tour.inclusions?.length) {
+    faqs.push({
+      kind: "packageInclusions",
+      question: "What is included in the package?",
+      answer: tour.inclusions.join("; ") + ".",
+    });
+  }
+
+  faqs.push({
+    kind: "booking",
+    question: "How can I book this tour?",
+    answer:
+      "Contact Zakher Travel at incoming@zakher.travel or +994 12 310 09 32. Offline support is available by call, e-mail, and WhatsApp 24/7.",
+  });
+
+  return faqs.slice(0, 4);
+}
 
 const PRIVATE_TOUR_INCLUSIONS = [
   "Pick-up & drop-off at your hotel (inside Baku)",

@@ -39,6 +39,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     title: "Information",
     links: [
       { href: "/about", label: "About Us" },
+      { href: "/who-we-are", label: "Who We Are" },
       { href: "/our-branches", label: "Our Branches" },
       { href: "/our-events", label: "Our Events" },
       { href: "/contact-us", label: "Contact Us" },
@@ -49,7 +50,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { href: "/tour-packages", label: "Tour Packages" },
       { href: "/our-services", label: "Services" },
-      { href: "/our-services", label: "Our Brochures" },
+      { href: "/privacy-policy", label: "Privacy Policy" },
+      { href: "/terms", label: "Terms of Use" },
     ],
   },
   {

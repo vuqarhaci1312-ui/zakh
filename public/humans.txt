@@ -1,0 +1,25 @@
+/* TEAM */
+Organization: Zakher Travel Group of Companies
+Site: https://zakher.travel
+Location: Baku, Azerbaijan
+Founded: 2016
+
+/* CONTACT */
+Email: info@zakher.travel
+Incoming: incoming@zakher.travel
+Phone: +994 12 310 09 32
+Address: Huseyn Javid Ave 73, AZ1073, Baku, Azerbaijan
+
+/* SITE */
+Standards: HTML5, Schema.org JSON-LD, Open Graph, hreflang (az, en, ru, ar)
+Languages: Azerbaijani, English, Russian, Arabic
+Doctype: HTML5
+CMS: Headless (Next.js + Express)
+
+/* THANKS */
+Framework: Next.js
+Hosting: Production CDN
+
+/* SITE MAP */
+https://zakher.travel/sitemap.xml
+https://zakher.travel/llms.txt

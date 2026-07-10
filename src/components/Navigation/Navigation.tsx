@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Fragment, useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
@@ -22,7 +21,9 @@ import {
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useCeepiiNavigation } from "./useCeepiiNavigation";
 import T from "@/components/edit-mode/EditableText";
+import LocaleLink from "@/components/LocaleLink";
 import { useTranslations } from "@/contexts/TranslationsContext";
+import { stripLocale } from "@/lib/i18n/locale-path";
 
 function isExternalHref(href: string) {
   return href.startsWith("http://") || href.startsWith("https://");
@@ -33,17 +34,19 @@ function isActiveLink(pathname: string, href: string) {
     return false;
   }
 
+  const barePath = stripLocale(pathname);
+
   if (href === "/tour-packages") {
-    return pathname === "/tour-packages" || pathname.startsWith("/destinations");
+    return barePath === "/tour-packages" || barePath.startsWith("/destinations");
   }
 
   const pathOnly = href.split("#")[0] || href;
 
   if (pathOnly === "/") {
-    return pathname === "/";
+    return barePath === "/";
   }
 
-  return pathname === pathOnly || pathname.startsWith(`${pathOnly}/`);
+  return barePath === pathOnly || barePath.startsWith(`${pathOnly}/`);
 }
 
 function isDropdownActive(
@@ -93,9 +96,9 @@ function NavLink({
   }
 
   return (
-    <Link href={href} className={combinedClassName} onClick={onClick}>
+    <LocaleLink href={href} className={combinedClassName} onClick={onClick}>
       <T k={labelKey} fallback={label} />
-    </Link>
+    </LocaleLink>
   );
 }
 
@@ -124,9 +127,9 @@ function PillLink({
   }
 
   return (
-    <Link href={href} className={className} aria-current={active ? "page" : undefined}>
+    <LocaleLink href={href} className={className} aria-current={active ? "page" : undefined}>
       <T k={labelKey} fallback={label} />
-    </Link>
+    </LocaleLink>
   );
 }
 
@@ -257,7 +260,7 @@ function PillDropdown({
 
                 return (
                   <li key={child.href} role="none">
-                    <Link
+                    <LocaleLink
                       href={child.href}
                       className={`${styles.pillDropdownItem} ${childActive ? styles.pillDropdownItemActive : ""}`}
                       role="menuitem"
@@ -265,7 +268,7 @@ function PillDropdown({
                       onClick={() => setOpen(false)}
                     >
                       <T k={childLabelKey} fallback={child.label} />
-                    </Link>
+                    </LocaleLink>
                   </li>
                 );
               })}
@@ -282,7 +285,7 @@ function PillDropdown({
       onMouseEnter={openMenu}
       onMouseLeave={scheduleClose}
     >
-      <Link
+      <LocaleLink
         href={href}
         className={className}
         aria-current={active ? "page" : undefined}
@@ -295,7 +298,7 @@ function PillDropdown({
         <span className={styles.pillDropdownChevron} aria-hidden="true">
           ▾
         </span>
-      </Link>
+      </LocaleLink>
 
       {menu}
     </div>
@@ -351,7 +354,7 @@ function DesktopHeader({
         <div className={styles.headerInner}>
           <div className={styles.container}>
             <div className={styles.left}>
-              <Link
+              <LocaleLink
                 href="/"
                 className={styles.logoLink}
                 aria-label={t("ui.zakherTravelHome", "Zakher Travel home")}
@@ -360,8 +363,10 @@ function DesktopHeader({
                   src={NAV_LOGO}
                   alt={t("ui.zakherTravelHome", "Zakher Travel home")}
                   className={styles.logo}
+                  width={160}
+                  height={48}
                 />
-              </Link>
+              </LocaleLink>
             </div>
 
             <div className={styles.centerWrap}>
@@ -533,7 +538,7 @@ export default function Navigation() {
             const tabLabel = t(`nav.mobileTabs.${tabIndex}.label`, tab.label);
 
             return (
-              <Link
+              <LocaleLink
                 key={tab.href}
                 href={tab.href}
                 className={`${styles.bottomTab} ${active ? styles.bottomTabActive : ""}`}
@@ -543,7 +548,7 @@ export default function Navigation() {
                 <p className={styles.bottomTabLabel}>
                   <T k={`nav.mobileTabs.${tabIndex}.label`} fallback={tab.label} />
                 </p>
-              </Link>
+              </LocaleLink>
             );
           })}
         </div>

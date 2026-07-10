@@ -225,22 +225,14 @@ export default function InstagramSection() {
                 </div>
               </div>
               <div className="space-1-normal" />
-              <div className="max-width-41">
-                <h2 className="section-heading night">
+              <div className={styles.instagramHeadingWrap}>
+                <h2 className={`section-heading night ${styles.instagramHeading}`}>
                   <span className="text-gradient-orange">
                     <Dt k="ui.instagramHeading.accent" fallback="Zakher Travel" />
                   </span>
                   <Dt k="ui.instagramHeading.after" fallback=" on Instagram" />
                 </h2>
               </div>
-            </div>
-            <div className="max-width-27">
-              <p className="font-1-extra-small">
-                <Dt
-                  k="social.INSTAGRAM_SECTION.description"
-                  fallback={INSTAGRAM_SECTION.description}
-                />
-              </p>
             </div>
           </div>
 

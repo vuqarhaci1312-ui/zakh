@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import T from "@/components/edit-mode/EditableText";
+import LocaleLink from "@/components/LocaleLink";
 import { useTranslations } from "@/contexts/TranslationsContext";
 import { SocialIcon } from "@/components/SocialMedia/SocialIcons";
 import styles from "./Footer.module.css";
@@ -40,9 +40,9 @@ function FooterLinkItem({
   }
 
   return (
-    <Link href={href} className={linkClassName}>
+    <LocaleLink href={href} className={linkClassName}>
       {label}
-    </Link>
+    </LocaleLink>
   );
 }
 
@@ -56,10 +56,10 @@ export default function Footer() {
     <footer id="footer" className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.brandRow}>
-          <Link href="/" className={styles.logoLink} aria-label={homeLabel}>
+          <LocaleLink href="/" className={styles.logoLink} aria-label={homeLabel}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={FOOTER_LOGO} alt={homeLabel} className={styles.logo} />
-          </Link>
+            <img src={FOOTER_LOGO} alt={homeLabel} className={styles.logo} width={160} height={48} />
+          </LocaleLink>
           <T k="footer.tagline" fallback={FOOTER_TAGLINE} as="p" className={styles.tagline} />
         </div>
 

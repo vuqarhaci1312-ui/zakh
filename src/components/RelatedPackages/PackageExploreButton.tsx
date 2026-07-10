@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { Dt } from "@/lib/i18n/use-data-translation";
 
 function ButtonArrow() {
@@ -27,7 +27,7 @@ type PackageExploreButtonProps = {
 
 export default function PackageExploreButton({ href }: PackageExploreButtonProps) {
   return (
-    <Link
+    <LocaleLink
       href={href}
       dir="ltr"
       className="primary-button w-variant-b04b30b8-312c-20b6-324a-d08432c0f8eb w-inline-block"
@@ -49,6 +49,6 @@ export default function PackageExploreButton({ href }: PackageExploreButtonProps
         </div>
         <div className="button-animated-color" />
       </div>
-    </Link>
+    </LocaleLink>
   );
 }

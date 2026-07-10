@@ -10,6 +10,20 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: projectRoot,
   },
+  async redirects() {
+    return [
+      {
+        source: "/destinations",
+        destination: "/az/tour-packages",
+        permanent: true,
+      },
+      {
+        source: "/:locale(az|en|ru|ar)/destinations",
+        destination: "/:locale/tour-packages",
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return [
       {
@@ -19,6 +33,7 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",

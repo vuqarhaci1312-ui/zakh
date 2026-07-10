@@ -465,3 +465,11 @@
 .youtubeLink {
   margin: 0;
 }
+
+.instagramHeadingWrap {
+  max-width: none;
+}
+
+.instagramHeading {
+  white-space: nowrap;
+}

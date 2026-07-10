@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { Dt } from "@/lib/i18n/use-data-translation";
 import CompanyProfileSlider from "./CompanyProfileSlider";
 import {
@@ -15,15 +15,15 @@ export default function WhoWeAreDetailSection() {
   return (
     <section className={`${styles.section} ${styles.overflowHidden}`}>
       <div className={`${styles.container} ${styles.whoWeAreDetail}`}>
-        <Link href="/about" className={styles.whoWeAreBackLink}>
+        <LocaleLink href="/about" className={styles.whoWeAreBackLink}>
           <Dt k="ui.backToAbout" fallback="← About Us" />
-        </Link>
+        </LocaleLink>
 
         <div className={styles.whoWeAreDetailGrid}>
           <div className={styles.whoWeAreDetailMedia}>
             <Image
               src={WHO_WE_ARE_ASSETS.heroImage}
-              alt=""
+              alt={WHO_WE_ARE_HERO.titleBefore + " " + WHO_WE_ARE_HERO.titleAccent}
               width={640}
               height={640}
               className={styles.aboutIntroImage}

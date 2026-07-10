@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { useRef } from "react";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
@@ -59,9 +59,9 @@ export default function BranchDetailSection({ branch }: { branch: BranchDetail }
     <section ref={sectionRef} className={`section ${styles.detailSection}`}>
       <div className="w-layout-blockcontainer container w-container">
         <div className="service-wrapper">
-          <Link href="/our-branches" className={styles.backLink} data-services-reveal>
+          <LocaleLink href="/our-branches" className={styles.backLink} data-services-reveal>
             <T k="ui.allBranches" fallback="← All branches" />
-          </Link>
+          </LocaleLink>
 
           <div className={styles.grid} data-experience-card>
             <div className={styles.content}>
@@ -138,6 +138,19 @@ export default function BranchDetailSection({ branch }: { branch: BranchDetail }
                 <a href={mailHref} className={styles.cta}>
                   <T k="ui.contactUs" fallback="Contact Us" />
                 </a>
+              ) : null}
+
+              {branch.slug !== "saudi-arabia" ? (
+                <LocaleLink
+                  href={`/destinations/${branch.slug}`}
+                  className={styles.cta}
+                  style={{ marginTop: "0.75rem", display: "inline-flex" }}
+                >
+                  <T
+                    k="ui.viewToursInCountry"
+                    fallback={`View tours in ${branch.title}`}
+                  />
+                </LocaleLink>
               ) : null}
             </div>
 

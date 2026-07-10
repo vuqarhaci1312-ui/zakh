@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useDt } from "@/lib/i18n/use-data-translation";
@@ -210,14 +211,28 @@ export default function TourGallery({ images, label, alt }: TourGalleryProps) {
                   aria-label={dt("ui.gallery", "Gallery")}
                   onClick={() => setLightboxOpen(true)}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={image}
-                    alt={alt}
-                    className={styles.slideImage}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    draggable={false}
-                  />
+                  {index === 0 ? (
+                    <Image
+                      src={image}
+                      alt={alt}
+                      width={1280}
+                      height={720}
+                      className={styles.slideImage}
+                      sizes="(max-width: 991px) 100vw, 720px"
+                      priority
+                      fetchPriority="high"
+                      draggable={false}
+                    />
+                  ) : (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={image}
+                      alt={alt}
+                      className={styles.slideImage}
+                      loading="lazy"
+                      draggable={false}
+                    />
+                  )}
                 </button>
               </div>
             ))}

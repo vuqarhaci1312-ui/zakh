@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import LocaleLink from "@/components/LocaleLink";
 import { useMemo, useRef } from "react";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
@@ -71,6 +71,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
   const countryIndex = COUNTRY_TOURS.findIndex((country) => country.slug === data.slug);
   const effectiveCountryIndex = countryIndex >= 0 ? countryIndex : 0;
   const countryNameFallback = COUNTRY_TOURS[countryIndex]?.name ?? data.slug;
+
   const hasTours = data.tours.length > 0;
 
   const translatedFaqs = useMemo(
@@ -102,7 +103,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
   );
 
   return (
-    <div ref={rootRef} className="destination-detail-root">
+    <article ref={rootRef} className="destination-detail-root">
       <section className="section_hero-resort">
         <div className="padding-global">
           <div className="w-layout-blockcontainer container-large w-container">
@@ -114,7 +115,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                   alt={t(countryKey(effectiveCountryIndex, "name"), countryNameFallback)}
                 />
 
-                <div className="wrap_text-resort" data-detail-reveal>
+                <div className="wrap_text-resort" data-detail-reveal data-seo-summary>
                   <h1 className="heading-style-h3">
                     <T
                       k={countryKey(effectiveCountryIndex, "name")}
@@ -145,7 +146,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                       {data.amenities.map((amenity, index) => (
                         <div key={amenity.label} className="tile_amenity" data-detail-amenity>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={amenity.icon} loading="lazy" alt="" className="icon_amenity" />
+                          <img src={amenity.icon} loading="lazy" alt="" aria-hidden="true" className="icon_amenity" />
                           <div>
                             <T
                               k={`caladan.CALADAN_RESORT_DETAIL.amenities.${index}.label`}
@@ -206,15 +207,16 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                   </div>
                 </div>
 
-                <div className="resort_amenities" data-detail-reveal>
+                <section className="resort_amenities" data-detail-reveal aria-labelledby="faq-heading">
                   <T
                     k="ui.faqs"
                     fallback={data.faqsTitle ?? "FAQs"}
-                    as="div"
+                    as="h2"
+                    id="faq-heading"
                     className="text-size-large text_body-bold"
                   />
                   <FaqAccordion items={translatedFaqs} />
-                </div>
+                </section>
               </div>
             </div>
           </div>
@@ -238,7 +240,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
               <div className="resorts">
                 <div className="grid_resorts">
                   {data.tours.map((tour, tourIndex) => (
-                    <Link
+                    <LocaleLink
                       key={tour.slug}
                       href={`/destinations/${data.slug}/${tour.slug}?from=destination`}
                       className="card_resort-v1 w-inline-block"
@@ -268,7 +270,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                         <T
                           k={tourKey(data.slug, tourIndex, "title")}
                           fallback={tour.title}
-                          as="div"
+                          as="h3"
                           className="text-size-large text_body-bold text-gradient-orange"
                         />
                         <T
@@ -302,7 +304,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                           })}
                         </div>
                       </div>
-                    </Link>
+                    </LocaleLink>
                   ))}
                 </div>
               </div>
@@ -327,7 +329,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                 {data.related.map((resort) => {
                   const relatedIndex = COUNTRY_TOURS.findIndex((c) => c.slug === resort.slug);
                   return (
-                    <Link
+                    <LocaleLink
                       key={resort.slug}
                       href={`/destinations/${resort.slug}`}
                       className="card_resort-v1 w-inline-block"
@@ -400,7 +402,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                           })}
                         </div>
                       </div>
-                    </Link>
+                    </LocaleLink>
                   );
                 })}
               </div>
@@ -408,6 +410,6 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
           </div>
         </div>
       </section>
-    </div>
+    </article>
   );
 }

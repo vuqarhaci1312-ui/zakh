@@ -22,6 +22,7 @@ export type DestinationDetailData = CaladanResortDetail & {
   faqsTitle?: string;
   toursTitle?: string;
   tours: TourCardData[];
+  countryFaqCount: number;
 };
 
 const GENERAL_FAQS: CountryTourFaq[] = [
@@ -57,7 +58,7 @@ function toTourCard(tour: TourDetail): TourCardData {
 
 function getRelatedDestinations(currentSlug: string) {
   return COUNTRY_TOURS.filter((country) => country.slug !== currentSlug)
-    .slice(0, 2)
+    .slice(0, 4)
     .map((country) => ({
       slug: country.slug,
       tag: "Tour Package",
@@ -75,6 +76,9 @@ export function getDestinationDetail(slug: string): DestinationDetailData | null
 
   const tours = getToursForCountry(slug);
   const hasTours = tours.length > 0;
+  const faqResult = hasTours
+    ? { faqs: GENERAL_FAQS, countryFaqCount: 0 }
+    : { faqs: country.faqs, countryFaqCount: country.faqs.length };
 
   return {
     ...CALADAN_RESORT_DETAIL,
@@ -85,10 +89,16 @@ export function getDestinationDetail(slug: string): DestinationDetailData | null
     toursTitle: hasTours ? `Tours in ${country.name}` : undefined,
     tours: tours.map(toTourCard),
     faqsTitle: hasTours ? "FAQs" : country.faqsTitle,
-    faqs: hasTours ? GENERAL_FAQS : country.faqs,
+    faqs: faqResult.faqs,
+    countryFaqCount: faqResult.countryFaqCount,
     roomSummary: country.stats,
     related: getRelatedDestinations(slug),
   };
+}
+
+export function isRealFaqQuestion(question: string): boolean {
+  const q = question.trim();
+  return /[?؟]/.test(q) || /^(how|what|which|when|where|why|can|do|does|is|are)\b/i.test(q);
 }
 
 export function getAllDestinationSlugs(): string[] {
