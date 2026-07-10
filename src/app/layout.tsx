@@ -51,7 +51,6 @@ export default async function RootLayout({
     >
       <head>
         <link rel="preconnect" href="https://cdn.prod.website-files.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://storage.googleapis.com" crossOrigin="anonymous" />
       </head>
       <body>
         <Providers initialLocale={locale}>

@@ -491,13 +491,13 @@
   "footer.columns.0.contact.address": "Azərbaycan, Bakı, Huseyn Javid Ave 73, AZ1073",
   "footer.columns.0.title": "Əlaqə",
   "footer.columns.1.links.0.label": "Haqqımızda",
-  "footer.columns.1.links.1.label": "Filiallarımız",
-  "footer.columns.1.links.2.label": "Tədbirlər",
-  "footer.columns.1.links.3.label": "Bizimlə əlaqə",
+  "footer.columns.1.links.1.label": "Biz kimik",
+  "footer.columns.1.links.2.label": "Filiallarımız",
+  "footer.columns.1.links.3.label": "Tədbirlər",
   "footer.columns.1.title": "Məlumat",
   "footer.columns.2.links.0.label": "Tur paketləri",
   "footer.columns.2.links.1.label": "Xidmətlərimiz",
-  "footer.columns.2.links.2.label": "Broşürlərimiz",
+  "footer.columns.2.links.2.label": "Məxfilik siyasəti",
   "footer.columns.2.title": "Xidmətlər",
   "footer.columns.3.social.0.label": "LinkedIn",
   "footer.columns.3.social.1.label": "Facebook",
@@ -1657,5 +1657,7 @@
   "meta.privacy.title": "Məxfilik Siyasəti | Zakher Travel",
   "meta.privacy.description": "Zakher Travel şəxsi məlumatlarınızı necə toplayır, istifadə edir və qoruyur.",
   "meta.terms.title": "İstifadə Şərtləri | Zakher Travel",
-  "meta.terms.description": "Zakher Travel vebsaytı və səyahət xidmətlərinin istifadəsini tənzimləyən şərtlər."
+  "meta.terms.description": "Zakher Travel vebsaytı və səyahət xidmətlərinin istifadəsini tənzimləyən şərtlər.",
+  "footer.columns.1.links.4.label": "Bizimlə əlaqə",
+  "footer.columns.2.links.3.label": "İstifadə şərtləri"
 }

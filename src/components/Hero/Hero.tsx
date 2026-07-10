@@ -3,6 +3,7 @@
 import LocaleLink from "@/components/LocaleLink";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, type ReactNode } from "react";
+import { preload } from "react-dom";
 import T from "@/components/edit-mode/EditableText";
 import { useTranslations } from "@/contexts/TranslationsContext";
 import {
@@ -57,6 +58,9 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
   const t = useTranslations();
+
+  preload(HERO_VIDEO.src, { as: "video", type: "video/mp4", fetchPriority: "high" });
+
   const fadeIn = reduceMotion
     ? {
         initial: { opacity: 1, y: 0 },
@@ -94,14 +98,7 @@ export default function Hero() {
 
   return (
     <section className={styles.heroSection} aria-label={t("ui.heroSection", "Hero")}>
-      <div
-        className={styles.mediaWrap}
-        style={
-          HERO_VIDEO.poster
-            ? { backgroundImage: `url(${HERO_VIDEO.poster})` }
-            : undefined
-        }
-      >
+      <div className={styles.mediaWrap}>
         <video
           ref={videoRef}
           className={styles.video}
@@ -110,7 +107,6 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
-          poster={HERO_VIDEO.poster || undefined}
         >
           <source src={HERO_VIDEO.src} type="video/mp4" />
         </video>
